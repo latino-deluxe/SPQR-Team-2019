@@ -58,7 +58,7 @@
  *  - Emanuele Coletta & Siria Sannino
  *
  * 13/12/2018
- * La repo diventa privata, il nome ufficiale è SPQR 2019.
+ * La repo diventa privata, il nome ufficiale è SPQR 2019. Test per il fetch da repo privata
  *
  *
  *
