@@ -1,23 +1,6 @@
 #include "libs.h"
 
 int reading=0;
-
-// US variables
-  }
-
-      us_fr = us_values[0];             // putting US values into declared array index
-      us_dx = us_values[1];
-      us_dx = us_values[2];
-      us_px = us_values[3];
-
-// altenative test
-  //  for(int i = 0; i < 4; i++){
-  //  Serial.println(us_values[i]);
-  //  delay(1500);
-  // }
-
-  }
-
 long us_t0 = 0;                         // US measure start
 long us_t1 = 0;                         // time value during measure
 byte us_flag = false;                   // is it measuring or not?

@@ -11,3 +11,6 @@
 
 //SPI pins
 #define SS_PIN 2
+
+
+#define LN1 15
