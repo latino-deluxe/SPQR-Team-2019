@@ -13,4 +13,4 @@
 #define SS_PIN 2
 
 
-#define LN1 15
+#define LN1 A14
