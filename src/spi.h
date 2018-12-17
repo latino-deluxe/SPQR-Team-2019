@@ -1,6 +1,8 @@
 #include "libs.h"
 
 byte mess;
+int ball_sensor;
+int ball_distance;
 
 SPISettings settings(100000, MSBFIRST, SPI_MODE0);
 
@@ -17,6 +19,11 @@ void readSPI() {
   mess = SPI.transfer(255);
   digitalWrite(SS_PIN, HIGH);
   SPI.endTransaction();
+  if (mess == 255) return;
+
+  ball_sensor = mess & 31;
+  ball_distance = (mess & 224) >> 5;
+
   Serial.println(mess);
   delay(500);
 }
