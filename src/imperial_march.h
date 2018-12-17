@@ -1,8 +1,4 @@
-#include "libs"
-
-#define LA3 220.00
-#define C4  261.63
-#define F3  174.61
+#include "libs.h"
 
 //Costanti durata note
 #define BPM  240

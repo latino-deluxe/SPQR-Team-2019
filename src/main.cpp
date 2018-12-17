@@ -13,13 +13,16 @@ int SWD = 0;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(LN1, INPUT);
-  attachInterrupt(LN1, testInterrupt, FALLING);
+  pinMode(27, OUTPUT);
+
+
+
   Wire1.begin();
   initIMU();
   initSPI();
 
-  //init_linesensors();
+  init_linesensors();
+
   //SWS = digitalRead(SWITCH_SX);
   /*valStringY.rese
   rve(30);                                     //riserva 30byte per le stringhe
@@ -32,6 +35,7 @@ void setup() {
 }
 
 void loop() {
+
   //readSPI();
 
   //readIMU();
