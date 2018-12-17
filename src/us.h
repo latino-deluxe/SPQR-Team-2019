@@ -37,7 +37,7 @@ for(int i = 0; i <4; i++){              //  int i = 3;
       reading |= Wire1.read();          // receive low byte as lower 8 bit
       us_values[i] = reading;           // test
                                         //  Serial.println(reading);
-                                        //  delay(1500;
+                                        //  delay(1500);
     }
   }
 
