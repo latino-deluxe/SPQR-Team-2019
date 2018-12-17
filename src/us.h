@@ -1,9 +1,12 @@
 #include "libs.h"
 
 int reading=0;
+<<<<<<< HEAD
 
 // US variables
 
+=======
+>>>>>>> 3678987f94a29c9601a864fb04a1c8ef926c24b1
 long us_t0 = 0;                         // US measure start
 long us_t1 = 0;                         // time value during measure
 byte us_flag = false;                   // is it measuring or not?

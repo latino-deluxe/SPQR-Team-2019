@@ -3,7 +3,7 @@
 #include "us.h"
 #include "motors.h"
 #include "spi.h"
-
+#include "linesensor.h"
 
 
 //Switch management vars
@@ -13,7 +13,8 @@ int SWD = 0;
 
 void setup() {
   Serial.begin(9600);
-  attachInterrupt(BTN, testInterrupt, RISING);
+  pinMode(LN1, INPUT);
+  attachInterrupt(LN1, testInterrupt, RISING);
   Wire1.begin();
   initIMU();
   initSPI();
@@ -26,12 +27,11 @@ void setup() {
   initMotorsGPIO();
   tone(22, 1000, 500);
   for(int i=29;i<=31;i++) pinMode(i, OUTPUT);
-  digitalWrite(29, HIGH);
 }
 
 void loop() {
 
-  readSPI();
+  //readSPI();
 
   //Serial.println("ao");
   //readIMU();
