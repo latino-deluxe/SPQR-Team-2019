@@ -61,6 +61,6 @@
  * La repo diventa privata, il nome ufficiale è SPQR 2019.
  * -Test per il fetch da repo privata delle 22:18
  * -Test fetch manjaro II
- * atom://teletype/portal/650e94cb-1d9e-491b-b876-9acfc96a0b76
+ * atom://teletype/portal/e684d780-5ec2-4303-9e97-b2764b92095c
  * CIAO
  */
