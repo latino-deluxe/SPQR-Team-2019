@@ -9,10 +9,11 @@
 //Switch management vars
 int SWS = 0;
 int SWD = 0;
- 
+
 
 void setup() {
   Serial.begin(9600);
+  attachInterrupt(BTN, testInterrupt, RISING);
   Wire1.begin();
   initIMU();
   initSPI();

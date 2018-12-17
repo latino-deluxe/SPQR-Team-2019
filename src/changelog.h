@@ -62,5 +62,5 @@
  * -Test per il fetch da repo privata delle 22:18
  * -Test fetch manjaro II
  * atom://teletype/portal/b89f36b4-ed1c-4259-a5db-bc20fd5e4576
- *
+ * CIAO
  */
