@@ -1,6 +1,7 @@
 #include "libs.h"
 
+
 void testInterrupt(){
   Serial.println("ciao");
-  delay(500);
+  delay(1500);
 }
