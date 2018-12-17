@@ -15,9 +15,9 @@ void setup() {
   Serial.begin(9600);
   pinMode(LN1, INPUT);
   attachInterrupt(LN1, testInterrupt, FALLING);
-  //Wire1.begin();
-  //initIMU();
-  //initSPI();
+  Wire1.begin();
+  initIMU();
+  initSPI();
 
   //init_linesensors();
   //SWS = digitalRead(SWITCH_SX);
@@ -25,20 +25,15 @@ void setup() {
   rve(30);                                     //riserva 30byte per le stringhe
   valStringB.reserve(30);*/
 
-  //initMotorsGPIO();
+  initMotorsGPIO();
   //tone(22, 1000, 500);
-  //for(int i=29;i<=31;i++) pinMode(i, OUTPUT);
+  for(int i=29;i<=31;i++) pinMode(i, OUTPUT);
 
 }
 
 void loop() {
-
   //readSPI();
 
-  //Serial.println("ao");
-  //Serial.println(digitalRead(LN1));
-
-  delay(500);
   //readIMU();
   //readUS();
 
@@ -52,5 +47,5 @@ void loop() {
   turnMotor(1,0,0,0);
   delay(1000);
   */
-
+  delay(500);
 }
