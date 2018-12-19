@@ -1,8 +1,8 @@
 #include "libs.h"
 
-byte INA_MOT [4] = {0,  16,  5,  8};           // INA pin
-byte INB_MOT [4] = {0,  15,  6,  9};           // INB pin
-byte PWM_MOT [4] = {0,  4,   7,   10};         // PWM pin
+byte INA_MOT [4] = {0, 16, 5, 8};   //{0,  16,  5,  8};           // INA pin
+byte INB_MOT [4] = {0, 15, 6, 9};   //{0,  15,  6,  9};           // INB pin
+byte PWM_MOT [4] = {0, 4, 7, 10};  //{0,  4,   7,   10};         // PWM pin
 
 //Motors variables
 float speed1;                                  // speed motor 1

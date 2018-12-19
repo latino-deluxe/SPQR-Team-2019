@@ -8,37 +8,61 @@ int SWS = 0;
 int SWD = 0;
 
 void setup() {
-  Serial.begin(9600);
+        Serial.begin(9600);
 
-  pinMode(A8, INPUT_DISABLE); //pin A8 con corto a 3.3V e massa
+        pinMode(A8, INPUT_DISABLE); //pin A8 con corto a 3.3V e massa
 
-  pinMode(27, OUTPUT);
-  for(int i=29;i<=31;i++) pinMode(i, OUTPUT);
-  Wire1.begin();
+        pinMode(27, OUTPUT);
+        for(int i=29; i<=31; i++) pinMode(i, OUTPUT);
+        Wire1.begin();
 
-  SWS = digitalRead(SWITCH_SX);
+        SWS = digitalRead(SWITCH_SX);
 
-  initMotorsGPIO();                                         //inizializza GPIO motori
-  init_linesensors();                                         //abilita i sensori di linea a chiamare interrupt come PCINT2
-  initSPI();                                                 //inizializza comunicazione spi
-  initIMU();                                                 //inizializza imu
-  initOmnidirectionalSins();                                //inizializza seni
-  SWS = digitalRead(SWITCH_SX);                               //lettura switch sinistro
-  //valStringY.reserve(30);                                     //riserva 30byte per le stringhe
-  //valStringB.reserve(30);
-  //initial_p();                                              //inizializza sensore presa palla
-  tone(22, 1000, 500);
+        initMotorsGPIO();                                   //inizializza GPIO motori
+        init_linesensors();                                   //abilita i sensori di linea a chiamare interrupt come PCINT2
+        initSPI();                                           //inizializza comunicazione spi
+        initIMU();                                           //inizializza imu
+        initOmnidirectionalSins();                          //inizializza seni
+        SWS = digitalRead(SWITCH_SX);                         //lettura switch sinistro
+        //valStringY.reserve(30);                                     //riserva 30byte per le stringhe
+        //valStringB.reserve(30);
+        //initial_p();                                              //inizializza sensore presa palla
+        tone(22, 1000, 500);
 }
 
 
 void loop() {
 
+        int  i= 1;
 
+        turnMotor(i, 0, 1, 100);
+        delay(1000);
+        turnMotor(i, 0, 0, 100);
+        delay(300);
+        turnMotor(i, 1, 0, 100);
+        delay(1000);
+        turnMotor(i, 0, 0, 100);
+        delay(300);
 
-  //update_location_complete();
+        /*i = 2;
 
+        turnMotor(i, 0, 1, 100);
+        delay(1000);
+        turnMotor(i, 0, 0, 100);
+        delay(300);
+        turnMotor(i, 1, 0, 100);
+        delay(1000);
+        turnMotor(i, 0, 0, 100);
+        delay(300);*/
 
-
-  //goalie();
+        i = 3;
+        turnMotor(i, 0, 1, 100);
+        delay(1000);
+        turnMotor(i, 0, 0, 100);
+        delay(300);
+        turnMotor(i, 1, 0, 100);
+        delay(1000);
+        turnMotor(i, 0, 0, 100);
+        delay(300);
 
 }
