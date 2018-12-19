@@ -68,5 +68,6 @@
  * Ad alcune variabili sembra che venga assegnato un valore nei tab non ancora importati.
  * Da sistemare
  *
+ * atom://teletype/portal/66728b8b-18be-40d7-93de-c78a615ad16d
  *
  */
