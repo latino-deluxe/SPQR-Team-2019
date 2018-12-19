@@ -2,6 +2,7 @@
 
 byte lettura;
 
+void init_linesensors();
 void int1();
 void int2();
 void int3();
@@ -28,7 +29,7 @@ void init_linesensors(){
 
 
 void int1(){
-  brake();
+  // brake();
   lettura = 0b111110;
   digitalWrite(27, HIGH);
   delay(200);
@@ -36,7 +37,7 @@ void int1(){
 }
 
 void int2(){
-  brake();
+  // brake();
   lettura = 0b111101;
   digitalWrite(27, HIGH);
   delay(200);
@@ -44,7 +45,7 @@ void int2(){
 }
 
 void int3(){
-  brake();
+  // brake();
   lettura = 0b111011;
   digitalWrite(27, HIGH);
   delay(200);
@@ -52,7 +53,7 @@ void int3(){
 }
 
 void int4(){
-  brake();
+  // brake();
   lettura = 0b110111;
   digitalWrite(27, HIGH);
   delay(200);
@@ -60,7 +61,7 @@ void int4(){
 }
 
 void int5(){
-  brake();
+  // brake();
   lettura = 0b101111;
   digitalWrite(27, HIGH);
   delay(200);
@@ -68,7 +69,7 @@ void int5(){
 }
 
 void int6(){
-  brake();
+  // brake();
   lettura = 0b011111;
   digitalWrite(27, HIGH);
   delay(200);

@@ -1,8 +1,13 @@
 #include "libs.h"
 
 byte mess;
-int ball_sensor;
-int ball_distance;
+//VARIABILI RELATIVE ALLA LETTURA DELLA PALLA---------------
+byte spi_temp_byte = 0;    // dato grezzo letto da SPI
+byte ball_sensor = 0;      // sensore che vede la palla
+byte ball_distance = 0;    // distanza della palla con valore da 0 a 6
+bool ball_seen = false;    // palla in vista si/no era byte
+byte old_s_ball;           // sensore che vedeva la palla in precedenza, paragonato con ball_sensor
+unsigned long time_s_ball; // millisecondipassati dal cambiamento di sensore che vede la palla (KEEPER)
 
 SPISettings settings(100000, MSBFIRST, SPI_MODE0);
 

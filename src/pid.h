@@ -1,5 +1,26 @@
 #include "libs.h"
 #include "motors.h"
+#include "imu.h"
+
+void CheckSpeed();
+float updatePid();
+void recenter(float);
+
+//VARIABILI E COSTANTI DEL PID--------------------------------
+#define KP  0.7             // K proporzionale
+#define KI  0.001           // K integrativo
+#define KD  0.001           // K derivativo
+float errorePre = 0.0;      // angolo di errore precedente
+float integral = 0.0;       // somisa degli angoli di errore
+bool reaching_ball = false; // serve per aumentare il PID del 20% GOALIE
+int st = 0; // storcimento sulle fasce
+
+//da utilizzare per sviluppi futuri-------------------
+signed int old_Dir = 0;  // angolo di direzione precedente a quella attuale
+signed int new_Dir = 0;  // angolo di direzione corrente del moto
+float old_vMot;          // velocitá di moto precedente
+float new_vMot;          // velocitá di moto corrente
+
 
 //TIMED PID CONTROL TESTING
 void drivePID(signed int direzione, float vMot) {
