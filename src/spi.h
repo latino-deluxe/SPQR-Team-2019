@@ -25,10 +25,13 @@ void readSPI() {
   digitalWrite(SS_PIN, HIGH);
   SPI.endTransaction();
   if (mess == 255) return;
+  ball_sensor = mess & 0b00011111;
+  ball_distance = (mess & 0b11100000) >> 5;
 
-  ball_sensor = mess & 31;
-  ball_distance = (mess & 224) >> 5;
-
-  Serial.println(mess);
-  delay(500);
+  Serial.print(ball_sensor);
+  delay(200);
+  Serial.print(" | ");
+  delay(200);
+  Serial.println(ball_distance);
+  delay(200);
 }

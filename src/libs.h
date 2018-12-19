@@ -15,12 +15,12 @@
 #define SS_PIN 2
 
 
-#define LN1 A14
-#define LN2 A15
-#define LN3 A0
-#define LN4 A1
-#define LN5 A2
-#define LN6 A3
+#define LN0 A14
+#define LN1 A15
+#define LN2 A7
+#define LN3 A6
+#define LN4 A9
+#define LN5 A16
 
 #define LA3 220.00
 #define C4  261.63

@@ -61,4 +61,12 @@
  * La repo diventa privata, il nome ufficiale è SPQR 2019.
  * -Test per il fetch da repo privata delle 22:18
  * -Test fetch manjaro II
+ *
+ * 19/12/2018
+ * Sistemati gli #include per far funzionare goalie e pid.
+ * Un sacco di variabili erano mancanti non importate dal codice vecchio.
+ * Ad alcune variabili sembra che venga assegnato un valore nei tab non ancora importati.
+ * Da sistemare
+ *
+ *
  */
