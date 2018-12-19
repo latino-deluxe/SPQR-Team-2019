@@ -1,5 +1,4 @@
 #include <Arduino.h>
-
 #include <Adafruit_BNO055.h>
 #include <SPI.h>
 
@@ -14,7 +13,7 @@
 //SPI pins
 #define SS_PIN 2
 
-
+//Linesensors
 #define LN0 A14
 #define LN1 A15
 #define LN2 A7
@@ -22,6 +21,7 @@
 #define LN4 A9
 #define LN5 A16
 
+//Note
 #define LA3 220.00
 #define C4  261.63
 #define F3  174.61

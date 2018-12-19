@@ -1,8 +1,8 @@
 #include "libs.h"
 
-byte INA_MOT [4] = {0, 16, 5, 8};   //{0,  16,  5,  8};           // INA pin
+byte INA_MOT [4] = {0, 17, 5, 8};   //{0,  16,  5,  8};           // INA pin
 byte INB_MOT [4] = {0, 15, 6, 9};   //{0,  15,  6,  9};           // INB pin
-byte PWM_MOT [4] = {0, 4, 7, 10};  //{0,  4,   7,   10};         // PWM pin
+byte PWM_MOT [4] = {0,  4, 7, 10};  //{0,  4,   7,   10};         // PWM pin
 
 //Motors variables
 float speed1;                                  // speed motor 1
@@ -86,4 +86,38 @@ void mot (byte mot, int vel) {           //Function to send the speed to the mot
   digitalWrite(INB_MOT[mot], VAL_INB);
   analogWrite (PWM_MOT[mot], vel);
   return;
+}
+
+void testmotors() {
+  int  i= 1;
+
+  turnMotor(i, 0, 1, 100);
+  delay(1000);
+  turnMotor(i, 0, 0, 100);
+  delay(300);
+  turnMotor(i, 1, 0, 100);
+  delay(1000);
+  turnMotor(i, 0, 0, 100);
+  delay(300);
+
+  i = 2;
+
+  turnMotor(i, 0, 1, 100);
+  delay(1000);
+  turnMotor(i, 0, 0, 100);
+  delay(300);
+  turnMotor(i, 1, 0, 100);
+  delay(1000);
+  turnMotor(i, 0, 0, 100);
+  delay(300);
+
+  i = 3;
+  turnMotor(i, 0, 1, 100);
+  delay(1000);
+  turnMotor(i, 0, 0, 100);
+  delay(300);
+  turnMotor(i, 1, 0, 100);
+  delay(1000);
+  turnMotor(i, 0, 0, 100);
+  delay(300);
 }

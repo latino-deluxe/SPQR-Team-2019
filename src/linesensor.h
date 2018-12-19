@@ -29,49 +29,67 @@ void init_linesensors(){
 
 
 void int0(){
-  // brake();
+  brake();
   lettura = 0b111110;
   digitalWrite(27, HIGH);
+  digitalWrite(29, HIGH);
   delay(200);
   digitalWrite(27, LOW);
+  digitalWrite(29, LOW);
+  return;
 }
 
 void int1(){
-  // brake();
+  brake();
   lettura = 0b111101;
   digitalWrite(27, HIGH);
+  digitalWrite(29, HIGH);
   delay(200);
   digitalWrite(27, LOW);
+  digitalWrite(29, LOW);
+  return;
 }
 
 void int2(){
-  // brake();
+  brake();
   lettura = 0b111011;
   digitalWrite(27, HIGH);
+  digitalWrite(29, HIGH);
   delay(200);
   digitalWrite(27, LOW);
+  digitalWrite(29, LOW);
+  return;
 }
 
 void int3(){
-  // brake();
+  brake();
   lettura = 0b110111;
   digitalWrite(27, HIGH);
+  digitalWrite(29, HIGH);
   delay(200);
   digitalWrite(27, LOW);
+  digitalWrite(29, LOW);
+  return;
 }
 
 void int4(){
-  // brak4e();
+  brake();
   lettura = 0b101111;
   digitalWrite(27, HIGH);
+  digitalWrite(29, HIGH);
   delay(200);
   digitalWrite(27, LOW);
+  digitalWrite(29, LOW);
+  return;
 }
 
 void int5(){
-  // brake();
+  brake();
   lettura = 0b011111;
   digitalWrite(27, HIGH);
+  digitalWrite(29, HIGH);
   delay(200);
   digitalWrite(27, LOW);
+  digitalWrite(29, LOW);
+  return;
 }

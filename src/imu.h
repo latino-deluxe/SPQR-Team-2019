@@ -12,12 +12,11 @@ void initIMU() {
 }
 
 void readIMU(){
-    digitalWrite(30, HIGH);
     imu::Vector<3> euler = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
-      if (euler.x() != x){
+      if (euler.x() != imu_current_euler){
        /*Serial.print("X: ");
        Serial.println(euler.x());*/
-       x = euler.x();
+       imu_current_euler = euler.x();
      }
-    else x = euler.x();
+    else imu_current_euler = euler.x();
 }

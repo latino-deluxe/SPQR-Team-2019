@@ -27,11 +27,11 @@ void readSPI() {
   if (mess == 255) return;
   ball_sensor = mess & 0b00011111;
   ball_distance = (mess & 0b11100000) >> 5;
-
+/*
   Serial.print(ball_sensor);
-  delay(200);
+  delay(600);
   Serial.print(" | ");
-  delay(200);
+  delay(600);
   Serial.println(ball_distance);
-  delay(200);
+  delay(600);*/
 }
