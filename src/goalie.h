@@ -23,7 +23,8 @@ void goalie() {
 
 
   atk_direction = goaliedirection[ball_sensor]; //going around the ball
-
+  
+/*
 
   // controllo per ridurre oscillazione quando ha la palla in avanti
   if (ball_sensor == 1) {

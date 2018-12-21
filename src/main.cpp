@@ -20,7 +20,7 @@ void setup() {
         SWS = digitalRead(SWITCH_SX);
 
         initMotorsGPIO();                                   //inizializza GPIO motori
-        //init_linesensors();                                   //abilita i sensori di linea a chiamare interrupt come PCINT2
+        init_linesensors();                                   //abilita i sensori di linea a chiamare interrupt come PCINT2
         initSPI();                                           //inizializza comunicazione spi
         initIMU();                                           //inizializza imu
         initOmnidirectionalSins();                          //inizializza seni
