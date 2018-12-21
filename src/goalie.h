@@ -24,7 +24,7 @@ void goalie() {
 
   atk_direction = goaliedirection[ball_sensor]; //going around the ball
 
-  /*
+
   // controllo per ridurre oscillazione quando ha la palla in avanti
   if (ball_sensor == 1) {
     if (ball_distance <= 2) {   //se la palla è vicina
@@ -68,15 +68,15 @@ void goalie() {
 
     }
   }
-  if (ball_distance>=3){
+  /*if (ball_distance>=3){
       if ((status_x==OVEST) && (status_y==NORD)){
         atk_speed=200;
       }
       else if ((status_x==EST) && (status_y==NORD)) {
         atk_speed=200;
       }
-  }
-  */
+  }*/
+
 
   drivePID(atk_direction, atk_speed);
 }

@@ -12,11 +12,16 @@ void initIMU() {
 }
 
 void readIMU(){
-    imu::Vector<3> euler = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
-      /*if (euler.x() != imu_current_euler){
-       imu_current_euler = euler.x();
-     }
-    else imu_current_euler = euler.x();*/
-      imu_temp_euler = euler.x();
-      return imu_temp_euler;
+
+  imu::Vector<3> euler = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
+
+  if (euler.x() != imu_current_euler){
+    Serial.print("X: ");
+    Serial.println(euler.x());
+    imu_current_euler = euler.x();
+  }
+
+  delay(BNO055_SAMPLERATE_DELAY_MS);
+
+  return;
 }
