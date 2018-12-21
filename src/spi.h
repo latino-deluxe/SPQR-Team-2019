@@ -27,6 +27,7 @@ void readSPI() {
   if (mess == 255) return;
   ball_sensor = mess & 0b00011111;
   ball_distance = (mess & 0b11100000) >> 5;
+  return;                                                    //unica differenza con readspi vecchio codice
 /*
   Serial.print(ball_sensor);
   delay(600);
@@ -34,4 +35,21 @@ void readSPI() {
   delay(600);
   Serial.println(ball_distance);
   delay(600);*/
+}
+
+void ball_read_position()
+{
+  readSPI(); //getting our data from our spi slave
+  ball_seen = true; //in any other case the ball is seen by the robot
+  if (ball_distance == 6)
+  {
+    ball_seen = false; //if the distance is 6 it means that the robot doesnt see the ball
+  }
+
+  if (old_s_ball != ball_sensor)
+  {
+    old_s_ball = ball_sensor;
+    time_s_ball = millis();  // per quanto tempo lo stesso sensore vede la palla >usata in keeper e non in goalie<
+  }
+  return;
 }

@@ -2,6 +2,7 @@
 #include <Adafruit_BNO055.h>
 #include <SPI.h>
 
+int imu_current_euler;
 
 #define bluetooth  Serial3         // BT communication serial
 
