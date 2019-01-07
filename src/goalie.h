@@ -1,6 +1,6 @@
 #include "libs.h"
 #include "pid.h"
-#include "spi.h"
+#include "myspi.h"
 #include "us.h"
 
 void goalie() {
@@ -23,7 +23,7 @@ void goalie() {
 
 
   atk_direction = goaliedirection[ball_sensor]; //going around the ball
-  
+
 /*
 
   // controllo per ridurre oscillazione quando ha la palla in avanti

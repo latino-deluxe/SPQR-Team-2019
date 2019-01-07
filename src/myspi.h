@@ -1,5 +1,6 @@
 #include "libs.h"
 
+
 byte mess;
 //VARIABILI RELATIVE ALLA LETTURA DELLA PALLA---------------
 byte spi_temp_byte = 0;    // dato grezzo letto da SPI
