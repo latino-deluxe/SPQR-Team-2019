@@ -46,18 +46,18 @@
 #define AA5  120
 #define AA6  130
 #define AA7  160
-#define AA8  170
-#define AA9  999
-#define AA10 999
-#define AA11 999
-#define AA12 190
+#define AA8  180
+#define AA9  135
+#define AA10 135
+#define AA11 135
+#define AA12 180
 #define AA13 200
 #define AA14 230
 #define AA15 240
-#define AA16 270
+#define AA16 280
 #define AA17 280
 #define AA18 300
-#define AA19 337
+#define AA19 330
 
 //ZONE DEL CAMPO
 #define EST           2        // codici utilizzabili per una matice 3x3

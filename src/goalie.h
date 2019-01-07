@@ -9,6 +9,7 @@ void goalie() {
   int goaliedirection[20] = { AA0, AA1 , AA2, AA3, AA4, AA5, AA6, AA7, AA8, AA9, AA10, AA11, AA12, AA13, AA14, AA15, AA16, AA17, AA18, AA19 }; //direzioni going around the ball
 
   //PALLA DI FRONTE
+  /*
   if (ball_sensor == 0)
   {
     if(ball_distance>=2) atk_speed = 180;
@@ -19,9 +20,8 @@ void goalie() {
     if(ball_distance>=2) atk_speed = 180;
     atk_speed = GOALIE_MIN;
   }
-
-
-
+  */
+  atk_speed = 180;
   atk_direction = goaliedirection[ball_sensor]; //going around the ball
 
 /*

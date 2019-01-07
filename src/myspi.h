@@ -16,27 +16,26 @@ void initSPI() {
   pinMode(SS_PIN, OUTPUT);
   Serial.begin(9600);
   SPI.begin();
+
+  digitalWrite(SS_PIN,HIGH);
 }
 
+
+unsigned long t1 = 0;
 void readSPI() {
+  if(millis() - t1 > 10){
   mess = 0;
-  SPI.beginTransaction(settings);
+    SPI.beginTransaction(settings);
   digitalWrite(SS_PIN, LOW);
   mess = SPI.transfer(255);
   digitalWrite(SS_PIN, HIGH);
   SPI.endTransaction();
+  t1 = millis();
   if (mess == 255) return;
   ball_sensor = mess & 0b00011111;
-  ball_distance = (mess & 0b11100000) >> 5;
-  return;                                                    //unica differenza con readspi vecchio codice
-/*
-  Serial.print(ball_sensor);
-  delay(600);
-  Serial.print(" | ");
-  delay(600);
-  Serial.println(ball_distance);
-  delay(600);*/
-}
+  ball_distance = (mess & 0b11100000) >> 5;                                                    //unica differenza con readspi vecchio codice
+  }
+  }
 
 void ball_read_position()
 {
