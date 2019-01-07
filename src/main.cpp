@@ -35,6 +35,7 @@ void setup() {
 
 void loop() {
   ball_read_position();
+  
   readIMU();
   //Serial.println(ball_sensor);
   if(ball_distance < 6){
