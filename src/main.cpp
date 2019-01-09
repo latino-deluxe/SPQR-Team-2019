@@ -1,7 +1,5 @@
 #include "libs.h"
 #include "goalie.h"
-#include "linesensor.h"
-//#include "position.h"
 
 //Switch management vars
 int SWS = 0;
@@ -32,9 +30,7 @@ void setup() {
 
 
 void loop() {
-  ball_read_position();
-  readIMU();
-  readUS();
+  update_sensors_all();
   if(ball_distance < 6){
   goalie();
 }

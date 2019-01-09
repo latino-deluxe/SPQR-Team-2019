@@ -1,5 +1,24 @@
 #include "libs.h"
 
+void update_sensors_all();
+
+//MATRICE DI PROBABILITÁ-------------------------------
+byte zone [3] [3] {1, 2, 3, 4, 5, 6, 7, 8, 9}; // il primo indice = NORD SUD CENTRO  il secondo indice  EST OVEST CENTRO
+signed int zone_prob[3] [3] {0, 0, 0, 0, 5, 0, 0, 0, 0};
+
+// VARIABILI WHERE AM I
+int old_status_x = CENTRO;
+int old_status_y = CENTRO;
+int old_currentlocation;
+int old_guessedlocation = CENTRO_CENTRO;
+int status_x = CENTRO;
+int status_y = CENTRO;
+int currentlocation = CENTRO_CENTRO;
+int guessedlocation = CENTRO_CENTRO;
+bool goal_zone = false;
+bool good_field_x = true;
+bool good_field_y = true;
+
 void WhereAmI() {
   // decide la posizione in orizzontale e verticale
   // Aggiorna i flag :  good_field_x  good_field_y      non utilizzata da altre routines
@@ -349,3 +368,10 @@ void ritornaporta(int posizione)  //chiamata da gestione portiere
   }
   return;
 }//--------------------------------------------------------------
+
+void update_sensors_all() {
+  ball_read_position();
+  readIMU();
+  readUS();
+  return;
+}

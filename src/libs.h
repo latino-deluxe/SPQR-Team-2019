@@ -2,6 +2,8 @@
 #include <Adafruit_BNO055.h>
 #include <SPI.h>
 
+
+
 #define BNO055_SAMPLERATE_DELAY_MS (60)
 
 #define bluetooth  Serial3         // BT communication serial
