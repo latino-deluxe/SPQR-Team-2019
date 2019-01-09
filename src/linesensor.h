@@ -30,36 +30,42 @@ void init_linesensors(){
 
 void int0(){
   brake();
+  ritornacentro();
   lettura = 0b111110;
   return;
 }
 
 void int1(){
   brake();
+  ritornacentro();
   lettura = 0b111101;
   return;
 }
 
 void int2(){
   brake();
+  ritornacentro();
   lettura = 0b111011;
   return;
 }
 
 void int3(){
   brake();
+  ritornacentro();
   lettura = 0b110111;
   return;
 }
 
 void int4(){
   brake();
+  ritornacentro();
   lettura = 0b101111;
   return;
 }
 
 void int5(){
   brake();
+  ritornacentro();
   lettura = 0b011111;
   return;
 }
