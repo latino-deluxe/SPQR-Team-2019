@@ -1,5 +1,7 @@
 #include "libs.h"
 
+void us_receive();
+
 int reading=0;
 
 long us_t0 = 0;                         // US measure start
@@ -8,7 +10,7 @@ byte us_flag = false;                   // is it measuring or not?
 int us_values[4];                       // US values array
 int us_sx, us_dx, us_px, us_fr;         // copies with other names in the array
 
-void readUS(){
+void readUSTEST(){
                                         // test
 for(int i = 0; i <4; i++){              //  int i = 3;
 // step 1: instruct sensor to read echoes
@@ -51,4 +53,44 @@ for(int i = 0; i <4; i++){              //  int i = 3;
     //  delay(1500);
     // }
 
+  }
+
+  void us_trigger(){
+    for (byte i = 0; i < 4; i++){
+      Wire1.beginTransmission(112 + i);
+      Wire1.write(0x51);
+      Wire1.endTransmission();
+    }
+  }
+
+  void us_scheduling() {
+    if (us_flag == false) {
+      us_trigger();
+      us_flag = true;
+      us_t0 = millis();
+    }
+    if (us_flag == true) {
+      us_t1 = millis();
+      if ((us_t1 - us_t0) > 70)
+      {
+        us_receive();
+        us_flag = 0;
+      }
+    }
+  }
+
+  void us_receive() {
+    for (byte i = 0; i < 4; i++) {
+      Wire1.requestFrom(112 + i, 2);
+      us_values[i] = Wire1.read() << 8;
+      us_values[i] |= Wire1.read();
+    }
+  }
+
+  void readUS() {
+    us_scheduling();
+    us_fr = us_values[0]; //FRONT US
+    us_dx = us_values[1]; //DX US
+    us_px = us_values[2]; //BACK US
+    us_sx = us_values[3]; //SX US
   }

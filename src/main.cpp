@@ -30,9 +30,12 @@ void setup() {
 
 
 void loop() {
+  /*
   update_sensors_all();
   if(ball_distance < 6){
   goalie();
 }
-  else recenter(2);
+  else recenter(2);*/
+  readBall();
+  delay(150);
 }

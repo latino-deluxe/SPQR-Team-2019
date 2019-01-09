@@ -1,55 +1,69 @@
 #include "libs.h"
 
+#define DISTANCE 0b00001111
+#define DEGREES 0b00001010
 
-byte mess;
-//VARIABILI RELATIVE ALLA LETTURA DELLA PALLA---------------
-byte spi_temp_byte = 0;    // dato grezzo letto da SPI
-byte ball_sensor = 0;      // sensore che vede la palla
-byte ball_distance = 0;    // distanza della palla con valore da 0 a 6
-bool ball_seen = false;    // palla in vista si/no era byte
-byte old_s_ball;           // sensore che vedeva la palla in precedenza, paragonato con ball_sensor
-unsigned long time_s_ball; // millisecondipassati dal cambiamento di sensore che vede la palla (KEEPER)
-
-unsigned long tspi = 0;
+#define SPI_DELAY 1
+#define SS 10
 
 SPISettings settings(100000, MSBFIRST, SPI_MODE0);
+byte ball_distance;
+byte ball_sensor;
 
 void initSPI() {
-  pinMode(SS_PIN, OUTPUT);
-  Serial.begin(9600);
-  SPI.begin();
+  pinMode(SS, OUTPUT);
+  digitalWrite(SS, HIGH);  // ensure 10 stays high for now
 
-  digitalWrite(SS_PIN,HIGH);
+  // Put SCK, MOSI, 10 pins into output mode
+  // also put SCK, MOSI into LOW state, and 10 into HIGH state.
+  // Then put SPI hardware into Master mode and turn SPI on
+  SPI.begin ();
+
+  // Slow down the master a bit
+  SPI.setClockDivider(SPI_CLOCK_DIV8);
 }
 
-void readSPI() {
-  if(millis() - tspi > 10){
-  mess = 0;
-    SPI.beginTransaction(settings);
-  digitalWrite(SS_PIN, LOW);
-  mess = SPI.transfer(255);
-  digitalWrite(SS_PIN, HIGH);
+void readBall(){
+  /**THIS PART COULD BE REFACTORED INTO A NICER THING, BUT IT'S JUST FOR EXAMPLE**/
+
+  //Sends a byte to the slave. The slave now prepares the response byte (The slave knows what to do)
+  SPI.beginTransaction(settings);
+  digitalWrite(SS, LOW);
+  SPI.transfer(DISTANCE);
+  digitalWrite(SS, HIGH);
   SPI.endTransaction();
-  tspi = millis();
-  if (mess == 255) return;
-  ball_sensor = mess & 0b00011111;
-  ball_distance = (mess & 0b11100000) >> 5;                                                    //unica differenza con readspi vecchio codice
-  }
-  }
+  delay(SPI_DELAY);
 
-void ball_read_position()
-{
-  readSPI(); //getting our data from our spi slave
-  ball_seen = true; //in any other case the ball is seen by the robot
-  if (ball_distance == 6)
-  {
-    ball_seen = false; //if the distance is 6 it means that the robot doesnt see the ball
-  }
+  //Sends a byte to get the response that the slave has prepared
+  SPI.beginTransaction(settings);
+  digitalWrite(SS, LOW);
+  ball_distance = SPI.transfer(0);
+  digitalWrite(SS, HIGH);
+  SPI.endTransaction();
+  delay(SPI_DELAY);
 
-  if (old_s_ball != ball_sensor)
-  {
-    old_s_ball = ball_sensor;
-    time_s_ball = millis();  // per quanto tempo lo stesso sensore vede la palla >usata in keeper e non in goalie<
-  }
-  return;
+  Serial.println(ball_distance);
+
+  //Waits between the printing and the next SPI communication. Serial printing slows down a lot
+  delay(SPI_DELAY);
+
+    //Sends a byte to the slave. The slave now prepares the response byte (The slave knows what to do)
+  SPI.beginTransaction(settings);
+  digitalWrite(SS, LOW);
+  SPI.transfer(DEGREES);
+  digitalWrite(SS, HIGH);
+  SPI.endTransaction();
+  delay(SPI_DELAY);
+
+  //Sends a byte to get the response that the slave has prepared
+  SPI.beginTransaction(settings);
+  digitalWrite(SS, LOW);
+  ball_sensor = SPI.transfer(0);
+  digitalWrite(SS, HIGH);
+  SPI.endTransaction();
+  delay(SPI_DELAY);
+
+  ball_sensor=(ball_sensor%2) + ball_sensor * 2;
+
+  Serial.println(ball_sensor);
 }
