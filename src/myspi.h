@@ -26,26 +26,6 @@ void initSPI() {
 void readBall(){
   /**THIS PART COULD BE REFACTORED INTO A NICER THING, BUT IT'S JUST FOR EXAMPLE**/
 
-  //Sends a byte to the slave. The slave now prepares the response byte (The slave knows what to do)
-  SPI.beginTransaction(settings);
-  digitalWrite(SS, LOW);
-  SPI.transfer(DISTANCE);
-  digitalWrite(SS, HIGH);
-  SPI.endTransaction();
-  delay(SPI_DELAY);
-
-  //Sends a byte to get the response that the slave has prepared
-  SPI.beginTransaction(settings);
-  digitalWrite(SS, LOW);
-  ball_distance = SPI.transfer(0);
-  digitalWrite(SS, HIGH);
-  SPI.endTransaction();
-  delay(SPI_DELAY);
-
-  Serial.println(ball_distance);
-
-  //Waits between the printing and the next SPI communication. Serial printing slows down a lot
-  delay(SPI_DELAY);
 
     //Sends a byte to the slave. The slave now prepares the response byte (The slave knows what to do)
   SPI.beginTransaction(settings);
@@ -62,8 +42,6 @@ void readBall(){
   digitalWrite(SS, HIGH);
   SPI.endTransaction();
   delay(SPI_DELAY);
-
-  ball_sensor=(ball_sensor%2) + ball_sensor * 2;
 
   Serial.println(ball_sensor);
 }
