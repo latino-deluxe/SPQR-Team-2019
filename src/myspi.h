@@ -10,6 +10,8 @@ bool ball_seen = false;    // palla in vista si/no era byte
 byte old_s_ball;           // sensore che vedeva la palla in precedenza, paragonato con ball_sensor
 unsigned long time_s_ball; // millisecondipassati dal cambiamento di sensore che vede la palla (KEEPER)
 
+unsigned long tspi = 0;
+
 SPISettings settings(100000, MSBFIRST, SPI_MODE0);
 
 void initSPI() {
@@ -20,17 +22,15 @@ void initSPI() {
   digitalWrite(SS_PIN,HIGH);
 }
 
-
-unsigned long t1 = 0;
 void readSPI() {
-  if(millis() - t1 > 10){
+  if(millis() - tspi > 10){
   mess = 0;
     SPI.beginTransaction(settings);
   digitalWrite(SS_PIN, LOW);
   mess = SPI.transfer(255);
   digitalWrite(SS_PIN, HIGH);
   SPI.endTransaction();
-  t1 = millis();
+  tspi = millis();
   if (mess == 255) return;
   ball_sensor = mess & 0b00011111;
   ball_distance = (mess & 0b11100000) >> 5;                                                    //unica differenza con readspi vecchio codice

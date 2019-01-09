@@ -19,7 +19,7 @@ for(int i = 0; i <4; i++){              //  int i = 3;
     Wire1.endTransmission();            // stop transmitting
 
 // step 2: wait for readings to happen
-    delay(70);                          // datasheet suggests at least 65 milliseconds
+    delay(30);                          // datasheet suggests at least 65 milliseconds
 
 // step 3: instruct sensor to return a particular echo reading
     Wire1.beginTransmission(112+i);     // transmit to device #112

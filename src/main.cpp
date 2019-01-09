@@ -26,21 +26,17 @@ void setup() {
         initOmnidirectionalSins();                          //inizializza seni
         SWS = digitalRead(SWITCH_SX);                         //lettura switch sinistro
         //valStringY.reserve(30);                                     //riserva 30byte per le stringhe
-        //valStringB.reserve(30);
-        //initial_p();                                              //inizializza sensore presa palla
-      //  tone(27, 1000, 500);
-      digitalWrite(31, HIGH);
+        //valStringB.reserve(30);  //  tone(27, 1000, 500);
+        digitalWrite(31, HIGH);
 }
 
 
 void loop() {
   ball_read_position();
-  
   readIMU();
-  //Serial.println(ball_sensor);
+  readUS();
   if(ball_distance < 6){
   goalie();
 }
   else recenter(2);
-  //recenter(1);
 }

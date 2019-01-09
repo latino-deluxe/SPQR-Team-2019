@@ -11,7 +11,7 @@
 #define SWITCH_SX 24
 #define SWITCH_DX 25
 
-//SPI pins
+//SPI
 #define SS_PIN 2
 
 //Linesensors
