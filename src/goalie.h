@@ -1,83 +1,32 @@
-#include "libs.h"
-#include "pid.h"
-#include "myspi.h"
-#include "us.h"
-
-void goalie() {
-  int atk_direction = 0; //direzione di attacco in funzione del sensore che vede la palla
-  int atk_speed = 0;     //velocitá di attacco in funzione del sensore che vede la palla
-  int goaliedirection[20] = { AA0, AA1 , AA2, AA3, AA4, AA5, AA6, AA7, AA8, AA9, AA10, AA11, AA12, AA13, AA14, AA15, AA16, AA17, AA18, AA19 }; //direzioni going around the ball
-
-  //PALLA DI FRONTE
-  /*
-  if (ball_sensor == 0)
-  {
-    if(ball_distance>=2) atk_speed = 180;
-    atk_speed = GOALIE_MAX;
-  }
-  else
-  {
-    if(ball_distance>=2) atk_speed = 180;
-    atk_speed = GOALIE_MIN;
-  }
-  */
-  atk_speed = 180;
-  atk_direction = goaliedirection[ball_sensor]; //going around the ball
-
-/*
-
-  // controllo per ridurre oscillazione quando ha la palla in avanti
-  if (ball_sensor == 1) {
-    if (ball_distance <= 2) {   //se la palla è vicina
-      atk_speed = GOALIE_MAX;
-      atk_direction = 15;
-    }
-  }
 
 
-  if (ball_sensor == 19) {
-    if (ball_distance <= 2) {   //se la palla è vicina
-      atk_speed = GOALIE_MAX;
-      atk_direction = 345;
-    }
-  }
+//COSTANTI PER ATTACCANTE (GOALIE & MENAMOLI)-----------------------------
+#define GOALIE_MAX 130
+#define GOALIE_MIN 200
+#define GOALIE_SLOW1 130
+#define GOALIE_SLOW2 150
+#define GOALIE_DANGER 100
+#define VEL_RET 180
+#define GOALIE_P 255 // velocità portiere
+#define AA0  0   // angoli di attacco in funzione del sensore palla
+#define AA1  30
+#define AA2  60
+#define AA3  80
+#define AA4  90
+#define AA5  120
+#define AA6  130
+#define AA7  160
+#define AA8  180
+#define AA9  135
+#define AA10 135
+#define AA11 135
+#define AA12 180
+#define AA13 200
+#define AA14 230
+#define AA15 240
+#define AA16 280
+#define AA17 280
+#define AA18 300
+#define AA19 330
 
-  if ((ball_sensor == 10) || (ball_sensor == 9) || (ball_sensor == 11))  //  se la palla é dietro e vicina la scanso a 90 a dx o sx dove ho piú spazio
-  {
-    if (ball_distance < 4)
-    {
-        if (us_sx>=80)
-        {
-          atk_direction = 225;
-        }
-        else
-        {
-          atk_direction = 135;
-        }
-     }
-    else //la palla é lontana anche se dietro le vado quasi addosso in velocita
-     {
-
-      if(us_sx>=80) {
-         atk_direction = 200;
-         atk_speed = GOALIE_MAX;
-       }
-       else {
-         atk_direction = 160;
-         atk_speed = GOALIE_MAX;
-       }
-
-    }
-  }
-  /*if (ball_distance>=3){
-      if ((status_x==OVEST) && (status_y==NORD)){
-        atk_speed=200;
-      }
-      else if ((status_x==EST) && (status_y==NORD)) {
-        atk_speed=200;
-      }
-  }*/
-
-
-  drivePID(atk_direction, atk_speed);
-}
+void goalie();
