@@ -13,14 +13,6 @@ int us_sx, us_dx, us_px, us_fr;         // copies with other names in the array
 
 void us_receive();
 
-int reading=0;
-
-long us_t0 = 0;                         // US measure start
-long us_t1 = 0;                         // time value during measure
-byte us_flag = false;                   // is it measuring or not?
-int us_values[4];                       // US values array
-int us_sx, us_dx, us_px, us_fr;         // copies with other names in the array
-
 void readUSTEST(){
                                         // test
 for(int i = 0; i <4; i++){              //  int i = 3;

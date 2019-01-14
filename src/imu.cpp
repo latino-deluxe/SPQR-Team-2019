@@ -27,3 +27,9 @@ void readIMU(){
 
   return;
 }
+
+void testIMU(){
+  readIMU();
+  Serial.println(imu_current_euler);
+  delay(500);
+}

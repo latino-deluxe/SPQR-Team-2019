@@ -4,4 +4,4 @@ void brake();
 float torad(float);
 void initOmnidirectionalSins();
 void mot(byte, int);
-void testmotors();
+void testMotors();

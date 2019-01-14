@@ -54,3 +54,12 @@ void ball_read_position()
   }
   return;
 }
+
+void testBall(){
+  ball_read_position();
+  Serial.print(ball_sensor);
+  Serial.print(" | ");
+  Serial.println(ball_distance);
+
+  delay(500);
+}

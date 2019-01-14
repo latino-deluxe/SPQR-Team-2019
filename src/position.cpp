@@ -374,6 +374,6 @@ void ritornaporta(int posizione)  //chiamata da gestione portiere
 void update_sensors_all() {
   //ball_read_position();
   readIMU();
-  readUS_old();
+  readUS();
   return;
 }

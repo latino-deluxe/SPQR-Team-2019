@@ -89,7 +89,7 @@ void mot (byte mot, int vel) {           //Function to send the speed to the mot
   return;
 }
 
-void testmotors() {
+void testMotors() {
   int  i= 1;
 
   turnMotor(i, 0, 1, 100);

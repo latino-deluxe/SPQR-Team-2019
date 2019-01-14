@@ -3,7 +3,7 @@
 #include "motors.h"
 #include "imu.h"
 #include "linesensor.h"
-#include "myspi.h"
+#include "myspi_old.h"
 #include "motors.h"
 #include "us.h"
 #include "goalie.h"
@@ -31,34 +31,33 @@ int SWD = 0;
 extern int ball_distance;
 
 void setup() {
-        Serial.begin(9600);
+  Serial.begin(9600);
 
-        pinMode(A8, INPUT_DISABLE); //pin A8 in corto tra 3.3V e massa
-        pinMode(16, INPUT_DISABLE); //pin 16 in corto tra 3.3V e massa
+  pinMode(A8, INPUT_DISABLE); //pin A8 in corto tra 3.3V e massa
+  pinMode(16, INPUT_DISABLE); //pin 16 in corto tra 3.3V e massa
 
-        pinMode(27, OUTPUT);
-        for(int i=29; i<=31; i++) pinMode(i, OUTPUT);
-        Wire1.begin();
+  pinMode(27, OUTPUT);
+  for(int i=29; i<=31; i++) pinMode(i, OUTPUT);
+  Wire1.begin();
 
-        SWS = digitalRead(SWITCH_SX);
+  SWS = digitalRead(SWITCH_SX);
 
-        initMotorsGPIO();                                     //inizializza GPIO motori
-        init_linesensors();                                   //abilita i sensori di linea a chiamare interrupt come PCINT2
-        initSPI();                                            //inizializza comunicazione spi
-        initIMU();                                            //inizializza imu
-        initOmnidirectionalSins();                            //inizializza seni
-        SWS = digitalRead(SWITCH_SX);                         //lettura switch sinistro
-        //valStringY.reserve(30);                                     //riserva 30byte per le stringhe
-        //valStringB.reserve(30);  //  tone(27, 1000, 500);
-        digitalWrite(31, HIGH);
+  initMotorsGPIO();                                     //inizializza GPIO motori
+  init_linesensors();                                   //abilita i sensori di linea a chiamare interrupt come PCINT2
+  initSPI();                                            //inizializza comunicazione spi
+  initIMU();                                            //inizializza imu
+  initOmnidirectionalSins();                            //inizializza seni
+  SWS = digitalRead(SWITCH_SX);                         //lettura switch sinistro
+  //valStringY.reserve(30);                                     //riserva 30byte per le stringhe
+  //valStringB.reserve(30);  //  tone(27, 1000, 500);
+  digitalWrite(31, HIGH);
 }
 
 
 void loop() {
-  ball_read_position();
   readIMU();
-  if(ball_distance < 6){
+  ball_read_position();
+  Serial.println("Chiamo goalie");
   goalie();
-}
-  else recenter(2);
+  Serial.println("Finito goalie");
 }

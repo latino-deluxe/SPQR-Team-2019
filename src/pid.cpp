@@ -55,6 +55,14 @@ void drivePID(signed int direzione, float vMot) {
   mot(2, int(speed2));
   mot(1, int(speed1));
   mot(3, int(speed3));
+
+  Serial.print(speed1);
+  Serial.print("   ");
+  Serial.print(speed2);
+  Serial.print("   ");
+  Serial.print(speed3);
+  Serial.println("   ");
+
 }
 
 float updatePid() {
