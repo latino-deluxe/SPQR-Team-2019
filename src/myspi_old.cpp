@@ -24,22 +24,23 @@ void initSPI() {
 }
 
 void readSPI() {
+  Serial.println("ciao");
   if(millis() - tspi > 10){
-  mess = 0;
+    mess = 0;
     SPI.beginTransaction(settings);
-  digitalWrite(SS_PIN, LOW);
-  mess = SPI.transfer(255);
-  digitalWrite(SS_PIN, HIGH);
-  SPI.endTransaction();
-  tspi = millis();
-  if (mess == 255) return;
-  ball_sensor = mess & 0b00011111;
-  ball_distance = (mess & 0b11100000) >> 5;                                                    //unica differenza con readspi vecchio codice
+    digitalWrite(SS_PIN, LOW);
+    mess = SPI.transfer(255);
+    digitalWrite(SS_PIN, HIGH);
+    SPI.endTransaction();
+    tspi = millis();
+    if (mess == 255) return;
+    ball_sensor = mess & 0b00011111;
+    ball_distance = (mess & 0b11100000) >> 5;                                                    //unica differenza con readspi vecchio codice
   }
-  }
+  return;
+}
 
-void ball_read_position()
-{
+void ball_read_position(){
   readSPI(); //getting our data from our spi slave
   ball_seen = true; //in any other case the ball is seen by the robot
   if (ball_distance == 6)

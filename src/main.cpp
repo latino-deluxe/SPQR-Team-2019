@@ -42,12 +42,12 @@ void setup() {
 
   SWS = digitalRead(SWITCH_SX);
 
-  initMotorsGPIO();                                     //inizializza GPIO motori
-  init_linesensors();                                   //abilita i sensori di linea a chiamare interrupt come PCINT2
-  initSPI();                                            //inizializza comunicazione spi
-  initIMU();                                            //inizializza imu
-  initOmnidirectionalSins();                            //inizializza seni
-  SWS = digitalRead(SWITCH_SX);                         //lettura switch sinistro
+  initMotorsGPIO();                               //inizializza GPIO motori
+  init_linesensors();                             //abilita i sensori di linea a chiamare interrupt come PCINT2
+  initSPI();                                      //inizializza comunicazione spi
+  initIMU();                                      //inizializza imu
+  initOmnidirectionalSins();                      //inizializza seni
+  SWS = digitalRead(SWITCH_SX);                   //lettura switch sinistro
   //valStringY.reserve(30);                                     //riserva 30byte per le stringhe
   //valStringB.reserve(30);  //  tone(27, 1000, 500);
   digitalWrite(31, HIGH);
@@ -55,14 +55,11 @@ void setup() {
 
 
 void loop() {
-  Serial.println("Chiamo");
-  ball_read_position();
-  Serial.println("Finito");
-  delay(350);
-  // readIMU();
-  // ball_read_position();
-  // Serial.println("Chiamo goalie");
-  // goalie();
-  // Serial.println("Finito goalie");
-  // delay(200);
+  Serial.println("1");
+  //readIMU();
+  Serial.println("2");
+  //testBall();
+  Serial.println("3");
+  goalie();
+  Serial.println("4");
 }
