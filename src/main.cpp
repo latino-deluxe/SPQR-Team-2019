@@ -55,9 +55,14 @@ void setup() {
 
 
 void loop() {
-  readIMU();
+  Serial.println("Chiamo");
   ball_read_position();
-  Serial.println("Chiamo goalie");
-  goalie();
-  Serial.println("Finito goalie");
+  Serial.println("Finito");
+  delay(350);
+  // readIMU();
+  // ball_read_position();
+  // Serial.println("Chiamo goalie");
+  // goalie();
+  // Serial.println("Finito goalie");
+  // delay(200);
 }
