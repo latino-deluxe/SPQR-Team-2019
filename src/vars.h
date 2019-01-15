@@ -13,16 +13,17 @@
 #define LyF_max 270
 // valore massimo accettabile di lunghezza sulle fasce (lunghezza campo)
 #define LyP_min 139 // valore minimo accettabile di lunghezza tra le porte
-#define LyP_max 250 // valore massimo accettabile di lunghezza tra le porte
-#define DxF                                                                    \
-  48 // con misura x OK con us_dx o us_sx < DxF sto nelle fasce 30 + 30 - 1/2
-     // robot
-#define DyF                                                                    \
-  91 // con  misura y OK e robot a EST o A OVEST con us_fx o us_px < DyF sto a
-     // NORD o a SUD  era - 10
-#define DyP                                                                    \
-  69 // con misura y OK e robot al CENTRO (tra le porte) con us_fx o us_px < DyP
-     // sto a NORD o a SUD era - 22
+#define LyP_max 250
+// valore massimo accettabile di lunghezza tra le porte// con misura x OK
+// con us_dx o us_sx < DxF sto nelle fasce 30 + 30 - 1/2
+// robot
+#define DxF 48
+// con  misura y OK e robot a EST o A OVEST con us_fx o us_px < DyF sto a
+// NORD o a SUD  era - 10
+#define DyF 91
+// con misura y OK e robot al CENTRO (tra le porte) con us_fx o us_px < DyP
+// sto a NORD o a SUD era - 22
+#define DyP 69
 #define robot 21 // diametro del robot
 
 // ZONE DEL CAMPO
@@ -96,17 +97,17 @@ extr float speed1, speed2, speed3, pidfactor, sins[360];
 // MySPI
 extr byte mess, ball_sensor, ball_distance, old_s_ball;
 extr long time_s_ball, tspi;
-extr bool ball_seen = false;
+extr bool ball_seen;
 // PID
 extr float errorePre;    // angolo di errore precedente
 extr float integral;     // somisa degli angoli di errore
 extr bool reaching_ball; // serve per aumentare il PID del 20% GOALIE
-int st;                  // storcimento sulle fasce
+extr int st;             // storcimento sulle fasce
 // da utilizzare per sviluppi futuri
-signed int old_Dir;  // angolo di direzione precedente a quella attuale
-signed int new_Dir;  // angolo di direzione corrente del moto
-extr float old_vMot; // velocitá di moto precedente
-extr float new_vMot; // velocitá di moto corrente
+extr signed int old_Dir; // angolo di direzione precedente a quella attuale
+extr signed int new_Dir; // angolo di direzione corrente del moto
+extr float old_vMot;     // velocitá di moto precedente
+extr float new_vMot;     // velocitá di moto corrente
 // US
 extr int reading;
 extr int us_t0;                      // US measure start

@@ -2,9 +2,9 @@
 #include "vars.h"
 #include <Arduino.h>
 
-byte INA_MOT[4] = {0, 17, 5, 8}; // INA pin
-byte INB_MOT[4] = {0, 15, 6, 9}; // INB pin
-byte PWM_MOT[4] = {0, 4, 7, 10}; // PWM pin
+byte INA_MOT[4] = {0, 17, 5, 8}; //{0,  16,  5,  8};           // INA pin
+byte INB_MOT[4] = {0, 15, 6, 9}; //{0,  15,  6,  9};           // INB pin
+byte PWM_MOT[4] = {0, 4, 7, 10}; //{0,  4,   7,   10};         // PWM pin
 
 void initMotorsGPIO() {
   pinMode(PWM_MOT[1], OUTPUT);
@@ -16,6 +16,22 @@ void initMotorsGPIO() {
   pinMode(PWM_MOT[3], OUTPUT);
   pinMode(INA_MOT[3], OUTPUT);
   pinMode(INB_MOT[3], OUTPUT);
+}
+
+/**
+ * Combination of motor 1 / motor 2 /result
+ *
+ * 0 - 0   ----->  Stopped - Neutral
+ * 0 - 1   ----->  Clockwise
+ * 1 - 0   ----->  Counter-Clockwise
+ * 1 - 1   ----->  Stopped - Brake
+ *
+ **/
+
+void turnMotor(byte motorIndex, byte pinA, byte pinB, byte pwm) {
+  digitalWrite(INA_MOT[motorIndex], pinA);
+  digitalWrite(INB_MOT[motorIndex], pinB);
+  analogWrite(PWM_MOT[motorIndex], pwm);
 }
 
 void brake() {
@@ -98,21 +114,4 @@ void testMotors() {
   delay(1000);
   turnMotor(i, 0, 0, 100);
   delay(300);
-}
-
-/**
- * Combination of motor 1 / motor 2 /result
- *
- * 0 - 0   ----->  Stopped - Neutral
- * 0 - 1   ----->  Clockwise
- * 1 - 0   ----->  Counter-Clockwise
- * 1 - 1   ----->  Stopped - Brake
- *
- **/
-
-// Just for test
-void turnMotor(byte motorIndex, byte pinA, byte pinB, byte pwm) {
-  digitalWrite(INA_MOT[motorIndex], pinA);
-  digitalWrite(INB_MOT[motorIndex], pinB);
-  analogWrite(PWM_MOT[motorIndex], pwm);
 }

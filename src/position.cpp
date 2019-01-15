@@ -8,7 +8,9 @@
 #include <Arduino.h>
 
 // MATRICE DI PROBABILITÁ-------------------------------
-byte zone[3][3]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+byte zone[3][3]{1, 2, 3, 4, 5,
+                6, 7, 8, 9}; // il primo indice = NORD SUD CENTRO  il secondo
+                             // indice  EST OVEST CENTRO
 signed int zone_prob[3][3]{0, 0, 0, 0, 5, 0, 0, 0, 0};
 
 void WhereAmI() {

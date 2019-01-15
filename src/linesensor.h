@@ -1,4 +1,3 @@
-
 void init_linesensors();
 void int0();
 void int1();
