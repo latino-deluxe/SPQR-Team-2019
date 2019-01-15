@@ -1,3 +1,5 @@
+#include "Arduino.h"
+
 void initMotorsGPIO();
 void turnMotor(byte, byte, byte, byte);
 void brake();

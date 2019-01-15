@@ -1,17 +1,17 @@
-#ifndef IS_MAIN
-// Dont' touch this, makes variables init correctly through different files
+#include <Arduino.h>
+#ifndef MAIN
 #define extr extern
 #else
-// Dont' touch this, makes variables init correctly through different files
 #define extr
+#endif
 
 // You can modify this if you need
 // LIMITI DEL CAMPO
 #define Lx_min 115  // valore minimo accettabile di larghezza
 #define Lx_max 195  // valore massimo accettabile di larghezza (larghezza campo)
 #define LyF_min 190 // valore minimo accettabile di lunghezza sulle fasce
-#define LyF_max                                                                \
-  270 // valore massimo accettabile di lunghezza sulle fasce (lunghezza campo)
+#define LyF_max 270
+// valore massimo accettabile di lunghezza sulle fasce (lunghezza campo)
 #define LyP_min 139 // valore minimo accettabile di lunghezza tra le porte
 #define LyP_max 250 // valore massimo accettabile di lunghezza tra le porte
 #define DxF                                                                    \
@@ -26,7 +26,7 @@
 #define robot 21 // diametro del robot
 
 // ZONE DEL CAMPO
-#define EST 2    // codici utilizzabili per una matice 3x3
+#define EST 2 // codici utilizzabili per una matice 3x3
 #define OVEST 0
 #define CENTRO 1
 #define NORD 0
@@ -87,26 +87,21 @@
 #define AA18 300
 #define AA19 330
 
-#endif
-
 // IMU
 extr int imu_temp_euler, imu_current_euler;
 // Line Sensors
 extr byte lineReading;
 // Motors
 extr float speed1, speed2, speed3, pidfactor, sins[360];
-extr byte INA_MOT[4] = {0, 17, 5, 8}; // INA pin
-extr byte INB_MOT[4] = {0, 15, 6, 9}; // INB pin
-extr byte PWM_MOT[4] = {0, 4, 7, 10}; // PWM pin
 // MySPI
 extr byte mess, ball_sensor, ball_distance, old_s_ball;
 extr long time_s_ball, tspi;
 extr bool ball_seen = false;
 // PID
-extr float errorePre;        // angolo di errore precedente
-extr float integral;         // somisa degli angoli di errore
-integral bool reaching_ball; // serve per aumentare il PID del 20% GOALIE
-int st;                      // storcimento sulle fasce
+extr float errorePre;    // angolo di errore precedente
+extr float integral;     // somisa degli angoli di errore
+extr bool reaching_ball; // serve per aumentare il PID del 20% GOALIE
+int st;                  // storcimento sulle fasce
 // da utilizzare per sviluppi futuri
 signed int old_Dir;  // angolo di direzione precedente a quella attuale
 signed int new_Dir;  // angolo di direzione corrente del moto
@@ -114,11 +109,11 @@ extr float old_vMot; // velocitá di moto precedente
 extr float new_vMot; // velocitá di moto corrente
 // US
 extr int reading;
-extr int us_t0;                  // US measure start
-extr int us_t1;                  // time value during measure
-extr bool us_flag;               // is it measuring or not?
-extr int us_values[4];           // US values array
-extr us_sx, us_dx, us_px, us_fr; // copies with other names in the array
+extr int us_t0;                      // US measure start
+extr int us_t1;                      // time value during measure
+extr bool us_flag;                   // is it measuring or not?
+extr int us_values[4];               // US values array
+extr int us_sx, us_dx, us_px, us_fr; // copies with other names in the array
 // POSITION
 extr int old_status_x; // posizione precedente nel campo vale EST, OVEST o
                        // CENTRO o 255 >USI FUTURI<
@@ -133,8 +128,8 @@ extr bool goal_zone; // sto al centro rispetto alle porte         assegnata// da
 extr bool good_field_x;   // vedo tutta la larghezza del campo si/no
 extr bool good_field_y;   // vedo tutta la lunghezza del campo si/no
 extr int status_x;        // posizione nel campo vale EST, OVEST o CENTRO o 255
-extr int old_status_y;    // posizione nel campo vale SUD, NORD o CENTRO o 255
-extr intcurrentlocation;  // risultato misure zone campo da 1 a 9 o 255 se
+extr int status_y;        // posizione nel campo vale SUD, NORD o CENTRO o 255
+extr int currentlocation; // risultato misure zone campo da 1 a 9 o 255 se
                           // undefined
 extr int guessedlocation; // risultato misure zone campo da 1 a 9 (da
                           // CENTRO_CENTRO a SUD_OVEST)

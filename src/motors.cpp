@@ -2,6 +2,10 @@
 #include "vars.h"
 #include <Arduino.h>
 
+byte INA_MOT[4] = {0, 17, 5, 8}; // INA pin
+byte INB_MOT[4] = {0, 15, 6, 9}; // INB pin
+byte PWM_MOT[4] = {0, 4, 7, 10}; // PWM pin
+
 void initMotorsGPIO() {
   pinMode(PWM_MOT[1], OUTPUT);
   pinMode(INA_MOT[1], OUTPUT);

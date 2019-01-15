@@ -1,5 +1,5 @@
 // Here to correctly init vars.h, do not remove
-#define IS_MAIN
+#define MAIN
 
 #include "Wire.h"
 #include <Arduino.h>
@@ -42,7 +42,7 @@ void setup() {
   ball_seen = false;
   tspi = 0;
   // PID
-  errorPre = 0.0;
+  errorePre = 0.0;
   integral = 0.0;
   reaching_ball = false;
   st = 0;
