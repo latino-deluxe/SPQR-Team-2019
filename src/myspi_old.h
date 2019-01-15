@@ -1,5 +1,3 @@
-//SPI
-#define SS_PIN 2
 
 void initSPI();
 void readSPI();

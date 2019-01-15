@@ -1,10 +1,9 @@
-#include <Arduino.h>
 #include "linesensor.h"
 #include "motors.h"
-byte lettura;
+#include "vars.h"
+#include <Arduino.h>
 
-
-void init_linesensors(){
+void init_linesensors() {
   pinMode(LN0, INPUT);
   pinMode(LN1, INPUT);
   pinMode(LN2, INPUT);
@@ -20,39 +19,38 @@ void init_linesensors(){
   attachInterrupt(LN5, int5, FALLING);
 }
 
-
-void int0(){
+void int0() {
   brake();
-  lettura = 0b111110;
+  lineReading = 0b111110;
   return;
 }
 
-void int1(){
+void int1() {
   brake();
-  lettura = 0b111101;
+  lineReading = 0b111101;
   return;
 }
 
-void int2(){
+void int2() {
   brake();
-  lettura = 0b111011;
+  lineReading = 0b111011;
   return;
 }
 
-void int3(){
+void int3() {
   brake();
-  lettura = 0b110111;
+  lineReading = 0b110111;
   return;
 }
 
-void int4(){
+void int4() {
   brake();
-  lettura = 0b101111;
+  lineReading = 0b101111;
   return;
 }
 
-void int5(){
+void int5() {
   brake();
-  lettura = 0b011111;
+  lineReading = 0b011111;
   return;
 }
