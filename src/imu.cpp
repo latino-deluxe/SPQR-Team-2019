@@ -1,4 +1,5 @@
 #include "imu.h"
+#include "vars.h"
 #include <Adafruit_BNO055.h>
 #include <Arduino.h>
 
