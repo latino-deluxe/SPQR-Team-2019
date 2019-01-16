@@ -98,10 +98,10 @@ void setup() {
 }
 
 void loop() {
-  readUSTEST();
-  // readIMU();
-  // ball_read_position();
-  //
-  // if(ball_distance < 6) goalie();
-  // else recenter(2);
+  // readUSTEST();
+  readIMU();
+  ball_read_position();
+
+  if(ball_distance < 6) goalie();
+  else recenter(2);
 }
