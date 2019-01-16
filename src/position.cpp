@@ -342,3 +342,24 @@ void update_sensors_all() {
   readUS();
   return;
 }
+
+void centroporta() {
+  int larghezza = 0;
+  if (status_x == CENTRO) {
+    if (status_y == CENTRO) {
+      drivePID(180, 150);
+    }
+    else if (status_y == SUD) {
+      if (us_px > 20) drivePID(180, 110);
+      else if (us_px < 15) drivePID(0, 130);
+      else recenter(1.0);
+    }
+    else ritornacentro();
+  }
+  else if (status_x == 255) {
+    if (us_px > 50) drivePID(180, 110);
+    else if (us_px < 30) drivePID(0, 130);
+    else recenter(1.0);
+  }
+  else ritornacentro();
+}

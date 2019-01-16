@@ -101,7 +101,7 @@ void loop() {
   update_sensors_all();
   WhereAmI();
   if(ball_seen==true) goalie();
-  else space_invaders();
+  else centroporta();
   //readUSTEST();
   //
   // Serial.print(us_values[0]);
