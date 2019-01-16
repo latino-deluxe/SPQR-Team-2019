@@ -3,7 +3,7 @@
 #include "vars.h"
 #include <Arduino.h>
 
-void init_linesensors() {
+void initLineSensors() {
   pinMode(LN0, INPUT);
   pinMode(LN1, INPUT);
   pinMode(LN2, INPUT);
@@ -20,37 +20,34 @@ void init_linesensors() {
 }
 
 void int0() {
-  brake();
-  lineReading = 0b111110;
-  return;
+   interruptHandle(0b111110, LA3);
 }
 
 void int1() {
-  brake();
-  lineReading = 0b111101;
-  return;
+  interruptHandle(0b111101, C4);
 }
 
 void int2() {
-  brake();
-  lineReading = 0b111011;
-  return;
+  interruptHandle(0b11011, F3);
 }
 
 void int3() {
-  brake();
-  lineReading = 0b110111;
-  return;
+  interruptHandle(0b110111, E6);
 }
 
 void int4() {
-  brake();
-  lineReading = 0b101111;
-  return;
+  interruptHandle(0b101111, F6);
 }
 
 void int5() {
+  interruptHandle(0b011111, GB6);
+  //return;
+}
+
+void interruptHandle(byte b, float note){
   brake();
-  lineReading = 0b011111;
-  return;
+  noTone(BUZZER);
+  tone(BUZZER, note);
+  lineReading = b;
+  delay(50);
 }

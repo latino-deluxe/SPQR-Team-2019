@@ -5,6 +5,19 @@
 #define extr
 #endif
 
+// IR shield pin
+#define BUZZER 27
+#define SWITCH_SX 24
+#define SWITCH_DX 25
+
+// Note
+#define LA3 220.00
+#define C4 261.63
+#define F3 174.61
+#define E6 1318.51
+#define F6 1396.91
+#define GB6 1479.98
+
 // You can modify this if you need
 // LIMITI DEL CAMPO
 #define Lx_min 115  // valore minimo accettabile di larghezza

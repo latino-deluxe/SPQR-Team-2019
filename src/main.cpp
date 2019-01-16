@@ -14,19 +14,6 @@
 #include "us.h"
 #include "vars.h"
 
-// IR shield pin
-#define BUZZER 27
-#define SWITCH_SX 24
-#define SWITCH_DX 25
-
-// Note
-#define LA3 220.00
-#define C4 261.63
-#define F3 174.61
-#define E6 1318.51
-#define F6 1396.91
-#define GB6 1479.98
-
 // Switch management vars
 int SWS = 0;
 int SWD = 0;
@@ -85,7 +72,7 @@ void setup() {
 
   // Misc inits
   initMotorsGPIO();   // inizializza GPIO motori
-  init_linesensors(); // abilita i sensori di linea a chiamare interrupt come
+  initLineSensors(); // abilita i sensori di linea a chiamare interrupt come
                       // PCINT2
   initSPI();          // inizializza comunicazione spi
   initUS();

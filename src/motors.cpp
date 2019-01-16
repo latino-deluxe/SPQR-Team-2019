@@ -44,7 +44,7 @@ void brake() {
   analogWrite(PWM_MOT[1], 255);
   analogWrite(PWM_MOT[2], 255);
   analogWrite(PWM_MOT[3], 255);
-  // return;
+  return;
 }
 
 float torad(float deg) // degrees to radiant converting
@@ -83,35 +83,33 @@ void mot(byte mot, int vel) { // Function to send the speed to the motor
 }
 
 void testMotors() {
-  int i = 1;
 
-  turnMotor(i, 0, 1, 100);
-  delay(1000);
-  turnMotor(i, 0, 0, 100);
-  delay(300);
-  turnMotor(i, 1, 0, 100);
-  delay(1000);
-  turnMotor(i, 0, 0, 100);
-  delay(300);
+  for(int i = 1; i < 4; i++){
+    turnMotor(i, 0, 1, 100);
+    delay(1000);
+    turnMotor(i, 0, 0, 100);
+    delay(300);
+    turnMotor(i, 1, 0, 100);
+    delay(1000);
+    turnMotor(i, 0, 0, 100);
+    delay(300);
 
-  i = 2;
+    turnMotor(i, 0, 1, 100);
+    delay(1000);
+    turnMotor(i, 0, 0, 100);
+    delay(300);
+    turnMotor(i, 1, 0, 100);
+    delay(1000);
+    turnMotor(i, 0, 0, 100);
+    delay(300);
 
-  turnMotor(i, 0, 1, 100);
-  delay(1000);
-  turnMotor(i, 0, 0, 100);
-  delay(300);
-  turnMotor(i, 1, 0, 100);
-  delay(1000);
-  turnMotor(i, 0, 0, 100);
-  delay(300);
-
-  i = 3;
-  turnMotor(i, 0, 1, 100);
-  delay(1000);
-  turnMotor(i, 0, 0, 100);
-  delay(300);
-  turnMotor(i, 1, 0, 100);
-  delay(1000);
-  turnMotor(i, 0, 0, 100);
-  delay(300);
+    turnMotor(i, 0, 1, 100);
+    delay(1000);
+    turnMotor(i, 0, 0, 100);
+    delay(300);
+    turnMotor(i, 1, 0, 100);
+    delay(1000);
+    turnMotor(i, 0, 0, 100);
+    delay(300);
+  }
 }
