@@ -110,8 +110,8 @@ extr float old_vMot;     // velocitá di moto precedente
 extr float new_vMot;     // velocitá di moto corrente
 // US
 extr int reading;
-extr int us_t0;                      // US measure start
-extr int us_t1;                      // time value during measure
+extr long us_t0;                      // US measure start
+extr long us_t1;                      // time value during measure
 extr bool us_flag;                   // is it measuring or not?
 extr int us_values[4];               // US values array
 extr int us_sx, us_dx, us_px, us_fr; // copies with other names in the array

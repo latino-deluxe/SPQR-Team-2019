@@ -82,14 +82,13 @@ void setup() {
   SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
 
-  // Start I2C On Wire1 for US
-  Wire1.begin();
 
   // Misc inits
   initMotorsGPIO();   // inizializza GPIO motori
   init_linesensors(); // abilita i sensori di linea a chiamare interrupt come
                       // PCINT2
   initSPI();          // inizializza comunicazione spi
+  initUS();
   initIMU();          // inizializza imu
   initOmnidirectionalSins(); // inizializza seni
   // valStringY.reserve(30);                                     //riserva
@@ -98,10 +97,22 @@ void setup() {
 }
 
 void loop() {
-  // readUSTEST();
-  readIMU();
-  ball_read_position();
-
-  if(ball_distance < 6) goalie();
-  else recenter(2);
+  //readUSTEST();
+  update_sensors_all();
+  WhereAmI();
+  if(ball_seen==true) goalie();
+  else space_invaders();
+  //readUSTEST();
+  //
+  // Serial.print(us_values[0]);
+  // Serial.print(" | ");
+  // Serial.print(us_dx);
+  // Serial.print(" | ");
+  // Serial.print(us_px);
+  // Serial.print(" | ");
+  // Serial.print(us_sx);
+  // Serial.println(" | ");
+  // Serial.println(status_x);
+  // Serial.print("  ");
+  // Serial.println(status_y);
 }

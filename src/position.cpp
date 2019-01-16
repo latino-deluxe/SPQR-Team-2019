@@ -4,6 +4,7 @@
 #include "pid.h"
 #include "position.h"
 #include "us.h"
+#include "myspi_old.h"
 #include "vars.h"
 #include <Arduino.h>
 
@@ -336,7 +337,7 @@ void ritornaporta(int posizione) // chiamata da gestione portiere
 }
 
 void update_sensors_all() {
-  // ball_read_position();
+  ball_read_position();
   readIMU();
   readUS();
   return;
