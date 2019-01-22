@@ -48,8 +48,7 @@ void ball_read_position() {
 }
 
 void testBall() {
-  // ball_read_position();
-  readSPI();
+  ball_read_position();
   Serial.print(ball_sensor);
   Serial.print(" | ");
   Serial.println(ball_distance);

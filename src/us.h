@@ -1,4 +1,4 @@
-void readUSTEST();
+void testUS();
 void us_receive();
 void us_trigger();
 void us_scheduling();

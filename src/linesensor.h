@@ -1,10 +1,9 @@
 #include <Arduino.h>
 
 void initLineSensors();
-void int0();
-void int1();
-void int2();
-void int3();
-void int4();
-void int5();
-void interruptHandle(byte, float);
+void line0();
+void line1();
+void line2();
+void line3();
+void line4();
+void line5();

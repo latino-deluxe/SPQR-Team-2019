@@ -1,4 +1,4 @@
-
+void testPosition();
 void WhereAmI();
 void update_location_complete();
 void ritornacentro();

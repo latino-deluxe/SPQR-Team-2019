@@ -68,8 +68,6 @@
  * Ad alcune variabili sembra che venga assegnato un valore nei tab non ancora importati.
  * Da sistemare
  *
- * atom://teletype/portal/66728b8b-18be-40d7-93de-c78a615ad16d
- *
  * 16/1/2019
  * Due big refactor del codice, header e cpp e variabili sono ora utilizzate bene
  * Sistemati US e zone, ora funzionano. Da investigare i sensori di linea
@@ -77,6 +75,10 @@
  *  SENSORI DI LINEA
  *  bluetooth e camera, trascurabili per ora
  *
- *
+ * 21/1/2019 - 17:30
+ * Prima implementazione sensori di linea. Funzionano benino ma hanno portato un paio di bug con la palla, investighiamo
+ * TODO:
+ *  Fixare bug palla
+ *  bluetooth e camera, trascurabili per ora
  *
  */

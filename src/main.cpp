@@ -12,6 +12,7 @@
 #include "pid.h"
 #include "position.h"
 #include "us.h"
+#include "interrupt.h"
 #include "vars.h"
 
 // Switch management vars
@@ -52,6 +53,13 @@ void setup() {
   status_y = CENTRO;
   currentlocation = CENTRO_CENTRO;
   guessedlocation = CENTRO_CENTRO;
+  //Linesensors and interrupt
+  flag_interrupt = false;
+  nint = 0;
+  attesa = 0;
+  linea[0] = 63;                                              //prima degli interrupt sensori linea ok
+
+
   // end of variable set up
 
   // disable those pins, damaged teensy
@@ -84,22 +92,13 @@ void setup() {
 }
 
 void loop() {
-  //readUSTEST();
-  update_sensors_all();
-  WhereAmI();
-  if(ball_seen==true) goalie();
-  else centroporta();
-  //readUSTEST();
-  //
-  // Serial.print(us_values[0]);
-  // Serial.print(" | ");
-  // Serial.print(us_dx);
-  // Serial.print(" | ");
-  // Serial.print(us_px);
-  // Serial.print(" | ");
-  // Serial.print(us_sx);
-  // Serial.println(" | ");
-  // Serial.println(status_x);
-  // Serial.print("  ");
-  // Serial.println(status_y);
+  testMotors();
+
+  // if(flag_interrupt){
+  //   handleInterrupt();
+  // }
+    // update_sensors_all();
+    // WhereAmI();
+    // if(ball_seen==true) goalie();
+    // else centroporta();
 }

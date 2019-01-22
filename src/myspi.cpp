@@ -1,17 +1,13 @@
-// #include <Arduino.h>
 // #include "myspi.h"
+// #include "vars.h"
 // #include <SPI.h>
-// #define DISTANCE 0b00001111
-// #define DEGREES 0b00001010
 //
-// #define SPI_DELAY 1
-// #define SS 10
+// SPISettings settings1(100000, MSBFIRST, SPI_MODE0);
 //
-// SPISettings settings(100000, MSBFIRST, SPI_MODE0);
-// byte ball_distance;
-// byte ball_sensor;
+// void initSPINew() {
+//   //10 is the SS pin. Not the Gestapo one
 //
-// void initSPI() {
+//   Serial.begin(9600);
 //   pinMode(SS, OUTPUT);
 //   digitalWrite(SS, HIGH);  // ensure 10 stays high for now
 //
@@ -24,12 +20,9 @@
 //   SPI.setClockDivider(SPI_CLOCK_DIV8);
 // }
 //
-// void readBall(){
+// void testBallNew(){
 //   /**THIS PART COULD BE REFACTORED INTO A NICER THING, BUT IT'S JUST FOR EXAMPLE**/
-//
-//
-//     //Sends a byte to the slave. The slave now prepares the response byte (The slave knows what to do)
-//   SPI.beginTransaction(settings);
+//   SPI.beginTransaction(settings1);
 //   digitalWrite(SS, LOW);
 //   SPI.transfer(DEGREES);
 //   digitalWrite(SS, HIGH);
@@ -37,12 +30,12 @@
 //   delay(SPI_DELAY);
 //
 //   //Sends a byte to get the response that the slave has prepared
-//   SPI.beginTransaction(settings);
+//   SPI.beginTransaction(settings1);
 //   digitalWrite(SS, LOW);
-//   ball_sensor = SPI.transfer(0);
+//   ball_degrees = SPI.transfer(0);
 //   digitalWrite(SS, HIGH);
 //   SPI.endTransaction();
 //   delay(SPI_DELAY);
 //
-//   Serial.println(ball_sensor);
+//   Serial.println(ball_degrees);
 // }

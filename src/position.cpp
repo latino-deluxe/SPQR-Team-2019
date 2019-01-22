@@ -363,3 +363,10 @@ void centroporta() {
   }
   else ritornacentro();
 }
+
+void testPosition(){
+  WhereAmI();
+  Serial.print(status_x);
+  Serial.print(" | ");
+  Serial.println(status_y);
+}

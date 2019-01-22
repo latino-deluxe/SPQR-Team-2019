@@ -62,13 +62,14 @@
 #define KD 0.001 // K derivativo
 // SPI
 #define SS_PIN 2
-// Linesensors
+// Linesensors e interrupt
 #define LN0 A14
 #define LN1 A15
 #define LN2 A7
 #define LN3 A6
 #define LN4 A9
 #define LN5 A16
+#define INT_LUNG 100
 
 #define BNO055_SAMPLERATE_DELAY_MS (60)
 
@@ -105,10 +106,19 @@
 extr int imu_temp_euler, imu_current_euler;
 // Line Sensors
 extr byte lineReading;
+extr volatile bool flag_interrupt;
+extr volatile byte nint;        // numero di interrupt consecutivi prima della fine della gestione
+extr volatile byte linea[INT_LUNG];
+extr int VL_INT;                    // velocitá di uscita dalle linee
+extr int EXT_LINEA;                 // direzione di uscita dalla linea
+extr byte n_us;                     // ultrasuono da controllare dopo la fuga dalla linea
+extr int attesa;                // tempo di attesa palla dopo un interrupt (utilizzata dallo switch destro)
+extr bool danger;                   // avviso che terminata da poco la gestione interrupt
+extr unsigned long tdanger;         // misura il tempo dal termine della gestione interrupt
 // Motors
 extr float speed1, speed2, speed3, pidfactor, sins[360];
 // MySPI
-extr byte mess, ball_sensor, ball_distance, old_s_ball;
+extr byte mess, ball_sensor, ball_distance, old_s_ball, ball_degrees;
 extr long time_s_ball, tspi;
 extr bool ball_seen;
 // PID

@@ -8,15 +8,14 @@ void initUS(){
     Wire1.begin();
 }
 
-void readUSTEST() {
+void testUS() {
   // test
   for (int i = 0; i < 4; i++) {       //  int i = 3;
                                       // step 1: instruct sensor to read echoes
     Wire1.beginTransmission(112 + i); // transmit to device #112 (0x70)
     Wire1.write(
         byte(0x00)); // sets register pointer to the command register (0x00)
-    Wire1.write(byte(
-        0x51)); // command sensor to measure in "inches" (0x50)
+    Wire1.write(byte(0x51)); // command sensor to measure in "inches" (0x50)
                 // use 0x51 for centimeters or use 0x52 for ping microseconds
     Wire1.endTransmission(); // stop transmitting
 
