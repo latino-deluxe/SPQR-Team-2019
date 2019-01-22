@@ -469,6 +469,7 @@ void handleInterrupt()   //utilizzato in semifinale
 
   brake();
   for (int i = 0; i < 30; i++) {
+    readIMU(); //da testare
     // imu_current_euler = read_euler(); //reads the imu euler angle >imu_current_euler<
     recenter(1.0);
     delay(10);
