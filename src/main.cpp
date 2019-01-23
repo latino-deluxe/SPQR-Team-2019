@@ -46,14 +46,14 @@ void setup() {
   // Position
   old_status_x = CENTRO;
   old_status_y = CENTRO;
-  old_guessedlocation = CENTRO_CENTRO;
+  // old_guessedlocation = CENTRO_CENTRO;
   goal_zone = false;
   good_field_x = true;
   good_field_y = true;
   status_x = CENTRO;
   status_y = CENTRO;
-  currentlocation = CENTRO_CENTRO;
-  guessedlocation = CENTRO_CENTRO;
+  // currentlocation = CENTRO_CENTRO;
+  // guessedlocation = CENTRO_CENTRO;
   //Linesensors and interrupt
   flag_interrupt = false;
   nint = 0;
@@ -102,12 +102,15 @@ void setup() {
 
 void loop() {
   //testMotors();
+  testPosition();
+  testGuessZone();
+  delay(200);
 
-  if(flag_interrupt){
-    handleInterrupt();
-  }
-    update_sensors_all();
-    WhereAmI();
-    if(ball_seen==true) goalie();
-    else centroporta();
+  // if(flag_interrupt){
+  //   handleInterrupt();
+  // }
+  //   update_sensors_all();
+  //   WhereAmI();
+  //   if(ball_seen==true) goalie();
+  //   else centroporta();
 }

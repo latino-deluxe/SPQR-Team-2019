@@ -6,3 +6,6 @@ void fugacentro();
 void ritornaporta(int);
 void update_sensors_all();
 void centroporta();
+void guessZone();
+void updateGuessZone();
+void testGuessZone();

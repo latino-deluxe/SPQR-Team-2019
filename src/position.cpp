@@ -8,12 +8,6 @@
 #include "vars.h"
 #include <Arduino.h>
 
-// MATRICE DI PROBABILITÁ-------------------------------
-byte zone[3][3]{1, 2, 3, 4, 5,
-                6, 7, 8, 9}; // il primo indice = NORD SUD CENTRO  il secondo
-                             // indice  EST OVEST CENTRO
-signed int zone_prob[3][3]{0, 0, 0, 0, 5, 0, 0, 0, 0};
-
 void WhereAmI() {
   // decide la posizione in orizzontale e verticale
   // Aggiorna i flag :  good_field_x  good_field_y      non utilizzata da altre
@@ -113,73 +107,6 @@ void WhereAmI() {
       status_y = CENTRO; //  e'probabile che stia al centro
   }
 
-  return;
-}
-
-void cerco_zona() // restituisce in currentlocation la zona o 255 se non lo sa
-{
-
-  if ((status_x == 255) && (status_y == 255)) {
-    currentlocation = 255;
-    return; // non posso stabilire la zona
-  }
-
-  if ((status_x != 255) &&
-      (status_y == 255)) // se conosco solo posizione orizzontale
-  {
-    for (byte i = 0; i < 3; i++) // aumento tutta la fascia nota di fattore 2
-    {
-      zone_prob[i][status_x] = zone_prob[i][status_x] + 2;
-    }
-    if (old_status_y != 255) // se conosco la vecchia posizione verticale
-    {
-      status_y = old_status_y; // prendo la y precedente
-    } else {
-      currentlocation = 255;
-      return; // non posso stabilire la zona
-    }
-  }
-
-  if ((status_x == 255) &&
-      (status_y != 255)) // se conosco solo posizione verticale
-  {
-    for (byte i = 0; i < 3; i++) // aumento tutta la fascia nota di fattore 2
-    {
-      zone_prob[status_y][i] = zone_prob[status_y][i] + 2;
-    }
-    if ((old_status_x != 255)) // se conosco la vecchia posizione orizzontale
-    {
-      status_x = old_status_x; // prendo la x precedente
-    } else {
-      currentlocation = 255;
-      return; // non posso stabilire la zona
-    }
-  }
-  currentlocation = zone[status_y][status_x]; // estraggo codice zona
-
-  return;
-}
-
-void update_location_complete() {
-
-  old_currentlocation = currentlocation; // per usi futuri
-  old_guessedlocation = guessedlocation; // per usi futuri
-
-  WhereAmI(); // stabilisce status_x e status_y per cerco_zona()
-
-  cerco_zona(); // mette in current_location la zona in cui si trova il robot o
-                // 255 se non lo sa
-  if (currentlocation == 255) {
-    //    resolve_statistics(); // aggiorna guessedlocation zona campo dedotta
-    //    dalla matrice statistica
-    guessedlocation = old_guessedlocation;
-  } else // current location da 1 a 9 comunque non 255
-  {
-    //    update_statistics();  // aggiorna la matrice statistica avendo una
-    //    posizione sicura
-    guessedlocation =
-        currentlocation; // zona campo dedotta dalle misure effettuate
-  }
   return;
 }
 
@@ -365,8 +292,72 @@ void centroporta() {
 }
 
 void testPosition(){
+  update_sensors_all();
   WhereAmI();
+  Serial.print("Measured location:\t");
   Serial.print(status_x);
   Serial.print(" | ");
   Serial.println(status_y);
+}
+
+int zone[3][3] = {{0,0,0},{0,0,0},{0,0,0}};
+
+void guessZone(){
+  update_sensors_all();
+  updateGuessZone();
+
+    int top = 0;
+
+  for(int i = 0; i < 3; i++){
+    for(int j = 0; j < 3; j++){
+      if(zone[i][j] > top){
+        guessed_x = i;
+        guessed_y = j;
+      }
+    }
+  }
+}
+
+void testGuessZone(){
+  update_sensors_all();
+  updateGuessZone();
+  guessZone();
+  Serial.println("-----------------");
+
+    for(int j = 0; j < 3; j++){
+    for(int i = 0; i < 3; i++){
+        Serial.print(zone[i][j]);
+        Serial.print(" | ");
+      }
+      Serial.println();
+    }
+  Serial.println("-----------------");
+  Serial.print("Guessed location:\t");
+  Serial.print(guessed_x);
+  Serial.print(" | ");
+  Serial.println(guessed_y);
+}
+
+void updateGuessZone(){
+  if(status_x == 255 && status_y != 255){
+    for(int i = 0; i < 3; i++){
+      if(zone[i][status_y] < 350)
+        zone[i][status_y] += 2;
+    }
+  }else if(status_x != 255 && status_y == 255){
+    for(int i = 0; i < 3; i++){
+      if(zone[status_x][i] < 350)
+        zone[status_x][i] += 2;
+    }
+  }else{
+    if(zone[status_x][status_y] < 350)
+      zone[status_x][status_y] += 6;
+  }
+
+  for(int i = 0; i < 3; i++){
+    for(int j = 0; j < 3; j++){
+      if(zone[i][j]-1 > 0)
+        zone[i][j]-=1;
+    }
+  }
 }

@@ -39,8 +39,8 @@
 #define DyP 69
 #define robot 21 // diametro del robot
 
-// ZONE DEL CAMPO
-#define EST 2 // codici utilizzabili per una matice 3x3
+// ZONE DEL CAMPO // codici utilizzabili per una matice 3x3
+#define EST 2
 #define OVEST 0
 #define CENTRO 1
 #define NORD 0
@@ -145,20 +145,21 @@ extr int old_status_x; // posizione precedente nel campo vale EST, OVEST o
                        // CENTRO o 255 >USI FUTURI<
 extr int old_status_y; // posizione precedente nel campo vale SUD, NORD o
                        // CENTRO o 255 >USI FUTURI<
-extr int old_currentlocation; // zona precedente del robot in campo da 1 a 9 o
-                              // 255 se undefined >USI FUTURI<
-extr int old_guessedlocation; // zona precedente del robot in campo da 1 a 9 (da
-                              // CENTRO_CENTRO a SUD_OVEST) >USI FUTURI<
 extr bool goal_zone; // sto al centro rispetto alle porte         assegnata// da
                      // WhereAmI ma non usata
 extr bool good_field_x;   // vedo tutta la larghezza del campo si/no
 extr bool good_field_y;   // vedo tutta la lunghezza del campo si/no
 extr int status_x;        // posizione nel campo vale EST, OVEST o CENTRO o 255
 extr int status_y;        // posizione nel campo vale SUD, NORD o CENTRO o 255
-extr int currentlocation; // risultato misure zone campo da 1 a 9 o 255 se
-                          // undefined
-extr int guessedlocation; // risultato misure zone campo da 1 a 9 (da
+extr int guessed_x, guessed_y;
+// extr int currentlocation; // risultato misure zone campo da 1 a 9 o 255 se
+//                           // undefined
+// extr int guessedlocation; // risultato misure zone campo da 1 a 9 (da
                           // CENTRO_CENTRO a SUD_OVEST)
+// extr int old_currentlocation; // zona precedente del robot in campo da 1 a 9 o
+//                               // 255 se undefined >USI FUTURI<
+// extr int old_guessedlocation; // zona precedente del robot in campo da 1 a 9 (da
+//                               // CENTRO_CENTRO a SUD_OVEST) >USI FUTURI<
 // extr byte zone[3][3];     // il primo indice = NORD SUD CENTRO  il secondo
 //                           // indice  EST OVEST CENTRO
 // signed int zone_prob[3][3];
