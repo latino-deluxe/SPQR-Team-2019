@@ -14,6 +14,7 @@
 #include "us.h"
 #include "interrupt.h"
 #include "vars.h"
+#include "bluetooth.h"
 
 // Switch management vars
 int SWS = 0;
@@ -58,6 +59,11 @@ void setup() {
   nint = 0;
   attesa = 0;
   linea[0] = 63;                                              //prima degli interrupt sensori linea ok
+  //bluetooth misc
+  a = 0;
+  compagno = false;
+  old_timer = 0;
+
 
 
   // end of variable set up
@@ -68,6 +74,9 @@ void setup() {
 
   // Enable Serial for test
   Serial.begin(9600);
+
+  // Enable Serial for BT
+  BT.begin(115200);
 
   // Setups a bunch of pins
   pinMode(27, OUTPUT);
@@ -92,13 +101,13 @@ void setup() {
 }
 
 void loop() {
-  testMotors();
+  //testMotors();
 
-  // if(flag_interrupt){
-  //   handleInterrupt();
-  // }
-    // update_sensors_all();
-    // WhereAmI();
-    // if(ball_seen==true) goalie();
-    // else centroporta();
+  if(flag_interrupt){
+    handleInterrupt();
+  }
+    update_sensors_all();
+    WhereAmI();
+    if(ball_seen==true) goalie();
+    else centroporta();
 }

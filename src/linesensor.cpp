@@ -21,86 +21,35 @@ void initLineSensors() {
 
 void line0() {
    lineReading = 0b111110;
-   brakeI();
-   if(flag_interrupt == true){
-     nint++;
-      if(nint >= INT_LUNG){
-        nint = INT_LUNG-1;
-      }
-   }else{
-     nint=1;
-     flag_interrupt=true;
-   }
-   linea[nint]=lineReading;
-   return;
+     passInterrupt(lineReading);
 }
 
 void line1() {
   lineReading = 0b111101;
-  brakeI();
-  if(flag_interrupt == true){
-    nint++;
-     if(nint >= INT_LUNG){
-       nint = INT_LUNG-1;
-     }
-  }else{
-    nint=1;
-    flag_interrupt=true;
-  }
-  linea[nint]=lineReading;
-  return;
+    passInterrupt(lineReading);
 }
 
 void line2() {
   lineReading = 0b111011;
-  brakeI();
-  if(flag_interrupt == true){
-    nint++;
-     if(nint >= INT_LUNG){
-       nint = INT_LUNG-1;
-     }
-  }else{
-    nint=1;
-    flag_interrupt=true;
-  }
-  linea[nint]=lineReading;
-  return;
+    passInterrupt(lineReading);
 }
 
 void line3() {
   lineReading = 0b110111;
-  brakeI();
-  if(flag_interrupt == true){
-    nint++;
-     if(nint >= INT_LUNG){
-       nint = INT_LUNG-1;
-     }
-  }else{
-    nint=1;
-    flag_interrupt=true;
-  }
-  linea[nint]=lineReading;
-  return;
+    passInterrupt(lineReading);
 }
 
 void line4() {
   lineReading = 0b101111;
-  brakeI();
-  if(flag_interrupt == true){
-    nint++;
-     if(nint >= INT_LUNG){
-       nint = INT_LUNG-1;
-     }
-  }else{
-    nint=1;
-    flag_interrupt=true;
-  }
-  linea[nint]=lineReading;
-  return;
+    passInterrupt(lineReading);
 }
 
 void line5() {
   lineReading = 0b011111;
+  passInterrupt(lineReading);
+}
+
+void passInterrupt(byte reading){
   brakeI();
   if(flag_interrupt == true){
     nint++;
@@ -111,6 +60,6 @@ void line5() {
     nint=1;
     flag_interrupt=true;
   }
-  linea[nint]=lineReading;
+  linea[nint]=reading;
   return;
 }

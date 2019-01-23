@@ -102,6 +102,8 @@
 #define AA18 300
 #define AA19 330
 
+#define BT Serial1
+
 // IMU
 extr int imu_temp_euler, imu_current_euler;
 // Line Sensors
@@ -160,3 +162,8 @@ extr int guessedlocation; // risultato misure zone campo da 1 a 9 (da
 // extr byte zone[3][3];     // il primo indice = NORD SUD CENTRO  il secondo
 //                           // indice  EST OVEST CENTRO
 // signed int zone_prob[3][3];
+
+// BLUETOOTH
+extr bool compagno;
+extr int a;
+extr unsigned long old_timer;
