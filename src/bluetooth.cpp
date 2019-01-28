@@ -22,3 +22,24 @@ bool comunicazione (int intervallo) {                             //funzione di 
   }
   return compagno ;
 }
+/*
+void btZone () {
+  update_sensors_all();
+  WhereAmI();
+  guessZone();
+
+  if(millis() - ao >= 100){
+    Serial.println("------");
+    for(int i = 0; i < 4; i++){
+      Serial.print("US: ");
+      Serial.print(us_values[i]);
+      Serial.print(" | ");
+    }
+    Serial.println();
+    testPosition();
+    testGuessZone();
+
+    Serial.println("------");
+    ao = millis();
+  }
+}*/

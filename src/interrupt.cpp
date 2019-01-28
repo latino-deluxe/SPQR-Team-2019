@@ -630,3 +630,10 @@ void handleInterrupt()   //utilizzato in semifinale
   return;
 
 }
+
+
+
+
+void btP() {
+  BT.print(p);
+}
