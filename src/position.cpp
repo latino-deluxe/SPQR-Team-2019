@@ -302,24 +302,7 @@ void testPosition(){
 
 int zone[3][3] = {{0,0,0},{0,0,0},{0,0,0}};
 
-void guessZone(){
-  update_sensors_all();
-  updateGuessZone();
-
-    int top = 0;
-
-  for(int i = 0; i < 3; i++){
-    for(int j = 0; j < 3; j++){
-      if(zone[i][j] > top){
-        guessed_x = i;
-        guessed_y = j;
-      }
-    }
-  }
-}
-
 void testGuessZone(){
-  update_sensors_all();
   updateGuessZone();
   guessZone();
   Serial.println("-----------------");
@@ -338,7 +321,22 @@ void testGuessZone(){
   Serial.println(guessed_y);
 }
 
+void guessZone(){
+  updateGuessZone();
+  int top = 0;
+  for(int i = 0; i < 3; i++){
+    for(int j = 0; j < 3; j++){
+      if(zone[i][j] > top){
+        guessed_x = i;
+        guessed_y = j;
+      }
+    }
+  }
+}
+
 void updateGuessZone(){
+  update_sensors_all();
+
   if(status_x == 255 && status_y != 255){
     for(int i = 0; i < 3; i++){
       if(zone[i][status_y] < 350)
@@ -356,7 +354,7 @@ void updateGuessZone(){
 
   for(int i = 0; i < 3; i++){
     for(int j = 0; j < 3; j++){
-      if(zone[i][j]-1 > 0)
+      if(zone[i][j]-1 >= 0)
         zone[i][j]-=1;
     }
   }

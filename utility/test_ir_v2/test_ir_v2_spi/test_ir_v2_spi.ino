@@ -44,11 +44,9 @@ void setup(){
   //THIS REGISTER IS ATMEGA-328P SPECIFIC
   SPCR |= bit (SPE);
 
-  pinMode(MISO, OUTPUT);
-  pinMode(SS, INPUT);
+  pinMode(MISO, OUTPUT);  
+
   SPI.attachInterrupt();
-  
-  
   for (byte x = 0; x < 12; x++) pinMode(pins[x], INPUT);
 }
 

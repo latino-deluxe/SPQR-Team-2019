@@ -9,6 +9,7 @@
 #include "linesensor.h"
 #include "motors.h"
 #include "myspi_old.h"
+#include "myspi.h"
 #include "pid.h"
 #include "position.h"
 #include "us.h"
@@ -100,17 +101,33 @@ void setup() {
   digitalWrite(31, HIGH);
 }
 
-void loop() {
-  //testMotors();
-  testPosition();
-  testGuessZone();
-  delay(200);
+unsigned long ao = 0;
 
-  // if(flag_interrupt){
-  //   handleInterrupt();
+void loop() {
+  // update_sensors_all();
+  // WhereAmI();
+  // guessZone();
+  //
+  // if(millis() - ao >= 100){
+  //   Serial.println("------");
+  //   for(int i = 0; i < 4; i++){
+  //     Serial.print("US: ");
+  //     Serial.print(us_values[i]);
+  //     Serial.print(" | ");
+  //   }
+  //   Serial.println();
+  //   testPosition();
+  //   testGuessZone();
+  //
+  //   Serial.println("------");
+  //   ao = millis();
   // }
-  //   update_sensors_all();
-  //   WhereAmI();
-  //   if(ball_seen==true) goalie();
-  //   else centroporta();
+
+  if(flag_interrupt){
+    handleInterrupt();
+  }
+  update_sensors_all();
+  WhereAmI();
+  if(ball_seen==true) goalie();
+  else centroporta();
 }
