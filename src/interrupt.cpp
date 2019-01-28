@@ -31,11 +31,28 @@ void handleInterrupt()   //utilizzato in semifinale
   do
   {
     update_sensors_all();
+    brake();
   }
-  while ((millis() - t0) <= 100) ; //attesa per la frenata di 100 ms
+  while ((millis() - t0) <= 200) ; //attesa per la frenata di 100 ms
   digitalWrite(BUZZER, LOW);
 
-  int p = guessed_y * 3 + guessed_x;
+  int x, y;
+
+  if(status_x == 255){
+    x = guessed_x;
+  }else{
+    x = status_x;
+  }
+
+  if(status_y == 255){
+    y = guessed_y;
+  }else{
+    y = status_y;
+  }
+
+  int p = y * 3 + x;
+  BT.write(p);
+
   int vel = 150;
   switch (p) {
     case 0:
@@ -622,6 +639,10 @@ void handleInterrupt()   //utilizzato in semifinale
   //
   // /*--------------------------------------------------------------------------------------*/
 
+  int tombola = millis();
+  do{
+    recenter(1.0);
+  } while (tombola < 100);
 
   flag_interrupt = false;//considera conclusa la gestione dell'interrupt
   nint = 0;
@@ -629,11 +650,4 @@ void handleInterrupt()   //utilizzato in semifinale
   tdanger = millis();
   return;
 
-}
-
-
-
-
-void btP() {
-  BT.print(p);
 }

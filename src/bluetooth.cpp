@@ -2,7 +2,7 @@
 #include "bluetooth.h"
 
 void initBluetooth() {                                           //inizializza bluetooth
-  BT.begin(115200);
+  BT.begin(9600);
   //tt=millis();
 }
 
@@ -21,6 +21,10 @@ bool comunicazione (int intervallo) {                             //funzione di 
     compagno = false;
   }
   return compagno ;
+}
+
+void testBluetooth(){
+  BT.println("pippo pluto e paperino");
 }
 /*
 void btZone () {

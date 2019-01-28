@@ -76,9 +76,6 @@ void setup() {
   // Enable Serial for test
   Serial.begin(9600);
 
-  // Enable Serial for BT
-  BT.begin(115200);
-
   // Setups a bunch of pins
   pinMode(27, OUTPUT);
   for (int i = 29; i <= 31; i++)
@@ -86,7 +83,6 @@ void setup() {
 
   SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
-
 
   // Misc inits
   initMotorsGPIO();   // inizializza GPIO motori
@@ -96,6 +92,7 @@ void setup() {
   initUS();
   initIMU();          // inizializza imu
   initOmnidirectionalSins(); // inizializza seni
+  initBluetooth();
   // valStringY.reserve(30);                                     //riserva
   // 30byte per le stringhe valStringB.reserve(30);  //  tone(27, 1000, 500);
   digitalWrite(31, HIGH);
@@ -128,6 +125,7 @@ void loop() {
   }
   update_sensors_all();
   WhereAmI();
+  guessZone();
   if(ball_seen==true) goalie();
   else centroporta();
 }
