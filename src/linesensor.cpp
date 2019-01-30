@@ -20,36 +20,37 @@ void initLineSensors() {
 }
 
 void line0() {
-   lineReading = 0b111110;
+   lineReading = 0b000001;
      passInterrupt(lineReading);
 }
 
 void line1() {
-  lineReading = 0b111101;
+  lineReading = 0b000010;
     passInterrupt(lineReading);
 }
 
 void line2() {
-  lineReading = 0b111011;
+  lineReading = 0b000100;
     passInterrupt(lineReading);
 }
 
 void line3() {
-  lineReading = 0b110111;
+  lineReading = 0b001000;
     passInterrupt(lineReading);
 }
 
 void line4() {
-  lineReading = 0b101111;
+  lineReading = 0b010000;
     passInterrupt(lineReading);
 }
 
 void line5() {
-  lineReading = 0b011111;
+  lineReading = 0b100000;
   passInterrupt(lineReading);
 }
 
 void passInterrupt(byte reading){
+  if(maggica == true) return;
   brakeI();
   if(flag_interrupt == true){
     nint++;

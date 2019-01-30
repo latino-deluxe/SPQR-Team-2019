@@ -169,3 +169,6 @@ extr int zoneIndex;
 extr bool compagno;
 extr int a;
 extr unsigned long old_timer;
+
+//Sviluppo interrupt creativo
+extr bool maggica;

@@ -67,6 +67,8 @@ void setup() {
   old_timer = 0;
 
 
+  maggica = false;
+
 
   // end of variable set up
 
