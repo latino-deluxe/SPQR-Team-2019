@@ -1,8 +1,10 @@
 #include "vars.h"
 #include "bluetooth.h"
 
+//Bluetooth on Serial1
+
 void initBluetooth() {                                           //inizializza bluetooth
-  BT.begin(9600);
+  BT.begin(115200);
   //tt=millis();
 }
 
@@ -24,7 +26,13 @@ bool comunicazione (int intervallo) {                             //funzione di 
 }
 
 void testBluetooth(){
-  BT.println("pippo pluto e paperino");
+  //prints the serial read to bluetooth and bluetooth to serial monitor
+  if(BT.available()){
+    Serial.println((char)BT.read());
+  }
+  if(Serial.available()){
+    BT.write((char)Serial.read());
+  }
 }
 /*
 void btZone () {

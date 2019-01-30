@@ -36,25 +36,10 @@ void handleInterrupt()   //utilizzato in semifinale
   while ((millis() - t0) <= 200) ; //attesa per la frenata di 100 ms
   digitalWrite(BUZZER, LOW);
 
-  int x, y;
-
-  if(status_x == 255){
-    x = guessed_x;
-  }else{
-    x = status_x;
-  }
-
-  if(status_y == 255){
-    y = guessed_y;
-  }else{
-    y = status_y;
-  }
-
-  int p = y * 3 + x;
-  BT.write(p);
+  calculateMixedZone();
 
   int vel = 150;
-  switch (p) {
+  switch (zoneIndex) {
     case 0:
       for(int i = 0; i < 50; i++){
         drivePID(135, vel);
@@ -642,12 +627,32 @@ void handleInterrupt()   //utilizzato in semifinale
   int tombola = millis();
   do{
     recenter(1.0);
-  } while (tombola < 100);
+  } while (tombola < 200);
 
   flag_interrupt = false;//considera conclusa la gestione dell'interrupt
   nint = 0;
   danger = true;
   tdanger = millis();
   return;
+
+}
+
+//gives zoneIndex based on guessed and measured zone
+void calculateMixedZone(){
+  int x, y;
+
+  if(status_x == 255){
+    x = guessed_x;
+  }else{
+    x = status_x;
+  }
+
+  if(status_y == 255){
+    y = guessed_y;
+  }else{
+    y = status_y;
+  }
+
+  zoneIndex = y * 3 + x;
 
 }

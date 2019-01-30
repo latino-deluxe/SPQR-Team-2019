@@ -1,2 +1,2 @@
 void handleInterrupt();
-void btP();
+void calculateMixedZone();

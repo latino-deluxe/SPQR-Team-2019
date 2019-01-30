@@ -60,6 +60,7 @@ void setup() {
   nint = 0;
   attesa = 0;
   linea[0] = 63;                                              //prima degli interrupt sensori linea ok
+  zoneIndex = 0;
   //bluetooth misc
   a = 0;
   compagno = false;
@@ -98,34 +99,20 @@ void setup() {
   digitalWrite(31, HIGH);
 }
 
-unsigned long ao = 0;
+unsigned long t1 = 0;
 
 void loop() {
-  // update_sensors_all();
-  // WhereAmI();
-  // guessZone();
-  //
-  // if(millis() - ao >= 100){
-  //   Serial.println("------");
-  //   for(int i = 0; i < 4; i++){
-  //     Serial.print("US: ");
-  //     Serial.print(us_values[i]);
-  //     Serial.print(" | ");
-  //   }
-  //   Serial.println();
-  //   testPosition();
-  //   testGuessZone();
-  //
-  //   Serial.println("------");
-  //   ao = millis();
-  // }
-
+  calculateMixedZone();
+  if(millis() - t1 >= 200){
+    BT.println(zoneIndex);
+  }
   if(flag_interrupt){
     handleInterrupt();
   }
   update_sensors_all();
   WhereAmI();
   guessZone();
+  // gigaTestZone();
   if(ball_seen==true) goalie();
-  else centroporta();
+  else ritornacentro();
 }

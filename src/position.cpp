@@ -294,10 +294,10 @@ void centroporta() {
 void testPosition(){
   update_sensors_all();
   WhereAmI();
-  Serial.print("Measured location:\t");
-  Serial.print(status_x);
-  Serial.print(" | ");
-  Serial.println(status_y);
+  BT.print("Measured location:\t");
+  BT.print(status_x);
+  BT.print(" | ");
+  BT.println(status_y);
 }
 
 int zone[3][3] = {{0,0,0},{0,0,0},{0,0,0}};
@@ -308,16 +308,16 @@ void testGuessZone(){
 
     for(int j = 0; j < 3; j++){
     for(int i = 0; i < 3; i++){
-        Serial.print(zone[i][j]);
-        Serial.print(" | ");
+        BT.print(zone[i][j]);
+        BT.print(" | ");
       }
-      Serial.println();
+      BT.println();
     }
-  Serial.println("-----------------");
-  Serial.print("Guessed location:\t");
-  Serial.print(guessed_x);
-  Serial.print(" | ");
-  Serial.println(guessed_y);
+  BT.println("-----------------");
+  BT.print("Guessed location:\t");
+  BT.print(guessed_x);
+  BT.print(" | ");
+  BT.println(guessed_y);
 }
 
 void guessZone(){
@@ -355,4 +355,27 @@ void updateGuessZone(){
         zone[i][j]-=1;
     }
   }
+}
+
+unsigned long ao;
+
+void gigaTestZone(){
+    update_sensors_all();
+    WhereAmI();
+    guessZone();
+
+    if(millis() - ao >= 100){
+      BT.println("------");
+      for(int i = 0; i < 4; i++){
+        BT.print("US: ");
+        BT.print(us_values[i]);
+        BT.print(" | ");
+      }
+      BT.println();
+      testPosition();
+      testGuessZone();
+
+      BT.println("------");
+      ao = millis();
+    }
 }

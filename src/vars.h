@@ -152,6 +152,7 @@ extr bool good_field_y;   // vedo tutta la lunghezza del campo si/no
 extr int status_x;        // posizione nel campo vale EST, OVEST o CENTRO o 255
 extr int status_y;        // posizione nel campo vale SUD, NORD o CENTRO o 255
 extr int guessed_x, guessed_y;
+extr int zoneIndex;
 // extr int currentlocation; // risultato misure zone campo da 1 a 9 o 255 se
 //                           // undefined
 // extr int guessedlocation; // risultato misure zone campo da 1 a 9 (da
