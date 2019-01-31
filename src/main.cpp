@@ -65,10 +65,7 @@ void setup() {
   zoneIndex = 0;
   //bluetooth misc
   a = 0;
-  compagno = false;
   old_timer = 0;
-
-
   maggica = false;
   ruolo = 0;
   friendZone = 0;
@@ -123,10 +120,14 @@ void loop() {
   update_sensors_all();
   WhereAmI();
   guessZone();
+  ruolo = HIGH;
   // gigaTestZone();
   if(ball_seen==true) {
-    if(comrade == true) goalie();
+    if(ruolo == HIGH) goalie();
     else space_invaders();
   }
-  else ritornacentro();
+  else {
+    if(ruolo == HIGH) ritornacentro();
+    else centroporta();
+  }
 }

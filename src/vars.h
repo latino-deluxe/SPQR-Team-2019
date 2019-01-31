@@ -166,13 +166,10 @@ extr int zoneIndex;
 // signed int zone_prob[3][3];
 
 // BLUETOOTH
-extr bool compagno;
 extr int a;
 extr unsigned long old_timer;
-
 //Sviluppo interrupt creativo
 extr bool maggica;
-
 //Comunicazione compagno
 extr int iAmHere;
 extr int friendZone;
