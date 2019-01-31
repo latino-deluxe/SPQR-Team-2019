@@ -172,3 +172,6 @@ extr unsigned long old_timer;
 
 //Sviluppo interrupt creativo
 extr bool maggica;
+
+//Comunicazione compagno
+extr int imHere;
