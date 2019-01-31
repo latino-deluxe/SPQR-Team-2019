@@ -1,4 +1,4 @@
 void handleInterrupt();
-void calculateMixedZone();
+void calculateZoneIndex();
 void handleInterruptNEW();
 void mecojoni();

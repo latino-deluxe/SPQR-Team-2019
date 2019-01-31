@@ -462,7 +462,7 @@ void handleInterruptNEW()   //utilizzato in semifinale
 }
 
 //gives zoneIndex based on guessed and measured zone
-void calculateMixedZone(){
+void calculateZoneIndex(){
   int x, y;
 
   if(status_x == 255){
@@ -520,7 +520,7 @@ void handleInterrupt() {
 }
 
 void mecojoni() {
-  calculateMixedZone();
+  calculateZoneIndex();
   readIMU();
 
   if((imu_current_euler>=345 && imu_current_euler<=359) || (imu_current_euler>=0 && imu_current_euler<=15)) {

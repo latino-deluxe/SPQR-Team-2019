@@ -104,7 +104,7 @@ void setup() {
 unsigned long t1 = 0;
 
 void loop() {
-  calculateMixedZone();
+  calculateZoneIndex();
   if(millis() - t1 >= 200){
     BT.println(zoneIndex);
   }
