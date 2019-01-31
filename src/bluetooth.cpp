@@ -8,23 +8,6 @@ void initBluetooth() {                                           //inizializza b
   //tt=millis();
 }
 
-bool comunicazione (int intervallo) {                             //funzione di comunicazione
-
-  if (BT.available() > 0) {
-    a = BT.read();
-  }
-  if (a == 42) {
-    compagno = true;
-    a = 0;
-    old_timer = millis();
-  }
-  if ((millis() - old_timer ) > intervallo) {
-    old_timer = millis();
-    compagno = false;
-  }
-  return compagno ;
-}
-
 void testBluetooth(){
   //prints the serial read to bluetooth and bluetooth to serial monitor
   if(BT.available()){

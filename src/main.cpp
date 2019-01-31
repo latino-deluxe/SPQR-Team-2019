@@ -16,6 +16,8 @@
 #include "interrupt.h"
 #include "vars.h"
 #include "bluetooth.h"
+#include "space_invaders.h"
+#include "chat.h"
 
 // Switch management vars
 int SWS = 0;
@@ -68,6 +70,10 @@ void setup() {
 
 
   maggica = false;
+  ruolo = 0;
+  friendZone = 0;
+  iAmHere = 0;
+  comrade = false;
 
 
   // end of variable set up
@@ -104,10 +110,13 @@ void setup() {
 unsigned long t1 = 0;
 
 void loop() {
-  calculateZoneIndex();
-  if(millis() - t1 >= 200){
-    BT.println(zoneIndex);
-  }
+  // calculateZoneIndex();
+  comunicazione(2000);
+  teamZone();
+  whereAreYou();
+  // if(millis() - t1 >= 200){
+  //   BT.println(zoneIndex);
+  // }
   if(flag_interrupt){
     handleInterrupt();
   }
@@ -115,6 +124,9 @@ void loop() {
   WhereAmI();
   guessZone();
   // gigaTestZone();
-  if(ball_seen==true) goalie();
+  if(ball_seen==true) {
+    if(comrade == true) goalie();
+    else space_invaders();
+  }
   else ritornacentro();
 }

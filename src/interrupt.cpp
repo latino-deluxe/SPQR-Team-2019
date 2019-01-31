@@ -461,26 +461,6 @@ void handleInterruptNEW()   //utilizzato in semifinale
 
 }
 
-//gives zoneIndex based on guessed and measured zone
-void calculateZoneIndex(){
-  int x, y;
-
-  if(status_x == 255){
-    x = guessed_x;
-  }else{
-    x = status_x;
-  }
-
-  if(status_y == 255){
-    y = guessed_y;
-  }else{
-    y = status_y;
-  }
-
-  zoneIndex = y * 3 + x;
-
-}
-
 void handleInterrupt() {
   long t0;                                         // istante inizio frenata
   long dt;                                         // tempo di fuga

@@ -174,4 +174,7 @@ extr unsigned long old_timer;
 extr bool maggica;
 
 //Comunicazione compagno
-extr int imHere;
+extr int iAmHere;
+extr int friendZone;
+extr int ruolo;
+extr bool comrade;

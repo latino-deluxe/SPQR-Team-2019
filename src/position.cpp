@@ -270,26 +270,7 @@ void update_sensors_all() {
   return;
 }
 
-void centroporta() {
-  int larghezza = 0;
-  if (status_x == CENTRO) {
-    if (status_y == CENTRO) {
-      drivePID(180, 150);
-    }
-    else if (status_y == SUD) {
-      if (us_px > 20) drivePID(180, 110);
-      else if (us_px < 15) drivePID(0, 130);
-      else recenter(1.0);
-    }
-    else ritornacentro();
-  }
-  else if (status_x == 255) {
-    if (us_px > 50) drivePID(180, 110);
-    else if (us_px < 30) drivePID(0, 130);
-    else recenter(1.0);
-  }
-  else ritornacentro();
-}
+
 
 void testPosition(){
   update_sensors_all();
@@ -378,4 +359,24 @@ void gigaTestZone(){
       BT.println("------");
       ao = millis();
     }
+}
+
+//gives zoneIndex based on guessed and measured zone
+void calculateZoneIndex(){
+  int x, y;
+
+  if(status_x == 255){
+    x = guessed_x;
+  }else{
+    x = status_x;
+  }
+
+  if(status_y == 255){
+    y = guessed_y;
+  }else{
+    y = status_y;
+  }
+
+  zoneIndex = y * 3 + x;
+
 }
