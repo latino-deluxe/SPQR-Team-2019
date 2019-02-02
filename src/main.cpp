@@ -107,20 +107,21 @@ void setup() {
 unsigned long t1 = 0;
 
 void loop() {
-  // calculateZoneIndex();
-  comunicazione(2000);
-  teamZone();
-  whereAreYou();
-  // if(millis() - t1 >= 200){
-  //   BT.println(zoneIndex);
-  // }
+  // comunicazione(2000);
+  // teamZone();
+  // whereAreYou();
+  if(millis() - t1 >= 200){
+    BT.println(imu_current_euler);
+  }
+
+  calculateZoneIndex();
   if(flag_interrupt){
     handleInterrupt();
   }
   update_sensors_all();
   WhereAmI();
   guessZone();
-  ruolo = HIGH;
+  ruolo = LOW;
   // gigaTestZone();
   if(ball_seen==true) {
     if(ruolo == HIGH) goalie();
@@ -130,4 +131,5 @@ void loop() {
     if(ruolo == HIGH) ritornacentro();
     else centroporta();
   }
+  gigaTestZone();
 }

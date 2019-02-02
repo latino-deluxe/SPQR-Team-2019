@@ -225,8 +225,7 @@ void fuga_centro() {
   return;
 }
 
-void ritornaporta(int posizione) // chiamata da gestione portiere
-{
+void ritornaporta(int posizione) {
   if (posizione == 255) {
     recenter(1.0);
   } else {

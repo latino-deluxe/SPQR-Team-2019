@@ -120,6 +120,5 @@ void recenter(float spd) {
   mot(1, int(speed1));
   mot(3, int(speed3));
 
-  maggica = false;
   return;
 }

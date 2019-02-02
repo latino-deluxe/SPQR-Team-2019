@@ -503,7 +503,9 @@ void mecojoni() {
   calculateZoneIndex();
   readIMU();
 
-  if((imu_current_euler>=345 && imu_current_euler<=359) || (imu_current_euler>=0 && imu_current_euler<=15)) {
+  if((imu_current_euler>=315 && imu_current_euler<=359) || (imu_current_euler>=0 && imu_current_euler<=45)) {
+    maggica = false;
+
     int vel = 150;
     switch (zoneIndex) {
       case 0:
@@ -583,10 +585,14 @@ void mecojoni() {
         brake();
         delay(2000);
       break;
+
+      default:
+        ritornacentro();
+      break;
     }
   } else {
     maggica = true;
-    recenter(1.0);
+    recenter(4.0);
     mecojoni();
   }
 }
