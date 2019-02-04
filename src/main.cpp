@@ -61,8 +61,8 @@ void setup() {
   flag_interrupt = false;
   nint = 0;
   attesa = 0;
-  linea[0] = 63;                                              //prima degli interrupt sensori linea ok
   zoneIndex = 0;
+  lineReading = 0;
   //bluetooth misc
   a = 0;
   old_timer = 0;
@@ -72,7 +72,9 @@ void setup() {
   iAmHere = 0;
   comrade = false;
 
-
+  //global vars for angles
+  globalDir = 0;
+  globalSpeed = 0;
   // end of variable set up
 
   // disable those pins, damaged teensy
@@ -108,9 +110,9 @@ unsigned long t1 = 0;
 
 void loop() {
 
-  update_sensors_all();
-  WhereAmI();
-  space_invaders();
+  // update_sensors_all();
+  // WhereAmI();
+  // space_invaders();
 
   // comunicazione(2000);
   // teamZone();
@@ -118,23 +120,27 @@ void loop() {
   // if(millis() - t1 >= 200){
   //   BT.println(imu_current_euler);
   // }
-  //
-  // calculateZoneIndex();
-  // if(flag_interrupt){
-  //   handleInterrupt();
-  // }
-  // update_sensors_all();
-  // WhereAmI();
-  // guessZone();
-  // ruolo = LOW;
-  // // gigaTestZone();
-  // if(ball_seen==true) {
-  //   if(ruolo == HIGH) goalie();
-  //   else space_invaders();
-  // }
-  // else {
-  //   if(ruolo == HIGH) ritornacentro();
-  //   else centroporta();
-  // }
+
+  t1 = millis();
+  calculateZoneIndex();
+
+  update_sensors_all();
+  WhereAmI();
+  guessZone();
+  ruolo = HIGH;
   // gigaTestZone();
+  if(ball_seen==true) {
+    if(ruolo == HIGH) goalie();
+    else space_invaders();
+  }
+  else {
+    if(ruolo == HIGH) ritornacentro();
+    else centroporta();
+  }
+
+  handleInterruptTrigonometry();
+  //final drive pid
+  drivePID(globalDir, globalSpeed);
+  // gigaTestZone();
+
 }

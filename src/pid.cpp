@@ -7,41 +7,50 @@
 
 // TIMED PID CONTROL TESTING
 void drivePID(signed int direzione, float vMot) {
-  // mette in variabili globali direzione e velocitá precedenti e attuali
-  old_Dir = new_Dir;
-  new_Dir = direzione;
-  old_vMot = new_vMot;
-  new_vMot = vMot;
+  if(vMot == 0){
+    recenter(1.0);
+  }else{
+    // mette in variabili globali direzione e velocitá precedenti e attuali
+    old_Dir = new_Dir;
+    new_Dir = direzione;
+    old_vMot = new_vMot;
+    new_vMot = vMot;
 
-  speed1 = ((-(sins[((direzione - 60) + 360) % 360])) * vMot); // mot 1
-  speed2 = ((sins[(direzione + 360) % 360]) * vMot);           // mot 2
-  speed3 = ((-(sins[(direzione + 60) % 360])) * vMot);         // mot 3
+    speed1 = ((-(sins[((direzione - 60) + 360) % 360])) * vMot); // mot 1
+    speed2 = ((sins[(direzione + 360) % 360]) * vMot);           // mot 2
+    speed3 = ((-(sins[(direzione + 60) % 360])) * vMot);         // mot 3
 
-  pidfactor = updatePid();
+    pidfactor = updatePid();
 
-  // da valutare se é opportuno
-  if (reaching_ball == true) {
-    pidfactor = pidfactor * 1.2;
+    // da valutare se é opportuno
+    if (reaching_ball == true) {
+      pidfactor = pidfactor * 1.2;
+    }
+
+    speed1 += pidfactor;
+    speed2 += pidfactor;
+    speed3 += pidfactor;
+
+    CheckSpeed(); // normalizza la velocita' a 255 max al motore piu' veloce e gli
+                  // altri in proporzione
+
+    // Send every speed to his motor
+    mot(2, int(speed2));
+    mot(1, int(speed1));
+    mot(3, int(speed3));
+
+    // Serial.print(speed1);
+    // Serial.print("   ");
+    // Serial.print(speed2);
+    // Serial.print("   ");
+    // Serial.print(speed3);
+    // Serial.println("   ");
   }
+}
 
-  speed1 += pidfactor;
-  speed2 += pidfactor;
-  speed3 += pidfactor;
-
-  CheckSpeed(); // normalizza la velocita' a 255 max al motore piu' veloce e gli
-                // altri in proporzione
-
-  // Send every speed to his motor
-  mot(2, int(speed2));
-  mot(1, int(speed1));
-  mot(3, int(speed3));
-
-  // Serial.print(speed1);
-  // Serial.print("   ");
-  // Serial.print(speed2);
-  // Serial.print("   ");
-  // Serial.print(speed3);
-  // Serial.println("   ");
+void preparePID(int direction, int speed){
+  globalDir = direction;
+  globalSpeed = speed;
 }
 
 float updatePid() {

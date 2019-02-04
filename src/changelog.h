@@ -81,4 +81,8 @@
  *  Fixare bug palla
  *  bluetooth e camera, trascurabili per ora
  *
+ * 4/2/2019 - 16:22
+ * Sotto consiglio di Flavio, ora c'è solo un drivePID per loop e ogni drivePID è stato sostituito con un'impostazione
+ * della velocità globale.
+ * Prossimo passo cambio interrupt
  */

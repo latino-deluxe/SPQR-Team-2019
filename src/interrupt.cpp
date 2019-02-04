@@ -367,7 +367,7 @@ void handleInterruptNEW()   //utilizzato in semifinale
   {
     update_sensors_all();
     // WhereAmI(); non conviene corro rischio di perdere informazione
-    drivePID (EXT_LINEA, VL_INT);
+    preparePID (EXT_LINEA, VL_INT);
     if (VL_INT < 255)  VL_INT++;  //limitazione velocita massima (prima era 220)
   }
   while ( (millis() - t0) < dt);
@@ -442,7 +442,7 @@ void handleInterruptNEW()   //utilizzato in semifinale
   // if ((PINK & 63) != 63) {
   //   t0 = millis();
   //   do {
-  //     drivePID(EXT_LINEA, VL_INT);
+  //     preparePID(EXT_LINEA, VL_INT);
   //   } while (((PINK & 63) != 63) && (millis() - t0) < 2000);
   // }
 
@@ -510,7 +510,7 @@ void mecojoni() {
     switch (zoneIndex) {
       case 0:
         for(int i = 0; i < 50; i++){
-          drivePID(135, vel);
+          preparePID(135, vel);
           readIMU();
           delay(10);
         }
@@ -519,7 +519,7 @@ void mecojoni() {
       break;
       case 1:
         for(int i = 0; i < 50; i++){
-          drivePID(180, vel);
+          preparePID(180, vel);
           readIMU();
           delay(10);
         }
@@ -528,7 +528,7 @@ void mecojoni() {
       break;
       case 2:
         for(int i = 0; i < 50; i++){
-          drivePID(225, vel);
+          preparePID(225, vel);
           readIMU();
           delay(10);
         }
@@ -537,7 +537,7 @@ void mecojoni() {
       break;
       case 3:
         for(int i = 0; i < 50; i++){
-          drivePID(90, vel);
+          preparePID(90, vel);
           readIMU();
           delay(10);
         }
@@ -551,7 +551,7 @@ void mecojoni() {
       break;
       case 5:
         for(int i = 0; i < 50; i++){
-          drivePID(270, vel);
+          preparePID(270, vel);
           readIMU();
           delay(10);
         }
@@ -560,7 +560,7 @@ void mecojoni() {
       break;
       case 6:
         for(int i = 0; i < 50; i++){
-          drivePID(45, vel);
+          preparePID(45, vel);
           readIMU();
           delay(10);
         }
@@ -569,7 +569,7 @@ void mecojoni() {
       break;
       case 7:
         for(int i = 0; i < 50; i++){
-          drivePID(0, vel);
+          preparePID(0, vel);
           readIMU();
           delay(10);
         }
@@ -578,7 +578,7 @@ void mecojoni() {
       break;
       case 8:
         for(int i = 0; i < 50; i++){
-          drivePID(315, vel);
+          preparePID(315, vel);
           readIMU();
           delay(10);
         }

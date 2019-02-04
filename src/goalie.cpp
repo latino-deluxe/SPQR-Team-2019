@@ -89,5 +89,5 @@ void goalie() {
         }
     }*/
 
-  drivePID(atk_direction, atk_speed);
+  preparePID(atk_direction, atk_speed);
 }

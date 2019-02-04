@@ -69,7 +69,7 @@
 #define LN3 A6
 #define LN4 A9
 #define LN5 A16
-#define INT_LUNG 100
+#define INT_LUNG 6
 
 #define BNO055_SAMPLERATE_DELAY_MS (60)
 
@@ -175,3 +175,7 @@ extr int iAmHere;
 extr int friendZone;
 extr int ruolo;
 extr bool comrade;
+
+//test new angle
+extr int globalDir;
+extr int globalSpeed;

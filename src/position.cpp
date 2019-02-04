@@ -114,148 +114,86 @@ void ritornacentro() // lavora su guessedlocation
 {
   if (status_x == EST) {
     if (status_y == SUD) {
-      drivePID(330, VEL_RET);
+      preparePID(330, VEL_RET);
     } else if (status_y == CENTRO) {
-      drivePID(270, VEL_RET);
+      preparePID(270, VEL_RET);
     } else if (status_y == NORD) {
-      drivePID(225, VEL_RET);
+      preparePID(225, VEL_RET);
     } else { // non conosco la y
-      recenter(1.0);
+      preparePID(0,0);
     }
   }
   if (status_x == OVEST) {
     if (status_y == SUD) {
-      drivePID(45, VEL_RET);
+      preparePID(45, VEL_RET);
     } else if (status_y == CENTRO) {
-      drivePID(90, VEL_RET);
+      preparePID(90, VEL_RET);
     } else if (status_y == NORD) {
-      drivePID(135, VEL_RET);
+      preparePID(135, VEL_RET);
     } else { // non conosco la y
-      recenter(1.0);
+      preparePID(0,0);
     }
   }
   if (status_x == CENTRO) {
     if (status_y == SUD) {
-      drivePID(0, VEL_RET);
+      preparePID(0, VEL_RET);
     } else if (status_y == CENTRO) {
-      recenter(1.0);
+      preparePID(0,0);
     } else if (status_y == NORD) {
-      drivePID(180, VEL_RET);
+      preparePID(180, VEL_RET);
     } else { // non conosco la y
-      recenter(1.0);
+      preparePID(0,0);
     }
   }
   if (status_x == 255) {
     if (status_y == SUD) {
-      drivePID(0, VEL_RET);
+      preparePID(0, VEL_RET);
 
     } else if (status_y == CENTRO) {
-      recenter(1.0);
+      preparePID(0,0);
 
     } else if (status_y == NORD) {
-      drivePID(180, VEL_RET);
+      preparePID(180, VEL_RET);
 
     } else { // non conosco la y
-      recenter(1.0);
+      preparePID(0,0);
     }
   }
   return;
 }
 
-void fuga_centro() {
-  long t0;
-
-  if (status_x == 255 && status_y == 255) // non so dove sto
-  {
-    do {
-      brake(); // sto fermo in attesa di conoscere la x o la y meglio se guardo
-               // anche la palla
-      update_sensors_all();
-      update_location_complete();
-      delay(1);
-    } while (status_x == 255 && status_y == 255);
-  }
-
-  if (status_x != 255 && status_y != 255) // conosco sia la x che la y
-  {
-    for (byte i = 0; i < 200; i++) {
-      update_sensors_all(); // serve per avere imu_current_euler aggiornata e
-                            // gli ultrasuoni
-      update_location_complete(); //  vede  dove si trova
-      ritornacentro(); //  ritorna al centro del campo per circa 200+ ms
-      delay(1);
-    }
-  } else // conosco per lo meno una coordinata
-  {
-    t0 = millis();       // istante inizio ricentra piano solo su una coordinata
-    if (status_x != 255) // conosco la x
-    {
-      do {
-        switch (status_x) {
-        case EST:
-          drivePID(270, 100);
-          delay(10);
-          break;
-        case OVEST:
-          drivePID(90, 100);
-          delay(10);
-          break;
-        }
-        update_sensors_all();
-        WhereAmI();
-      } while ((status_x != CENTRO) && ((millis() - t0) < 200));
-    } else // conosco la y
-    {
-      do {
-        switch (status_y) {
-        case NORD:
-          drivePID(180, 100);
-          delay(10);
-          break;
-        case SUD:
-          drivePID(0, 100);
-          delay(10);
-          break;
-        }
-        update_sensors_all();
-        WhereAmI();
-      } while ((status_y != CENTRO) && ((millis() - t0) < 200));
-    }
-  }
-  return;
-}
-
-void ritornaporta(int posizione) {
+void ritornaporta(int posizione) // chiamata da gestione portiere
+{
   if (posizione == 255) {
-    recenter(1.0);
+    preparePID(0,0);
   } else {
     switch (posizione) {
     case NORD_CENTRO:
-      drivePID(180, VEL_RET);
+      preparePID(180, VEL_RET);
       break;
     case NORD_EST:
-      drivePID(210, VEL_RET);
+      preparePID(210, VEL_RET);
       break;
     case NORD_OVEST:
-      drivePID(150, VEL_RET);
+      preparePID(150, VEL_RET);
       break;
     case SUD_CENTRO:
-      recenter(1.0);
+      preparePID(0,0);
       break;
     case SUD_EST:
-      drivePID(270, VEL_RET);
+      preparePID(270, VEL_RET);
       break;
     case SUD_OVEST:
-      drivePID(90, VEL_RET);
+      preparePID(90, VEL_RET);
       break;
     case CENTRO_CENTRO:
-      drivePID(180, VEL_RET);
+      preparePID(180, VEL_RET);
       break;
     case CENTRO_EST:
-      drivePID(270, VEL_RET);
+      preparePID(270, VEL_RET);
       break;
     case CENTRO_OVEST:
-      drivePID(90, VEL_RET);
+      preparePID(90, VEL_RET);
       break;
     }
   }
