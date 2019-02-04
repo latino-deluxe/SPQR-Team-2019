@@ -85,4 +85,10 @@
  * Sotto consiglio di Flavio, ora c'è solo un drivePID per loop e ogni drivePID è stato sostituito con un'impostazione
  * della velocità globale.
  * Prossimo passo cambio interrupt
+ *
+ * 4/2/2019 - 19:51
+ * Con aiuto di Flavio, nuovi interrupt migliori con trigonometria. Da ultimare il punto di stop
+ * se la palla di trova in un certo range di sensori rispetto a quello dove era la palla a interrupt attivato
+ *
+ *
  */
