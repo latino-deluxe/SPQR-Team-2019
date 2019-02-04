@@ -107,29 +107,34 @@ void setup() {
 unsigned long t1 = 0;
 
 void loop() {
+
+  update_sensors_all();
+  WhereAmI();
+  space_invaders();
+
   // comunicazione(2000);
   // teamZone();
   // whereAreYou();
-  if(millis() - t1 >= 200){
-    BT.println(imu_current_euler);
-  }
-
-  calculateZoneIndex();
-  if(flag_interrupt){
-    handleInterrupt();
-  }
-  update_sensors_all();
-  WhereAmI();
-  guessZone();
-  ruolo = LOW;
+  // if(millis() - t1 >= 200){
+  //   BT.println(imu_current_euler);
+  // }
+  //
+  // calculateZoneIndex();
+  // if(flag_interrupt){
+  //   handleInterrupt();
+  // }
+  // update_sensors_all();
+  // WhereAmI();
+  // guessZone();
+  // ruolo = LOW;
+  // // gigaTestZone();
+  // if(ball_seen==true) {
+  //   if(ruolo == HIGH) goalie();
+  //   else space_invaders();
+  // }
+  // else {
+  //   if(ruolo == HIGH) ritornacentro();
+  //   else centroporta();
+  // }
   // gigaTestZone();
-  if(ball_seen==true) {
-    if(ruolo == HIGH) goalie();
-    else space_invaders();
-  }
-  else {
-    if(ruolo == HIGH) ritornacentro();
-    else centroporta();
-  }
-  gigaTestZone();
 }
