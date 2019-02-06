@@ -57,6 +57,8 @@ void handleInterruptTrigonometry() {
     }
   }
 
+  //old version
+  /*
   // exit angle
   float angle = atan2(y, x) * 180 / 3.14;
 
@@ -78,6 +80,26 @@ void handleInterruptTrigonometry() {
   // Serial.print(map_angle);
   // Serial.print(" | ");
   // Serial.println(dir);
+  */
+
+  //new version
+  //calcolo dell'angolo della linea
+  float angle = atan2(y,x) * 180 / 3.14; 						//atan2 restituisce i gradi in [-180,+180] e seguendo la circonf. goniometrica.
+
+  int map_angle = 0;
+  map_angle = (int)angle;
+  map_angle = -(angle) + 90;                        //Conversione + cambio di rotazione = nord 0 gradi, senso orario positivo. 
+  map_angle = (map_angle +360) % 360; 							//per rientrare nel [0,360]
+  
+  int corrected_angle = map_angle;
+  corrected_angle = corrected_angle - imu_current_euler;	//tolgo la rotazione del robot all'angolo della linea
+  corrected_angle = (corrected_angle +360) % 360; 				//per rientrare nel [0,360]
+  
+  int out_direction = corrected_angle;
+  out_direction = out_direction + 180; 							//trovo opposto all'angolo calcolato
+  out_direction = (out_direction +360)% 360; 				//per rientrare nel [0,360]  
+
+  ldir = out_direction;
 
   // saves the ball sensors which is seeing the ball
   lineBallSensor = ball_sensor;
