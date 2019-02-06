@@ -1,10 +1,10 @@
 #include "goalie.h"
 #include "imu.h"
 #include "motors.h"
+#include "myspi_old.h"
 #include "pid.h"
 #include "position.h"
 #include "us.h"
-#include "myspi_old.h"
 #include "vars.h"
 #include <Arduino.h>
 
@@ -35,60 +35,59 @@ void WhereAmI() {
   Ly_mis = us_fr + us_px + robot; // lunghezza totale stimata
 
   // controllo orizzontale
-  if ((Lx_mis < Lx_max) && (Lx_mis > Lx_min) && (us_dx > 25) &&
-      (us_sx > 25)) // se la misura orizzontale é accettabile
-  {
+  if ((Lx_mis < Lx_max) && (Lx_mis > Lx_min) && (us_dx > 25) && (us_sx > 25)) {
+    // se la misura orizzontale é accettabile
     good_field_x = true;
     status_x = CENTRO;
-    if (us_dx < DxF)
-      status_x = EST; // robot é vicino al bordo destro
-    if (us_sx < DxF)
-      status_x = OVEST; // robot é vicino al bordo sinistro
+    if (us_dx < DxF) // robot é vicino al bordo destro
+      status_x = EST;
+    if (us_sx < DxF) // robot é vicino al bordo sinistro
+      status_x = OVEST;
 
     if (status_x == CENTRO) {
-      Ly_min = LyP_min; // imposto limiti di controllo lunghezza verticale tra
-                        // le porte
+      // imposto limiti di controllo lunghezza verticale tra le porte
+      Ly_min = LyP_min;
       Ly_max = LyP_max;
       Dy = DyP;
     } else {
-      Ly_min =
-          LyF_min; // imposto limiti di controllo lunghezza verticale in fascia
+      // imposto limiti di controllo lunghezza verticale in fascia
+      Ly_min = LyF_min;
       Ly_max = LyF_max;
       Dy = DyF;
     }
   } else {
     // la misura non é pulita per la presenza di un ostacolo
-    if ((us_dx >= (DxF + 10)) ||
-        (us_sx >= (DxF + 10))) // se ho abbastanza spazio a destra o a sinistra
-    {
-      status_x = CENTRO; // devo stare per forza al cento
-      Ly_min = LyP_min;  // imposto limiti di controllo lunghezza verticale tra
-                         // le porte
+    if ((us_dx >= (DxF + 10)) || (us_sx >= (DxF + 10))) {
+      // se ho abbastanza spazio a destra o a sinistra
+      // devo stare per forza al cento
+      status_x = CENTRO;
+      // imposto limiti di controllo lunghezza verticale tra le porte
+      Ly_min = LyP_min;
       Ly_max = LyP_max;
       Dy = DyP;
     } else {
-      status_x = 255; // non so la coordinata x
+      status_x = 255;
+      // non so la coordinata x
       // imposto i limiti di controllo verticale in base alla posizione
       // orizzontale precedente
-      if (old_status_x == CENTRO) // controlla la posizione precedente per
-                                  // decidere limiti di controllo y
-      {
-        Ly_min = LyP_min; // imposto limiti di controllo lunghezza verticale tra
-                          // le porte
+      if (old_status_x == CENTRO) {
+        // controlla la posizione precedente per decidere limiti di controllo y
+        // imposto limiti di controllo lunghezza verticale tra le porte
+        Ly_min = LyP_min;
         Ly_max = LyP_max;
         Dy = DyP;
       } else {
-        Ly_min = LyF_min; // imposto limiti di controllo lunghezza verticale in
-                          // fascia anche per x incognita
+        // imposto limiti di controllo lunghezza verticale in fascia anche per x
+        // incognita
+        Ly_min = LyF_min;
         Ly_max = LyF_max;
         Dy = DyF;
       }
     }
   }
   // controllo verticale
-  if ((Ly_mis < Ly_max) &&
-      (Ly_mis > Ly_min)) // se la misura verticale é accettabile
-  {
+  if ((Ly_mis < Ly_max) && (Ly_mis > Ly_min)) {
+    // se la misura verticale é accettabile
     good_field_y = true;
     status_y = CENTRO;
     if (us_fr < Dy) {
@@ -106,12 +105,10 @@ void WhereAmI() {
     if (us_px >= (Dy + 0))
       status_y = CENTRO; //  e'probabile che stia al centro
   }
-
   return;
 }
 
-void ritornacentro() // lavora su guessedlocation
-{
+void goCenter() {
   if (status_x == EST) {
     if (status_y == SUD) {
       preparePID(330, VEL_RET);
@@ -119,8 +116,9 @@ void ritornacentro() // lavora su guessedlocation
       preparePID(270, VEL_RET);
     } else if (status_y == NORD) {
       preparePID(225, VEL_RET);
-    } else { // non conosco la y
-      preparePID(0,0);
+    } else {
+      // non conosco la y
+      preparePID(0, 0);
     }
   }
   if (status_x == OVEST) {
@@ -130,19 +128,21 @@ void ritornacentro() // lavora su guessedlocation
       preparePID(90, VEL_RET);
     } else if (status_y == NORD) {
       preparePID(135, VEL_RET);
-    } else { // non conosco la y
-      preparePID(0,0);
+    } else {
+      // non conosco la y
+      preparePID(0, 0);
     }
   }
   if (status_x == CENTRO) {
     if (status_y == SUD) {
       preparePID(0, VEL_RET);
     } else if (status_y == CENTRO) {
-      preparePID(0,0);
+      preparePID(0, 0);
     } else if (status_y == NORD) {
       preparePID(180, VEL_RET);
-    } else { // non conosco la y
-      preparePID(0,0);
+    } else {
+      // non conosco la y
+      preparePID(0, 0);
     }
   }
   if (status_x == 255) {
@@ -150,22 +150,23 @@ void ritornacentro() // lavora su guessedlocation
       preparePID(0, VEL_RET);
 
     } else if (status_y == CENTRO) {
-      preparePID(0,0);
+      preparePID(0, 0);
 
     } else if (status_y == NORD) {
       preparePID(180, VEL_RET);
 
-    } else { // non conosco la y
-      preparePID(0,0);
+    } else {
+      // non conosco la y
+      preparePID(0, 0);
     }
   }
   return;
 }
 
-void ritornaporta(int posizione) // chiamata da gestione portiere
-{
+// called by keeper
+void goGoalPost(int posizione) {
   if (posizione == 255) {
-    preparePID(0,0);
+    preparePID(0, 0);
   } else {
     switch (posizione) {
     case NORD_CENTRO:
@@ -178,7 +179,7 @@ void ritornaporta(int posizione) // chiamata da gestione portiere
       preparePID(150, VEL_RET);
       break;
     case SUD_CENTRO:
-      preparePID(0,0);
+      preparePID(0, 0);
       break;
     case SUD_EST:
       preparePID(270, VEL_RET);
@@ -207,43 +208,41 @@ void update_sensors_all() {
   return;
 }
 
-
-
-void testPosition(){
+void testPosition() {
   update_sensors_all();
   WhereAmI();
-  BT.print("Measured location:\t");
-  BT.print(status_x);
-  BT.print(" | ");
-  BT.println(status_y);
+  DEBUG_PRINT.print("Measured location:\t");
+  DEBUG_PRINT.print(status_x);
+  DEBUG_PRINT.print(" | ");
+  DEBUG_PRINT.println(status_y);
 }
 
-int zone[3][3] = {{0,0,0},{0,0,0},{0,0,0}};
+int zone[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
-void testGuessZone(){
+void testGuessZone() {
   guessZone();
   Serial.println("-----------------");
 
-    for(int j = 0; j < 3; j++){
-    for(int i = 0; i < 3; i++){
-        BT.print(zone[i][j]);
-        BT.print(" | ");
-      }
-      BT.println();
+  for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < 3; i++) {
+      DEBUG_PRINT.print(zone[i][j]);
+      DEBUG_PRINT.print(" | ");
     }
-  BT.println("-----------------");
-  BT.print("Guessed location:\t");
-  BT.print(guessed_x);
-  BT.print(" | ");
-  BT.println(guessed_y);
+    DEBUG_PRINT.println();
+  }
+  DEBUG_PRINT.println("-----------------");
+  DEBUG_PRINT.print("Guessed location:\t");
+  DEBUG_PRINT.print(guessed_x);
+  DEBUG_PRINT.print(" | ");
+  DEBUG_PRINT.println(guessed_y);
 }
 
-void guessZone(){
+void guessZone() {
   updateGuessZone();
   int top = 0;
-  for(int i = 0; i < 3; i++){
-    for(int j = 0; j < 3; j++){
-      if(zone[i][j] > top){
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      if (zone[i][j] > top) {
         guessed_x = i;
         guessed_y = j;
       }
@@ -251,69 +250,68 @@ void guessZone(){
   }
 }
 
-void updateGuessZone(){
-  if(status_x == 255 && status_y != 255){
-    for(int i = 0; i < 3; i++){
-      if(zone[i][status_y] < 150)
+void updateGuessZone() {
+  if (status_x == 255 && status_y != 255) {
+    for (int i = 0; i < 3; i++) {
+      if (zone[i][status_y] < 150)
         zone[i][status_y] += 2;
     }
-  }else if(status_x != 255 && status_y == 255){
-    for(int i = 0; i < 3; i++){
-      if(zone[status_x][i] < 150)
+  } else if (status_x != 255 && status_y == 255) {
+    for (int i = 0; i < 3; i++) {
+      if (zone[status_x][i] < 150)
         zone[status_x][i] += 2;
     }
-  }else{
-    if(zone[status_x][status_y] < 150)
+  } else {
+    if (zone[status_x][status_y] < 150)
       zone[status_x][status_y] += 6;
   }
 
-  for(int i = 0; i < 3; i++){
-    for(int j = 0; j < 3; j++){
-      if(zone[i][j]-1 >= 0)
-        zone[i][j]-=1;
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      if (zone[i][j] - 1 >= 0)
+        zone[i][j] -= 1;
     }
   }
 }
 
 unsigned long ao;
 
-void gigaTestZone(){
-    update_sensors_all();
-    WhereAmI();
-    guessZone();
+void gigaTestZone() {
+  update_sensors_all();
+  WhereAmI();
+  guessZone();
 
-    if(millis() - ao >= 100){
-      BT.println("------");
-      for(int i = 0; i < 4; i++){
-        BT.print("US: ");
-        BT.print(us_values[i]);
-        BT.print(" | ");
-      }
-      BT.println();
-      testPosition();
-      testGuessZone();
-
-      BT.println("------");
-      ao = millis();
+  if (millis() - ao >= 100) {
+    DEBUG_PRINT.println("------");
+    for (int i = 0; i < 4; i++) {
+      DEBUG_PRINT.print("US: ");
+      DEBUG_PRINT.print(us_values[i]);
+      DEBUG_PRINT.print(" | ");
     }
+    DEBUG_PRINT.println();
+    testPosition();
+    testGuessZone();
+
+    DEBUG_PRINT.println("------");
+    ao = millis();
+  }
 }
 
-//gives zoneIndex based on guessed and measured zone
-void calculateZoneIndex(){
+// gives zoneIndex based on guessed and measured zone
+void calculateZoneIndex() {
   int x, y;
 
-  if(status_x == 255){
+  if (status_x == 255) {
     x = guessed_x;
-  }else{
+  } else {
     x = status_x;
   }
 
-  if(status_y == 255){
+  if (status_y == 255) {
     y = guessed_y;
-  }else{
+  } else {
     y = status_y;
   }
 
   zoneIndex = y * 3 + x;
-
 }

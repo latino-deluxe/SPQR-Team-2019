@@ -198,8 +198,8 @@ bool danger;                   // avviso che terminata da poco la gestione inter
 unsigned long tdanger;         // misura il tempo dal termine della gestione interrupt
 
 
-//VARIABILI PER LA GESTIONE DEL RUOLO TRAMITE BLUETOOTH-----
-int ruolo = 0, a, count;
+//VARIABILI PER LA GESTIONE DEL role TRAMITE BLUETOOTH-----
+int role = 0, a, count;
 long timer, old_timer;
 unsigned long tt = 0;  //tempo tra una trasmissione e l'altra
 bool compagno = false;                  // ritiene compagno vero se riceve un carattere in datoArrivato

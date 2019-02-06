@@ -1,9 +1,9 @@
 void testPosition();
 void WhereAmI();
 void update_location_complete();
-void ritornacentro();
+void goCenter();
 void fugacentro();
-void ritornaporta(int);
+void goGoalPost(int);
 void update_sensors_all();
 void guessZone();
 void updateGuessZone();

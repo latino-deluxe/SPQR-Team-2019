@@ -11,7 +11,7 @@ void gest_interrupt()   //utilizzato in semifinale
   boolean d_uscita;                                // se true la palla si trova in zona da cui e' uscito in  precedenza
   boolean d_palla;                                 // se true la palla non si e' mossa rispetto a uscita precedente
 
-  if(ruolo==HIGH) attesa=100;
+  if(role==HIGH) attesa=100;
   else attesa=0;
   
 

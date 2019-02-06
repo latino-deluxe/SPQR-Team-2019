@@ -60,7 +60,7 @@
    Modificato goalie in modo che tenti di convergere verso la porta sulle fasce
 
    Versione 10
-   Cambio di ruolo tramite Switch sinistro
+   Cambio di role tramite Switch sinistro
    Cambio di velocità tramite switch destro
    Modifica funzione portiere
    Modifica linee : i sensori mascherati dipendono solo dai sensori di linea (provvisoriamente si sono impostate le variabili d1,d2 e d3 a 99 per disabilitare nel while il mascheramento nel sensore palla)
@@ -71,12 +71,12 @@
    Messa in ordine delle varie costanti per velocità e angoli palla
    Aumento delle velocità di 20 su VEL_RET
    Gestione interrupt: aumentati tempo dt di 200
-   Integrazione della gestione del ruolo del robot basandosi sul suo compagno in gara tramite il bluetooth DA VERIFICARE
+   Integrazione della gestione del role del robot basandosi sul suo compagno in gara tramite il bluetooth DA VERIFICARE
    Modificati angoli 300 e 120 in 295 e 115. Portati i simmetrici 60 a 55  240 in 235.
    Modificati angoli di uscita e tempi di rientro nell'interrupt.
    Aumentato da 15 a 25 st che va a modificare il centro in drivePID nella tab pid.
    Implementato il drift. Ora a OVEST corregge a 45 e a EST a 315.
-   Tolto al momento la gestione del ruolo tramite BT.
+   Tolto al momento la gestione del role tramite BT.
    Creata funzione menamoli.
    Adesso se la palla va dietro il portiere torna in porta.
    Quando riceve un interrupt durante menamoli, il robot torna al centro porta per evitare che esca per tentare di prendere la palla o situazioni scomode in cui l'avversario si ritorva con la porta nostra scoperta
@@ -141,7 +141,7 @@
   MODIFICHE MONDIALI (versione KIRK HAMMETT)
 
   Sostituito buzzer=HIGH con tone
-  Comunicazione tra robot attraverso bluetooth per capire se è presente o no il compagno e gestire il ruolo
+  Comunicazione tra robot attraverso bluetooth per capire se è presente o no il compagno e gestire il role
   Aggiunto super_mario e tab buzzer
   Aggiunta telecamera e migliorate tattiche generali di presa palla, controllo palla e posizionamento
   Aggiunte più condizioni alla fase di attacco considerando la posizione esatta del centro del blob
@@ -149,7 +149,7 @@
   Unita gestione interrupt europei con gestione interrupt rauch e gestione interrupt porcata di emanuele
   Modificato totalmente gestione palla dietro in goalie e menamoli
   Aggiunte strategie con la gestione dei ruoli tramite bluetooth in space_invaders
-  Cambio di ruolo BT in main
+  Cambio di role BT in main
   Diminuite velocità in danger, palla dietro e rientro del portiere causa perdita palla o uscita dal campo violenta
   Create le costanti per più velocità, come la velocità in danger e quelle laterali a varie distanze
   Unificate le modifiche in goalie in menamoli

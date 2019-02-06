@@ -1,22 +1,23 @@
-#include "vars.h"
 #include "bluetooth.h"
+#include "vars.h"
 
-//Bluetooth on Serial1
-
-void initBluetooth() {                                           //inizializza bluetooth
+// init bluetooth on Serial1, look in vars.h for define
+void initBluetooth() {
   BT.begin(115200);
-  //tt=millis();
+  // tt=millis();
 }
 
-void testBluetooth(){
-  //prints the serial read to bluetooth and bluetooth to serial monitor
-  if(BT.available()){
+// prints the serial read to bluetooth and bluetooth to serial monitor
+void testBluetooth() {
+  if (BT.available()) {
     Serial.println((char)BT.read());
   }
-  if(Serial.available()){
+  if (Serial.available()) {
     BT.write((char)Serial.read());
   }
 }
+
+// Code to fix when we'll have two robots
 /*
 void btZone () {
   update_sensors_all();

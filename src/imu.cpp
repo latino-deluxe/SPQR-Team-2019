@@ -11,7 +11,6 @@ void initIMU() {
 }
 
 void readIMU() {
-
   imu::Vector<3> euler = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
 
   if (euler.x() != imu_current_euler) {

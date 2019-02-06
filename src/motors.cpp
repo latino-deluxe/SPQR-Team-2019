@@ -72,19 +72,20 @@ void initOmnidirectionalSins() { // calculates sins of integer angles from 0 to
   }
 }
 
-void mot(byte mot, int vel) { // Function to send the speed to the motor
+// Function to send the speed to the motor
+void mot(byte mot, int vel) {
   byte VAL_INA, VAL_INB;
-  if (vel == 0) // no brake ma motore inerte corto a massa e vel=0 contro freno
-                // dove corto a VCC e vel=max
-  {
+  if (vel == 0) {
+    // no brake ma motore inerte corto a massa e vel=0 contro freno
+    // dove corto a VCC e vel=max
     VAL_INA = 0;
     VAL_INB = 0;
-  } else if (vel > 0) // clockwise
-  {
+  } else if (vel > 0) {
+    // clockwise
     VAL_INA = 1;
     VAL_INB = 0;
-  } else if (vel < 0) // counterclockwise
-  {
+  } else if (vel < 0) {
+    // counterclockwise
     VAL_INA = 0;
     VAL_INB = 1;
     vel = -vel;
@@ -96,8 +97,7 @@ void mot(byte mot, int vel) { // Function to send the speed to the motor
 }
 
 void testMotors() {
-
-  for(int i = 1; i < 4; i++){
+  for (int i = 1; i < 4; i++) {
     turnMotor(i, 0, 1, 100);
     delay(1000);
     turnMotor(i, 0, 0, 100);

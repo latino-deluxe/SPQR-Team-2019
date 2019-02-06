@@ -1,31 +1,31 @@
-#include <Arduino.h>
-#include "vars.h"
 #include "chat.h"
 #include "goalie.h"
 #include "position.h"
 #include "space_invaders.h"
+#include "vars.h"
+#include <Arduino.h>
 
 int count = 0;
 
-bool comunicazione (int intervallo) {                             //funzione di comunicazione
+// comunicate with the comrade
+bool comunicazione(int intervallo) {
   if (BT.available() > 0) {
     comrade = true;
     old_timer = millis();
   }
-  if ((millis() - old_timer ) > intervallo) {
+  if ((millis() - old_timer) > intervallo) {
     old_timer = millis();
     comrade = false;
   }
-  return comrade ;
+  return comrade;
 }
 
 void teamZone() {
   calculateZoneIndex();
   iAmHere = zoneIndex;
-  if (count < 30 ) {
+  if (count < 30) {
     count++;
-  }
-  else {
+  } else {
     count = 0;
     BT.write(iAmHere);
   }
@@ -37,7 +37,9 @@ void whereAreYou() {
     friendZone = BT.read();
   }
   if (zoneIndex == friendZone) {
-    if (ruolo == HIGH) goalie();
-    else centroporta();
+    if (role == HIGH)
+      goalie();
+    else
+      centerGoalPost();
   }
 }

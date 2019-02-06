@@ -1,2 +1,2 @@
 void space_invaders();
-void centroporta();
+void centerGoalPost();

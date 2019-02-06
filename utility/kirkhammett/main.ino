@@ -48,7 +48,7 @@ void loop() {
   }
 
   SWS = digitalRead(SWITCH_SX);                                           //lettura switch sinistro
-  ruolo = SWS;                                                            //cambio ruolo
+  role = SWS;                                                            //cambio role
   
   update_location_complete();
 
@@ -67,7 +67,7 @@ void loop() {
 
   if (ball_seen == true)                                                  //SCELTA DEI RUOLI TRAMITE SWITCH E BT
   {
-    if (ruolo == HIGH) {
+    if (role == HIGH) {
       if (compagno == true) goalie();
       else space_invaders();
     }
@@ -77,7 +77,7 @@ void loop() {
     }
   }
   else {
-    if (ruolo == HIGH) {
+    if (role == HIGH) {
       if (compagno == true) ritornacentro();
       else centroporta();
     }

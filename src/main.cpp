@@ -4,20 +4,19 @@
 #include "Wire.h"
 #include <Arduino.h>
 
+#include "bluetooth.h"
+#include "chat.h"
 #include "goalie.h"
 #include "imu.h"
+#include "interrupt.h"
 #include "linesensor.h"
 #include "motors.h"
 #include "myspi_old.h"
-#include "myspi.h"
 #include "pid.h"
 #include "position.h"
-#include "us.h"
-#include "interrupt.h"
-#include "vars.h"
-#include "bluetooth.h"
 #include "space_invaders.h"
-#include "chat.h"
+#include "us.h"
+#include "vars.h"
 
 // Switch management vars
 int SWS = 0;
@@ -57,22 +56,21 @@ void setup() {
   status_y = CENTRO;
   // currentlocation = CENTRO_CENTRO;
   // guessedlocation = CENTRO_CENTRO;
-  //Linesensors and interrupt
+  // Linesensors and interrupt
   flag_interrupt = false;
   nint = 0;
   attesa = 0;
   zoneIndex = 0;
   lineReading = 0;
-  //bluetooth misc
+  // bluetooth misc
   a = 0;
   old_timer = 0;
-  maggica = false;
-  ruolo = 0;
+  role = 0;
   friendZone = 0;
   iAmHere = 0;
   comrade = false;
 
-  //global vars for angles
+  // global vars for angles
   globalDir = 0;
   globalSpeed = 0;
   // end of variable set up
@@ -93,20 +91,18 @@ void setup() {
   SWD = digitalRead(SWITCH_DX);
 
   // Misc inits
-  initMotorsGPIO();   // inizializza GPIO motori
+  initMotorsGPIO();  // inizializza GPIO motori
   initLineSensors(); // abilita i sensori di linea a chiamare interrupt come
-                      // PCINT2
-  initSPI();          // inizializza comunicazione spi
+                     // PCINT2
+  initSPI();         // inizializza comunicazione spi
   initUS();
-  initIMU();          // inizializza imu
+  initIMU();                 // inizializza imu
   initOmnidirectionalSins(); // inizializza seni
   initBluetooth();
   // valStringY.reserve(30);                                     //riserva
   // 30byte per le stringhe valStringB.reserve(30);  //  tone(27, 1000, 500);
   digitalWrite(31, HIGH);
 }
-
-unsigned long t1 = 0;
 
 void loop() {
 
@@ -121,26 +117,29 @@ void loop() {
   //   BT.println(imu_current_euler);
   // }
 
-  t1 = millis();
   calculateZoneIndex();
 
+  // game routine
   update_sensors_all();
   WhereAmI();
   guessZone();
-  ruolo = HIGH;
-  // gigaTestZone();
-  if(ball_seen==true) {
-    if(ruolo == HIGH) goalie();
-    else space_invaders();
-  }
-  else {
-    if(ruolo == HIGH) ritornacentro();
-    else centroporta();
+
+  // currently setting the role by code
+  role = HIGH;
+  if (ball_seen == true) {
+    if (role == HIGH)
+      goalie();
+    else
+      space_invaders();
+  } else {
+    if (role == HIGH)
+      goCenter();
+    else
+      centerGoalPost();
   }
 
   handleInterruptTrigonometry();
-  //final drive pid
+  // final drive pid
   drivePID(globalDir, globalSpeed);
   // gigaTestZone();
-
 }
