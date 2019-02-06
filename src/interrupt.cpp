@@ -22,6 +22,7 @@ void handleInterruptTrigonometry() {
     // continues the old movement, due to high motors inertia
     preparePID(ldir, lspeed);
     lineBallSensor = ball_sensor;
+    lineBallDistance = ball_distance;
     stopFlag = true;
     return;
   }
@@ -29,6 +30,7 @@ void handleInterruptTrigonometry() {
   //   tline = 0;
   //   // if the current sensor is in a range of sensors from the one that seen the
   //   // ball, just stop
+  tline = 0;
     if (stopFlag) {
       if (inSensorRange(lineBallSensor, (byte) 1)) {
         preparePID(0, 0);
@@ -61,7 +63,7 @@ void handleInterruptTrigonometry() {
   }
 
   //old version
-  
+
   // exit angle
   float angle = atan2(y, x) * 180 / 3.14;
 
