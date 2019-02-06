@@ -87,17 +87,13 @@ void setup() {
   for (int i = 29; i <= 31; i++)
     pinMode(i, OUTPUT);
 
-  SWS = digitalRead(SWITCH_SX);
-  SWD = digitalRead(SWITCH_DX);
-
   // Misc inits
-  initMotorsGPIO();  // inizializza GPIO motori
-  initLineSensors(); // abilita i sensori di linea a chiamare interrupt come
-                     // PCINT2
-  initSPI();         // inizializza comunicazione spi
+  initMotorsGPIO();
+  initLineSensors();
+  initSPI();
   initUS();
-  initIMU();                 // inizializza imu
-  initOmnidirectionalSins(); // inizializza seni
+  initIMU();
+  initOmnidirectionalSins();
   initBluetooth();
   // valStringY.reserve(30);                                     //riserva
   // 30byte per le stringhe valStringB.reserve(30);  //  tone(27, 1000, 500);
@@ -105,6 +101,9 @@ void setup() {
 }
 
 void loop() {
+
+  SWS = digitalRead(SWITCH_SX);
+  SWD = digitalRead(SWITCH_DX);
 
   // update_sensors_all();
   // WhereAmI();
@@ -120,26 +119,27 @@ void loop() {
   calculateZoneIndex();
 
   // game routine
-  update_sensors_all();
-  WhereAmI();
-  guessZone();
-
-  // currently setting the role by code
-  role = HIGH;
-  if (ball_seen == true) {
-    if (role == HIGH)
-      goalie();
-    else
-      space_invaders();
-  } else {
-    if (role == HIGH)
-      goCenter();
-    else
-      centerGoalPost();
-  }
-
-  handleInterruptTrigonometry();
-  // final drive pid
-  drivePID(globalDir, globalSpeed);
-  // gigaTestZone();
+  // update_sensors_all();
+  // WhereAmI();
+  // guessZone();
+  //
+  // // currently setting the role by code
+  // role = LOW;
+  // BT.print(role);
+  // if (ball_seen == true) {
+  //   if (role == HIGH)
+  //     goalie();
+  //   else
+  //     space_invaders();
+  // } else {
+  //   if (role == HIGH)
+  //     goCenter();
+  //   else
+  //     centerGoalPost();
+  // }
+  //
+  // handleInterruptTrigonometry();
+  // // final drive pid
+  // drivePID(globalDir, globalSpeed);
+  gigaTestZone();
 }

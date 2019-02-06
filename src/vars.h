@@ -7,8 +7,8 @@
 
 // IR shield pin
 #define BUZZER 27
-#define SWITCH_SX 24
-#define SWITCH_DX 25
+#define SWITCH_SX 26
+#define SWITCH_DX 28
 
 // Note
 #define LA3 220.00

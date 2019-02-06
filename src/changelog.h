@@ -90,5 +90,15 @@
  * Con aiuto di Flavio, nuovi interrupt migliori con trigonometria. Da ultimare il punto di stop
  * se la palla di trova in un certo range di sensori rispetto a quello dove era la palla a interrupt attivato
  *
+ * 6/2/2018 - 19.51
+ * Tentantivo di sistemazione dei sensori di linea, fallimentare(probabilmente per il campo orribile), e di space_invaders, fallimetare
+ * Approfondire la prossima volta
+ * ULTRASUONI O I2C ROTTI, DA VERIFICARE
+ *
+ *
+ *
+ *
+ *
+ *
  *
  */
