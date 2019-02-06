@@ -111,8 +111,7 @@ extr int imu_temp_euler, imu_current_euler;
 // Line Sensors
 extr byte lineReading;
 extr volatile bool flag_interrupt;
-extr volatile byte
-    nint; // numero di interrupt consecutivi prima della fine della gestione
+extr volatile byte nint; // numero di interrupt consecutivi prima della fine della gestione
 extr volatile byte linea[INT_LUNG];
 extr int VL_INT;    // velocitá di uscita dalle linee
 extr int EXT_LINEA; // direzione di uscita dalla linea
@@ -176,8 +175,9 @@ extr int zoneIndex;
 // BLUETOOTH
 extr int a;
 extr unsigned long old_timer;
-// Sviluppo interrupt creativo
-extr bool maggica;
+// Interrupt
+extr byte lineBallSensor;
+extr byte lineBallDistance;
 // Comunicazione compagno
 extr int iAmHere;
 extr int friendZone;

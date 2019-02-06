@@ -12,8 +12,8 @@ unsigned long tline = 0;
 bool stopFlag = false;
 
 int ldir = 0;
-int lspeed = 150;
-byte lineBallSensor = 0;
+int lspeed = 180;
+// byte lineBallSensor = 0;
 
 // brand new way to handle the interrupt: trigonometry!
 void handleInterruptTrigonometry() {
@@ -21,20 +21,22 @@ void handleInterruptTrigonometry() {
   if (millis() - tline < 250) {
     // continues the old movement, due to high motors inertia
     preparePID(ldir, lspeed);
+    lineBallSensor = ball_sensor;
+    stopFlag = true;
     return;
-  } else {
-    tline = 0;
-    // if the current sensor is in a range of sensors from the one that seen the
-    // ball, just stop
+  }
+  // else {
+  //   tline = 0;
+  //   // if the current sensor is in a range of sensors from the one that seen the
+  //   // ball, just stop
     if (stopFlag) {
-      if (ball_sensor == getSensorIndex(lineBallSensor - 2) &&
-          ball_sensor <= lineBallSensor + 2) {
+      if (inSensorRange(lineBallSensor, (byte) 1)) {
         preparePID(0, 0);
         return;
       }
       stopFlag = false;
     }
-  }
+  // }
 
   byte line = 0;
   // constructs a complete byte using the array that stores the interrupt data
@@ -48,6 +50,7 @@ void handleInterruptTrigonometry() {
   // interpolates the data with sine and cosine and using atan2 construct an
   // angle of exit
   tline = millis();
+
   float x = 0, y = 0;
 
   for (int i = 0; i < INT_LUNG; i++) {
@@ -58,7 +61,7 @@ void handleInterruptTrigonometry() {
   }
 
   //old version
-  /*
+  
   // exit angle
   float angle = atan2(y, x) * 180 / 3.14;
 
@@ -77,41 +80,46 @@ void handleInterruptTrigonometry() {
   // itself) and calculates the final go-back angle
   ldir -= imu_current_euler;
   ldir = ldir < 0 ? ldir += 360 : ldir;
+
   // Serial.print(map_angle);
   // Serial.print(" | ");
   // Serial.println(dir);
-  */
+
 
   //new version
   //calcolo dell'angolo della linea
-  float angle = atan2(y,x) * 180 / 3.14; 						//atan2 restituisce i gradi in [-180,+180] e seguendo la circonf. goniometrica.
-
-  int map_angle = 0;
-  map_angle = (int)angle;
-  map_angle = -(angle) + 90;                        //Conversione + cambio di rotazione = nord 0 gradi, senso orario positivo. 
-  map_angle = (map_angle +360) % 360; 							//per rientrare nel [0,360]
-  
-  int corrected_angle = map_angle;
-  corrected_angle = corrected_angle - imu_current_euler;	//tolgo la rotazione del robot all'angolo della linea
-  corrected_angle = (corrected_angle +360) % 360; 				//per rientrare nel [0,360]
-  
-  int out_direction = corrected_angle;
-  out_direction = out_direction + 180; 							//trovo opposto all'angolo calcolato
-  out_direction = (out_direction +360)% 360; 				//per rientrare nel [0,360]  
-
-  ldir = out_direction;
+  // float angle = atan2(y,x) * 180 / 3.14; 						//atan2 restituisce i gradi in [-180,+180] e seguendo la circonf. goniometrica.
+  //
+  // int map_angle = 0;
+  // map_angle = (int)angle;
+  // map_angle = -(angle) + 90;                        //Conversione + cambio di rotazione = nord 0 gradi, senso orario positivo.
+  // map_angle = (map_angle +360) % 360; 							//per rientrare nel [0,360]
+  //
+  // int corrected_angle = map_angle;
+  // corrected_angle = corrected_angle - imu_current_euler;	//tolgo la rotazione del robot all'angolo della linea
+  // corrected_angle = (corrected_angle +360) % 360; 				//per rientrare nel [0,360]
+  //
+  // int out_direction = corrected_angle;
+  // out_direction = out_direction + 180; 							//trovo opposto all'angolo calcolato
+  // out_direction = (out_direction +360)% 360; 				//per rientrare nel [0,360]
+  //
+  // ldir = out_direction;
 
   // saves the ball sensors which is seeing the ball
   lineBallSensor = ball_sensor;
+  lineBallDistance = ball_distance;
   stopFlag = true;
 
   preparePID(ldir, lspeed);
 }
 
 bool inSensorRange(byte sensor, byte range) {
+  // BT.println(lineBallSensor);
   for (int i = 0; i <= range; i++) {
-    if (ball_sensor == getSensorIndex(sensor - i) ||
-        ball_sensor == getSensorIndex(sensor + i)) {
+    // BT.print(getSensorIndex(sensor - i));
+    // BT.print(" | ");
+    // BT.println(getSensorIndex(sensor + i))
+    if (ball_sensor == getSensorIndex(sensor - i) || ball_sensor == getSensorIndex(sensor + i)) {
       return true;
     }
   }
