@@ -1,4 +1,4 @@
-#include <Arduino.h>
+NORTH_CENTER#include <Arduino.h>
 #ifndef MAIN
 #define extr extern
 #else
@@ -10,7 +10,7 @@
 #define SWITCH_SX 26
 #define SWITCH_DX 28
 
-// Note
+// Notes
 #define LA3 220.00
 #define C4 261.63
 #define F3 174.61
@@ -19,7 +19,7 @@
 #define GB6 1479.98
 
 // You can modify this if you need
-// LIMITI DEL CAMPO
+// LIMITI DEL CAMPO (CAMP LIMITS)
 #define Lx_min 115  // valore minimo accettabile di larghezza
 #define Lx_max 195  // valore massimo accettabile di larghezza (larghezza campo)
 #define LyF_min 190 // valore minimo accettabile di lunghezza sulle fasce
@@ -37,31 +37,33 @@
 // con misura y OK e robot al CENTRO (tra le porte) con us_fx o us_px < DyP
 // sto a NORD o a SUD era - 22
 #define DyP 69
-#define robot 21 // diametro del robot
+#define robot 21 // robot's diameter
 
 // ZONE DEL CAMPO // codici utilizzabili per una matice 3x3
-#define EST 2
-#define OVEST 0
-#define CENTRO 1
-#define NORD 0
-#define SUD 2
+#define EST 2     //ex EST
+#define OVEST 0   //ex OVEST
+#define CENTRO 1  //ex CENTRO
+#define NORD 0    //ex NORD
+#define SUD 2     //ex SUD
 
-#define NORD_OVEST 1
-#define NORD_CENTRO 2
-#define NORD_EST 3
-#define CENTRO_OVEST 4
-#define CENTRO_CENTRO 5 // codici zona nuovi
-#define CENTRO_EST 6
-#define SUD_OVEST 7
-#define SUD_CENTRO 8
-#define SUD_EST 9
+#define NORTH_WEST 1                          //ex NORD_OVEST
+#define NORTH_CENTER 2                        //ex NORD_CENTRO
+#define NORTH_EAST 3                          //ex NORD_EST
+#define CENTER_WEST 4                         //ex CENTRO_OVEST
+#define CENTER_CENTER 5 // codici zona nuovi  //ex CENTRO_CENTRO
+#define CENTER_EAST 6   // (NEW ZONE CODES)   //ex CENTRO_EST
+#define SOUTH_WEST 7                          //ex SUD_OVEST
+#define SOUTH_CENTER 8                        //ex SUD_CENTRO
+#define SOUTH_EAST 9                          //ex SUD_EST
 
-// VARIABILI E COSTANTI DEL PID
+// PID, VARS AND COSTANSTS
 #define KP 0.7   // K proporzionale
 #define KI 0.001 // K integrativo
 #define KD 0.001 // K derivativo
+
 // SPI
 #define SS_PIN 2
+
 // Linesensors e interrupt
 #define LN0 A14
 #define LN1 A15
@@ -73,15 +75,15 @@
 
 #define BNO055_SAMPLERATE_DELAY_MS (60)
 
-// COSTANTI PER ATTACCANTE (GOALIE & MENAMOLI)-----------------------------
+// GOALIE'S CONSTANTS (GOALIE & MENAMOLI)-----------------------------
 #define GOALIE_MAX 130
 #define GOALIE_MIN 200
 #define GOALIE_SLOW1 130
 #define GOALIE_SLOW2 150
 #define GOALIE_DANGER 100
 #define VEL_RET 180
-#define GOALIE_P 255 // velocità portiere
-#define AA0 0        // angoli di attacco in funzione del sensore palla
+#define GOALIE_P 255   // keeper's speed
+#define AA0 0          // angoli di attacco in funzione del sensore palla (angles to attack from ball sensor)
 #define AA1 30
 #define AA2 60
 #define AA3 80
@@ -108,6 +110,7 @@
 
 // IMU
 extr int imu_temp_euler, imu_current_euler;
+
 // Line Sensors
 extr byte lineReading;
 extr volatile bool flag_interrupt;
@@ -116,27 +119,31 @@ extr volatile byte linea[INT_LUNG];
 extr int VL_INT;    // velocitá di uscita dalle linee
 extr int EXT_LINEA; // direzione di uscita dalla linea
 extr byte n_us;     // ultrasuono da controllare dopo la fuga dalla linea
-extr int attesa;    // tempo di attesa palla dopo un interrupt (utilizzata dallo
+extr int waiting;    // ex attesa tempo di attesa palla dopo un interrupt (utilizzata dallo
                     // switch destro)
 extr bool danger;   // avviso che terminata da poco la gestione interrupt
 extr unsigned long
-    tdanger; // misura il tempo dal termine della gestione interrupt
+    tdanger;        // misura il tempo dal termine della gestione interrupt
+
 // Motors
 extr float speed1, speed2, speed3, pidfactor, sins[360];
+
 // MySPI
 extr byte mess, ball_sensor, ball_distance, old_s_ball, ball_degrees;
 extr long time_s_ball, tspi;
 extr bool ball_seen;
+
 // PID
-extr float errorePre;    // angolo di errore precedente
+extr float errorePre;    // previous error angle
 extr float integral;     // somisa degli angoli di errore
 extr bool reaching_ball; // serve per aumentare il PID del 20% GOALIE
 extr int st;             // storcimento sulle fasce
 // da utilizzare per sviluppi futuri
 extr signed int old_Dir; // angolo di direzione precedente a quella attuale
 extr signed int new_Dir; // angolo di direzione corrente del moto
-extr float old_vMot;     // velocitá di moto precedente
-extr float new_vMot;     // velocitá di moto corrente
+extr float old_vMot;     // previous motion speed
+extr float new_vMot;     // current motion speed
+
 // US
 extr int reading;
 extr long us_t0;                     // US measure start
@@ -144,13 +151,14 @@ extr long us_t1;                     // time value during measure
 extr bool us_flag;                   // is it measuring or not?
 extr int us_values[4];               // US values array
 extr int us_sx, us_dx, us_px, us_fr; // copies with other names in the array
+
 // POSITION
-extr int old_status_x; // posizione precedente nel campo vale EST, OVEST o
-                       // CENTRO o 255 >USI FUTURI<
-extr int old_status_y; // posizione precedente nel campo vale SUD, NORD o
-                       // CENTRO o 255 >USI FUTURI<
-extr bool goal_zone; // sto al centro rispetto alle porte         assegnata// da
-                     // WhereAmI ma non usata
+extr int old_status_x;  // posizione precedente nel campo vale EST, OVEST o
+                        // CENTRO o 255 >USI FUTURI<
+extr int old_status_y;  // posizione precedente nel campo vale SUD, NORD o
+                        // CENTRO o 255 >USI FUTURI<
+extr bool goal_zone;    // sto al centro rispetto alle porte
+                        // assigned by WhereAmI but unused
 extr bool good_field_x; // vedo tutta la larghezza del campo si/no
 extr bool good_field_y; // vedo tutta la lunghezza del campo si/no
 extr int status_x;      // posizione nel campo vale EST, OVEST o CENTRO o 255
@@ -161,24 +169,26 @@ extr int zoneIndex;
 // extr int currentlocation; // risultato misure zone campo da 1 a 9 o 255 se
 //                           // undefined
 // extr int guessedlocation; // risultato misure zone campo da 1 a 9 (da
-// CENTRO_CENTRO a SUD_OVEST)
+// CENTER_CENTER a SOUTH_WEST)
 // extr int old_currentlocation; // zona precedente del robot in campo da 1 a 9
 // o
 //                               // 255 se undefined >USI FUTURI<
 // extr int old_guessedlocation; // zona precedente del robot in campo da 1 a 9
 // (da
-//                               // CENTRO_CENTRO a SUD_OVEST) >USI FUTURI<
-// extr byte zone[3][3];     // il primo indice = NORD SUD CENTRO  il secondo
-//                           // indice  EST OVEST CENTRO
+//                               // CENTER_CENTER a SOUTH_WEST) >USI FUTURI<
+// extr byte zone[3][3];         // il primo indice = NORD SUD CENTRO  il secondo
+//                               // indice  EST OVEST CENTRO
 // signed int zone_prob[3][3];
 
 // BLUETOOTH
 extr int a;
 extr unsigned long old_timer;
+
 // Interrupt
 extr byte lineBallSensor;
 extr byte lineBallDistance;
-// Comunicazione compagno
+
+// comrade communication
 extr int iAmHere;
 extr int friendZone;
 extr int role;

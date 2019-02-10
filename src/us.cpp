@@ -36,8 +36,7 @@ void testUS() {
 
     // step 5: receive reading from sensor
     if (2 <= Wire1.available()) {
-      // if two bytes were received
-      // receive high byte (overwrites  previous reading)
+      // if two bytes were received, receive high byte (overwrites previous reading)
       reading = Wire1.read();
       // shift high byte to be high 8 bits
       reading = reading << 8;

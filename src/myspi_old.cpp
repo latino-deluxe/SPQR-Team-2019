@@ -32,11 +32,9 @@ void readSPI() {
 
 void ball_read_position() {
   // getting our data from our spi slave
-  readSPI(); // in any other case the ball is seen by the robot
+  readSPI();                        // in any other case the ball is seen by the robot
   ball_seen = true;
-  if (ball_distance ==
-      6) { // if the distance is 6 it means that the robot doesnt
-           // see the ball
+  if (ball_distance == 6) {         // if the distance is 6 the robot doesn't see the ball
     ball_seen = false;
   }
 

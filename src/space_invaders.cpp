@@ -1,4 +1,4 @@
-#include "imu.h"
+$#include "imu.h"
 #include "motors.h"
 #include "myspi_old.h"
 #include "pid.h"
@@ -11,9 +11,9 @@
 void space_invaders() {
   int vel = 200;
 
-  if (us_px >= 20|| !ball_seen ){
+  if (us_px >= 20|| !ball_seen ) {
     centerGoalPost();
-  }else{
+  } else {
     preparePID(0, 0);
     if (ball_sensor >= 14 && ball_sensor <= 18) {
       preparePID(270, vel);
@@ -27,22 +27,19 @@ void space_invaders() {
 }
 
 void centerGoalPost() {
-    int larghezza = 0;
+    int width = 0;  //ex larghezza
     if (status_x == CENTRO) {
       if (status_y == CENTRO) {
         preparePID(180, 150);
-      }
-      else if (status_y == SUD) {
-        if (us_px > 20) preparePID(180, 110);
-        else if (us_px < 15) preparePID(0, 130);
-        else preparePID(0,0);
+      } else if (status_y == SUD) {
+          if (us_px > 20) preparePID(180, 110);
+          else if (us_px < 15) preparePID(0, 130);
+          else preparePID(0,0);
       }
       else goCenter();
-    }
-    else if (status_x == 255) {
-      if (us_px > 50) preparePID(180, 110);
-      else if (us_px < 30) preparePID(0, 130);
-      else preparePID(0,0);
-    }
-    else goCenter();
+      } else if (status_x == 255) {
+          if (us_px > 50) preparePID(180, 110);
+          else if (us_px < 30) preparePID(0, 130);
+          else preparePID(0,0);
+    } else goCenter();
 }
