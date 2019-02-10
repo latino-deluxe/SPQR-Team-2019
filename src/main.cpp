@@ -50,19 +50,17 @@ void setup() {
   us_flag = false;
 
   // Position
-  old_status_x = CENTRO;
-  old_status_y = CENTRO;
+  old_status_x = CENTER;
+  old_status_y = CENTER;
   // old_guessedlocation = CENTRO_CENTRO;
   goal_zone = false;
   good_field_x = true;
   good_field_y = true;
-  status_x = CENTRO;
-  status_y = CENTRO;
+  status_x = CENTER;
+  status_y = CENTER;
   // currentlocation = CENTRO_CENTRO;
   // guessedlocation = CENTRO_CENTRO;
   // Linesensors and interrupt
-  flag_interrupt = false;
-  nint = 0;
   waiting = 0;    //ex attesa
   zoneIndex = 0;
   lineReading = 0;
@@ -143,7 +141,7 @@ void loop() {
   //     centerGoalPost();
   // }
   //
-  // handleInterruptTrigonometry();
+  // handleInterrupt();
   // // final drive pid
   // drivePID(globalDir, globalSpeed);
   gigaTestZone();

@@ -31,7 +31,8 @@ void drivePID(signed int direzione, float vMot) {
     speed2 += pidfactor;
     speed3 += pidfactor;
 
-    CheckSpeed(); // normalizes the speed to a maximum of 255 to the fastest motor, the others in proportion
+    checkSpeed();
+    // normalizes the speed to a maximum of 255 to the fastest motor, the others in proportion
     // Send every speed to his motor
     mot(2, int(speed2));
     mot(1, int(speed1));
@@ -78,7 +79,7 @@ float updatePid() {
   return errorD + errorP + errorI;
 }
 
-void CheckSpeed() {
+void checkSpeed() {
   float Max, Min;
   if ((speed1 <= 255.0 && speed1 >= -255.0) &&
       (speed2 <= 255.0 && speed2 >= -255.0) &&
@@ -120,7 +121,7 @@ void recenter(float spd) {
   speed2 = spd * pidfactor;
   speed3 = spd * pidfactor;
 
-  CheckSpeed();
+  checkSpeed();
 
   // Send every speed to his motor
   mot(2, int(speed2));

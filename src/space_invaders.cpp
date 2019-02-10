@@ -1,4 +1,4 @@
-$#include "imu.h"
+#include "imu.h"
 #include "motors.h"
 #include "myspi_old.h"
 #include "pid.h"
@@ -28,10 +28,10 @@ void space_invaders() {
 
 void centerGoalPost() {
     int width = 0;  //ex larghezza
-    if (status_x == CENTRO) {
-      if (status_y == CENTRO) {
+    if (status_x == CENTER) {
+      if (status_y == CENTER) {
         preparePID(180, 150);
-      } else if (status_y == SUD) {
+      } else if (status_y == SOUTH) {
           if (us_px > 20) preparePID(180, 110);
           else if (us_px < 15) preparePID(0, 130);
           else preparePID(0,0);

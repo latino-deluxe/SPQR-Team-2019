@@ -8,19 +8,19 @@
 #include "vars.h"
 #include <Arduino.h>
 
-void WhereAmI() {
+void whereAmI() {
   // determines horizontal and vertical position
   // Updates flags:  good_field_x  good_field_y      not used in other routines
   //                 goal_zone                       not used in other routines
   // Updates vars:
-  //                 status_x (con valori CENTRO EST  OVEST 255  = non lo so)
-  //                 status_y (con valori CENTRO NORD SUD   255  = non lo so)
+  //                 status_x (values CENTER EAST  WEST 255  mean uncertain data)
+  //                 status_y (values CENTER NORTH SOUTH   mean uncertain data)
 
-  int Lx_mis; // total width, estmated from measures
-  int Ly_mis; // total length, estimated from measures
-  int Ly_min; // Limite inferiore con cui confrontare la misura y
+  int Lx_mis; // total width, EASTmated from measures
+  int Ly_mis; // total length, EASTimated from measures
+  int Ly_min; // bottom limit to check the y measure
   int Ly_max; // Limite inferiore con cui confrontare la misura y
-  int Dy;     // Limite per decidere NORD SUD in funzione della posizione orizzontale
+  int Dy;     // Limite per decidere NORTH SOUTH in funzione della posizione orizzontale
 
   old_status_x = status_x;
   old_status_y = status_y;
@@ -28,20 +28,20 @@ void WhereAmI() {
   good_field_y = false; // non é buona y (bad y)
   goal_zone = false;    // im not in front of the opponent's goalpost
 
-  Lx_mis = us_dx + us_sx + robot;     // estimated total width
-  Ly_mis = us_fr + us_px + robot;     // estimated total length
+  Lx_mis = us_dx + us_sx + robot;     // EASTimated total width
+  Ly_mis = us_fr + us_px + robot;     // EASTimated total length
 
   // horizontal checking
   if ((Lx_mis < Lx_max) && (Lx_mis > Lx_min) && (us_dx > 25) && (us_sx > 25)) {
     // if the horizontal measure is acceptable
     good_field_x = true;
-    status_x = CENTRO;
+    status_x = CENTER;
     if (us_dx < DxF)        // robot is near the right margin
-      status_x = EST;
-    if (us_sx < DxF)        // robot is near th left margin
-      status_x = OVEST;
+      status_x = EAST;
+    if (us_sx < DxF)        // robot is near eth left margin
+      status_x = WEST;
 
-    if (status_x == CENTRO) {
+    if (status_x == CENTER) {
       // imposto limiti di controllo lunghezza verticale tra le porte
       Ly_min = LyP_min;
       Ly_max = LyP_max;
@@ -54,9 +54,9 @@ void WhereAmI() {
     }
   } else {
     // the measure isn't accurate because there is an obstacle
-    if ((us_dx >= (DxF + 10)) || (us_sx >= (DxF + 10)) {
+    if ((us_dx >= (DxF + 10)) || (us_sx >= (DxF + 10))) {
       // if i have enough space on the left and on the right, im in the cente
-      status_x = CENTRO;
+      status_x = CENTER;
       // imposto limiti di controllo lunghezza verticale tra le porte
       Ly_min = LyP_min;
       Ly_max = LyP_max;
@@ -65,7 +65,7 @@ void WhereAmI() {
       status_x = 255;
       // i don't know the x coordinate
       // imposto i limiti di controllo verticale in base alla posizione orizzontale precedente
-      if (old_status_x == CENTRO) {
+      if (old_status_x == CENTER) {
         // controlla la posizione precedente per decidere limiti di controllo y
         // imposto limiti di controllo lunghezza verticale tra le porte
         Ly_min = LyP_min;
@@ -83,67 +83,67 @@ void WhereAmI() {
   if ((Ly_mis < Ly_max) && (Ly_mis > Ly_min)) {
     // if the vertical measure is acceptable
     good_field_y = true;
-    status_y = CENTRO;
+    status_y = CENTER;
     if (us_fr < Dy) {
-      status_y = NORD; // robot is near to the opponent's goalpost
+      status_y = NORTH; // robot is near to the opponent's goalpost
       if (Dy == DyP)
         goal_zone = true; // in front of the goalpost in goal zone
     }
     if (us_px < Dy)
-      status_y = SUD; // robot is near its goalpost
+      status_y = SOUTH; // robot is near its goalpost
   } else {
     // the measure isn't accurate because there is an obstacle
     status_y = 255;                      // i don't know the y coordinate
     if (us_fr >= (Dy + 0))
-      status_y = CENTRO;                 // if i have enough space in the front or in the back
+      status_y = CENTER;                 // if i have enough space in the front or in the back
     if (us_px >= (Dy + 0))
-      status_y = CENTRO;                 // probably it's in the center
+      status_y = CENTER;                 // probably it's in the center
   }
   return;
 }
 
 void goCenter() {
-  if (status_x == EST) {
-    if (status_y == SUD) {
+  if (status_x == EAST) {
+    if (status_y == SOUTH) {
       preparePID(330, VEL_RET);
-    } else if (status_y == CENTRO) {
+    } else if (status_y == CENTER) {
       preparePID(270, VEL_RET);
-    } else if (status_y == NORD) {
+    } else if (status_y == NORTH) {
       preparePID(225, VEL_RET);
     } else { //i don't know the y
       preparePID(0,0);
     }
   }
-  if (status_x == OVEST) {
-    if (status_y == SUD) {
+  if (status_x == WEST) {
+    if (status_y == SOUTH) {
       preparePID(45, VEL_RET);
-    } else if (status_y == CENTRO) {
+    } else if (status_y == CENTER) {
       preparePID(90, VEL_RET);
-    } else if (status_y == NORD) {
+    } else if (status_y == NORTH) {
       preparePID(135, VEL_RET);
     } else { //i don't know the y
       preparePID(0,0);
     }
   }
-  if (status_x == CENTRO) {
-    if (status_y == SUD) {
+  if (status_x == CENTER) {
+    if (status_y == SOUTH) {
       preparePID(0, VEL_RET);
-    } else if (status_y == CENTRO) {
+    } else if (status_y == CENTER) {
       preparePID(0,0);
-    } else if (status_y == NORD) {
+    } else if (status_y == NORTH) {
       preparePID(180, VEL_RET);
     } else { //i don't know the y
       preparePID(0,0);
     }
   }
   if (status_x == 255) {
-    if (status_y == SUD) {
+    if (status_y == SOUTH) {
       preparePID(0, VEL_RET);
 
-    } else if (status_y == CENTRO) {
+    } else if (status_y == CENTER) {
       preparePID(0,0);
 
-    } else if (status_y == NORD) {
+    } else if (status_y == NORTH) {
       preparePID(180, VEL_RET);
 
     } else { //i don't know the y
@@ -200,7 +200,7 @@ void update_sensors_all() {
 
 void testPosition() {
   update_sensors_all();
-  WhereAmI();
+  whereAmI();
   DEBUG_PRINT.print("Measured location:\t");
   DEBUG_PRINT.print(status_x);
   DEBUG_PRINT.print(" | ");
@@ -268,7 +268,7 @@ unsigned long ao;  //dunno how to translate it, halp
 
 void gigaTestZone() {
   update_sensors_all();
-  WhereAmI();
+  whereAmI();
   guessZone();
 
   if (millis() - ao >= 100) {

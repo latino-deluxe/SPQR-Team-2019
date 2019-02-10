@@ -1,4 +1,4 @@
-NORTH_CENTER#include <Arduino.h>
+#include <Arduino.h>
 #ifndef MAIN
 #define extr extern
 #else
@@ -20,8 +20,8 @@ NORTH_CENTER#include <Arduino.h>
 
 // You can modify this if you need
 // LIMITI DEL CAMPO (CAMP LIMITS)
-#define Lx_min 115  // valore minimo accettabile di larghezza
-#define Lx_max 195  // valore massimo accettabile di larghezza (larghezza campo)
+#define Lx_min 115  // min acceptable value for field width
+#define Lx_max 195  // max acceptable value for field width
 #define LyF_min 190 // valore minimo accettabile di lunghezza sulle fasce
 #define LyF_max 270
 // valore massimo accettabile di lunghezza sulle fasce (lunghezza campo)
@@ -40,31 +40,31 @@ NORTH_CENTER#include <Arduino.h>
 #define robot 21 // robot's diameter
 
 // ZONE DEL CAMPO // codici utilizzabili per una matice 3x3
-#define EST 2     //ex EST
-#define OVEST 0   //ex OVEST
-#define CENTRO 1  //ex CENTRO
-#define NORD 0    //ex NORD
-#define SUD 2     //ex SUD
+#define EAST 2     //ex EST
+#define WEST 0   //ex OVEST
+#define CENTER 1  //ex CENTRO
+#define NORTH 0    //ex NORD
+#define SOUTH 2     //ex SUD
 
 #define NORTH_WEST 1                          //ex NORD_OVEST
 #define NORTH_CENTER 2                        //ex NORD_CENTRO
 #define NORTH_EAST 3                          //ex NORD_EST
 #define CENTER_WEST 4                         //ex CENTRO_OVEST
-#define CENTER_CENTER 5 // codici zona nuovi  //ex CENTRO_CENTRO
+#define CENTER_CENTER 5                       //ex CENTRO_CENTRO
 #define CENTER_EAST 6   // (NEW ZONE CODES)   //ex CENTRO_EST
 #define SOUTH_WEST 7                          //ex SUD_OVEST
 #define SOUTH_CENTER 8                        //ex SUD_CENTRO
 #define SOUTH_EAST 9                          //ex SUD_EST
 
 // PID, VARS AND COSTANSTS
-#define KP 0.7   // K proporzionale
-#define KI 0.001 // K integrativo
-#define KD 0.001 // K derivativo
+#define KP 0.7   // Proportional K
+#define KI 0.001 // Integrative K
+#define KD 0.001 // Derivate K
 
-// SPI
+// SPI - will be soon deprecated
 #define SS_PIN 2
 
-// Linesensors e interrupt
+// Linesensors and interrupt
 #define LN0 A14
 #define LN1 A15
 #define LN2 A7
@@ -83,7 +83,8 @@ NORTH_CENTER#include <Arduino.h>
 #define GOALIE_DANGER 100
 #define VEL_RET 180
 #define GOALIE_P 255   // keeper's speed
-#define AA0 0          // angoli di attacco in funzione del sensore palla (angles to attack from ball sensor)
+//angles to attack from ball sensor
+#define AA0 0
 #define AA1 30
 #define AA2 60
 #define AA3 80
@@ -113,12 +114,10 @@ extr int imu_temp_euler, imu_current_euler;
 
 // Line Sensors
 extr byte lineReading;
-extr volatile bool flag_interrupt;
-extr volatile byte nint; // numero di interrupt consecutivi prima della fine della gestione
-extr volatile byte linea[INT_LUNG];
+extr byte n_us;     // ultr
+extr volatile byte lineSensors[INT_LUNG];
 extr int VL_INT;    // velocitá di uscita dalle linee
-extr int EXT_LINEA; // direzione di uscita dalla linea
-extr byte n_us;     // ultrasuono da controllare dopo la fuga dalla linea
+extr int EXT_LINEA; // direzione di uscita dalla lineaasuono da controllare dopo la fuga dalla linea
 extr int waiting;    // ex attesa tempo di attesa palla dopo un interrupt (utilizzata dallo
                     // switch destro)
 extr bool danger;   // avviso che terminata da poco la gestione interrupt

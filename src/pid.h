@@ -1,4 +1,4 @@
-void CheckSpeed();
+void checkSpeed();
 float updatePid();
 void recenter(float);
 void drivePID(signed int, float);

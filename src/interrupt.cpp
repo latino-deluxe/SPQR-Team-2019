@@ -16,7 +16,7 @@ int lspeed = 180;
 // byte lineBallSensor = 0;
 
 // brand new way to handle the interrupt: trigonometry!
-void handleInterruptTrigonometry() {
+void handleInterrupt() {
 
   if (millis() - tline < 250) {
     // continues the old movement, due to high motors inertia
@@ -40,13 +40,13 @@ void handleInterruptTrigonometry() {
     }
   // }
 
-  byte line = 0;
+  lineReading = 0;
   // constructs a complete byte using the array that stores the interrupt data
   for (int i = 0; i < INT_LUNG; i++) {
-    line |= linea[i] << i;
+    lineReading |= lineSensors[i] << i;
   }
 
-  if (line == 0)
+  if (lineReading == 0)
     return;
 
   // interpolates the data with sine and cosine and using atan2 construct an
@@ -56,7 +56,7 @@ void handleInterruptTrigonometry() {
   float x = 0, y = 0;
 
   for (int i = 0; i < INT_LUNG; i++) {
-    if (linea[i] == 1) {
+    if (lineSensors[i] == 1) {
       x += lCosins[i];
       y += lSins[i];
     }
@@ -133,77 +133,4 @@ byte getSensorIndex(byte sensor) {
   return sensor < 0 ? (byte)(20 + sensor) : (byte)(sensor);
 }
 
-// handles the interrupt the old way around, using the switch case
-void handleInterruptNew() {
-  byte line = 0;
-  int dir, speed = 150;
-
-  for (int i = 0; i < INT_LUNG; i++) {
-    line |= linea[i] << i;
-  }
-
-  if (line == 0)
-    return;
-
-  switch (line) {
-
-    // VEDI BIBBIA ROSSA
-
-  case 1:
-    dir = 190;
-    break;
-  case 2:
-    dir = 270;
-    break;
-  case 4:
-    dir = 340;
-    break;
-  case 8:
-    dir = 30;
-    break;
-  case 16:
-    dir = 90;
-    break;
-  case 32:
-    dir = 170;
-    break;
-
-  case 33:
-    dir = 180;
-    break;
-
-  case 12:
-    dir = 0;
-    break;
-
-  case 35:
-    dir = 225;
-    break;
-  case 49:
-    dir = 135;
-    break;
-  case 14:
-    dir = 315;
-    break;
-  case 28:
-    dir = 60;
-    break;
-
-  case 3:
-  case 6:
-  case 7:
-    dir = 270;
-    break;
-
-  case 48:
-  case 24:
-  case 56:
-    dir = 90;
-    break;
-
-  default:
-    speed = 0;
-  }
-
-  preparePID(dir, speed);
-}
+//ONCE THERE WAS A SWITCH VERSION OF THIS, TAKE IT FROM OLD COMMITS

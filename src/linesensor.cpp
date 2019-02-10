@@ -21,14 +21,14 @@ void initLineSensors() {
 }
 
 // Each interrupt construct a byte
-void line0() { linea[0] = !digitalRead(LN0); }
+void line0() { lineSensors[0] = !digitalRead(LN0); }
 
-void line1() { linea[1] = !digitalRead(LN1); }
+void line1() { lineSensors[1] = !digitalRead(LN1); }
 
-void line2() { linea[2] = !digitalRead(LN2); }
+void line2() { lineSensors[2] = !digitalRead(LN2); }
 
-void line3() { linea[3] = !digitalRead(LN3); }
+void line3() { lineSensors[3] = !digitalRead(LN3); }
 
-void line4() { linea[4] = !digitalRead(LN4); }
+void line4() { lineSensors[4] = !digitalRead(LN4); }
 
-void line5() { linea[5] = !digitalRead(LN5); }
+void line5() { lineSensors[5] = !digitalRead(LN5); }

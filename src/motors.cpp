@@ -60,11 +60,13 @@ void brakeI() {
   return;
 }
 
-float torad(float deg) {                //converting from degrees to radiants
+//converting from degrees to radiants
+float torad(float deg) {
   return (deg * PI / 180.0);
 }
 
-void initOmnidirectionalSins() {        // calculates sins of integer angles from 0 to 359
+// calculates sins of integer angles from 0 to 359
+void initOmnidirectionalSins() {
   for (int i = 0; i < 360; i++) {
     sins[i] = sin(torad(i));
   }
