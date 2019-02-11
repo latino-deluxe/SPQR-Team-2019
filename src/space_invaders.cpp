@@ -13,9 +13,10 @@ void space_invaders() {
 
   if (zoneIndex < 6 || !ball_seen ){
     centerGoalPost();
-  }else{
+  }
+  else{
     preparePID(0, 0);
-    if (ball_sensor >= 12 && ball_sensor <= 18) {
+    if (ball_sensor >= 12 && ball_sensor <= 19) {
       preparePID(270, vel);
       return;
     }
