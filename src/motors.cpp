@@ -2,9 +2,9 @@
 #include "vars.h"
 #include <Arduino.h>
 
-byte INA_MOT[4] = {0, 17, 5, 8};     //{0,  16,  5,  8};           // INA pin
-byte INB_MOT[4] = {0, 15, 6, 9};     //{0,  15,  6,  9};           // INB pin
-byte PWM_MOT[4] = {0, 4, 7, 10};     //{0,  4,   7,   10};         // PWM pin
+byte INA_MOT[4] = {0, 17, 5, 8}; //{0,  16,  5,  8};           // INA pin
+byte INB_MOT[4] = {0, 15, 6, 9}; //{0,  15,  6,  9};           // INB pin
+byte PWM_MOT[4] = {0, 4, 7, 10}; //{0,  4,   7,   10};         // PWM pin
 
 void initMotorsGPIO() {
   pinMode(PWM_MOT[1], OUTPUT);
@@ -18,7 +18,7 @@ void initMotorsGPIO() {
   pinMode(INB_MOT[3], OUTPUT);
 }
 
-/*
+/**
  * Combination of motor 1 / motor 2 /result
  *
  * 0 - 0   ----->  Stopped - Neutral
@@ -26,7 +26,7 @@ void initMotorsGPIO() {
  * 1 - 0   ----->  Counter-Clockwise
  * 1 - 1   ----->  Stopped - Brake
  *
- */
+ **/
 
 void turnMotor(byte motorIndex, byte pinA, byte pinB, byte pwm) {
   digitalWrite(INA_MOT[motorIndex], pinA);
@@ -60,13 +60,13 @@ void brakeI() {
   return;
 }
 
-//converting from degrees to radiants
-float torad(float deg) {
+float torad(float deg) // degrees to radiant converting
+{
   return (deg * PI / 180.0);
 }
 
-// calculates sins of integer angles from 0 to 359
-void initOmnidirectionalSins() {
+void initOmnidirectionalSins() { // calculates sins of integer angles from 0 to
+                                 // 359
   for (int i = 0; i < 360; i++) {
     sins[i] = sin(torad(i));
   }

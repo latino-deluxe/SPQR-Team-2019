@@ -8,12 +8,12 @@
 int count = 0;
 
 // comunicate with the comrade
-bool communication(int wait) {
+bool comunicazione(int intervallo) {
   if (BT.available() > 0) {
     comrade = true;
     old_timer = millis();
   }
-  if ((millis() - old_timer) > wait) {
+  if ((millis() - old_timer) > intervallo) {
     old_timer = millis();
     comrade = false;
   }

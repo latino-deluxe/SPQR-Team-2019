@@ -17,12 +17,15 @@ void goalie() {
                              AA7,  AA8,  AA9,  AA10, AA11, AA12, AA13,
                              AA14, AA15, AA16, AA17, AA18, AA19};
 
-  // BALL IN FRONT OF THE ROBOT
+  // PALLA DI FRONTE
   /*
-  if (ball_sensor == 0)  {
+  if (ball_sensor == 0)
+  {
     if(ball_distance>=2) atk_speed = 180;
     atk_speed = GOALIE_MAX;
-  } else {
+  }
+  else
+  {
     if(ball_distance>=2) atk_speed = 180;
     atk_speed = GOALIE_MIN;
   }
@@ -32,7 +35,7 @@ void goalie() {
 
   /*
 
-    // TO REDUCE WIGGLING WHEN THE BALL IS IN FRONT OF THE ROBOT
+    // controllo per ridurre oscillazione quando ha la palla in avanti
     if (ball_sensor == 1) {
       if (ball_distance <= 2) {   //se la palla è vicina
         atk_speed = GOALIE_MAX;
@@ -42,26 +45,35 @@ void goalie() {
 
 
     if (ball_sensor == 19) {
-      if (ball_distance <= 2) {   //if the ball is near
+      if (ball_distance <= 2) {   //se la palla è vicina
         atk_speed = GOALIE_MAX;
         atk_direction = 345;
       }
     }
 
-    if ((ball_sensor == 10) || (ball_sensor == 9) || (ball_sensor == 11)) {
-    // se la palla é dietro e vicina la scanso a 90 a dx o sx dove ho piú spazio 
-      if (ball_distance < 4) {
-          if (us_sx>=80) {
+    if ((ball_sensor == 10) || (ball_sensor == 9) || (ball_sensor == 11))  // se
+    la palla é dietro e vicina la scanso a 90 a dx o sx dove ho piú spazio
+    {
+      if (ball_distance < 4)
+      {
+          if (us_sx>=80)
+          {
             atk_direction = 225;
-          } else {
+          }
+          else
+          {
             atk_direction = 135;
           }
-       } else {
-    //la palla é lontana anche se dietro le vado quasi addosso in velocità
+       }
+      else //la palla é lontana anche se dietro le vado quasi addosso in
+    velocita
+       {
+
         if(us_sx>=80) {
            atk_direction = 200;
            atk_speed = GOALIE_MAX;
-         } else {
+         }
+         else {
            atk_direction = 160;
            atk_speed = GOALIE_MAX;
          }
@@ -71,7 +83,8 @@ void goalie() {
     /*if (ball_distance>=3){
         if ((status_x==OVEST) && (status_y==NORD)){
           atk_speed=200;
-        } else if ((status_x==EST) && (status_y==NORD)) {
+        }
+        else if ((status_x==EST) && (status_y==NORD)) {
           atk_speed=200;
         }
     }*/

@@ -12,6 +12,7 @@
 #include "linesensor.h"
 #include "motors.h"
 #include "myspi_old.h"
+#include "mysoftware_serial.h"
 #include "pid.h"
 #include "position.h"
 #include "space_invaders.h"
@@ -27,13 +28,11 @@ void setup() {
   // IMU
   imu_current_euler = 0;
   imu_temp_euler = 0;
-
   // MySPI
   ball_sensor = 0;
   ball_distance = 0;
   ball_seen = false;
   tspi = 0;
-
   // PID
   errorePre = 0.0;
   integral = 0.0;
@@ -42,29 +41,28 @@ void setup() {
   old_Dir = 0;
   new_Dir = 0;
   new_vMot = 0;
-
   // US
   reading = 0;
   us_t0 = 0;
   us_t1 = 0;
   us_flag = false;
-
   // Position
-  old_status_x = CENTER;
-  old_status_y = CENTER;
+  old_status_x = CENTRO;
+  old_status_y = CENTRO;
   // old_guessedlocation = CENTRO_CENTRO;
   goal_zone = false;
   good_field_x = true;
   good_field_y = true;
-  status_x = CENTER;
-  status_y = CENTER;
+  status_x = CENTRO;
+  status_y = CENTRO;
   // currentlocation = CENTRO_CENTRO;
   // guessedlocation = CENTRO_CENTRO;
   // Linesensors and interrupt
-  waiting = 0;    //ex attesa
+  flag_interrupt = false;
+  nint = 0;
+  attesa = 0;
   zoneIndex = 0;
   lineReading = 0;
-
   // bluetooth misc
   a = 0;
   old_timer = 0;
@@ -79,8 +77,8 @@ void setup() {
   // end of variable set up
 
   // disable those pins, damaged teensy
-  pinMode(A8, INPUT_DISABLE); // pin A8 in short circuit between 3.3V and gnd
-  pinMode(16, INPUT_DISABLE); // pin 16 in short circuit between 3.3V and gnd
+  pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
+  pinMode(16, INPUT_DISABLE); // pin 16 in corto tra 3.3V e massa
 
   // Enable Serial for test
   Serial.begin(9600);
@@ -98,8 +96,9 @@ void setup() {
   initIMU();
   initOmnidirectionalSins();
   initBluetooth();
-  // valStringY.reserve(30);  //reserves
-  // 30byte for the strings valStringB.reserve(30);  //  tone(27, 1000, 500);
+  initSoftwareSerial();
+  // valStringY.reserve(30);                                     //riserva
+  // 30byte per le stringhe valStringB.reserve(30);  //  tone(27, 1000, 500);
   digitalWrite(31, HIGH);
 }
 
@@ -119,30 +118,29 @@ void loop() {
   //   BT.println(imu_current_euler);
   // }
 
+  // game routine
+  update_sensors_all();
+  WhereAmI();
+  guessZone();
   calculateZoneIndex();
 
-  // game routine
-  // update_sensors_all();
-  // WhereAmI();
-  // guessZone();
-  //
-  // // currently setting the role by code
-  // role = LOW;
-  // BT.print(role);
-  // if (ball_seen == true) {
-  //   if (role == HIGH)
-  //     goalie();
-  //   else
-  //     space_invaders();
-  // } else {
-  //   if (role == HIGH)
-  //     goCenter();
-  //   else
-  //     centerGoalPost();
-  // }
-  //
-  // handleInterrupt();
-  // // final drive pid
-  // drivePID(globalDir, globalSpeed);
+  // currently setting the role by code
+  role = LOW;
+  BT.print(role);
+  if (ball_seen == true) {
+    if (role == HIGH)
+      goalie();
+    else
+      space_invaders();
+  } else {
+    if (role == HIGH)
+      goCenter();
+    else
+      centerGoalPost();
+  }
+
+  //handleInterruptTrigonometry();
+  // final drive pid
+  drivePID(globalDir, globalSpeed);
   gigaTestZone();
 }

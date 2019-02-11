@@ -13,23 +13,17 @@ Day 6/12/2018 (DD/MM/YY)
 Modified by: Alessandro Mauri
 Day 19/12/2018
 Modified by: Emanuele Coletta, Emanuele Latino & Siria Sannino
-Day 9/1/2018 Added SPI control, with map from -180, 180 to 0,360
+Day 9/1/2018 Added Software Serial control, with map from -180, 180 to 0,360
 */
 
 #include <math.h>
-#include <SPI.h>
+#include <SoftwareSerial.h>
 
-#define SS 10
 #define TOUT 100
 #define DEBUG 0
 #define THRL 30
 #define THRH 253
 
-#define DISTANCE 0b00001111
-#define DEGREES 0b00001010
-
-bool bSending = false;
-byte bSendingByte;
 
 byte tx_data = 0;
 float tmp_y, tmp_x;
@@ -38,55 +32,21 @@ float vect[2], s_data[12], dist, angle, angle2;
 const float sins[12] = {0, 0.5, 0.866, 1, 0.866, 0.5, 0, -0.5, -0.866, -1, -0.866, -0.5},
             cosins[12] = {1, 0.866, 0.5, 0, -0.5, -0.866, -1, -0.866, -0.5, 0, 0.5, 0.866};
 
+SoftwareSerial mySerial(10 ,11); // RX, TX
+
+long ssDegree = 0b000000011, ssDist = 0b00000001;
+
+long mess;
+char mystr[20];
+
 void setup(){
   Serial.begin(9600);
+  mySerial.begin(115200);
   
-  //THIS REGISTER IS ATMEGA-328P SPECIFIC
-  SPCR |= bit (SPE);
-
-  pinMode(MISO, OUTPUT);  
-
-  SPI.attachInterrupt();
   for (byte x = 0; x < 12; x++) pinMode(pins[x], INPUT);
 }
 
-
-ISR (SPI_STC_vect) { 
-  bSending = true;
-        //the bool defines whether the slave is sending or not.
-        //It's assumed by both master and slave that the first communication is from master to slave
-        /*if(bSending) {
-  //THOSE REGISTERS ARE ATMEGA-328P SPECIFIC
-                //sends the previously prepared byte to the master
-                SPCR = 64 & 127; // disble interrupt
-                SPDR= bSendingByte;
-                SPCR = 64 |128; // enable interrupt
-        }else{
-                //prepares output for next time it's asked, based on the received byte
-                switch(SPDR) {
-                case DISTANCE:
-                        bSendingByte = dist;
-                        bSending = !bSending;
-                        break;
-                case DEGREES:
-                        bSendingByte = angle2;
-                        bSending = !bSending;
-                        break;
-                default:
-                        break;
-                }
-
-                //sets SPDR (SPI byte) to be send next time
-                SPDR = bSendingByte;
-        }*/
-}
-
 void loop() {
-  if(bSending){
-    Serial.println("ciao");
-    bSending = false;
-  }
-  return;
 
   t = millis();
   readSensors_old();
@@ -151,9 +111,34 @@ void readSensors_old(){
   dist = sqrt(square(vect[0]) + square(vect[1]));
   //cast da 0 a 360 ;)
   angle = map(angle,-179,180,0,360);
-  angle2 = angle / 2; //divido per l'spi
+
   vect[0] = 0;
   vect[1] = 0;
+
+  //ssDegree = angle;
+  //ssDist = dist;
+
+  sendData();
+}
+
+void sendData(){
+  //constructing the data int. Shift the distance by 9 bits (size of degree int), then ORs the degree int, and voilà 
+  mess = ssDist;
+  mess = mess << 9;
+  mess |= ssDegree;
+
+  //long to string, SERIAL COMMUNICATION CAN ONLY SEND A BYTE, NOT MORE THAN THAT, but a char array can be sent
+  String s = String(mess);
+  //string to char array
+  s.toCharArray(mystr, 20);
+  
+  Serial.println(mystr);
+  
+  //send the char array, so the full data can be sent
+  mySerial.write(mystr, 20);
+
+  //bit of delay
+  delay(1000);
 }
 
 void dataConstruct(){

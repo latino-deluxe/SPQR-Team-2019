@@ -36,6 +36,6 @@ void btZone () {
     testGuessZone();
 
     Serial.println("------");
-    ao = millis(); //dunno how to translate "ao"
+    ao = millis();
   }
 }*/

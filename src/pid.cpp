@@ -7,22 +7,22 @@
 
 // TIMED PID CONTROL TESTING
 void drivePID(signed int direzione, float vMot) {
-  if(vMot == 0) {
+  if(vMot == 0){
     recenter(1.0);
-  } else {
-    // global vars for direction and speed (previous and current)
+  }else{
+    // mette in variabili globali direzione e velocitá precedenti e attuali
     old_Dir = new_Dir;
     new_Dir = direzione;
     old_vMot = new_vMot;
     new_vMot = vMot;
 
-    speed1 = ((-(sins[((direzione - 60) + 360) % 360])) * vMot);    // mot 1
-    speed2 = ((sins[(direzione + 360) % 360]) * vMot);              // mot 2
-    speed3 = ((-(sins[(direzione + 60) % 360])) * vMot);            // mot 3
+    speed1 = ((-(sins[((direzione - 60) + 360) % 360])) * vMot); // mot 1
+    speed2 = ((sins[(direzione + 360) % 360]) * vMot);           // mot 2
+    speed3 = ((-(sins[(direzione + 60) % 360])) * vMot);         // mot 3
 
     pidfactor = updatePid();
 
-    // to evaluate if it's appropriate
+    // da valutare se é opportuno
     if (reaching_ball == true) {
       pidfactor = pidfactor * 1.2;
     }
@@ -31,8 +31,9 @@ void drivePID(signed int direzione, float vMot) {
     speed2 += pidfactor;
     speed3 += pidfactor;
 
-    checkSpeed();
-    // normalizes the speed to a maximum of 255 to the fastest motor, the others in proportion
+    CheckSpeed(); // normalizza la velocita' a 255 max al motore piu' veloce e gli
+                  // altri in proporzione
+
     // Send every speed to his motor
     mot(2, int(speed2));
     mot(1, int(speed1));
@@ -79,7 +80,7 @@ float updatePid() {
   return errorD + errorP + errorI;
 }
 
-void checkSpeed() {
+void CheckSpeed() {
   float Max, Min;
   if ((speed1 <= 255.0 && speed1 >= -255.0) &&
       (speed2 <= 255.0 && speed2 >= -255.0) &&
@@ -121,7 +122,7 @@ void recenter(float spd) {
   speed2 = spd * pidfactor;
   speed3 = spd * pidfactor;
 
-  checkSpeed();
+  CheckSpeed();
 
   // Send every speed to his motor
   mot(2, int(speed2));

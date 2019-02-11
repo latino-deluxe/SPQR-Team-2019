@@ -1,3 +1,3 @@
 void whereAreYou();
 void teamZone();
-bool communication(int);
+bool comunicazione(int);
