@@ -68,6 +68,37 @@
  * Ad alcune variabili sembra che venga assegnato un valore nei tab non ancora importati.
  * Da sistemare
  *
- * atom://teletype/portal/66728b8b-18be-40d7-93de-c78a615ad16d
+ * 16/1/2019
+ * Due big refactor del codice, header e cpp e variabili sono ora utilizzate bene
+ * Sistemati US e zone, ora funzionano. Da investigare i sensori di linea
+ * TODO:
+ *  SENSORI DI LINEA
+ *  bluetooth e camera, trascurabili per ora
+ *
+ * 21/1/2019 - 17:30
+ * Prima implementazione sensori di linea. Funzionano benino ma hanno portato un paio di bug con la palla, investighiamo
+ * TODO:
+ *  Fixare bug palla
+ *  bluetooth e camera, trascurabili per ora
+ *
+ * 4/2/2019 - 16:22
+ * Sotto consiglio di Flavio, ora c'è solo un drivePID per loop e ogni drivePID è stato sostituito con un'impostazione
+ * della velocità globale.
+ * Prossimo passo cambio interrupt
+ *
+ * 4/2/2019 - 19:51
+ * Con aiuto di Flavio, nuovi interrupt migliori con trigonometria. Da ultimare il punto di stop
+ * se la palla di trova in un certo range di sensori rispetto a quello dove era la palla a interrupt attivato
+ *
+ * 6/2/2018 - 19.51
+ * Tentantivo di sistemazione dei sensori di linea, fallimentare(probabilmente per il campo orribile), e di space_invaders, fallimetare
+ * Approfondire la prossima volta
+ * ULTRASUONI O I2C ROTTI, DA VERIFICARE
+ *
+ *
+ *
+ *
+ *
+ *
  *
  */
