@@ -11,15 +11,15 @@
 void space_invaders() {
   int vel = 200;
 
-  if (us_px >= 30 || us_dx < 35 || us_sx < 35 || !ball_seen ){
+  if (zoneIndex < 6 || !ball_seen ){
     centerGoalPost();
   }else{
     preparePID(0, 0);
-    if (ball_sensor >= 14 && ball_sensor <= 18) {
+    if (ball_sensor >= 12 && ball_sensor <= 18) {
       preparePID(270, vel);
       return;
     }
-    if (ball_sensor >= 1 && ball_sensor <= 6) {
+    if (ball_sensor >= 1 && ball_sensor <= 8) {
       preparePID(90, vel);
       return;
     }
@@ -31,14 +31,19 @@ void centerGoalPost(){
 
   int vel = 150;
 
-  if(zoneIndex < 6){
-    preparePID(180, vel);
-  }else if (zoneIndex == 8){
-    preparePID(270, vel);
-  }else if(zoneIndex == 6){
-    preparePID(90, vel);
-  }else if(zoneIndex == 7){
-    preparePID(0, 0);
+  if(zoneIndex != 7) {
+    if(zoneIndex < 6){
+      preparePID(180, vel);
+    }
+    else if (zoneIndex == 8){
+      preparePID(270, vel);
+    }
+    else if(zoneIndex == 6){
+      preparePID(90, vel);
+    }
+  }
+  else {
+    if(imu_current_euler <= 345 || imu_current_euler >= 15) preparePID(0, 0);
   }
 }
 
