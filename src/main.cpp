@@ -24,6 +24,9 @@ int SWS = 0;
 int SWD = 0;
 
 void setup() {
+  // analogWriteFrequency(4,  1000);
+  // analogWriteFrequency(7,  1000);
+  // analogWriteFrequency(10, 1000);
   // Now assign value to variables, first thing to do
   // IMU
   imu_current_euler = 0;
@@ -118,7 +121,8 @@ void loop() {
   //   BT.println(imu_current_euler);
   // }
 
-  game routine update_sensors_all();
+  //game routine
+  update_sensors_all();
   WhereAmI();
   guessZone();
   calculateZoneIndex();
@@ -138,7 +142,7 @@ void loop() {
       centerGoalPost();
   }
 
-  handleInterruptTrigonometry();
+  //handleInterruptTrigonometry();
   // final drive pid
   drivePID(globalDir, globalSpeed);
 }
