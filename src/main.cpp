@@ -11,8 +11,8 @@
 #include "interrupt.h"
 #include "linesensor.h"
 #include "motors.h"
-#include "myspi_old.h"
 #include "mysoftware_serial.h"
+#include "myspi_old.h"
 #include "pid.h"
 #include "position.h"
 #include "space_invaders.h"
@@ -118,8 +118,7 @@ void loop() {
   //   BT.println(imu_current_euler);
   // }
 
-  // game routine
-  update_sensors_all();
+  game routine update_sensors_all();
   WhereAmI();
   guessZone();
   calculateZoneIndex();
@@ -139,8 +138,7 @@ void loop() {
       centerGoalPost();
   }
 
-  //handleInterruptTrigonometry();
+  handleInterruptTrigonometry();
   // final drive pid
   drivePID(globalDir, globalSpeed);
-  // gigaTestZone();
 }
