@@ -121,7 +121,8 @@ void loop() {
   //   BT.println(imu_current_euler);
   // }
 
-  //game routine
+  // game routine
+
   update_sensors_all();
   WhereAmI();
   guessZone();
@@ -129,7 +130,7 @@ void loop() {
 
   // currently setting the role by code
   role = LOW;
-  BT.print(role);
+
   if (ball_seen == true) {
     if (role == HIGH)
       goalie();
@@ -142,7 +143,7 @@ void loop() {
       centerGoalPost();
   }
 
-  //handleInterruptTrigonometry();
+  // handleInterruptTrigonometry();
   // final drive pid
   drivePID(globalDir, globalSpeed);
 }

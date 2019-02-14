@@ -1,5 +1,5 @@
-#include "imu.h"
 #include "goalie.h"
+#include "imu.h"
 #include "motors.h"
 #include "myspi_old.h"
 #include "pid.h"
@@ -10,109 +10,44 @@
 #include <Arduino.h>
 #include <math.h>
 
-// void space_invaders() {
-//   if (ball_seen) {
-//     float k = 0;
-//     float dir = 0;
-//     float newDir;
-//
-//     float x, y;
-//
-//     /*
-//     correggo sta funzione ignorante aggiungendo ignoranza ahah
-//     -bello il tentativo di scomporre in x,y mi piasce
-//     -cercate di tenere x e y scalati in -1, +1, non moltiplicate per la velocità
-//     -per come ho pensato io i vettori:
-//       x = 1 -> nord, -1 -> sud
-//       y = 1 -> destra, -1 -> sinistra
-//     */
-//     if(us_px <= 45) k = map(us_px, 45, 0, 0, 1);
-//     if(us_px >= 60) k = -map(us_px, 60, 250, 0, 1);
-//
-//     /*se il robot sta troppo indietro allora k aggiunge una componente y positiva, quindi si muove verso avanti insieme al movimento per la palla
-//     se il robot sta troppo avanti allora k aggiunge una componente y negativa, quindi si muove verso dietro insieme al movimento per la palla
-//     ora ho fatto una proporzione a caso, dovete testarla, in ogni caso ho fatto corrispondere una correzione potente in avanti se il robot sta mooolto vicino
-//     e una correzione sempre più potente in indietro se il robot sta sempre più lontano.
-//     su devc++ ho dovuto mettere tutte le variabili double, sennò map (copiato dalla libreria di arduino) mi dava sempre zero, guardate se su arduino fa lo stesso
-//      */
-//     if (ball_sensor >= 14 && ball_sensor <= 19) {
-//       dir = 270;
-//     } else if (ball_sensor >= 0 && ball_sensor <= 7) {
-//       dir = 90;
-//     }
-//
-//     /*  tutte le funzioni trigonometriche in c funzionano in radianti
-//       x è sin e y è cos perchè se disegnate il vettore direzione nella circonferenza goniometrica
-//       scoprite che l'angolo (direzione) è l'angolo opposto a quello che si usa convezionalmente,
-//       quindi o usate x = cos(90-dir) oppure sin(dir), stessa cosa per la y.
-//       non moltiplicate per la velocità, tanto poi la passate a preparepid manualmente.
-//     */
-//     x = sin(dir * PI / 180.0);
-//     y = cos(dir * PI / 180.0);
-//
-//     //aggiungo k al vettore y per influenzare il movimento verticale
-//     y += k;
-//     //il movimento orizzontale non lo tocco, dipende solo dalla direzione per inseguire la palla
-//
-//     newDir = atan2(y, x);
-//     newDir = newDir * 180 / 3.14; // atan2 restituisce i gradi in [-180,+180] e
-//                                   // seguendo la circonf. goniometrica.
-//
-//     int map_angle = 0;
-//     map_angle = (int)newDir;
-//     map_angle = -(newDir) + 90; // Conversione + cambio di rotazione = nord 0
-//                                  // gradi, senso orario positivo.
-//     map_angle = (map_angle + 360) % 360;
-//
-//     /*map angle contiene la direzione in dir però influenzata verticalmente dal valore dell'ultrasuono
-//     esempio se us_px = 45, allora map_angle = circa dir
-//     se us_px = 200, e dir = 90, map_angle = 126
-//     se us_px = 20, e dir = 90, map_angle = 60
-//     spero di aver capito l'idea che avevi, sennò ho fatto una piccola lezione di trigonometria e scomposizione della direzione lol
-//     */
-//   int vel = 200;
-//
-//   if (us_px >= 30 || us_dx < 35 || us_sx < 35 || !ball_seen) {
-//     centerGoalPost();
-//   } else {
-//     preparePID(0, 0);
-//     if (ball_sensor >= 14 && ball_sensor <= 18) {
-//       preparePID(270, vel);
-//       return;
-//     }
-//     if (ball_sensor >= 1 && ball_sensor <= 6) {
-//       preparePID(90, vel);
-//       return;
-//     }
-//       centerGoalPost();
-//     }
-//   }
-// }
+byte postSensor;
+
+void followBall() {}
 
 void space_invaders() {
-    if(us_px > 60) centerGoalPost();
-    if(ball_sensor == 19 || ball_sensor == 18 || (ball_sensor >= 0 && ball_sensor <= 2)) {
-      recenter(2.0);
-      brake();
+  int range;
+  int vel = 200;
+
+  DEBUG_PRINT.println(zoneIndex);
+  if (zoneIndex == 7) {
+    if (ball_sensor >= 14 && ball_sensor <= 19) {
+      recenter(3.0);
+      preparePID(270, vel);
+    } else if (ball_sensor >= 1 && ball_sensor <= 6) {
+      recenter(3.0);
+      preparePID(90, vel);
+    } else {
+      if (ball_distance <= 2) {
+        range = 2;
+      } else {
+        range = 1;
+      }
+      if (inSensorRange(0, range)) {
+        brake();
+        preparePID(0, 0);
+      } else {
+        goalie();
+      }
     }
-    if(ball_sensor >= 3 && ball_sensor <= 6) {
-      recenter(2.0);
-      brake();
-      preparePID(90, 200);
-      // recenter(2.0);
+  } else {
+    if (!inSensorRange(postSensor, 2)) {
+      centerGoalPost();
     }
-    if(ball_sensor >= 14 && ball_sensor <= 17) {
-      recenter(2.0);
-      brake();
-      preparePID(270, 200);
-      // recenter(2.0);
-    }
-    if(ball_sensor >= 7 && ball_sensor <= 13) goalie();
+  }
 }
 
 void centerGoalPost() {
-
-  int vel = 150;
+  int vel = 200;
 
   if (zoneIndex < 6) {
     preparePID(180, vel);
@@ -123,7 +58,33 @@ void centerGoalPost() {
   } else if (zoneIndex == 7) {
     preparePID(0, 0);
   }
+
+  postSensor = ball_sensor;
 }
+
+// void space_invaders() {
+//   if (us_px > 60)
+//     centerGoalPost();
+//   if (ball_sensor == 19 || ball_sensor == 18 ||
+//       (ball_sensor >= 0 && ball_sensor <= 2)) {
+//     recenter(2.0);
+//     brake();
+//   }
+//   if (ball_sensor >= 3 && ball_sensor <= 6) {
+//     recenter(2.0);
+//     brake();
+//     preparePID(90, 200);
+//     // recenter(2.0);
+//   }
+//   if (ball_sensor >= 14 && ball_sensor <= 17) {
+//     recenter(2.0);
+//     brake();
+//     preparePID(270, 200);
+//     // recenter(2.0);
+//   }
+//   if (ball_sensor >= 7 && ball_sensor <= 13)
+//     goalie();
+// }
 
 // void space_invaders() {
 //   if (zoneIndex >= 6) {
@@ -145,7 +106,8 @@ void centerGoalPost() {
 //       dir = 90;
 //     }
 //
-//     // Something strange makes the cos() function work in radians instead of
+//     // Something strange makes the cos() function work in radians instead
+//     of
 //     // degrees
 //     x = vel * cos(dir * PI / 180.0);
 //     y = vel * sin(dir * PI / 180.0);
@@ -157,7 +119,8 @@ void centerGoalPost() {
 //     // atan2 restituisce i gradi in [-180,+180] e seguendo la circonf.
 //     // goniometrica.
 //     int map_angle = (int)newDir;
-//     map_angle = -(newDir) + 90; // Conversione + cambio di rotazione = nord 0
+//     map_angle = -(newDir) + 90; // Conversione + cambio di rotazione = nord
+//     0
 //                                 // gradi, senso orario positivo.
 //     map_angle = ((map_angle + 360) % 360) + 90;
 //

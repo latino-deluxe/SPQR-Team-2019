@@ -34,9 +34,8 @@ void ball_read_position() {
   // getting our data from our spi slave
   readSPI(); // in any other case the ball is seen by the robot
   ball_seen = true;
-  if (ball_distance ==
-      6) { // if the distance is 6 it means that the robot doesnt
-           // see the ball
+  if (ball_distance == 6) { // if the distance is 6 it means that the robot
+                            // doesnt see the ball
     ball_seen = false;
   }
 
@@ -50,9 +49,28 @@ void ball_read_position() {
 
 void testBall() {
   ball_read_position();
-  Serial.print(ball_sensor);
-  Serial.print(" | ");
-  Serial.println(ball_distance);
+  DEBUG_PRINT.print(ball_sensor);
+  DEBUG_PRINT.print(" | ");
+  DEBUG_PRINT.println(ball_distance);
 
   delay(500);
+}
+
+bool inSensorRange(byte sensor, byte range) {
+  // BT.println(lineBallSensor);
+  for (int i = 0; i <= range; i++) {
+    // BT.print(getSensorIndex(sensor - i));
+    // BT.print(" | ");
+    // BT.println(getSensorIndex(sensor + i))
+    if (ball_sensor == getSensorIndex(sensor - i) ||
+        ball_sensor == getSensorIndex(sensor + i)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+byte getSensorIndex(byte sensor) {
+  sensor = sensor % 20;
+  return sensor < 0 ? (byte)(20 + sensor) : (byte)(sensor);
 }
