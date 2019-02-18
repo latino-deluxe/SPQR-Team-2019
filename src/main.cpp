@@ -123,7 +123,9 @@ void loop() {
 
   // game routine
 
-  update_sensors_all();
+  ball_read_position();
+  readIMU();
+  readUS();
   WhereAmI();
   guessZone();
   calculateZoneIndex();

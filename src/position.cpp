@@ -117,7 +117,7 @@ void goCenter() {
     } else if (status_y == NORD) {
       preparePID(225, VEL_RET);
     } else { // non conosco la y
-      preparePID(0,0);
+      preparePID(0, 0);
     }
   }
   if (status_x == OVEST) {
@@ -128,18 +128,18 @@ void goCenter() {
     } else if (status_y == NORD) {
       preparePID(135, VEL_RET);
     } else { // non conosco la y
-      preparePID(0,0);
+      preparePID(0, 0);
     }
   }
   if (status_x == CENTRO) {
     if (status_y == SUD) {
       preparePID(0, VEL_RET);
     } else if (status_y == CENTRO) {
-      preparePID(0,0);
+      preparePID(0, 0);
     } else if (status_y == NORD) {
       preparePID(180, VEL_RET);
     } else { // non conosco la y
-      preparePID(0,0);
+      preparePID(0, 0);
     }
   }
   if (status_x == 255) {
@@ -147,13 +147,13 @@ void goCenter() {
       preparePID(0, VEL_RET);
 
     } else if (status_y == CENTRO) {
-      preparePID(0,0);
+      preparePID(0, 0);
 
     } else if (status_y == NORD) {
       preparePID(180, VEL_RET);
 
     } else { // non conosco la y
-      preparePID(0,0);
+      preparePID(0, 0);
     }
   }
   return;
@@ -197,7 +197,7 @@ void goGoalPost(int posizione) {
   return;
 }
 
-void update_sensors_all() {
+void update_sensors_all_test() {
   ball_read_position();
   readIMU();
   readUS();
@@ -205,7 +205,11 @@ void update_sensors_all() {
 }
 
 void testPosition() {
-  update_sensors_all();
+
+  ball_read_position();
+  readIMU();
+  readUS();
+
   WhereAmI();
   DEBUG_PRINT.print("Measured location:\t");
   DEBUG_PRINT.print(status_x);
@@ -273,7 +277,9 @@ void updateGuessZone() {
 unsigned long ao;
 
 void gigaTestZone() {
-  update_sensors_all();
+  ball_read_position();
+  readIMU();
+  readUS();
   WhereAmI();
   guessZone();
 
