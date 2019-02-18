@@ -18,7 +18,7 @@ void space_invaders() {
   int range;
   int vel = 200;
 
-  DEBUG_PRINT.println(zoneIndex);
+  // DEBUG_PRINT.println(zoneIndex);
   if (zoneIndex == 7) {
     if (ball_sensor >= 14 && ball_sensor <= 19) {
       recenter(3.0);
@@ -40,9 +40,9 @@ void space_invaders() {
       }
     }
   } else {
-    if (!inSensorRange(postSensor, 2)) {
-      centerGoalPost();
-    }
+    // if (!inSensorRange(postSensor, 2)) {
+    centerGoalPost();
+    //}
   }
 }
 

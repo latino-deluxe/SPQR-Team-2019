@@ -114,7 +114,7 @@ void loop() {
   // WhereAmI();
   // space_invaders();
 
-  // comunicazione(2000);
+  // comunicazione(2000);u
   // teamZone();
   // whereAreYou();
   // if(millis() - t1 >= 200){
@@ -147,5 +147,6 @@ void loop() {
 
   // handleInterruptTrigonometry();
   // final drive pid
-  drivePID(globalDir, globalSpeed);
+  // drivePID(globalDir, globalSpeed);
+  gigaTestZone();
 }
