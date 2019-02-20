@@ -10,7 +10,6 @@
 #include <Arduino.h>
 #include <math.h>
 
-byte postSensor;
 unsigned long t = 0;
 
 void space_invaders() {
@@ -21,61 +20,46 @@ void space_invaders() {
   int usDist = 0;
 
   if (zoneIndex > 5) {
-    if (ball_sensor >= 1 && ball_sensor <= 6) {
-      recenter(3.0);
-      usDist = (us_dx) / 10;
-      vel = (baseVel * usDist * usDist) / 81;
-      dir = 90;
-    } else if (ball_sensor >= 14 && ball_sensor <= 19) {
-      recenter(3.0);
-      usDist = (us_sx) / 10;
-      vel = (baseVel * usDist * usDist) / 81;
-      dir = 270;
-    } else {
-      // In front or behind
-      dir = 0;
-      if (!globalSpeed == 0)
+    if (ball_distance > 4) {
+      if (inSensorRange(0, 2)) {
+        dir = 0;
         vel = 0;
-    }
-
-    if (millis() - t >= 100) {
-      DEBUG_PRINT.print("DX: ");
-      DEBUG_PRINT.println(us_dx);
-      DEBUG_PRINT.print("SX: ");
-      DEBUG_PRINT.println(us_sx);
-      DEBUG_PRINT.print("VEL: ");
-      DEBUG_PRINT.println(vel);
-      DEBUG_PRINT.println();
-      DEBUG_PRINT.println();
-      preparePID(dir, vel);
-      t = millis();
-    }
-  } else {
-    // centerGoalPost();
-  }
-  // DEBUG_PRINT.println(zoneIndex);
-  /*if (zoneIndex == 7) {
-    if (ball_sensor >= 14 && ball_sensor <= 19) {
-      recenter(3.0);
-      preparePID(270, vel);
-    } else if (ball_sensor >= 1 && ball_sensor <= 6) {
-      recenter(3.0);
-      preparePID(90, vel);
-    } else {
-      if (ball_distance <= 2) {
-        range = 2;
-      } else {
-        range = 3;
       }
-      if (inSensorRange((byte)0, range)) {
-        preparePID(0, 0);
+    } else {
+      if (ball_sensor >= 1 && ball_sensor <= 6) {
+        recenter(3.0);
+        usDist = (us_dx + 30) / 10;
+        vel = (baseVel * usDist * usDist) / 81;
+        dir = 90;
+      } else if (ball_sensor >= 14 && ball_sensor <= 19) {
+        recenter(3.0);
+        usDist = (us_sx + 30) / 10;
+        vel = (baseVel * usDist * usDist) / 81;
+        dir = 270;
       } else {
-        goalie();
+        // In front or behind
+        dir = 0;
+        vel = 0;
+      }
+      if (vel < 40)
+        vel = 0;
+      preparePID(dir, vel);
+
+      if (millis() - t >= 100) {
+        DEBUG_PRINT.print("DX: ");
+        DEBUG_PRINT.println(us_dx);
+        DEBUG_PRINT.print("SX: ");
+        DEBUG_PRINT.println(us_sx);
+        DEBUG_PRINT.print("VEL: ");
+        DEBUG_PRINT.println(vel);
+        DEBUG_PRINT.println();
+        DEBUG_PRINT.println();
+        t = millis();
       }
     }
   } else {
     centerGoalPost();
-  }*/
+  }
 }
 
 void centerGoalPost() {
@@ -90,10 +74,31 @@ void centerGoalPost() {
   } else if (zoneIndex == 7) {
     preparePID(0, 0);
   }
-
-  postSensor = ball_sensor;
 }
 
+// DEBUG_PRINT.println(zoneIndex);
+/*if (zoneIndex == 7) {
+  if (ball_sensor >= 14 && ball_sensor <= 19) {
+    recenter(3.0);
+    preparePID(270, vel);
+  } else if (ball_sensor >= 1 && ball_sensor <= 6) {
+    recenter(3.0);
+    preparePID(90, vel);
+  } else {
+    if (ball_distance <= 2) {
+      range = 2;
+    } else {
+      range = 3;
+    }
+    if (inSensorRange((byte)0, range)) {
+      preparePID(0, 0);
+    } else {
+      goalie();
+    }
+  }
+} else {
+  centerGoalPost();
+}*/
 // void space_invaders() {
 //   if (us_px > 60)
 //     centerGoalPost();

@@ -121,7 +121,7 @@ void loop() {
   //   BT.println(imu_current_euler);
   // }
 
-  // game routine
+  // // game routine
 
   ball_read_position();
   readIMU();
@@ -144,8 +144,9 @@ void loop() {
     else
       centerGoalPost();
   }
-  handleInterruptTrigonometry();
+
+  // handleInterruptTrigonometry();
   // final drive pid
   drivePID(globalDir, globalSpeed);
-  // gigaTestZone();
+  gigaTestZone();
 }
