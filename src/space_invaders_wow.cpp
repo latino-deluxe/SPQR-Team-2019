@@ -11,21 +11,25 @@
 #include <math.h>
 
 byte postSensor;
+unsigned long t = 0;
 
 void space_invaders() {
+
   byte range;
   int vel, baseVel = 235;
   int dir = 0;
+  int usDist = 0;
 
   if (zoneIndex > 5) {
     if (ball_sensor >= 1 && ball_sensor <= 6) {
       recenter(3.0);
-      vel = (baseVel * us_dx) / 100;
+      usDist = (us_dx) / 10;
+      vel = (baseVel * usDist * usDist) / 81;
       dir = 90;
-      DEBUG_PRINT.println(vel);
     } else if (ball_sensor >= 14 && ball_sensor <= 19) {
       recenter(3.0);
-      vel = (baseVel * us_sx) / 100;
+      usDist = (us_sx) / 10;
+      vel = (baseVel * usDist * usDist) / 81;
       dir = 270;
     } else {
       // In front or behind
@@ -34,12 +38,18 @@ void space_invaders() {
         vel = 0;
     }
 
-    if (vel <= 100) {
-      vel = 0;
+    if (millis() - t >= 100) {
+      DEBUG_PRINT.print("DX: ");
+      DEBUG_PRINT.println(us_dx);
+      DEBUG_PRINT.print("SX: ");
+      DEBUG_PRINT.println(us_sx);
+      DEBUG_PRINT.print("VEL: ");
+      DEBUG_PRINT.println(vel);
+      DEBUG_PRINT.println();
+      DEBUG_PRINT.println();
+      preparePID(dir, vel);
+      t = millis();
     }
-
-    DEBUG_PRINT.println(vel);
-    preparePID(dir, vel);
   } else {
     // centerGoalPost();
   }

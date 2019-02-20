@@ -144,11 +144,8 @@ void loop() {
     else
       centerGoalPost();
   }
-
-
-  // handleInterruptTrigonometry();
+  handleInterruptTrigonometry();
   // final drive pid
   drivePID(globalDir, globalSpeed);
-  //gigaTestZone();
-  // testIMU();
+  // gigaTestZone();
 }
