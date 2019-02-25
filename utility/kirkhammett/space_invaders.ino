@@ -18,11 +18,11 @@
 
 
   void space_invaders() {
-  us_read();
-  if (us_px >= 15) centroporta();
-  if ((ball_sensor >= 1) && (ball_sensor <= 8)) drivePID(90, GOALIE_P);
-  if ((ball_sensor >= 12) && (ball_sensor <= 19)) drivePID(270, GOALIE_P);
-  if ((ball_sensor > 8) && (ball_sensor < 12)) palla_dietro();
+    us_read();
+    if (us_px >= 15) centroporta();
+    if ((ball_sensor >= 1) && (ball_sensor <= 8)) drivePID(90, GOALIE_P);
+    if ((ball_sensor >= 12) && (ball_sensor <= 19)) drivePID(270, GOALIE_P);
+    if ((ball_sensor > 8) && (ball_sensor < 12)) palla_dietro();
   }
 
 

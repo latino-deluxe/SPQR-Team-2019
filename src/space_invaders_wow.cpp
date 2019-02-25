@@ -13,6 +13,14 @@
 unsigned long t = 0;
 
 void space_invaders() {
+  recenter(2.0);
+  if (us_px >= 25) centerGoalPost();
+  if ((ball_sensor >= 1) && (ball_sensor <= 8)) preparePID(95, GOALIE_P);
+  if ((ball_sensor >= 12) && (ball_sensor <= 19)) preparePID(265, GOALIE_P);
+  if ((ball_sensor > 8) && (ball_sensor < 12)) goalie();
+}
+
+void space_invaders2() {
 
   byte range;
   int vel, baseVel = 235;

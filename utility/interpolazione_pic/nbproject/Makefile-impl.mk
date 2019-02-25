@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=SimulatorePalla.X
+PROJECTNAME=interpolazione_pic
 
 # Active Configuration
 DEFAULTCONF=default
