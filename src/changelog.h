@@ -104,8 +104,13 @@
  *  PIC e Camera(finalmente funzionante)
  *  Fixare space space_invaders col metodo della somma vettoriale
  *
+ * 25/2/2019
+ * Ennesimo space_invaders che funziona male, da rivedere per l'ennesima volta.
+ * Nuovo PID, modificate le variabili ed ottimizzato il codice per un PID che "svirgoli" di meno e sia più preciso
+ * Inizio nuovo codice AVR12 (AVRupgrade) con interpolazione a 20 sensori, da testare con SPI perché seriale non funzionante.
+ * Iniziata nuova SPI per comunicazione con AVRupgrade, da ultimare.
+ * Apparentemente abbiamo una seconda scheda Teensy (testata e funzionante) su cui fare esperimenti in parallelo, da montare il robot completp
  *
- *
- *
- *
+ * TODO:
+ *  Data la vicinanza della Romecup bisogna decidere ciò che è da sistemare per la gara
  */

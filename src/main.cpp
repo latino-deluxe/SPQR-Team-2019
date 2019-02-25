@@ -130,25 +130,22 @@ void loop() {
   guessZone();
   calculateZoneIndex();
   globalSpeed=180;
-  
+
 
   // currently setting the role by code
-  role = HIGH;
+  role = LOW;
 
-  if(ball_seen) goalie();
-  else globalSpeed = 0;
-
-  // if (ball_seen == true) {
-  //   if (role == HIGH)
-  //     goalie();
-  //   else
-  //     space_invaders();
-  // } else {
-  //   if (role == HIGH)
-  //     goCenter();
-  //   else
-  //     centerGoalPost();
-  // }
+  if (ball_seen == true) {
+    if (role == HIGH)
+      goalie();
+    else
+      space_invaders();
+  } else {
+    if (role == HIGH)
+      goCenter();
+    else
+      centerGoalPost();
+  }
 
   handleInterruptTrigonometry();
   // final drive pid

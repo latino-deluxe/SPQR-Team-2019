@@ -11,6 +11,7 @@
 #include <math.h>
 
 unsigned long t = 0;
+int c = 0;
 
 void keeper() {
   // recenter(2.0);
@@ -20,67 +21,52 @@ void keeper() {
 
 void space_invaders() {
   // recenter(2.0);
-  if (us_px >= 25) centerGoalPost();
-  if ((ball_sensor >= 1) && (ball_sensor <= 8)) {
-    recenter(2.0);
-    preparePID(90, GOALIE_P);
+  // if(zoneIndex <= 6){
+  //   if ((ball_sensor >= 1) && (ball_sensor <= 8)) {
+  //     //recenter(2.0);
+  //     preparePID(90, GOALIE_P);
+  //   }else if ((ball_sensor >= 12) && (ball_sensor <= 19)) {
+  //     //recenter(2.0);
+  //     preparePID(270, GOALIE_P);
+  //   }else if ((ball_sensor > 8) && (ball_sensor < 12)) goalie();
+  // }else{
+  //    centerGoalPost();
+  // }
+  if(c < 500) c++;
+  else {
+    if(us_px>=20){
+       centerGoalPost();
+      return;
+    }
+    c=0;
+
   }
-  if ((ball_sensor >= 12) && (ball_sensor <= 19)) {
-    recenter(2.0);
-    preparePID(270, GOALIE_P);
-  }
+  if (ball_sensor==0) preparePID(0, 0);
+  if ((ball_sensor >= 1) && (ball_sensor <= 8)) preparePID(90, 180);
+  if ((ball_sensor >= 12) && (ball_sensor <= 19)) preparePID(270, 180);
   if ((ball_sensor > 8) && (ball_sensor < 12)) goalie();
 }
 
-void space_invaders2() {
-
-  byte range;
-  int vel, baseVel = 235;
-  int dir = 0;
-  int usDist = 0;
-
-  if (zoneIndex > 5) {
-    if (ball_distance > 4) {
-      if (inSensorRange(0, 2)) {
-        dir = 0;
-        vel = 0;
-      }
-    } else {
-      if (ball_sensor >= 1 && ball_sensor <= 6) {
-        recenter(3.0);
-        usDist = (us_dx + 30) / 10;
-        vel = (baseVel * usDist * usDist) / 81;
-        dir = 90;
-      } else if (ball_sensor >= 14 && ball_sensor <= 19) {
-        recenter(3.0);
-        usDist = (us_sx + 30) / 10;
-        vel = (baseVel * usDist * usDist) / 81;
-        dir = 270;
-      } else {
-        // In front or behind
-        dir = 0;
-        vel = 0;
-      }
-      if (vel < 40)
-        vel = 0;
-      preparePID(dir, vel);
-
-      if (millis() - t >= 100) {
-        DEBUG_PRINT.print("DX: ");
-        DEBUG_PRINT.println(us_dx);
-        DEBUG_PRINT.print("SX: ");
-        DEBUG_PRINT.println(us_sx);
-        DEBUG_PRINT.print("VEL: ");
-        DEBUG_PRINT.println(vel);
-        DEBUG_PRINT.println();
-        DEBUG_PRINT.println();
-        t = millis();
-      }
-    }
-  } else {
-    centerGoalPost();
-  }
-}
+// void space_invaders() {
+//   byte range;
+//   int vel, baseVel = 235;
+//   int dir = 0;
+//   int usDist = 0;
+//
+//   if (zoneIndex <= 6) {
+//     if(ball_sensor >= 1 && ball_sensor <= 6){
+//       vel = (baseVel * us_dx) / 90;
+//       preparePID(90, vel);
+//     }else if(ball_sensor >= 14 && ball_sensor <= 18){
+//       vel = (baseVel * us_sx) / 90;
+//       preparePID(270, vel);
+//     }else{
+//       preparePID(0, 0);
+//     }
+//   } else {
+//     centerGoalPost();
+//   }
+// }
 
 void centerGoalPost() {
   int vel = 200;
