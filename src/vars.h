@@ -58,9 +58,9 @@
 #define SUD_EST 9
 
 // VARIABILI E COSTANTI DEL PID
-  #define KP 0.7   // K proporzionale
-  #define KI 0.001 // K integrativo
-  #define KD 0.001 // K derivativo
+  #define KP 1.5   // K proporzionale
+  #define KI 0.1 // K integrativo
+  #define KD 3 // K derivativo
   // #define KP 1.4
   // #define KI 0.1
   // #define KD 0.5

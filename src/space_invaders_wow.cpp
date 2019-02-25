@@ -12,11 +12,23 @@
 
 unsigned long t = 0;
 
+void keeper() {
+  // recenter(2.0);
+  // if(ball_distance)
+}
+
+
 void space_invaders() {
-  recenter(2.0);
+  // recenter(2.0);
   if (us_px >= 25) centerGoalPost();
-  if ((ball_sensor >= 1) && (ball_sensor <= 8)) preparePID(95, GOALIE_P);
-  if ((ball_sensor >= 12) && (ball_sensor <= 19)) preparePID(265, GOALIE_P);
+  if ((ball_sensor >= 1) && (ball_sensor <= 8)) {
+    recenter(2.0);
+    preparePID(90, GOALIE_P);
+  }
+  if ((ball_sensor >= 12) && (ball_sensor <= 19)) {
+    recenter(2.0);
+    preparePID(270, GOALIE_P);
+  }
   if ((ball_sensor > 8) && (ball_sensor < 12)) goalie();
 }
 

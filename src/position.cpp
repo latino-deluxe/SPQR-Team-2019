@@ -109,53 +109,54 @@ void WhereAmI() {
 }
 
 void goCenter() {
-  if (status_x == EST) {
-    if (status_y == SUD) {
-      preparePID(330, VEL_RET);
-    } else if (status_y == CENTRO) {
-      preparePID(270, VEL_RET);
-    } else if (status_y == NORD) {
-      preparePID(225, VEL_RET);
-    } else { // non conosco la y
-      preparePID(0, 0);
-    }
-  }
-  if (status_x == OVEST) {
-    if (status_y == SUD) {
-      preparePID(45, VEL_RET);
-    } else if (status_y == CENTRO) {
-      preparePID(90, VEL_RET);
-    } else if (status_y == NORD) {
-      preparePID(135, VEL_RET);
-    } else { // non conosco la y
-      preparePID(0, 0);
-    }
-  }
-  if (status_x == CENTRO) {
-    if (status_y == SUD) {
-      preparePID(0, VEL_RET);
-    } else if (status_y == CENTRO) {
-      preparePID(0, 0);
-    } else if (status_y == NORD) {
-      preparePID(180, VEL_RET);
-    } else { // non conosco la y
-      preparePID(0, 0);
-    }
-  }
-  if (status_x == 255) {
-    if (status_y == SUD) {
-      preparePID(0, VEL_RET);
-
-    } else if (status_y == CENTRO) {
-      preparePID(0, 0);
-
-    } else if (status_y == NORD) {
-      preparePID(180, VEL_RET);
-
-    } else { // non conosco la y
-      preparePID(0, 0);
-    }
-  }
+  
+  // if (status_x == EST) {
+  //   if (status_y == SUD) {
+  //     preparePID(330, VEL_RET);
+  //   } else if (status_y == CENTRO) {
+  //     preparePID(270, VEL_RET);
+  //   } else if (status_y == NORD) {
+  //     preparePID(225, VEL_RET);
+  //   } else { // non conosco la y
+  //     preparePID(0, 0);
+  //   }
+  // }
+  // if (status_x == OVEST) {
+  //   if (status_y == SUD) {
+  //     preparePID(45, VEL_RET);
+  //   } else if (status_y == CENTRO) {
+  //     preparePID(90, VEL_RET);
+  //   } else if (status_y == NORD) {
+  //     preparePID(135, VEL_RET);
+  //   } else { // non conosco la y
+  //     preparePID(0, 0);
+  //   }
+  // }
+  // if (status_x == CENTRO) {
+  //   if (status_y == SUD) {
+  //     preparePID(0, VEL_RET);
+  //   } else if (status_y == CENTRO) {
+  //     preparePID(0, 0);
+  //   } else if (status_y == NORD) {
+  //     preparePID(180, VEL_RET);
+  //   } else { // non conosco la y
+  //     preparePID(0, 0);
+  //   }
+  // }
+  // if (status_x == 255) {
+  //   if (status_y == SUD) {
+  //     preparePID(0, VEL_RET);
+  //
+  //   } else if (status_y == CENTRO) {
+  //     preparePID(0, 0);
+  //
+  //   } else if (status_y == NORD) {
+  //     preparePID(180, VEL_RET);
+  //
+  //   } else { // non conosco la y
+  //     preparePID(0, 0);
+  //   }
+  // }
   return;
 }
 

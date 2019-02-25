@@ -67,23 +67,24 @@ void handleInterruptTrigonometry() {
   // old version
 
   // exit angle
-  float angle = atan2(y, x) * 180 / 3.14;
+  // float angle = atan2(y, x) * 180 / 3.14;
 
   // shifts the angle by 90 degrees, so the 0 in the front of the robot
-  int map_angle = 0;
+  /*int map_angle = 0;
   if (angle < 0)
     angle += 360;
   map_angle = ((int)(angle - 90)) % 360;
 
-  map_angle = -map_angle;
+  map_angle = -map_angle;*/
+  // angle = ((int) angle + 360) % 360;
 
   // now calculates the go-back angle (the opposite of the exit angle)
-  ldir = ((int)map_angle + 180) % 360;
+  // ldir = ((int)map_angle + 180) % 360;
 
   // shifts a bit the go-back angle by the imu reading (robot rotation over
   // itself) and calculates the final go-back angle
-  ldir -= imu_current_euler;
-  ldir = ldir < 0 ? ldir += 360 : ldir;
+  // ldir -= imu_current_euler;
+  // ldir = ldir < 0 ? ldir += 360 : ldir;
 
   // Serial.print(map_angle);
   // Serial.print(" | ");
@@ -91,29 +92,29 @@ void handleInterruptTrigonometry() {
 
   // new version
   // calcolo dell'angolo della linea
-  // float angle = atan2(y,x) * 180 / 3.14;
+  float angle = atan2(y,x) * 180 / 3.14;
   // //atan2 restituisce i gradi in [-180,+180] e seguendo la circonf.
   // goniometrica.
   //
-  // int map_angle = 0;
+  int map_angle = 0;
   // map_angle = (int)angle;
-  // map_angle = -(angle) + 90;                        //Conversione + cambio di
+  map_angle = -(angle) + 90;                        //Conversione + cambio di
   // rotazione = nord 0 gradi, senso orario positivo. map_angle = (map_angle
   // +360) % 360; 							//per rientrare
   // nel [0,360]
   //
-  // int corrected_angle = map_angle;
-  // corrected_angle = corrected_angle - imu_current_euler;	//tolgo la
+  int corrected_angle = map_angle;
+  corrected_angle = corrected_angle - imu_current_euler;	//tolgo la
   // rotazione del robot all'angolo della linea corrected_angle =
   // (corrected_angle +360) % 360; 				//per rientrare
   // nel [0,360]
   //
-  // int out_direction = corrected_angle;
-  // out_direction = out_direction + 180; 							//trovo
+  int out_direction = corrected_angle;
+  out_direction = out_direction + 180; 							//trovo
   // opposto all'angolo calcolato out_direction = (out_direction +360)% 360;
   // //per rientrare nel [0,360]
   //
-  // ldir = out_direction;
+  ldir = out_direction;
 
   // saves the ball sensors which is seeing the ball
   lineBallSensor = ball_sensor;

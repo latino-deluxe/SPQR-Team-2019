@@ -7,14 +7,10 @@
 
 // TIMED PID CONTROL TESTING
 void drivePID(signed int direzione, float vMot) {
-  if(vMot == 0){
-    recenter(1.0);
-  }else{
     // mette in variabili globali direzione e velocitá precedenti e attuali
-    old_Dir = new_Dir;
-    new_Dir = direzione;
-    old_vMot = new_vMot;
-    new_vMot = vMot;
+    // new_Dir = direzione;
+    // old_vMot = new_vMot;
+    // new_vMot = vMot;
 
     speed1 = ((-(sins[((direzione - 60) + 360) % 360])) * vMot); // mot 1
     speed2 = ((sins[(direzione + 360) % 360]) * vMot);           // mot 2
@@ -22,17 +18,17 @@ void drivePID(signed int direzione, float vMot) {
 
     pidfactor = updatePid();
 
-    // da valutare se é opportuno
-    if (reaching_ball == true) {
-      pidfactor = pidfactor * 1.2;
-    }
 
     speed1 += pidfactor;
     speed2 += pidfactor;
     speed3 += pidfactor;
 
-    CheckSpeed(); // normalizza la velocita' a 255 max al motore piu' veloce e gli
+    // CheckSpeed(); // normalizza la velocita' a 255 max al motore piu' veloce e gli
                   // altri in proporzione
+
+    speed1 = constrain(speed1, -255, 255);
+    speed2 = constrain(speed2, -255, 255);
+    speed3 = constrain(speed3, -255, 255);
 
     // Send every speed to his motor
     mot(2, int(speed2));
@@ -45,7 +41,7 @@ void drivePID(signed int direzione, float vMot) {
     // Serial.print("   ");
     // Serial.print(speed3);
     // Serial.println("   ");
-  }
+    old_Dir = direzione;
 }
 
 void preparePID(int direction, int speed){
@@ -71,9 +67,10 @@ float updatePid() {
   errorD = KD * (delta - errorePre);
   errorePre = delta;
 
+  // DEBUG_PRINT.println(errorD);
+
   // calcola correzione integrativa
-  integral =
-      0.5 * integral + delta; // corretta per non far divergere il contributo
+  integral = 0.5 * integral + delta; // corretta per non far divergere il contributo
   errorI = KI * integral;
 
   // calcota correzione complessiva

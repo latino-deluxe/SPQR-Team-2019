@@ -129,24 +129,30 @@ void loop() {
   WhereAmI();
   guessZone();
   calculateZoneIndex();
+  globalSpeed=180;
+  
 
   // currently setting the role by code
-  role = LOW;
+  role = HIGH;
 
-  if (ball_seen == true) {
-    if (role == HIGH)
-      goalie();
-    else
-      space_invaders();
-  } else {
-    if (role == HIGH)
-      goCenter();
-    else
-      centerGoalPost();
-  }
+  if(ball_seen) goalie();
+  else globalSpeed = 0;
 
-  // handleInterruptTrigonometry();
+  // if (ball_seen == true) {
+  //   if (role == HIGH)
+  //     goalie();
+  //   else
+  //     space_invaders();
+  // } else {
+  //   if (role == HIGH)
+  //     goCenter();
+  //   else
+  //     centerGoalPost();
+  // }
+
+  handleInterruptTrigonometry();
   // final drive pid
   drivePID(globalDir, globalSpeed);
-  gigaTestZone();
+  // gigaTestZone();
+  // testIMU();
 }
