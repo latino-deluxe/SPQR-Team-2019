@@ -129,8 +129,7 @@ void loop() {
   WhereAmI();
   guessZone();
   calculateZoneIndex();
-  globalSpeed=180;
-
+  globalSpeed = 180;
 
   // currently setting the role by code
   role = LOW;
@@ -139,7 +138,7 @@ void loop() {
     if (role == HIGH)
       goalie();
     else
-      space_invaders();
+      space_invaders_3();
   } else {
     if (role == HIGH)
       goCenter();

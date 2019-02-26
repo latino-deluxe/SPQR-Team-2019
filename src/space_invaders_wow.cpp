@@ -18,6 +18,25 @@ void keeper() {
   // if(ball_distance)
 }
 
+void space_invaders_3() {
+  int dir = 0, vel = 185;
+
+  if (zoneIndex >= 6) {
+    if (ball_sensor >= 1 && ball_sensor <= 8) {
+      // if it's not in the right zone (8), go right
+      if (zoneIndex != 8)
+        dir = 90;
+    } else if (ball_sensor >= 12 && ball_sensor >= 19)
+      // if it's not in the left zone (6), go left
+      if (zoneIndex != 6)
+        dir = 270;
+      else if (ball_sensor > 8 && ball_sensor < 12)
+        goalie(); // ball behind: goalie
+      else
+        dir = 0; // ball in front of the robot: stop
+  } else
+    centerGoalPost();
+}
 
 void space_invaders() {
   // recenter(2.0);
@@ -32,19 +51,23 @@ void space_invaders() {
   // }else{
   //    centerGoalPost();
   // }
-  if(c < 500) c++;
+  if (c < 500)
+    c++;
   else {
-    if(us_px>=20){
-       centerGoalPost();
+    if (us_px >= 20) {
+      centerGoalPost();
       return;
     }
-    c=0;
-
+    c = 0;
   }
-  if (ball_sensor==0) preparePID(0, 0);
-  if ((ball_sensor >= 1) && (ball_sensor <= 8)) preparePID(90, 180);
-  if ((ball_sensor >= 12) && (ball_sensor <= 19)) preparePID(270, 180);
-  if ((ball_sensor > 8) && (ball_sensor < 12)) goalie();
+  if (ball_sensor == 0)
+    preparePID(0, 0);
+  if ((ball_sensor >= 1) && (ball_sensor <= 8))
+    preparePID(90, 180);
+  if ((ball_sensor >= 12) && (ball_sensor <= 19))
+    preparePID(270, 180);
+  if ((ball_sensor > 8) && (ball_sensor < 12))
+    goalie();
 }
 
 // void space_invaders() {
