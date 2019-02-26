@@ -22,13 +22,15 @@ void goalie() {
   if(ball_sensor==9 || ball_sensor==10 || ball_sensor==1) {
     if(ball_distance < 4) { //se la palla è vicina decido come muovermi in base alla zona per non uscire
       atk_speed = 200;
-      if(zoneIndex!=8 || zoneIndex!=5 || zoneIndex!=2) atk_direction = 135;
-      if(zoneIndex!=0 || zoneIndex!=3 || zoneIndex!=9) atk_direction = 225;
+      if(zoneIndex==8 || zoneIndex==5 || zoneIndex==2) atk_direction = 225;
+      if(zoneIndex==0 || zoneIndex==3 || zoneIndex==9) atk_direction = 135;
+      if(zoneIndex==1 || zoneIndex==4 || zoneIndex==7) atk_direction = 250;
     }
   else {    //se la palla è lontana mi avvicino più velocemente con angolo più stretto
       atk_speed = 255;
-      if(zoneIndex!=8 || zoneIndex!=5 || zoneIndex!=2) atk_direction = 200;
-      if(zoneIndex!=0 || zoneIndex!=3 || zoneIndex!=9) atk_direction = 160;
+      if(zoneIndex==8 || zoneIndex==5 || zoneIndex==2) atk_direction = 200;
+      if(zoneIndex==0 || zoneIndex==3 || zoneIndex==9) atk_direction = 160;
+      if(zoneIndex==1 || zoneIndex==4 || zoneIndex==7) atk_direction = 180;
     }
   }
 
