@@ -183,6 +183,8 @@ extr unsigned long old_timer;
 // Interrupt
 extr byte lineBallSensor;
 extr byte lineBallDistance;
+extr float angle;
+extr int ldir, lspeed;
 // Comunicazione compagno
 extr int iAmHere;
 extr int friendZone;
@@ -192,3 +194,9 @@ extr bool comrade;
 // test new angle
 extr int globalDir;
 extr int globalSpeed;
+// extr int st;
+
+// attacco
+extr int atk_direction;
+extr int atk_speed;
+extr int atk_offset;

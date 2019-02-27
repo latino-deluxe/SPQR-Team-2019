@@ -66,6 +66,10 @@ void setup() {
   attesa = 0;
   zoneIndex = 0;
   lineReading = 0;
+  angle = 0;
+  ldir = 0;
+  lspeed = 0;
+
   // bluetooth misc
   a = 0;
   old_timer = 0;
@@ -77,7 +81,13 @@ void setup() {
   // global vars for angles
   globalDir = 0;
   globalSpeed = 0;
+  st = 0;
+  // attacco
+  atk_direction = 0;
+  atk_speed = 0;
+  atk_offset = 0;
   // end of variable set up
+
 
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
@@ -129,26 +139,28 @@ void loop() {
   WhereAmI();
   guessZone();
   calculateZoneIndex();
-  globalSpeed = 180;
 
   // currently setting the role by code
-  role = LOW;
+  role = HIGH;
 
-  if (ball_seen == true) {
-    if (role == HIGH)
-      goalie();
-    else
-      space_invaders_3();
-  } else {
-    if (role == HIGH)
-      goCenter();
-    else
-      centerGoalPost();
+  if(flag_interrupt){
+      handleInterruptTrigonometry();
+  }else{
+    if (ball_seen == true) {
+      if (role == HIGH)
+        goalie();
+      else
+        space_invaders_3();
+    } else {
+      if (role == HIGH)
+        goCenter();
+      else
+        centerGoalPost();
+    }
+
+    // final drive pid
+    drivePID(globalDir, globalSpeed);
   }
-
-  handleInterruptTrigonometry();
-  // final drive pid
-  drivePID(globalDir, globalSpeed);
   // gigaTestZone();
   // testIMU();
 }

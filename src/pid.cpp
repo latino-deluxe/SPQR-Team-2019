@@ -45,8 +45,13 @@ void drivePID(signed int direzione, float vMot) {
 }
 
 void preparePID(int direction, int speed){
+  preparePID(direction, speed, 0);
+}
+
+void preparePID(int direction, int speed, int offset){
   globalDir = direction;
   globalSpeed = speed;
+  st = offset;
 }
 
 float updatePid() {
@@ -56,9 +61,9 @@ float updatePid() {
 
   // calcola l'errore di posizione rispetto allo 0
   if (imu_current_euler < 180)
-    delta = float(imu_current_euler);
+    delta = float(imu_current_euler + st);
   else
-    delta = float(imu_current_euler - 360);
+    delta = float((imu_current_euler - 360) - st);
 
   // calcola correzione proporzionale
   errorP = KP * delta;
