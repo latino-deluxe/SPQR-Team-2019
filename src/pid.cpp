@@ -7,48 +7,45 @@
 
 // TIMED PID CONTROL TESTING
 void drivePID(signed int direzione, float vMot) {
-    // mette in variabili globali direzione e velocitá precedenti e attuali
-    // new_Dir = direzione;
-    // old_vMot = new_vMot;
-    // new_vMot = vMot;
+  // mette in variabili globali direzione e velocitá precedenti e attuali
+  // new_Dir = direzione;
+  // old_vMot = new_vMot;
+  // new_vMot = vMot;
 
-    speed1 = ((-(sins[((direzione - 60) + 360) % 360])) * vMot); // mot 1
-    speed2 = ((sins[(direzione + 360) % 360]) * vMot);           // mot 2
-    speed3 = ((-(sins[(direzione + 60) % 360])) * vMot);         // mot 3
+  speed1 = ((-(sins[((direzione - 60) + 360) % 360])) * vMot); // mot 1
+  speed2 = ((sins[(direzione + 360) % 360]) * vMot);           // mot 2
+  speed3 = ((-(sins[(direzione + 60) % 360])) * vMot);         // mot 3
 
-    pidfactor = updatePid();
+  pidfactor = updatePid();
 
+  speed1 += pidfactor;
+  speed2 += pidfactor;
+  speed3 += pidfactor;
 
-    speed1 += pidfactor;
-    speed2 += pidfactor;
-    speed3 += pidfactor;
+  // CheckSpeed(); // normalizza la velocita' a 255 max al motore piu' veloce e
+  // gli altri in proporzione
 
-    // CheckSpeed(); // normalizza la velocita' a 255 max al motore piu' veloce e gli
-                  // altri in proporzione
+  speed1 = constrain(speed1, -255, 255);
+  speed2 = constrain(speed2, -255, 255);
+  speed3 = constrain(speed3, -255, 255);
 
-    speed1 = constrain(speed1, -255, 255);
-    speed2 = constrain(speed2, -255, 255);
-    speed3 = constrain(speed3, -255, 255);
+  // Send every speed to his motor
+  mot(2, int(speed2));
+  mot(1, int(speed1));
+  mot(3, int(speed3));
 
-    // Send every speed to his motor
-    mot(2, int(speed2));
-    mot(1, int(speed1));
-    mot(3, int(speed3));
-
-    // Serial.print(speed1);
-    // Serial.print("   ");
-    // Serial.print(speed2);
-    // Serial.print("   ");
-    // Serial.print(speed3);
-    // Serial.println("   ");
-    old_Dir = direzione;
+  // Serial.print(speed1);
+  // Serial.print("   ");
+  // Serial.print(speed2);
+  // Serial.print("   ");
+  // Serial.print(speed3);
+  // Serial.println("   ");
+  old_Dir = direzione;
 }
 
-void preparePID(int direction, int speed){
-  preparePID(direction, speed, 0);
-}
+void preparePID(int direction, int speed) { preparePID(direction, speed, 0); }
 
-void preparePID(int direction, int speed, int offset){
+void preparePID(int direction, int speed, int offset) {
   globalDir = direction;
   globalSpeed = speed;
   st = offset;
@@ -75,7 +72,8 @@ float updatePid() {
   // DEBUG_PRINT.println(errorD);
 
   // calcola correzione integrativa
-  integral = 0.5 * integral + delta; // corretta per non far divergere il contributo
+  integral =
+      0.5 * integral + delta; // corretta per non far divergere il contributo
   errorI = KI * integral;
 
   // calcota correzione complessiva

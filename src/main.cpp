@@ -85,7 +85,6 @@ void setup() {
   atk_offset = 0;
   // end of variable set up
 
-
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
   pinMode(16, INPUT_DISABLE); // pin 16 in corto tra 3.3V e massa
@@ -113,7 +112,6 @@ void setup() {
 }
 
 void loop() {
-
   SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
 
@@ -140,24 +138,22 @@ void loop() {
   // currently setting the role by code
   role = HIGH;
 
-  if(flag_interrupt){
-      handleInterruptTrigonometry();
-  }else{
-    if (ball_seen == true) {
-      if (role == HIGH)
-        goalie();
-      else
-        space_invaders_3();
-    } else {
-      if (role == HIGH)
-        goCenter();
-      else
-        centerGoalPost();
-    }
-
-    // final drive pid
-    drivePID(globalDir, globalSpeed);
+  // if (flag_interrupt) {
+  //   handleInterruptTrigonometry();
+  // } else {
+  if (ball_seen == true) {
+    if (role == HIGH)
+      goalie();
+    else
+      space_invaders_3();
+  } else {
+    if (role == HIGH)
+      goCenter();
+    else
+      centerGoalPost();
   }
-  // gigaTestZone();
-  // testIMU();
+
+  // final drive pid
+  drivePID(globalDir, globalSpeed);
+  // }
 }
