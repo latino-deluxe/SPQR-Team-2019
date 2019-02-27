@@ -183,8 +183,8 @@ extr unsigned long old_timer;
 // Interrupt
 extr byte lineBallSensor;
 extr byte lineBallDistance;
-extr float angle;
-extr int ldir, lspeed;
+// extr float angle;
+// extr int ldir, lspeed;
 // Comunicazione compagno
 extr int iAmHere;
 extr int friendZone;

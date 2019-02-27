@@ -2,6 +2,7 @@
 #include "myspi_old.h"
 #include "pid.h"
 #include "vars.h"
+#include "imu.h"
 #include <Arduino.h>
 #include <math.h>
 
@@ -14,11 +15,10 @@ unsigned long tstop = 0;
 bool stopFlag = false;
 
 // byte lineBallSensor = 0;
+int ldir = 0, lspeed = 180;
 
 // brand new way to handle the interrupt: trigonometry!
 void handleInterruptTrigonometry() {
-  ldir = 0;
-  lspeed = 180;
 
   if (stopFlag) {
     if (inSensorRange(lineBallSensor, (byte)1)/* && millis() - tstop < 1500 && ball_distance <= lineBallDistance*/) {
@@ -29,47 +29,49 @@ void handleInterruptTrigonometry() {
     flag_interrupt = false;
   }
 
-  calculate();
-  drivePID(ldir, lspeed);
+  byte line = 0;
+  // constructs a complete byte using the array that stores the interrupt data
+  for (int i = 0; i < INT_LUNG; i++) {
+    line |= linea[i] << i;
+  }
+
+  if (line == 0)
+    return;
+
+  // interpolates the data with sine and cosine and using atan2 construct an
+  // angle of exit
+
+  float x = 0, y = 0;
+
+  for (int i = 0; i < INT_LUNG; i++) {
+    if (linea[i] == 1) {
+      x += lCosins[i];
+      y += lSins[i];
+    }
+  }
+
+  // new version
+  // calcolo dell'angolo della linea
+  float angle = atan2(y,x) * 180 / 3.14;
+  int map_angle = 0;
+  map_angle = -(angle) + 90;
+  int corrected_angle = map_angle;
+  corrected_angle = corrected_angle - imu_current_euler;
+
+  int out_direction = corrected_angle;
+  out_direction = out_direction + 180;
+  ldir = out_direction;
+
+  tline = millis();
+  while(millis() - tline <= 500){
+    readIMU();
+    drivePID(ldir, lspeed);
+    delay(10);
+  }
 
   // saves the ball sensors which is seeing the ball
   stopFlag = true;
   lineBallSensor = ball_sensor;
   lineBallDistance = ball_distance;
 
-}
-
-void calculate(){
-    byte line = 0;
-    // constructs a complete byte using the array that stores the interrupt data
-    for (int i = 0; i < INT_LUNG; i++) {
-      line |= linea[i] << i;
-    }
-
-    if (line == 0)
-      return;
-
-    // interpolates the data with sine and cosine and using atan2 construct an
-    // angle of exit
-
-    float x = 0, y = 0;
-
-    for (int i = 0; i < INT_LUNG; i++) {
-      if (linea[i] == 1) {
-        x += lCosins[i];
-        y += lSins[i];
-      }
-    }
-
-    // new version
-    // calcolo dell'angolo della linea
-    angle = atan2(y,x) * 180 / 3.14;
-    int map_angle = 0;
-    map_angle = -(angle) + 90;
-    int corrected_angle = map_angle;
-    corrected_angle = corrected_angle - imu_current_euler;
-
-    int out_direction = corrected_angle;
-    out_direction = out_direction + 180;
-    ldir = out_direction;
 }

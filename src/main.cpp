@@ -66,9 +66,6 @@ void setup() {
   attesa = 0;
   zoneIndex = 0;
   lineReading = 0;
-  angle = 0;
-  ldir = 0;
-  lspeed = 0;
 
   // bluetooth misc
   a = 0;
