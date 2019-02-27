@@ -19,7 +19,7 @@ void goalie() {
   atk_direction = goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
 
   //PALLA DIETRO
-  if(ball_sensor==9 || ball_sensor==10 || ball_sensor==1) {
+  if(ball_sensor==9 || ball_sensor==10 || ball_sensor==11) {
     if(ball_distance < 4) { //se la palla è vicina decido come muovermi in base alla zona per non uscire
       atk_speed = 200;
       if(zoneIndex==8 || zoneIndex==5 || zoneIndex==2) atk_direction = 225;
