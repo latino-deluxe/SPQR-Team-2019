@@ -82,14 +82,16 @@ void handleInterruptTrigonometry() {
   dovresti provare a vedere una specie di blocco da impostargli finché non
   risolve questo. Ho aggiunto il brakeI() nelle funzioni chiamate dagli
   interrupt
-  
+
   -Emaletta
 */
 void handleInterruptEasy() {
   tline = millis();
   while (millis() - tline <= 500) {
     readIMU();
-    // Va nella
+    // Va nella direzione opposta a quella a qui stava andando con goalie o
+    // space_invaders globalDir + 180 lo sposta di mezza circonferenza
+    // goniometria, %360 lo riporta nel primo giro
     ldir = (globalDir + 180) % 360;
     drivePID(ldir, lspeed);
     delay(10);
