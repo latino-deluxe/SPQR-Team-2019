@@ -66,13 +66,22 @@ void space_invaders_3() {
 void centerGoalPost() {
   int vel = 200;
 
-  if (zoneIndex < 6) {
+  if ((zoneIndex >= 0 && zoneIndex <= 2) || zoneIndex == 4)
     preparePID(180, vel);
-  } else if (zoneIndex == 8) {
-    preparePID(270, vel);
-  } else if (zoneIndex == 6) {
+  else if (zoneIndex == 3 || zoneIndex == 6)
     preparePID(90, vel);
-  } else if (zoneIndex == 7) {
+  else if (zoneIndex == 5 || zoneIndex == 8)
+    preparePID(270, vel);
+  else
     preparePID(0, 0);
-  }
+
+  // if (zoneIndex < 6) {
+  //   preparePID(180, vel);
+  // } else if (zoneIndex == 8) {
+  //   preparePID(270, vel);
+  // } else if (zoneIndex == 6) {
+  //   preparePID(90, vel);
+  // } else if (zoneIndex == 7) {
+  //   preparePID(0, 0);
+  // }
 }
