@@ -138,9 +138,10 @@ void loop() {
   // currently setting the role by code
   role = HIGH;
 
-  // if (flag_interrupt) {
-  //   handleInterruptTrigonometry();
-  // } else {
+  if (flag_interrupt) {
+    // handleInterruptTrigonometry();
+    handleInterruptEasy();
+  } else {
   if (ball_seen == true) {
     if (role == HIGH)
       goalie();
@@ -152,8 +153,9 @@ void loop() {
     else
       centerGoalPost();
   }
+}
 
   // final drive pid
   drivePID(globalDir, globalSpeed);
-  // }
+
 }
