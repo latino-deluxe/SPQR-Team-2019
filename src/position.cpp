@@ -109,7 +109,7 @@ void WhereAmI() {
 }
 
 void goCenter() {
-  
+
   // if (status_x == EST) {
   //   if (status_y == SUD) {
   //     preparePID(330, VEL_RET);
@@ -157,6 +157,17 @@ void goCenter() {
   //     preparePID(0, 0);
   //   }
   // }
+
+  if(zoneIndex == 8) preparePID(330, 180);
+  if(zoneIndex == 7) preparePID(0, 180);
+  if(zoneIndex == 6) preparePID(45, 180);
+  if(zoneIndex == 5) preparePID(270, 180);
+  if(zoneIndex == 4) preparePID(0, 0);
+  if(zoneIndex == 3) preparePID(90, 180);
+  if(zoneIndex == 2) preparePID(255, 180);
+  if(zoneIndex == 1) preparePID(180, 180);
+  if(zoneIndex == 0) preparePID(135, 180);
+
   return;
 }
 
@@ -198,7 +209,7 @@ void goGoalPost(int posizione) {
   return;
 }
 
-void update_sensors_all_test() {
+void update_sensors_all() {
   ball_read_position();
   readIMU();
   readUS();

@@ -200,3 +200,5 @@ extr int globalSpeed;
 extr int atk_direction;
 extr int atk_speed;
 extr int atk_offset;
+
+extr int Nint;

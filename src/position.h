@@ -4,7 +4,7 @@ void update_location_complete();
 void goCenter();
 void fugacentro();
 void goGoalPost(int);
-void update_sensors_all_test();
+void update_sensors_all();
 void guessZone();
 void updateGuessZone();
 void testGuessZone();

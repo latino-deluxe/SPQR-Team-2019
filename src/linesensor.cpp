@@ -12,12 +12,12 @@ void initLineSensors() {
   pinMode(LN4, INPUT);
   pinMode(LN5, INPUT);
 
-  attachInterrupt(LN0, line0, CHANGE);
-  attachInterrupt(LN1, line1, CHANGE);
-  attachInterrupt(LN2, line2, CHANGE);
-  attachInterrupt(LN3, line3, CHANGE);
-  attachInterrupt(LN4, line4, CHANGE);
-  attachInterrupt(LN5, line5, CHANGE);
+  attachInterrupt(LN0, line0, FALLING);
+  attachInterrupt(LN1, line1, FALLING);
+  attachInterrupt(LN2, line2, FALLING);
+  attachInterrupt(LN3, line3, FALLING);
+  attachInterrupt(LN4, line4, FALLING);
+  attachInterrupt(LN5, line5, FALLING);
 }
 
 // Each interrupt construct a byte

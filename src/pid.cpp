@@ -8,7 +8,7 @@
 // TIMED PID CONTROL TESTING
 void drivePID(signed int direzione, float vMot) {
   // mette in variabili globali direzione e velocitá precedenti e attuali
-  // new_Dir = direzione;
+  new_Dir = direzione;
   // old_vMot = new_vMot;
   // new_vMot = vMot;
 

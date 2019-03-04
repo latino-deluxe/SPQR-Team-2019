@@ -3,6 +3,8 @@
 #include "myspi_old.h"
 #include "pid.h"
 #include "vars.h"
+#include "motors.h"
+#include "position.h"
 #include <Arduino.h>
 #include <math.h>
 
@@ -17,9 +19,239 @@ bool stopFlag = false;
 // byte lineBallSensor = 0;
 int ldir = 0, lspeed = 180;
 
+void int_nuovo() {
+  long t0, dt;
+  byte sens;
+  byte si, sf;
+
+  brake();
+  t0 = millis();
+
+  tone(BUZZER, 1800);
+  do {
+    update_sensors_all();
+  } while((millis() - t0) <= 100);          //attesa per la frenata di 100ms
+  noTone(BUZZER);
+
+  sens=0;
+  if(linea[0] == 1) sens += 1;
+  if(linea[1] == 1) sens += 2;
+  if(linea[2] == 1) sens += 4;
+  if(linea[3] == 1) sens += 8;
+  if(linea[4] == 1) sens += 16;
+  if(linea[5] == 1) sens += 32;
+
+  DEBUG_PRINT.println(sens);
+  delay(1000);
+
+  switch (sens)
+  {
+    case 0b000001:            // sensori singoli 1
+
+      EXT_LINEA = 210;
+      dt = 300;
+      break;
+
+    case 0b000010:            // sensori singoli 2
+      EXT_LINEA = 270;
+      dt = 300;
+      break;
+
+    case 0b000100:            // sensori singoli 3
+      EXT_LINEA = 330;
+      dt = 300;
+      break;
+
+    case 0b001000:            // sensori singoli 4
+      EXT_LINEA = 30;
+      dt = 300;
+      break;
+
+    case 0b010000:            // sensori singoli 5
+      EXT_LINEA = 90;
+      dt = 300;
+      break;
+
+    case 0b100000:            // sensori singoli 6
+      EXT_LINEA = 150;
+      dt = 300;
+      break;
+
+    case 0b000011:   // attivati i sensori 1 e 2      // sta uscendo a destra
+    case 0b000110:   // attivati i sensori 2 e 3
+    case 0b000111:   // attivati i sensori 1  2 e 3
+    case 0b000101:
+      dt = 340;
+      EXT_LINEA = 270;
+      break;
+
+    case 0b110000:    // attivati i sensori 5 e 6       // sta uscendo a sinistra
+    case 0b011000:   //  attivati i sensori 5 e 4
+    case 0b111000:   //  attivati i sensori 6  5 e 4
+    case 0b101000:
+      dt = 340;
+      EXT_LINEA = 90;
+      break;
+
+    case 0b100001:    // attivati i sensori 6 1     sta uscendo in avanti
+      dt = 360;
+      EXT_LINEA = 180;
+      break;
+
+    case 0b001100:    // attivati i sensori 4 3      sta uscendo indietro
+      dt = 340;
+      EXT_LINEA = 0;
+      break;
+
+    case 0b100010:     // attivati 6 2
+    case 0b100011:    //attivati i sensori 6 2 1   sta in angolo Nord Est
+      dt = 340;
+      EXT_LINEA = 225;
+      break;
+
+    case 0b010001:     //attivati 6 5
+    case 0b110001:    // attivati i sensori 6 5 1   sta in angolo Nord Ovest
+      dt = 340;
+      EXT_LINEA = 135;
+      break;
+
+    case 0b001010:       // attivati 4 2
+    case 0b001110:      //attivati i sensori 4 3 2   sta in angolo Sud Est
+      dt = 340;
+      EXT_LINEA = 315;
+      break;
+
+    case 0b010100:     // attivati i sensori 5 3
+    case 0b011100:    // attivati i sensori 5 4 3     sta in angolo Sud Ovest
+      dt = 340;
+      EXT_LINEA = 45;
+      break;
+
+
+    case 0b011110:      //attivati i sensori 5 4 3 2     sta fuori quasi tutto dietro
+      dt = 500;
+      EXT_LINEA = 0;
+      break;
+
+    case 0b001011:     //attivati i sensori 4 2 1
+    case 0b001111:    //attivati i sensori 4 3 2 1
+      dt = 500;
+      EXT_LINEA = 315;
+      break;
+
+    case 0b110100:     //attivati i sensori 6 5 3
+    case 0b111100:    //attivati i sensori 6 5 4 3
+      dt = 500;
+      EXT_LINEA = 45;
+      break;
+
+    case 0b011001:     //attivati i sensori 5 4 1
+    case 0b111001:    //attivati i sensori 6 5 4 1
+      dt = 500;
+      EXT_LINEA = 135;
+      break;
+
+    case 0b100110:     //attivati i sensori 6 3 2
+    case 0b100111:    //attivati i sensori 6 3 2 1
+      dt = 500;
+      EXT_LINEA = 225;
+      break;
+
+    case 0b110011:    // attivati i sensori 6  1  5 e 2 sta fuori quasi tutto avanti
+      dt = 500;
+      EXT_LINEA = 180;
+      break;
+
+    case 0b101111:    // attivati i sensori 6  1  2  3  4 sta fuori a destra con solo 5 in campo
+      dt = 600;
+      EXT_LINEA = 270;
+      break;
+
+    case 0b111101:    // attivati i sensori 6  1  3  4  5 sta fuori a sinistra con solo 2 in campo
+      dt = 600;
+      EXT_LINEA = 90;
+      break;
+
+    case 0b110111:    // attivati i sensori 5  6  1  2  3   sta fuori a destra con solo 4 in campo (angolo NORD EST?)
+      dt = 600;
+      EXT_LINEA = 220;
+      break;
+
+    case 0b111011:    // attivati i sensori 4  5  6  1  2   sta fuori a sinistra con solo 3 in campo (angolo NORD OVEST?)
+      dt = 600;
+      EXT_LINEA = 120;
+      break;
+
+    case 0b111110:    // attivati i sensori 6  5  4  3  2  sta fuori indietro con solo 1 in campo (angolo SUD OVEST?)
+      dt = 600;
+      EXT_LINEA = 50;
+      break;
+
+    case 0b011111:    // attivati i sensori 1  2  3  4  5 sta fuori indietro con solo 6 in campo (angolo SUD EST?)
+      dt = 600;
+      EXT_LINEA = 310;
+      break;
+
+    case 0b000000:    // Tutti i sensori sono disattivi interrupt strano (line sensor =0)?
+      // sporco sul campo?
+      flag_interrupt = false;//considera conclusa la gestione dell'interrupt
+      // Nint = 0;
+      // danger = false;
+      for(int i=0; i<6; i++) linea[i] = 0;
+      return;
+      break;
+
+
+    case 0b010010:  //robot a cavallo della linea con fuori solo o 1,6 oppure 4,3 (attivi 5 e 2)
+
+        if ((ball_sensor > 14) || (ball_sensor < 6))   // vede la palla in avanti valutare && (us_fr<50)
+        {
+          EXT_LINEA = 180;
+        }
+        if ((ball_sensor > 7) && (ball_sensor < 13))  // vede la palla dietro valutare && (us_px<50)
+        {
+          EXT_LINEA = 0;
+        }
+        dt = 400;
+
+      break;
+
+
+    default:    // Si sono attivati 6 sensori o caso non previsto inverto il moto
+      dt = 450;
+      EXT_LINEA = new_Dir + 180 ;
+      if ( EXT_LINEA > 360) EXT_LINEA = EXT_LINEA - 360;
+        tone(BUZZER,20000,500);  // avviso che sono uscito
+      si = 0; // aggiustare
+      sf = 1;
+  }
+
+  t0 = millis();
+  VL_INT = 255;
+  do {
+    readIMU();
+    drivePID(EXT_LINEA, VL_INT);
+    // if(VL_INT < 255) VL_INT++;
+    delay(1);
+  } while((millis() - t0) < dt);
+
+  brake();
+
+  for(int i=0; i<30; i++) {
+    readIMU();
+    recenter(1.0);
+    delay(10);
+  }
+
+  brake();
+
+  for(int i=0; i<6; i++) linea[i] = 0;
+  flag_interrupt = false;
+}
+
+
 // brand new way to handle the interrupt: trigonometry!
 void handleInterruptTrigonometry() {
-
   if (stopFlag) {
     if (inSensorRange(lineBallSensor, (byte)1)/* && millis() - tstop < 1500 && ball_distance <= lineBallDistance*/) {
       drivePID(0, 0);
@@ -63,7 +295,7 @@ void handleInterruptTrigonometry() {
   ldir = out_direction;
 
   tline = millis();
-  while (millis() - tline <= 500) {
+  while (millis() - tline <= 700) {   //prima 500
     readIMU();
     drivePID(ldir, lspeed);
     delay(10);
