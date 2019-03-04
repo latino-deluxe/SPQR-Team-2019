@@ -3,4 +3,5 @@
 void mecojoni();
 
 void handleInterruptTrigonometry();
+void handleInterruptEasy();
 void calculate();

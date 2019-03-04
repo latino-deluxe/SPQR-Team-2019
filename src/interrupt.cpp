@@ -1,8 +1,8 @@
+#include "imu.h"
 #include "interrupt.h"
 #include "myspi_old.h"
 #include "pid.h"
 #include "vars.h"
-#include "imu.h"
 #include <Arduino.h>
 #include <math.h>
 
@@ -52,7 +52,7 @@ void handleInterruptTrigonometry() {
 
   // new version
   // calcolo dell'angolo della linea
-  float angle = atan2(y,x) * 180 / 3.14;
+  float angle = atan2(y, x) * 180 / 3.14;
   int map_angle = 0;
   map_angle = -(angle) + 90;
   int corrected_angle = map_angle;
@@ -63,7 +63,7 @@ void handleInterruptTrigonometry() {
   ldir = out_direction;
 
   tline = millis();
-  while(millis() - tline <= 500){
+  while (millis() - tline <= 500) {
     readIMU();
     drivePID(ldir, lspeed);
     delay(10);
@@ -73,5 +73,27 @@ void handleInterruptTrigonometry() {
   stopFlag = true;
   lineBallSensor = ball_sensor;
   lineBallDistance = ball_distance;
+}
 
+/*Per Ematino che oggi è l'unico che può
+  Controlla se così funziona:
+  Semplicemente quando vede interrupt va nella direzione opposta a dove stava
+  andando. Il punto è che nel frattempo potrebbe beccare altri interrupt,
+  dovresti provare a vedere una specie di blocco da impostargli finché non
+  risolve questo. Ho aggiunto il brakeI() nelle funzioni chiamate dagli
+  interrupt
+  
+  -Emaletta
+*/
+void handleInterruptEasy() {
+  tline = millis();
+  while (millis() - tline <= 500) {
+    readIMU();
+    // Va nella
+    ldir = (globalDir + 180) % 360;
+    drivePID(ldir, lspeed);
+    delay(10);
+  }
+
+  flag_interrupt = false;
 }
