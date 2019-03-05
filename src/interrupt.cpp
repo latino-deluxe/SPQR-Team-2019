@@ -20,7 +20,7 @@ bool stopFlag = false;
 int ldir = 0, lspeed = 180;
 
 void int_nuovo() {
-  long t0, dt;
+  long t0, dt, at;
   byte sens;
   byte si, sf;
 
@@ -41,8 +41,19 @@ void int_nuovo() {
   if(linea[4] == 1) sens += 16;
   if(linea[5] == 1) sens += 32;
 
-  DEBUG_PRINT.println(sens);
-  delay(1000);
+  // DEBUG_PRINT.println(sens);
+  // delay(1000);                           //DELAY DI DEBUG: funziona da dio ma scomodo in gioco, meglio fare così:
+
+  /*
+  *   Logica: per un secondo, se il sensore palla rimane uguale, ti inchiodi
+  *           non sono affatto sicuro che funzioni cos', da controllare in laboratorio
+  */
+
+  at = millis();
+  do {
+    if(inSensorRange(lineBallSensor, byte(1))) recenter(2.0);
+  } while((millis() - at) <= 1000);
+
 
   switch (sens)
   {
@@ -203,17 +214,9 @@ void int_nuovo() {
 
 
     case 0b010010:  //robot a cavallo della linea con fuori solo o 1,6 oppure 4,3 (attivi 5 e 2)
-
-        if ((ball_sensor > 14) || (ball_sensor < 6))   // vede la palla in avanti valutare && (us_fr<50)
-        {
-          EXT_LINEA = 180;
-        }
-        if ((ball_sensor > 7) && (ball_sensor < 13))  // vede la palla dietro valutare && (us_px<50)
-        {
-          EXT_LINEA = 0;
-        }
-        dt = 400;
-
+      if ((ball_sensor > 14) || (ball_sensor < 6)) EXT_LINEA = 180;   // vede la palla in avanti valutare
+      if ((ball_sensor > 7) && (ball_sensor < 13)) EXT_LINEA = 0;   // vede la palla dietro valutare
+      dt = 400;
       break;
 
 
@@ -221,9 +224,7 @@ void int_nuovo() {
       dt = 450;
       EXT_LINEA = new_Dir + 180 ;
       if ( EXT_LINEA > 360) EXT_LINEA = EXT_LINEA - 360;
-        tone(BUZZER,20000,500);  // avviso che sono uscito
-      si = 0; // aggiustare
-      sf = 1;
+      tone(BUZZER,20000,500);  // avviso che sono uscito
   }
 
   t0 = millis();
@@ -247,6 +248,7 @@ void int_nuovo() {
 
   for(int i=0; i<6; i++) linea[i] = 0;
   flag_interrupt = false;
+  lineBallSensor = ball_sensor;
 }
 
 
