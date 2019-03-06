@@ -1,5 +1,4 @@
 #include <Arduino.h>
-
 #include "goalie.h"
 #include "myspi_old.h"
 #include "pid.h"
@@ -25,17 +24,19 @@ void goalie() {
     if (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) {
       atk_speed = 255;
       if (zoneIndex == 0)
-        atk_offset = 50;
+        atk_offset = 90;
       if (zoneIndex == 1)
         atk_offset = 0;
       if (zoneIndex == 2)
-        atk_offset = -50;
+        atk_offset = -90;
     }
   } else {
     atk_offset = 0;
   }
 
-  preparePID(atk_direction, atk_speed, atk_offset);
+  atk_direction = atk_direction + atk_offset;
+
+  preparePID(atk_direction, atk_speed);
 }
 
 void palla_dietro() {
