@@ -7,50 +7,48 @@
 
 // TIMED PID CONTROL TESTING
 void drivePID(signed int direzione, float vMot) {
-  if(vMot == 0){
-    recenter(1.0);
-  }else{
-    // mette in variabili globali direzione e velocitá precedenti e attuali
-    old_Dir = new_Dir;
-    new_Dir = direzione;
-    old_vMot = new_vMot;
-    new_vMot = vMot;
+  // mette in variabili globali direzione e velocitá precedenti e attuali
+  new_Dir = direzione;
+  // old_vMot = new_vMot;
+  // new_vMot = vMot;
 
-    speed1 = ((-(sins[((direzione - 60) + 360) % 360])) * vMot); // mot 1
-    speed2 = ((sins[(direzione + 360) % 360]) * vMot);           // mot 2
-    speed3 = ((-(sins[(direzione + 60) % 360])) * vMot);         // mot 3
+  speed1 = ((-(sins[((direzione - 60) + 360) % 360])) * vMot); // mot 1
+  speed2 = ((sins[(direzione + 360) % 360]) * vMot);           // mot 2
+  speed3 = ((-(sins[(direzione + 60) % 360])) * vMot);         // mot 3
 
-    pidfactor = updatePid();
+  pidfactor = updatePid();
 
-    // da valutare se é opportuno
-    if (reaching_ball == true) {
-      pidfactor = pidfactor * 1.2;
-    }
+  speed1 += pidfactor;
+  speed2 += pidfactor;
+  speed3 += pidfactor;
 
-    speed1 += pidfactor;
-    speed2 += pidfactor;
-    speed3 += pidfactor;
+  // CheckSpeed(); // normalizza la velocita' a 255 max al motore piu' veloce e
+  // gli altri in proporzione
 
-    CheckSpeed(); // normalizza la velocita' a 255 max al motore piu' veloce e gli
-                  // altri in proporzione
+  speed1 = constrain(speed1, -255, 255);
+  speed2 = constrain(speed2, -255, 255);
+  speed3 = constrain(speed3, -255, 255);
 
-    // Send every speed to his motor
-    mot(2, int(speed2));
-    mot(1, int(speed1));
-    mot(3, int(speed3));
+  // Send every speed to his motor
+  mot(2, int(speed2));
+  mot(1, int(speed1));
+  mot(3, int(speed3));
 
-    // Serial.print(speed1);
-    // Serial.print("   ");
-    // Serial.print(speed2);
-    // Serial.print("   ");
-    // Serial.print(speed3);
-    // Serial.println("   ");
-  }
+  // Serial.print(speed1);
+  // Serial.print("   ");
+  // Serial.print(speed2);
+  // Serial.print("   ");
+  // Serial.print(speed3);
+  // Serial.println("   ");
+  old_Dir = direzione;
 }
 
-void preparePID(int direction, int speed){
+void preparePID(int direction, int speed) { preparePID(direction, speed, 0); }
+
+void preparePID(int direction, int speed, int offset) {
   globalDir = direction;
   globalSpeed = speed;
+  st = offset;
 }
 
 float updatePid() {
@@ -60,9 +58,9 @@ float updatePid() {
 
   // calcola l'errore di posizione rispetto allo 0
   if (imu_current_euler < 180)
-    delta = float(imu_current_euler);
+    delta = float(imu_current_euler + st);
   else
-    delta = float(imu_current_euler - 360);
+    delta = float((imu_current_euler - 360) - st);
 
   // calcola correzione proporzionale
   errorP = KP * delta;
@@ -70,6 +68,8 @@ float updatePid() {
   // calcola correzione derivativa
   errorD = KD * (delta - errorePre);
   errorePre = delta;
+
+  // DEBUG_PRINT.println(errorD);
 
   // calcola correzione integrativa
   integral =

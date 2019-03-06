@@ -1,4 +1,5 @@
 #include <Arduino.h>
+
 #ifndef MAIN
 #define extr extern
 #else
@@ -57,9 +58,12 @@
 #define SUD_EST 9
 
 // VARIABILI E COSTANTI DEL PID
-#define KP 0.7   // K proporzionale
-#define KI 0.001 // K integrativo
-#define KD 0.001 // K derivativo
+  #define KP 1.5   // K proporzionale
+  #define KI 0.1 // K integrativo
+  #define KD 3 // K derivativo
+  // #define KP 1.4
+  // #define KI 0.1
+  // #define KD 0.5
 // SPI
 #define SS_PIN 2
 // Linesensors e interrupt
@@ -111,7 +115,8 @@ extr int imu_temp_euler, imu_current_euler;
 // Line Sensors
 extr byte lineReading;
 extr volatile bool flag_interrupt;
-extr volatile byte nint; // numero di interrupt consecutivi prima della fine della gestione
+extr volatile byte
+    nint; // numero di interrupt consecutivi prima della fine della gestione
 extr volatile byte linea[INT_LUNG];
 extr int VL_INT;    // velocitá di uscita dalle linee
 extr int EXT_LINEA; // direzione di uscita dalla linea
@@ -178,6 +183,8 @@ extr unsigned long old_timer;
 // Interrupt
 extr byte lineBallSensor;
 extr byte lineBallDistance;
+// extr float angle;
+// extr int ldir, lspeed;
 // Comunicazione compagno
 extr int iAmHere;
 extr int friendZone;
@@ -187,3 +194,11 @@ extr bool comrade;
 // test new angle
 extr int globalDir;
 extr int globalSpeed;
+// extr int st;
+
+// attacco
+extr int atk_direction;
+extr int atk_speed;
+extr int atk_offset;
+
+extr int Nint;

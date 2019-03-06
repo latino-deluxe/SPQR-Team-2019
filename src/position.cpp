@@ -109,53 +109,65 @@ void WhereAmI() {
 }
 
 void goCenter() {
-  if (status_x == EST) {
-    if (status_y == SUD) {
-      preparePID(330, VEL_RET);
-    } else if (status_y == CENTRO) {
-      preparePID(270, VEL_RET);
-    } else if (status_y == NORD) {
-      preparePID(225, VEL_RET);
-    } else { // non conosco la y
-      preparePID(0,0);
-    }
-  }
-  if (status_x == OVEST) {
-    if (status_y == SUD) {
-      preparePID(45, VEL_RET);
-    } else if (status_y == CENTRO) {
-      preparePID(90, VEL_RET);
-    } else if (status_y == NORD) {
-      preparePID(135, VEL_RET);
-    } else { // non conosco la y
-      preparePID(0,0);
-    }
-  }
-  if (status_x == CENTRO) {
-    if (status_y == SUD) {
-      preparePID(0, VEL_RET);
-    } else if (status_y == CENTRO) {
-      preparePID(0,0);
-    } else if (status_y == NORD) {
-      preparePID(180, VEL_RET);
-    } else { // non conosco la y
-      preparePID(0,0);
-    }
-  }
-  if (status_x == 255) {
-    if (status_y == SUD) {
-      preparePID(0, VEL_RET);
 
-    } else if (status_y == CENTRO) {
-      preparePID(0,0);
+  // if (status_x == EST) {
+  //   if (status_y == SUD) {
+  //     preparePID(330, VEL_RET);
+  //   } else if (status_y == CENTRO) {
+  //     preparePID(270, VEL_RET);
+  //   } else if (status_y == NORD) {
+  //     preparePID(225, VEL_RET);
+  //   } else { // non conosco la y
+  //     preparePID(0, 0);
+  //   }
+  // }
+  // if (status_x == OVEST) {
+  //   if (status_y == SUD) {
+  //     preparePID(45, VEL_RET);
+  //   } else if (status_y == CENTRO) {
+  //     preparePID(90, VEL_RET);
+  //   } else if (status_y == NORD) {
+  //     preparePID(135, VEL_RET);
+  //   } else { // non conosco la y
+  //     preparePID(0, 0);
+  //   }
+  // }
+  // if (status_x == CENTRO) {
+  //   if (status_y == SUD) {
+  //     preparePID(0, VEL_RET);
+  //   } else if (status_y == CENTRO) {
+  //     preparePID(0, 0);
+  //   } else if (status_y == NORD) {
+  //     preparePID(180, VEL_RET);
+  //   } else { // non conosco la y
+  //     preparePID(0, 0);
+  //   }
+  // }
+  // if (status_x == 255) {
+  //   if (status_y == SUD) {
+  //     preparePID(0, VEL_RET);
+  //
+  //   } else if (status_y == CENTRO) {
+  //     preparePID(0, 0);
+  //
+  //   } else if (status_y == NORD) {
+  //     preparePID(180, VEL_RET);
+  //
+  //   } else { // non conosco la y
+  //     preparePID(0, 0);
+  //   }
+  // }
 
-    } else if (status_y == NORD) {
-      preparePID(180, VEL_RET);
+  if(zoneIndex == 8) preparePID(330, 180);
+  if(zoneIndex == 7) preparePID(0, 180);
+  if(zoneIndex == 6) preparePID(45, 180);
+  if(zoneIndex == 5) preparePID(270, 180);
+  if(zoneIndex == 4) preparePID(0, 0);
+  if(zoneIndex == 3) preparePID(90, 180);
+  if(zoneIndex == 2) preparePID(255, 180);
+  if(zoneIndex == 1) preparePID(180, 180);
+  if(zoneIndex == 0) preparePID(135, 180);
 
-    } else { // non conosco la y
-      preparePID(0,0);
-    }
-  }
   return;
 }
 
@@ -205,7 +217,11 @@ void update_sensors_all() {
 }
 
 void testPosition() {
-  update_sensors_all();
+
+  ball_read_position();
+  readIMU();
+  readUS();
+
   WhereAmI();
   DEBUG_PRINT.print("Measured location:\t");
   DEBUG_PRINT.print(status_x);
@@ -273,7 +289,9 @@ void updateGuessZone() {
 unsigned long ao;
 
 void gigaTestZone() {
-  update_sensors_all();
+  ball_read_position();
+  readIMU();
+  readUS();
   WhereAmI();
   guessZone();
 

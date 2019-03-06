@@ -21,5 +21,5 @@ void readIMU() {
 
 void testIMU() {
   readIMU();
-  Serial.println(imu_current_euler);
+  DEBUG_PRINT.println(imu_current_euler);
 }

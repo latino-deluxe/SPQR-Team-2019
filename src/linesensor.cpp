@@ -12,23 +12,47 @@ void initLineSensors() {
   pinMode(LN4, INPUT);
   pinMode(LN5, INPUT);
 
-  attachInterrupt(LN0, line0, CHANGE);
-  attachInterrupt(LN1, line1, CHANGE);
-  attachInterrupt(LN2, line2, CHANGE);
-  attachInterrupt(LN3, line3, CHANGE);
-  attachInterrupt(LN4, line4, CHANGE);
-  attachInterrupt(LN5, line5, CHANGE);
+  attachInterrupt(LN0, line0, FALLING);
+  attachInterrupt(LN1, line1, FALLING);
+  attachInterrupt(LN2, line2, FALLING);
+  attachInterrupt(LN3, line3, FALLING);
+  attachInterrupt(LN4, line4, FALLING);
+  attachInterrupt(LN5, line5, FALLING);
 }
 
 // Each interrupt construct a byte
-void line0() { linea[0] = !digitalRead(LN0); }
+void line0() {
+  linea[0] = !digitalRead(LN0);
+  flag_interrupt = true;
+  brakeI();
+}
 
-void line1() { linea[1] = !digitalRead(LN1); }
+void line1() {
+  linea[1] = !digitalRead(LN1);
+  flag_interrupt = true;
+  brakeI();
+}
 
-void line2() { linea[2] = !digitalRead(LN2); }
+void line2() {
+  linea[2] = !digitalRead(LN2);
+  flag_interrupt = true;
+  brakeI();
+}
 
-void line3() { linea[3] = !digitalRead(LN3); }
+void line3() {
+  linea[3] = !digitalRead(LN3);
+  flag_interrupt = true;
+  brakeI();
+}
 
-void line4() { linea[4] = !digitalRead(LN4); }
+void line4() {
+  linea[4] = !digitalRead(LN4);
+  flag_interrupt = true;
+  brakeI();
+}
 
-void line5() { linea[5] = !digitalRead(LN5); }
+void line5() {
+  linea[5] = !digitalRead(LN5);
+  flag_interrupt = true;
+  brakeI();
+}

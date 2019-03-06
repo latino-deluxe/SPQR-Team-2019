@@ -11,8 +11,8 @@
 #include "interrupt.h"
 #include "linesensor.h"
 #include "motors.h"
-#include "myspi_old.h"
 #include "mysoftware_serial.h"
+#include "myspi_old.h"
 #include "pid.h"
 #include "position.h"
 #include "space_invaders.h"
@@ -24,6 +24,9 @@ int SWS = 0;
 int SWD = 0;
 
 void setup() {
+  // analogWriteFrequency(4,  1000);
+  // analogWriteFrequency(7,  1000);
+  // analogWriteFrequency(10, 1000);
   // Now assign value to variables, first thing to do
   // IMU
   imu_current_euler = 0;
@@ -63,6 +66,7 @@ void setup() {
   attesa = 0;
   zoneIndex = 0;
   lineReading = 0;
+
   // bluetooth misc
   a = 0;
   old_timer = 0;
@@ -74,7 +78,13 @@ void setup() {
   // global vars for angles
   globalDir = 0;
   globalSpeed = 0;
+  st = 0;
+  // attacco
+  atk_direction = 0;
+  atk_speed = 0;
+  atk_offset = 0;
   // end of variable set up
+  Nint = 0;
 
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
@@ -103,7 +113,6 @@ void setup() {
 }
 
 void loop() {
-
   SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
 
@@ -111,36 +120,42 @@ void loop() {
   // WhereAmI();
   // space_invaders();
 
-  // comunicazione(2000);
+  // comunicazione(2000);u
   // teamZone();
   // whereAreYou();
   // if(millis() - t1 >= 200){
   //   BT.println(imu_current_euler);
   // }
 
-  // game routine
-  update_sensors_all();
+  // // game routine
+
+  ball_read_position();
+  readIMU();
+  readUS();
   WhereAmI();
   guessZone();
   calculateZoneIndex();
 
   // currently setting the role by code
-  role = LOW;
-  BT.print(role);
-  if (ball_seen == true) {
-    if (role == HIGH)
-      goalie();
-    else
-      space_invaders();
-  } else {
-    if (role == HIGH)
-      goCenter();
-    else
-      centerGoalPost();
+  role = HIGH;
+
+  if (flag_interrupt) {
+    // handleInterruptTrigonometry();
+    // handleInterruptEasy();
+    // gest_interrupt();
+    int_nuovo();
   }
 
-  //handleInterruptTrigonometry();
+  if (ball_seen == true) {
+    if (role == HIGH) goalie();
+    else space_invaders_3();
+  }
+  else {
+    if (role == HIGH) goCenter();
+    else centerGoalPost();
+  }
+
   // final drive pid
   drivePID(globalDir, globalSpeed);
-  gigaTestZone();
+  // DEBUG_PRINT.println(ball_sensor);
 }
