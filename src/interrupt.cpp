@@ -41,7 +41,12 @@ void int_nuovo() {
   if(linea[4] == 1) sens += 16;
   if(linea[5] == 1) sens += 32;
 
-  // DEBUG_PRINT.println(sens);
+  DEBUG_PRINT.println(sens);
+  for (int i = 0; i < 4; i++) {
+    DEBUG_PRINT.print("US: ");
+    DEBUG_PRINT.print(us_values[i]);
+    DEBUG_PRINT.print(" | ");
+  }
   // delay(1000);                           //DELAY DI DEBUG: funziona da dio ma scomodo in gioco, meglio fare così:
 
   /*
@@ -51,12 +56,16 @@ void int_nuovo() {
 
   at = millis();
   do {
-    if(inSensorRange(lineBallSensor, byte(1))) recenter(2.0);
+    ball_read_position();
+    if(inSensorRange(lineBallSensor, byte(1))) {
+      readIMU();
+      recenter(2.0);
+      delay(1);
+    }else break;
   } while((millis() - at) <= 1000);
 
 
-  switch (sens)
-  {
+  switch (sens){
     case 0b000001:            // sensori singoli 1
 
       EXT_LINEA = 210;
