@@ -7,3 +7,4 @@ float torad(float);
 void initOmnidirectionalSins();
 void mot(byte, int);
 void testMotors();
+void inchioda();

@@ -1,5 +1,6 @@
 #include "motors.h"
 #include "vars.h"
+#include "pid.h"
 #include <Arduino.h>
 
 byte INA_MOT[4] = {0, 17, 5, 8}; //{0,  16,  5,  8};           // INA pin
@@ -107,4 +108,13 @@ void testMotors() {
     turnMotor(i, 0, 0, 100);
     delay(300);
   }
+}
+
+void inchioda() {
+  unsigned long it;
+
+  it = millis();
+  do {
+    drivePID(((180 + globalDir) % 360), 255);
+  }while((millis() - it) < 100);
 }

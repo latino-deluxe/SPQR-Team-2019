@@ -24,7 +24,7 @@ void int_nuovo() {
   byte sens;
   byte si, sf;
 
-  brake();
+  inchioda();    //al posto di brake, fa 100ms di corsa nella direzione opposta
   t0 = millis();
 
   tone(BUZZER, 1800);
@@ -32,6 +32,8 @@ void int_nuovo() {
     update_sensors_all();
   } while((millis() - t0) <= 100);          //attesa per la frenata di 100ms
   noTone(BUZZER);
+
+  brake();
 
   sens=0;
   if(linea[0] == 1) sens += 1;
@@ -41,12 +43,12 @@ void int_nuovo() {
   if(linea[4] == 1) sens += 16;
   if(linea[5] == 1) sens += 32;
 
-  DEBUG_PRINT.println(sens);
-  for (int i = 0; i < 4; i++) {
-    DEBUG_PRINT.print("US: ");
-    DEBUG_PRINT.print(us_values[i]);
-    DEBUG_PRINT.print(" | ");
-  }
+  // DEBUG_PRINT.println(sens);
+  // for (int i = 0; i < 4; i++) {
+  //   DEBUG_PRINT.print("US: ");
+  //   DEBUG_PRINT.print(us_values[i]);
+  //   DEBUG_PRINT.print(" | ");
+  // }
   // delay(1000);                           //DELAY DI DEBUG: funziona da dio ma scomodo in gioco, meglio fare così:
 
   /*
@@ -237,11 +239,11 @@ void int_nuovo() {
   }
 
   t0 = millis();
-  VL_INT = 255;
+  VL_INT = 50;
   do {
     readIMU();
     drivePID(EXT_LINEA, VL_INT);
-    // if(VL_INT < 255) VL_INT++;
+    if(VL_INT < 255) VL_INT++;
     delay(1);
   } while((millis() - t0) < dt);
 
