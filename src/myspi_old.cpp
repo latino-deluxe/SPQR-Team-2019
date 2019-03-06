@@ -62,15 +62,10 @@ bool inSensorRange(byte sensor, byte range) {
     // BT.print(getSensorIndex(sensor - i));
     // BT.print(" | ");
     // BT.println(getSensorIndex(sensor + i))
-    if (ball_sensor == getSensorIndex(sensor - i) ||
-        ball_sensor == getSensorIndex(sensor + i)) {
+    if (ball_sensor == ((sensor + 20) % 20 - i) ||
+        ball_sensor == ((sensor + 20) % 20 + i)) {
       return true;
     }
   }
   return false;
-}
-
-byte getSensorIndex(byte sensor) {
-  sensor = sensor % 20;
-  return sensor < 0 ? (byte)(20 + sensor) : (byte)(sensor);
 }
