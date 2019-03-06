@@ -31,6 +31,11 @@ void WhereAmI() {
   good_field_y = false; // non é buona y
   goal_zone = false;    // non sono davanti alla porta avversaria
 
+  if (role == HIGH)
+    DxF = DxF_Atk;
+  else
+    DxF = DxF_Def;
+
   Lx_mis = us_dx + us_sx + robot; // larghezza totale stimata
   Ly_mis = us_fr + us_px + robot; // lunghezza totale stimata
 
@@ -158,15 +163,24 @@ void goCenter() {
   //   }
   // }
 
-  if(zoneIndex == 8) preparePID(330, 180);
-  if(zoneIndex == 7) preparePID(0, 180);
-  if(zoneIndex == 6) preparePID(45, 180);
-  if(zoneIndex == 5) preparePID(270, 180);
-  if(zoneIndex == 4) preparePID(0, 0);
-  if(zoneIndex == 3) preparePID(90, 180);
-  if(zoneIndex == 2) preparePID(255, 180);
-  if(zoneIndex == 1) preparePID(180, 180);
-  if(zoneIndex == 0) preparePID(135, 180);
+  if (zoneIndex == 8)
+    preparePID(330, 180);
+  if (zoneIndex == 7)
+    preparePID(0, 180);
+  if (zoneIndex == 6)
+    preparePID(45, 180);
+  if (zoneIndex == 5)
+    preparePID(270, 180);
+  if (zoneIndex == 4)
+    preparePID(0, 0);
+  if (zoneIndex == 3)
+    preparePID(90, 180);
+  if (zoneIndex == 2)
+    preparePID(255, 180);
+  if (zoneIndex == 1)
+    preparePID(180, 180);
+  if (zoneIndex == 0)
+    preparePID(135, 180);
 
   return;
 }

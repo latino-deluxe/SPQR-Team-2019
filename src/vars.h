@@ -31,7 +31,12 @@
 // valore massimo accettabile di lunghezza tra le porte// con misura x OK
 // con us_dx o us_sx < DxF sto nelle fasce 30 + 30 - 1/2
 // robot
-#define DxF 48
+
+#define DxF_Atk 48 // per attaccante, fascia centrale allargata
+#define DxF_Def 48 // per portiere, fascia centrale ristretta
+// questa roba viene fatta dentro WhereAmI
+extr int DxF;
+
 // con  misura y OK e robot a EST o A OVEST con us_fx o us_px < DyF sto a
 // NORD o a SUD  era - 10
 #define DyF 91
@@ -58,12 +63,12 @@
 #define SUD_EST 9
 
 // VARIABILI E COSTANTI DEL PID
-  #define KP 1.5   // K proporzionale
-  #define KI 0.1 // K integrativo
-  #define KD 3 // K derivativo
-  // #define KP 1.4
-  // #define KI 0.1
-  // #define KD 0.5
+#define KP 1.5 // K proporzionale
+#define KI 0.1 // K integrativo
+#define KD 3   // K derivativo
+// #define KP 1.4
+// #define KI 0.1
+// #define KD 0.5
 // SPI
 #define SS_PIN 2
 // Linesensors e interrupt

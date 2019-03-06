@@ -116,7 +116,7 @@ void loop() {
   SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
 
-  DEBUG_PRINT.println(SWS);
+  // DEBUG_PRINT.println(SWS);
 
   // update_sensors_all();
   // WhereAmI();
@@ -139,25 +139,23 @@ void loop() {
   calculateZoneIndex();
 
   // currently setting the role by code
-  role = HIGH;
 
+  role = LOW;
   if (flag_interrupt) {
-    // handleInterruptTrigonometry();
-    // handleInterruptEasy();
-    // gest_interrupt();
     int_nuovo();
   }
 
   if (ball_seen == true) {
-    if (role == HIGH) goalie();
-    else space_invaders_3();
+    if (role == HIGH)
+      goalie();
+    else
+      space_invaders_3();
+  } else {
+    if (role == HIGH)
+      goCenter();
+    else
+      centerGoalPost();
   }
-  else {
-    if (role == HIGH) goCenter();
-    else centerGoalPost();
-  }
-
   // final drive pid
   drivePID(globalDir, globalSpeed);
-  // DEBUG_PRINT.println(ball_sensor);
 }
