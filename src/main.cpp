@@ -116,6 +116,8 @@ void loop() {
   SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
 
+  DEBUG_PRINT.println(SWS);
+
   // update_sensors_all();
   // WhereAmI();
   // space_invaders();
