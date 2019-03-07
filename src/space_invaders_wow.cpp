@@ -19,41 +19,19 @@ void keeper() {
 }
 
 void space_invaders_3() {
-  if (zoneIndex >= 6) {
-    if (us_px <= 25) {
-      preparePID(0, 125);
-      return;
-    }
-    if (us_px >= 45) {
-      preparePID(180, 125);
-      return;
-    }
-
-    if (ball_sensor >= 1 && ball_sensor <= 6) {
-      if (us_dx < 70) {
-        preparePID(0, 0);
-      } else {
-        preparePID(90, 180);
-      }
-    } else if (ball_sensor >= 14 && ball_sensor <= 19) {
-      if (us_sx < 70) {
-        preparePID(0, 0);
-      } else {
-        preparePID(270, 180);
-      }
-    } else if (ball_sensor > 7 && ball_sensor < 14) {
-      palla_dietro();
-    } else {
-      preparePID(0, 0);
-    }
-  } else {
-    centerGoalPost();
+  if(ball_sensor >= 1 && ball_sensor <= 7){
+    if(us_dx > 70) preparePID(90, 180);
+    else preparePID(0, 0);
+  }else if(ball_sensor >= 14 && ball_sensor <= 19){
+      if(us_sx > 70) preparePID(270, 180);
+      else preparePID(0, 0);
+  }else{
+    preparePID(0,0);
   }
 }
 
 void centerGoalPost() {
   int vel = 200;
-
   if ((zoneIndex >= 0 && zoneIndex <= 2) || zoneIndex == 4)
     preparePID(180, vel);
   else if (zoneIndex == 3 || zoneIndex == 6)
@@ -62,14 +40,4 @@ void centerGoalPost() {
     preparePID(270, vel);
   else
     preparePID(0, 0);
-
-  // if (zoneIndex < 6) {
-  //   preparePID(180, vel);
-  // } else if (zoneIndex == 8) {
-  //   preparePID(270, vel);
-  // } else if (zoneIndex == 6) {
-  //   preparePID(90, vel);
-  // } else if (zoneIndex == 7) {
-  //   preparePID(0, 0);
-  // }
 }

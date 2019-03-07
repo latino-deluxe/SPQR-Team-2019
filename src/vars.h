@@ -33,7 +33,7 @@
 // robot
 
 #define DxF_Atk 48 // per attaccante, fascia centrale allargata
-#define DxF_Def 48 // per portiere, fascia centrale ristretta
+#define DxF_Def 65 // per portiere, fascia centrale ristretta
 // questa roba viene fatta dentro WhereAmI
 extr int DxF;
 
@@ -113,7 +113,7 @@ extr int DxF;
 
 #define BT Serial1
 
-#define DEBUG_PRINT BT
+#define DEBUG_PRINT Serial
 
 // IMU
 extr int imu_temp_euler, imu_current_euler;
