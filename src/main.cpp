@@ -16,6 +16,7 @@
 #include "pid.h"
 #include "position.h"
 #include "space_invaders.h"
+#include "camera.h"
 #include "us.h"
 #include "vars.h"
 
@@ -86,6 +87,12 @@ void setup() {
   // end of variable set up
   Nint = 0;
 
+  //CAMERA
+  p = 0;
+  XP_SX = false;
+  XP_DX = false;
+  x = 0;
+
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
   pinMode(16, INPUT_DISABLE); // pin 16 in corto tra 3.3V e massa
@@ -135,11 +142,13 @@ void loop() {
   WhereAmI();
   guessZone();
   calculateZoneIndex();
+  goalPosition();
 
   // gigaTestZone();
 
-  // currently setting the role by code
+  // currently setting the role and the goal by code
   role = LOW;
+  p = 1;                               // dove 1=Blu 0=Gialla
   if (flag_interrupt) {
     int_nuovo();
   }

@@ -115,6 +115,8 @@ extr int DxF;
 
 #define DEBUG_PRINT Serial
 
+#define CAMERA Serial2
+
 // IMU
 extr int imu_temp_euler, imu_current_euler;
 // Line Sensors
@@ -205,5 +207,11 @@ extr int globalSpeed;
 extr int atk_direction;
 extr int atk_speed;
 extr int atk_offset;
-
 extr int Nint;
+
+// variabili camera
+#define centrop 125              //valore letto dalla camera come centro
+extr int p;                      //variabile dello switch che decide dove bisogna attaccare
+extr bool XP_SX;
+extr bool XP_DX;
+extr int x;

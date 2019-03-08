@@ -13,26 +13,16 @@ void goalie() {
                              AA14, AA15, AA16, AA17, AA18, AA19};
 
   atk_speed = 180; // forse inutile, lo imposto per livellare
-  atk_direction =
-      goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
+  atk_direction = goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
 
   // PALLA DIETRO
   palla_dietro();
 
   // STORCIMENTO (senza camera, alla vecchia maniera)
-  if (ball_distance < 2) {
-    if (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) {
-      atk_speed = 255;
-      if (zoneIndex == 0)
-        atk_offset = 90;
-      if (zoneIndex == 1)
-        atk_offset = 0;
-      if (zoneIndex == 2)
-        atk_offset = -90;
-    }
-  } else {
-    atk_offset = 0;
-  }
+  storcimentoZone();
+
+  //CENTROPORTA CON CAMERA
+  storcimentoPorta();
 
   atk_direction = atk_direction + atk_offset;
 
@@ -70,4 +60,45 @@ void palla_dietro() {
         atk_direction = 100;
     }
   }
+}
+
+void storcimentoZone() {
+  if (ball_distance < 2) {
+    if (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) {
+      atk_speed = 255;
+      if (zoneIndex == 0)
+        atk_offset = 90;
+      if (zoneIndex == 1)
+        atk_offset = 0;
+      if (zoneIndex == 2)
+        atk_offset = -90;
+    }
+  } else {
+    atk_offset = 0;
+  }
+}
+
+
+void storcimentoPorta() {
+    /*------VECCHIO SISTEMA CON BOOLEANE------*/
+
+    // if(x>160) XP_SX=true;      //porta a sinistra del robot
+    // else XP_SX=false;
+    // if(x<35) XP_DX=true;      //porta a destra del robot
+    // else XP_DX=false;
+    // if(x==999) {
+    //   if(status_x==EST) XP_SX==true;
+    //   if(status_x==OVEST) XP_DX==true;
+    // }
+
+
+
+
+    /*------PROVA CON DATO DINAMICO------*/
+    //se per esempio il nostro centro della porta è 125
+    //impostiamo uno storcimento dinamico in base a quanto il numero
+    //è grande/piccolo da 125
+    //esempio su codice:
+    x = x - centrop;
+    atk_offset = x;
 }
