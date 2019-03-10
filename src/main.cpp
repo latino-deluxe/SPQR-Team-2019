@@ -6,6 +6,7 @@
 
 #include "bluetooth.h"
 #include "chat.h"
+#include "camera.h"
 #include "goalie.h"
 #include "imu.h"
 #include "interrupt.h"
@@ -16,7 +17,6 @@
 #include "pid.h"
 #include "position.h"
 #include "space_invaders.h"
-#include "camera.h"
 #include "us.h"
 #include "vars.h"
 
@@ -127,9 +127,7 @@ void loop() {
   // WhereAmI();
   // space_invaders();
 
-  // comunicazione(2000);u
-  // teamZone();
-  // whereAreYou();
+
   // if(millis() - t1 >= 200){
   //   BT.println(imu_current_euler);
   // }
@@ -143,6 +141,8 @@ void loop() {
   guessZone();
   calculateZoneIndex();
   goalPosition();
+  teamZone();
+  comunicazione(2000);
 
   // gigaTestZone();
 
@@ -160,6 +160,9 @@ void loop() {
     if (role == HIGH) goCenter();
     else centerGoalPost();
   }
+
+  if((comrade == true) && (role == HIGH) && (zoneIndex > 6)) goCenter();
+
   // final drive pid
   drivePID(globalDir, globalSpeed);
 }

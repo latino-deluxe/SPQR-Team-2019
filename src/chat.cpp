@@ -22,7 +22,7 @@ bool comunicazione(int intervallo) {
 
 // sends via bt the value of the zoneIndex
 void teamZone() {                                     //DA METTERE IN OGNI LOOP
-  calculateZoneIndex();
+  // calculateZoneIndex();
   iAmHere = zoneIndex;
   if (count < 30) {                                   //ogni 30 cicli invia il dato della zona al compagno
     count++;
@@ -46,6 +46,5 @@ void whereAreYou() {
   // }
 
   /*-----NUOVA LOGICA DA SCRIVERE-----*/
-  //Se il portiere è in gioco, l'attaccante non deve andare nelle zone 7,8,9
   //Se robot si trova da solo deve switchare il ruolo a PortiereViolento, funzione portiere completa con aggiunto di funzione di attacco menamoli (da scrivere)
 }
