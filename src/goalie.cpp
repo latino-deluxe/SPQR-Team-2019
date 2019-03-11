@@ -116,7 +116,6 @@ void storcimentoZone() {
 }
 
 void storcimentoPorta() {
-<<<<<<< HEAD
   /*------VECCHIO SISTEMA CON BOOLEANE------*/
 
   // if(x>160) XP_SX=true;      //porta a sinistra del robot
@@ -131,31 +130,11 @@ void storcimentoPorta() {
   /*------PROVA CON DATO DINAMICO------*/
   // se per esempio il nostro centro della porta è 125
   // impostiamo uno storcimento dinamico in base a quanto il numero
-  //è grande/piccolo da 125
+  //è grande/piccolo da 113
   // esempio su codice:
-  x = x - centrop;
-  atk_offset = x;
-  == == == =
-               /*------VECCHIO SISTEMA CON BOOLEANE------*/
 
-      // if(x>160) XP_SX=true;      //porta a sinistra del robot
-      // else XP_SX=false;
-      // if(x<35) XP_DX=true;      //porta a destra del robot
-      // else XP_DX=false;
-      // if(x==999) {
-      //   if(status_x==EST) XP_SX==true;
-      //   if(status_x==OVEST) XP_DX==true;
-      // }
+  // tone(BUZZER, 120000, 150);
 
-      /*------PROVA CON DATO DINAMICO------*/
-      // se per esempio il nostro centro della porta è 125
-      // impostiamo uno storcimento dinamico in base a quanto il numero
-      //è grande/piccolo da 113
-      // esempio su codice:
-
-      // tone(BUZZER, 120000, 150);
-
-      portx = portx - centrop;
+  portx = portx - centrop;
   atk_offset = portx;
->>>>>>> a101796eb1626df179e98e23b834fd659a80ce63
 }
