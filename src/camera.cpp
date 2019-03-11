@@ -67,10 +67,10 @@ void goalPosition() {
 
 if (datavalid==1)  {
   if(p=1){          //leggi porta blu
-    x=valB;
+    portx=valB;
   }
   else {            //leggi porta gialla
-    x=valY;
+    portx=valY;
   }
   datavalid = 0;
   }

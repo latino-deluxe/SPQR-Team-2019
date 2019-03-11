@@ -18,11 +18,11 @@ void goalie() {
   // PALLA DIETRO
   palla_dietro();
 
-  // STORCIMENTO (senza camera, alla vecchia maniera)
+  // STORCIMENTO (senza camera, alla vecchia maniera) FUNZNONA
   storcimentoZone();
 
   //CENTROPORTA CON CAMERA
-  storcimentoPorta();
+  // storcimentoPorta();
 
   atk_direction = atk_direction + atk_offset;
 
@@ -97,8 +97,11 @@ void storcimentoPorta() {
     /*------PROVA CON DATO DINAMICO------*/
     //se per esempio il nostro centro della porta è 125
     //impostiamo uno storcimento dinamico in base a quanto il numero
-    //è grande/piccolo da 125
+    //è grande/piccolo da 113
     //esempio su codice:
-    x = x - centrop;
-    atk_offset = x;
+
+    // tone(BUZZER, 120000, 150);
+
+    portx = portx - centrop;
+    atk_offset = portx;
 }

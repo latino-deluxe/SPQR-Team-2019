@@ -91,7 +91,7 @@ void setup() {
   p = 0;
   XP_SX = false;
   XP_DX = false;
-  x = 0;
+  portx = 0;
 
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
@@ -114,6 +114,7 @@ void setup() {
   initOmnidirectionalSins();
   initBluetooth();
   initSoftwareSerial();
+  CAMERA.begin(19200);
   // valStringY.reserve(30);                                     //riserva
   // 30byte per le stringhe valStringB.reserve(30);  //  tone(27, 1000, 500);
   digitalWrite(31, HIGH);
@@ -141,13 +142,13 @@ void loop() {
   guessZone();
   calculateZoneIndex();
   goalPosition();
-  teamZone();
-  comunicazione(2000);
+  // teamZone();            //DA USARE CON COMPAGNO
+  // comunicazione(2000);
 
-  // gigaTestZone();
+  gigaTestZone();
 
   // currently setting the role and the goal by code
-  role = LOW;
+  role = HIGH;
   p = 1;                               // dove 1=Blu 0=Gialla
   if (flag_interrupt) {
     int_nuovo();
@@ -161,7 +162,7 @@ void loop() {
     else centerGoalPost();
   }
 
-  if((comrade == true) && (role == HIGH) && (zoneIndex > 6)) goCenter();
+  // if((comrade == true) && (role == HIGH) && (zoneIndex > 6)) goCenter();     //DA USARE CON COMPAGNO
 
   // final drive pid
   drivePID(globalDir, globalSpeed);
