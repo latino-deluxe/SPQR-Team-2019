@@ -5,8 +5,8 @@
 #include <Arduino.h>
 
 #include "bluetooth.h"
-#include "chat.h"
 #include "camera.h"
+#include "chat.h"
 #include "goalie.h"
 #include "imu.h"
 #include "interrupt.h"
@@ -87,7 +87,7 @@ void setup() {
   // end of variable set up
   Nint = 0;
 
-  //CAMERA
+  // CAMERA
   p = 0;
   XP_SX = false;
   XP_DX = false;
@@ -128,7 +128,6 @@ void loop() {
   // WhereAmI();
   // space_invaders();
 
-
   // if(millis() - t1 >= 200){
   //   BT.println(imu_current_euler);
   // }
@@ -145,24 +144,26 @@ void loop() {
   // teamZone();            //DA USARE CON COMPAGNO
   // comunicazione(2000);
 
-  gigaTestZone();
-
   // currently setting the role and the goal by code
   role = HIGH;
-  p = 1;                               // dove 1=Blu 0=Gialla
+  p = 1; // dove 1=Blu 0=Gialla
   if (flag_interrupt) {
     int_nuovo();
   }
   if (ball_seen == true) {
-    if (role == HIGH) goalie();
-    else space_invaders_3();
-  }
-  else {
-    if (role == HIGH) goCenter();
-    else centerGoalPost();
+    if (role == HIGH)
+      goalie();
+    else
+      space_invaders_3();
+  } else {
+    if (role == HIGH)
+      goCenter();
+    else
+      centerGoalPost();
   }
 
-  // if((comrade == true) && (role == HIGH) && (zoneIndex > 6)) goCenter();     //DA USARE CON COMPAGNO
+  // if((comrade == true) && (role == HIGH) && (zoneIndex > 6)) goCenter(); //DA
+  // USARE CON COMPAGNO
 
   // final drive pid
   drivePID(globalDir, globalSpeed);
