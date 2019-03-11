@@ -1,3 +1,5 @@
+#include "bluetooth.h"
+#include "chat.h"
 #include "goalie.h"
 #include "imu.h"
 #include "motors.h"
@@ -13,20 +15,164 @@
 unsigned long t = 0;
 int c = 0;
 
-void keeper() {
-  // recenter(2.0);
-  // if(ball_distance)
+// VARIABILI PER IL PORTIERE
+float bd = 0;
+long ta;
+bool atk_p = false;
+
+byte ball_array[5];
+short i;
+byte vel_por = 255;
+long diff;
+float ball_distance_precise;
+
+void space_invaders_m() {
+
+  if (i = 0) {
+    ball_array[0] = ball_distance;
+    i++;
+  } else if (i = 1) {
+    ball_array[1] = ball_distance;
+    i++;
+  }
+  if (i = 2) {
+    ball_array[2] = ball_distance;
+    i++;
+  } else if (i = 3) {
+    ball_array[3] = ball_distance;
+    i++;
+  } else if (i = 4) {
+    ball_array[4] = ball_distance;
+    i = 0;
+  }
+
+  comunicazione(1000);
+
+  ball_distance_precise = (ball_array[0] + ball_array[1] + ball_array[2] +
+                           ball_array[3] + ball_array[4]) /
+                          5;
+  ball_distance_precise = (ball_distance_precise * 100) / 100;
+
+  if (comrade == true) {
+    if (ball_sensor == 0) {
+      brake();
+      readIMU(); // reads the imu euler angle >imu_current_euler<
+      recenter(1.0);
+    }
+    if ((ball_sensor >= 1) && (ball_sensor <= 6)) {
+      drivePID(90, GOALIE_P);
+    }
+    if ((ball_sensor <= 19) && (ball_sensor >= 14)) {
+      drivePID(270, GOALIE_P);
+    }
+    if ((ball_sensor < 14) && (ball_sensor > 6)) {
+      // menamoli();
+      goalie();
+    }
+
+    if (us_px > 35) {
+      drivePID(180, 150);
+    }
+    if (us_px < 18) {
+      drivePID(0, 150);
+    }
+    atk_p = false;
+  }
+
+  else {
+    // if (ball_distance_precise < 3) {
+    if ((((bd - ball_distance_precise) != 0) ||
+         ((bd - ball_distance_precise) != -0.2) ||
+         ((bd - ball_distance_precise) != 0.2))) {
+      bd = ball_distance_precise;
+    } else
+      ta = millis();
+
+    diff = millis() - ta;
+    if ((diff > 4000) && (diff != millis())) {
+      atk_p = true;
+    }
+    //}
+
+    if (atk_p == false) {
+
+      if (ball_sensor == 0) {
+        brake();
+        readIMU(); // reads the imu euler angle >imu_current_euler<
+        recenter(1.0);
+      }
+      if ((ball_sensor >= 1) && (ball_sensor <= 6)) {
+        drivePID(90, GOALIE_P);
+      }
+      if ((ball_sensor <= 19) && (ball_sensor >= 14)) {
+        drivePID(270, GOALIE_P);
+      }
+      if ((ball_sensor < 14) && (ball_sensor > 6)) {
+        //  menamoli();
+        goalie();
+      }
+
+      if (us_px > 35) {
+        drivePID(180, 150);
+      }
+      if (us_px < 18) {
+        drivePID(0, 150);
+      }
+    }
+
+    else if ((atk_p == true) && (ball_distance_precise < 0.7)) {
+      // menamoli();
+      goalie();
+    } else if ((atk_p == true) && (ball_distance_precise >= 0.7)) {
+
+      if (ball_sensor == 0) {
+        brake();
+        readIMU(); // reads the imu euler angle >imu_current_euler<
+        recenter(1.0);
+      }
+      if ((ball_sensor >= 1) && (ball_sensor <= 6)) {
+        drivePID(90, GOALIE_P);
+      }
+      if ((ball_sensor <= 19) && (ball_sensor >= 14)) {
+        drivePID(270, GOALIE_P);
+      }
+      if ((ball_sensor < 14) && (ball_sensor > 6)) {
+        // menamoli();
+        goalie();
+      }
+
+      if (us_px > 37) {
+        drivePID(180, 150);
+      }
+      if (us_px < 18) {
+        drivePID(0, 150);
+      }
+    }
+  }
+
+  return;
 }
 
 void space_invaders_3() {
-  if(ball_sensor >= 1 && ball_sensor <= 7){
-    if(us_dx > 70) preparePID(90, 180);
-    else preparePID(0, 0);
-  }else if(ball_sensor >= 14 && ball_sensor <= 19){
-      if(us_sx > 70) preparePID(270, 180);
-      else preparePID(0, 0);
-  }else{
-    preparePID(0,0);
+  st = 0;
+  if (us_px > 50) {
+    centerGoalPost();
+  } else {
+    if (ball_sensor >= 1 && ball_sensor <= 6) {
+      if (us_dx > 60)
+        preparePID(90, 180);
+      else
+        preparePID(0, 0);
+    } else if (ball_sensor >= 14 && ball_sensor <= 19) {
+      if (us_sx > 60)
+        preparePID(270, 180);
+      else
+        preparePID(0, 0);
+    } else if (ball_sensor < 14 && ball_sensor > 6) {
+      palla_dietroP();
+    } else {
+      preparePID(0, 0);
+    }
   }
 }
 
