@@ -20,7 +20,7 @@ void goalie() {
   palla_dietro();
 
   // STORCIMENTO (senza camera, alla vecchia maniera) FUNZNONA
-  // storcimentoZone();
+  storcimentoZone();
 
   // CENTROPORTA CON CAMERA
   // if (role)

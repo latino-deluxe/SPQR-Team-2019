@@ -41,14 +41,12 @@ void space_invaders_3() {
     goalie();
     // preparePID(180, 180);
   } else {
-    // if (us_px > 50) {
-    //   centerGoalPost();
-    // } else if (us_px < 40) {
-    //   preparePID(0, 100);
-    // } else {
     preparePID(0, 0);
-    // }
   }
+
+  // menamoli approssimato :D
+  if (ball_distance <= 2)
+    goalie();
 }
 
 void centerGoalPost() {
