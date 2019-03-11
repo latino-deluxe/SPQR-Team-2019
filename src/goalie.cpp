@@ -52,8 +52,8 @@ void palla_dietro() {
         atk_direction = 160;
       if (zoneIndex == 1 || zoneIndex == 4 || zoneIndex == 7)
         atk_direction = 180;
-    } else if (ball_distance <
-               2) { // se la palla è incredibilmente vicina VIRI ESTREMO
+    } else if (ball_distance < 2) {
+      // se la palla è incredibilmente vicina VIRI ESTREMO
       atk_speed = 255;
       if (zoneIndex == 8 || zoneIndex == 5 || zoneIndex == 2)
         atk_direction = 270;
@@ -85,8 +85,8 @@ void palla_dietroP() {
         atk_direction = 160;
       if (zoneIndex == 1 || zoneIndex == 4 || zoneIndex == 7)
         atk_direction = 180;
-    } else if (ball_distance <
-               2) { // se la palla è incredibilmente vicina VIRI ESTREMO
+    } else if (ball_distance < 2) {
+      // se la palla è incredibilmente vicina VIRI ESTREMO
       atk_speed = 255;
       if (zoneIndex == 8 || zoneIndex == 5 || zoneIndex == 2)
         atk_direction = 270;
@@ -95,8 +95,9 @@ void palla_dietroP() {
       if (zoneIndex == 1 || zoneIndex == 4 || zoneIndex == 7)
         atk_direction = 100;
     }
+    preparePID(atk_direction, atk_speed);
+    digitalWrite(30, HIGH);
   }
-  preparePID(atk_direction, atk_speed);
 }
 
 void storcimentoZone() {

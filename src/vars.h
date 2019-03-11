@@ -8,7 +8,7 @@
 
 // IR shield pin
 #define BUZZER 27
-#define SWITCH_SX 28
+//#define SWITCH_SX 28
 #define SWITCH_DX 26
 
 // Note
@@ -113,7 +113,7 @@ extr int DxF;
 
 #define BT Serial1
 
-#define DEBUG_PRINT Serial
+#define DEBUG_PRINT BT
 
 #define CAMERA Serial4
 
@@ -210,8 +210,8 @@ extr int atk_offset;
 extr int Nint;
 
 // variabili camera
-#define centrop 113              //valore letto dalla camera come centro
-extr int p;                      //variabile dello switch che decide dove bisogna attaccare
+#define centrop 113 // valore letto dalla camera come centro
+extr int p;         // variabile dello switch che decide dove bisogna attaccare
 extr bool XP_SX;
 extr bool XP_DX;
 extr int portx;

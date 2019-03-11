@@ -97,6 +97,8 @@ void setup() {
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
   pinMode(16, INPUT_DISABLE); // pin 16 in corto tra 3.3V e massa
 
+  pinMode(SWITCH_DX, INPUT);
+
   // Enable Serial for test
   Serial.begin(9600);
 
@@ -121,8 +123,11 @@ void setup() {
 }
 
 void loop() {
-  SWS = digitalRead(SWITCH_SX);
+  // SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
+  role = SWD;
+
+  DEBUG_PRINT.println(role);
 
   // update_sensors_all();
   // WhereAmI();
@@ -145,7 +150,6 @@ void loop() {
   // comunicazione(2000);
 
   // currently setting the role and the goal by code
-  role = HIGH;
   p = 1; // dove 1=Blu 0=Gialla
   if (flag_interrupt) {
     int_nuovo();
