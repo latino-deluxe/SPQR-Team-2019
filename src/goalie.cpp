@@ -23,10 +23,8 @@ void goalie() {
   // storcimentoZone();
 
   // CENTROPORTA CON CAMERA
-  storcimentoPorta();
-  // CENTROPORTA CON CAMERA
-  // storcimentoPorta();
-
+  // if (role)
+  //   storcimentoPorta();
   atk_direction = atk_direction + atk_offset;
 
   preparePID(atk_direction, atk_speed);
@@ -136,6 +134,7 @@ void storcimentoPorta() {
 
   // tone(BUZZER, 120000, 150);
 
-  portx = portx - centrop;
-  atk_offset = portx;
+  int cx;
+  cx = portx - centrop;
+  atk_offset = cx;
 }

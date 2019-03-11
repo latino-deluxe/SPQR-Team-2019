@@ -154,7 +154,6 @@ void space_invaders_m() {
 }
 
 void space_invaders_3() {
-  st = 0;
   if (us_px > 50) {
     centerGoalPost();
   } else {
@@ -169,7 +168,8 @@ void space_invaders_3() {
       else
         preparePID(0, 0);
     } else if (ball_sensor < 14 && ball_sensor > 6) {
-      palla_dietroP();
+      goalie();
+      // preparePID(180, 180);
     } else {
       preparePID(0, 0);
     }

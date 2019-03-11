@@ -272,6 +272,7 @@ void gigaTestZone() {
     DEBUG_PRINT.println();
     testPosition();
     testGuessZone();
+    testIMU();
 
     DEBUG_PRINT.println("------");
     ao = millis();

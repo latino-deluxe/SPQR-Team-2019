@@ -117,9 +117,8 @@ void setup() {
   initBluetooth();
   initSoftwareSerial();
   CAMERA.begin(19200);
-  // valStringY.reserve(30);                                     //riserva
-  // 30byte per le stringhe valStringB.reserve(30);  //  tone(27, 1000, 500);
-  digitalWrite(31, HIGH);
+
+  // digitalWrite(31, HIGH);
 }
 
 void loop() {
@@ -127,17 +126,7 @@ void loop() {
   SWD = digitalRead(SWITCH_DX);
   role = SWD;
 
-  DEBUG_PRINT.println(role);
-
-  // update_sensors_all();
-  // WhereAmI();
-  // space_invaders();
-
-  // if(millis() - t1 >= 200){
-  //   BT.println(imu_current_euler);
-  // }
-
-  // // game routine
+  // game routine
 
   ball_read_position();
   readIMU();
@@ -146,10 +135,7 @@ void loop() {
   guessZone();
   calculateZoneIndex();
   goalPosition();
-  // teamZone();            //DA USARE CON COMPAGNO
-  // comunicazione(2000);
 
-  // currently setting the role and the goal by code
   p = 1; // dove 1=Blu 0=Gialla
   if (flag_interrupt) {
     int_nuovo();
@@ -165,9 +151,6 @@ void loop() {
     else
       centerGoalPost();
   }
-
-  // if((comrade == true) && (role == HIGH) && (zoneIndex > 6)) goCenter(); //DA
-  // USARE CON COMPAGNO
 
   // final drive pid
   drivePID(globalDir, globalSpeed);
