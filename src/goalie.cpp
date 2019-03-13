@@ -13,8 +13,7 @@ void goalie() {
                              AA14, AA15, AA16, AA17, AA18, AA19};
 
   atk_speed = 180; // forse inutile, lo imposto per livellare
-  atk_direction =
-      goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
+  atk_direction = goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
 
   // PALLA DIETRO
   palla_dietro();
@@ -23,11 +22,12 @@ void goalie() {
   storcimentoZone();
 
   // CENTROPORTA CON CAMERA
-  // if (role)
-  //   storcimentoPorta();
-  atk_direction = atk_direction + atk_offset;
+  // storcimentoPorta();
 
-  preparePID(atk_direction, atk_speed);
+  // atk_direction = atk_direction + atk_offset;
+
+  preparePID(atk_direction, atk_speed, atk_offset);
+  atk_offset = 0;
 }
 
 void palla_dietro() {
@@ -115,26 +115,15 @@ void storcimentoZone() {
 }
 
 void storcimentoPorta() {
-  /*------VECCHIO SISTEMA CON BOOLEANE------*/
+  int pluto;
+  atk_offset = 0;
 
-  // if(x>160) XP_SX=true;      //porta a sinistra del robot
-  // else XP_SX=false;
-  // if(x<35) XP_DX=true;      //porta a destra del robot
-  // else XP_DX=false;
-  // if(x==999) {
-  //   if(status_x==EST) XP_SX==true;
-  //   if(status_x==OVEST) XP_DX==true;
-  // }
-
-  /*------PROVA CON DATO DINAMICO------*/
-  // se per esempio il nostro centro della porta è 125
-  // impostiamo uno storcimento dinamico in base a quanto il numero
-  //è grande/piccolo da 113
-  // esempio su codice:
-
-  // tone(BUZZER, 120000, 150);
-
-  int cx;
-  cx = portx - centrop;
-  atk_offset = cx;
+  if(ball_distance <= 2) {
+    if (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) {
+      pluto = 90 - portx;
+      atk_offset = pluto + imu_current_euler;
+      if(atk_offset > 60)  atk_offset = 60;
+      if(atk_offset < -61) atk_offset = -60;
+    }
+  }
 }
