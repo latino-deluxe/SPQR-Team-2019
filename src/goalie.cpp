@@ -155,13 +155,27 @@ void storcimentoPorta() {
   if ((pluto > -20) && (pluto < +20))
     atk_offset = 0;
 
-  if ((pluto < -20) && (pluto > -31))
-    atk_offset = 345;
-  if (pluto < -31)
+  if ((pluto < -20) && (pluto > -31)) {
     atk_offset = 330;
+    digitalWrite(30, HIGH);
+    digitalWrite(29, LOW);
+  }
+  if (pluto < -31) {
+    atk_offset = 315;
+    digitalWrite(30, HIGH);
+    digitalWrite(29, LOW);
+  }
 
-  if ((pluto > +20) && (pluto < +31))
-    atk_offset = 15;
-  if (pluto > +31)
+  if ((pluto > +20) && (pluto < +31)) {
     atk_offset = 30;
+    digitalWrite(29, HIGH);
+    digitalWrite(30, LOW);
+  }
+  if (pluto > +31) {
+    atk_offset = 45;
+    digitalWrite(29, HIGH);
+    digitalWrite(30, LOW);
+  }
+
+  if(portx == 999) atk_offset = 45;
 }

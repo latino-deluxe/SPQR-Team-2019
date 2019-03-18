@@ -104,8 +104,7 @@ void setup() {
 
   // Setups a bunch of pins
   pinMode(27, OUTPUT);
-  for (int i = 29; i <= 31; i++)
-    pinMode(i, OUTPUT);
+  for (int i = 29; i <= 31; i++) pinMode(i, OUTPUT);
 
   // Misc inits
   initMotorsGPIO();
@@ -118,7 +117,8 @@ void setup() {
   initSoftwareSerial();
   CAMERA.begin(19200);
 
-  // digitalWrite(31, HIGH);
+  //digitalWrite(30, HIGH);
+  //digitalWrite(29, HIGH);
 }
 
 void loop() {
