@@ -126,6 +126,8 @@ void loop() {
   SWD = digitalRead(SWITCH_DX);
   role = SWD;
 
+  //bluetooth and communication stuff
+  testBluetooth();
   // game routine
 
   ball_read_position();

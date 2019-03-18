@@ -3,8 +3,12 @@
 
 // init bluetooth on Serial1, look in vars.h for define
 void initBluetooth() {
-  BT.begin(115200);
-  // tt=millis();
+  BT.begin(9600);
+  BT.print("$");  // Print three times individually
+  BT.print("$");
+  BT.print("$");  // Enter command mode
+  delay(550);  // Short delay, wait for the Mate to send back CMD
+  BT.println("C");  // Temporarily Change the baudrate to 9600, no parity
 }
 
 // prints the serial read to bluetooth and bluetooth to serial monitor
