@@ -13,19 +13,24 @@ void goalie() {
                              AA14, AA15, AA16, AA17, AA18, AA19};
 
   atk_speed = 180; // forse inutile, lo imposto per livellare
-  atk_direction = goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
+  atk_direction =
+      goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
 
   // PALLA DIETRO
   palla_dietro();
 
-  if((ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) && (ball_distance <= 2)) {
-    // STORCIMENTO (senza camera, alla vecchia maniera) FUNZNONA
-    storcimentoZone();
-
-    // CENTROPORTA CON CAMERA
-    storcimentoPorta();
-    // storcimentoPorta2();
-} else atk_offset = 0;
+  if ((ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) &&
+      (ball_distance <= 2)) {
+    if (role) {
+      // STORCIMENTO (senza camera, alla vecchia maniera) FUNZNONA
+      storcimentoZone();
+    } else {
+      // CENTROPORTA CON CAMERA
+      storcimentoPorta();
+      // storcimentoPorta2();
+    }
+  } else
+    atk_offset = 0;
 
   atk_direction = atk_direction + atk_offset;
 
@@ -121,34 +126,41 @@ void storcimentoPorta2() {
   int pluto;
   atk_offset = 0;
 
-  if(ball_distance <= 2) {
+  if (ball_distance <= 2) {
     if (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) {
       pluto = centrop - portx;
       atk_offset = pluto + imu_current_euler;
-      if(atk_offset > 60)  atk_offset = 60;
-      if(atk_offset < -61) atk_offset = -60;
+      if (atk_offset > 60)
+        atk_offset = 60;
+      if (atk_offset < -61)
+        atk_offset = -60;
     }
   }
 }
 
 void storcimentoPorta() {
-  //sistema di corsie di attacco
-  //prendi il centro dalla costante centrop
-  //fai meno -20 +20 e hai la tua fascia di non-storcimento
-  //da -21 a -31 hai la prima fascia destra di attacco verso sinistra
-  //da -31 in poi hai la seconda più violenta
-  //da +21 a +31 hai la prima fascia sinistra di attacco verso destra
-  //da +31 in poi hai la seconda più violenta
-  //perché sottraendo si inverte!
-  //i valori delle correzioni sono un po' a caso, da provare
+  // sistema di corsie di attacco
+  // prendi il centro dalla costante centrop
+  // fai meno -20 +20 e hai la tua fascia di non-storcimento
+  // da -21 a -31 hai la prima fascia destra di attacco verso sinistra
+  // da -31 in poi hai la seconda più violenta
+  // da +21 a +31 hai la prima fascia sinistra di attacco verso destra
+  // da +31 in poi hai la seconda più violenta
+  // perché sottraendo si inverte!
+  // i valori delle correzioni sono un po' a caso, da provare
   int pluto;
 
   pluto = portx - centrop;
-  if((pluto > -20) && (pluto < +20)) atk_offset = 0;
+  if ((pluto > -20) && (pluto < +20))
+    atk_offset = 0;
 
-  if((pluto < -20) && (pluto > -31)) atk_offset = 315;
-  if(pluto < -31) atk_offset = 300;
+  if ((pluto < -20) && (pluto > -31))
+    atk_offset = 315;
+  if (pluto < -31)
+    atk_offset = 300;
 
-  if((pluto > +20) && (pluto < +31)) atk_offset = 45;
-  if(pluto > +31) atk_offset = 60;
+  if ((pluto > +20) && (pluto < +31))
+    atk_offset = 45;
+  if (pluto > +31)
+    atk_offset = 60;
 }
