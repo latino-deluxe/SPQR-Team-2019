@@ -29,7 +29,7 @@ blue_led.off()
 #                (30, 45, 1, 40, -60, -19)]    # thresholds blue goal
 #
 
-thresholds = [  (37, 87, 45, -14, 28, 74),    # thresholds yellow goal
+thresholds = [  (43, 85, -7, 32, 40, 82),    # thresholds yellow goal
                 ((21, 45, -12, 40, -113, -26))]    # thresholds blue goal
 
 
@@ -51,8 +51,8 @@ clock = time.clock()
 
 while(True):
     clock.tick()
-    tt_yellow = [(56, 85, 4, 31, 16, 78)]     ## creo una lista di tuple per il giallo, valore x = 999 : non trovata
-    tt_blue = [(11, 41, 0, 36, -67, -23)]       ## creo una lista di tuple per il blue, valore x = 999 : non trovata
+    tt_yellow = [(0,999,0,1)]     ## creo una lista di tuple per il giallo, valore x = 999 : non trovata
+    tt_blue = [(0,999,0,2)]       ## creo una lista di tuple per il blue, valore x = 999 : non trovata
 
     img = sensor.snapshot()
     for blob in img.find_blobs(thresholds, pixels_threshold=300, area_threshold=700):

@@ -21,7 +21,7 @@ void goalie() {
 
   if ((ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) &&
       (ball_distance <= 2)) {
-    if (role) {
+    if (role == LOW || !CAMERA.available()) {
       // STORCIMENTO (senza camera, alla vecchia maniera) FUNZNONA
       storcimentoZone();
     } else {
@@ -29,8 +29,9 @@ void goalie() {
       storcimentoPorta();
       // storcimentoPorta2();
     }
-  } else
+  } else{
     atk_offset = 0;
+  }
 
   atk_direction = atk_direction + atk_offset;
 
@@ -155,12 +156,12 @@ void storcimentoPorta() {
     atk_offset = 0;
 
   if ((pluto < -20) && (pluto > -31))
-    atk_offset = 315;
+    atk_offset = 345;
   if (pluto < -31)
-    atk_offset = 300;
+    atk_offset = 330;
 
   if ((pluto > +20) && (pluto < +31))
-    atk_offset = 45;
+    atk_offset = 15;
   if (pluto > +31)
-    atk_offset = 60;
+    atk_offset = 30;
 }
