@@ -6,6 +6,10 @@
 #define extr
 #endif
 
+#define R 29
+#define G 31
+#define Y 30
+
 // IR shield pin
 #define BUZZER 27
 //#define SWITCH_SX 28

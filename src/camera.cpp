@@ -84,6 +84,7 @@ if (datavalid==1)  {
   datavalid = 0;
   }
     // update_location_complete();
+  if(portx == 0) portx = 999;
 
 
 }
