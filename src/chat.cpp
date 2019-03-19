@@ -34,7 +34,7 @@ void teamZone() {                                     //DA METTERE IN OGNI LOOP
 
 //WHERE ARE YOU NOOOOWW
 void whereAreYou() {
-  calculateZoneIndex();                               //forse va tolto ogni volta il richiamo a zoneIndex??
+  //calculateZoneIndex();                               //forse va tolto ogni volta il richiamo a zoneIndex?? //già, andava proprio tolto :P
   if (BT.available() > 0) {
     friendZone = BT.read();
   }

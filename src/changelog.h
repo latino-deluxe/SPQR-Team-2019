@@ -129,5 +129,20 @@
  * TODO:
  *  Vedi lavagnetta o foto su whatsapp
  *
+ * 18/3/2019
+ *  Sistemati i robot che non riuscivano a giocare. Telecamera su robot attaccante,
+ *  da sistemare ancora un po' lo storcimento nella fascia di sinistra (Ematino).
+ *  Iniziato bluetooth tra i due robot, si connettono ma non comunicano la zona
+ *
+ *  TODO:
+ *    Migliorare comunicazione bluetooth
+ *    Migliorare tutto finché si può
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  *
  */

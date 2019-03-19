@@ -8,6 +8,9 @@ void initBluetooth() {
   BT.print("$");
   BT.print("$");  // Enter command mode
   delay(550);  // Short delay, wait for the Mate to send back CMD
+  //sets up a bunch of things for bluetooth to work correctly
+  BT.println("SM,6");
+  BT.println("SA,0");
   BT.println("C");  // Temporarily Change the baudrate to 9600, no parity
 }
 

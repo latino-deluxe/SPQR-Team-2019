@@ -127,7 +127,9 @@ void loop() {
   role = SWD;
 
   //bluetooth and communication stuff
-  testBluetooth();
+  teamZone();
+  whereAreYou();
+  //testBluetooth();
   // game routine
 
   ball_read_position();
@@ -155,8 +157,8 @@ void loop() {
   }
 
   // final drive pid
-  drivePID(globalDir, globalSpeed);
-  // gigaTestZone();
+  //drivePID(globalDir, globalSpeed);
+  gigaTestZone();
   // testBall();
   // DEBUG_PRINT.println(portx);
 }
