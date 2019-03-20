@@ -93,6 +93,9 @@ void setup() {
   XP_DX = false;
   portx = 0;
 
+  //BT
+  topolino = 0;
+
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
   pinMode(16, INPUT_DISABLE); // pin 16 in corto tra 3.3V e massa
@@ -139,6 +142,14 @@ void loop() {
   guessZone();
   calculateZoneIndex();
   goalPosition();
+
+  if (topolino < 30 ) {
+    topolino++;
+  }
+  else {
+    topolino = 0;
+    BT.write(42);
+  }
 
   p = 1; // dove 1=Blu 0=Gialla
   if (flag_interrupt) {

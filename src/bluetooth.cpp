@@ -46,3 +46,21 @@ void btZone () {
     ao = millis();
   }
 }*/
+
+
+bool com (int delay) {
+  int d;                           //funzione di comunicazione
+  if (BT.available() > 0) {
+    d = BT.read();
+  }
+  if (d == 42) {
+    comrade = true;
+    d = 0;
+    old_timer = millis();
+  }
+  if ((millis() - old_timer ) > delay) {
+    old_timer = millis();
+    comrade = false;
+  }
+  return comrade ;
+}

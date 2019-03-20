@@ -197,11 +197,13 @@ extr byte lineBallSensor;
 extr byte lineBallDistance;
 // extr float angle;
 // extr int ldir, lspeed;
+
 // Comunicazione compagno
 extr int iAmHere;
 extr int friendZone;
 extr int role;
 extr bool comrade;
+extr int topolino;
 
 // test new angle
 extr int globalDir;

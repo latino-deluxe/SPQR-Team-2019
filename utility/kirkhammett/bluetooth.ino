@@ -3,9 +3,9 @@ void init_bluetooth() {                                           //inizializza 
   tt=millis();
 }
 
-bool comunicazione (int intervallo) {                             //funzione di comunicazione 
+bool comunicazione (int intervallo) {                             //funzione di comunicazione
 
-  if (bluetooth.available() > 0) {
+   if (bluetooth.available() > 0) {
     a = bluetooth.read();
   }
   if (a == 42) {
