@@ -142,13 +142,8 @@ void loop() {
   guessZone();
   calculateZoneIndex();
   goalPosition();
-
-  if (topolino < 30) {
-    topolino++;
-  } else {
-    topolino = 0;
-    BT.write(42);
-  }
+  // Ao();
+  // com(2000);
 
   // for ports: 1=Blue 0=Yellow
   pAtk = 1;
@@ -157,6 +152,12 @@ void loop() {
   if (flag_interrupt) {
     int_nuovo();
   }
+
+  comrade = true;
+
+  if(comrade) role = role;
+  else role = 1 - role;
+
   if (ball_seen == true) {
     if (role == HIGH)
       goalie();
@@ -174,5 +175,4 @@ void loop() {
   // gigaTestZone();
   // testBall();
   // DEBUG_PRINT.println(portx);
-  com(2000);
 }

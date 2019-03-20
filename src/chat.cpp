@@ -43,6 +43,15 @@ void teamZone() { // DA METTERE IN OGNI LOOP
   }
 }
 
+void Ao() {
+  if (topolino < 30) {
+    topolino++;
+  } else {
+    topolino = 0;
+    BT.write(42);
+  }
+}
+
 // WHERE ARE YOU NOOOOWW
 void whereAreYou() {
   // calculateZoneIndex();                               //forse va tolto ogni
