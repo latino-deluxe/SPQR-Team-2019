@@ -134,8 +134,11 @@ void loop() {
   SWD = digitalRead(SWITCH_DX);
   role = SWD;
 
-  role = LOW;
+  comrade = true;
 
+  if(comrade) role = role;
+  else role = 1 - role;
+  
   // bluetooth and communication stuff
   teamZone();
   whereAreYou();
@@ -156,11 +159,6 @@ void loop() {
     int_nuovo();
   }
 
-  comrade = true;
-
-  if(comrade) role = role;
-  else role = 1 - role;
-
   if (ball_seen == true) {
     if (role == HIGH)
       goalie();
@@ -175,5 +173,4 @@ void loop() {
 
   // final drive pid
   drivePID(globalDir, globalSpeed);
-  DEBUG_PRINT.println(portx);
 }

@@ -33,7 +33,7 @@ void space_invaders_camera() {
     else
       preparePID(0, 0);
   } else if (ball_sensor >= 14 && ball_sensor <= 19) {
-    if (portx > 60)
+    if (portx > 90)
       preparePID(270, 180);
     else
       preparePID(0, 0);
