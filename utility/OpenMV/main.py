@@ -72,14 +72,14 @@ while(True):
 
 
     area,cx,cy,code = tt_yellow[ny-1]    # coordinata x del piu' grande y se montata al contrario
-    string_yellow = "Y"+str(cy)+"y"
+    string_yellow = "Y"+str(cx)+"y"
 
     #for c in range( 0, ny):
     #    print (tt_yellow[c])
 
 
     area,cx,cy,code = tt_blue[nb-1]      # coordinata x del piu' grande y se montata al contrario
-    string_blue = "B"+str(cy)+"b"
+    string_blue = "B"+str(cx)+"b"
 
     uart.write(string_yellow)   # scrivo su seriale
     uart.write(string_blue)     # scrivo su seriale
