@@ -48,7 +48,7 @@ void btZone () {
 }*/
 
 
-bool com (int delay) {
+bool com(int delay) {
   int d;                           //funzione di comunicazione
   if (BT.available() > 0) {
     d = BT.read();
@@ -61,6 +61,14 @@ bool com (int delay) {
   if ((millis() - old_timer ) > delay) {
     old_timer = millis();
     comrade = false;
+  }
+  if(comrade) {
+    digitalWrite(Y, HIGH);
+    digitalWrite(R, LOW);
+  }
+  else {
+    digitalWrite(R, HIGH);
+    digitalWrite(Y, LOW);
   }
   return comrade ;
 }

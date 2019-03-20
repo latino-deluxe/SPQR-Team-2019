@@ -169,7 +169,9 @@ void loop() {
 
   // final drive pid
   //drivePID(globalDir, globalSpeed);
-  gigaTestZone();
+  // gigaTestZone();
   // testBall();
   // DEBUG_PRINT.println(portx);
+  com(1000);
+
 }
