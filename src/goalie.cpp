@@ -20,20 +20,21 @@ void goalie() {
   palla_dietro();
 
   if ((ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) &&
-      (ball_distance <= 2)) {
-    if (role == LOW || !CAMERA.available()) {
-      // STORCIMENTO (senza camera, alla vecchia maniera) FUNZNONA
-      storcimentoZone();
-    } else {
-      // CENTROPORTA CON CAMERA
-      storcimentoPorta();
-      // storcimentoPorta2();
-    }
+      (ball_distance <= 2)) {  storcimentoPorta();
+    // if (role == LOW || !CAMERA.available()) {
+    //   // STORCIMENTO (senza camera, alla vecchia maniera) FUNZNONA
+    //   storcimentoZone();
+    // } else {
+    //   // CENTROPORTA CON CAMERA
+    //   storcimentoPorta();
+    //   // storcimentoPorta2();
+    // }
   } else{
     atk_offset = 0;
   }
 
-  atk_direction = atk_direction + atk_offset;
+  // atk_direction = atk_direction + atk_offset;
+  // atk_direction = (atk_direction + 360) % 360;
 
   preparePID(atk_direction, atk_speed);
   // atk_offset = 0;
@@ -139,7 +140,7 @@ void storcimentoPorta2() {
   }
 }
 
-void storcimentoPorta() {
+void storcimentoPortaOLDOLD() {
   // sistema di corsie di attacco
   // prendi il centro dalla costante centrop
   // fai meno -20 +20 e hai la tua fascia di non-storcimento
@@ -178,4 +179,22 @@ void storcimentoPorta() {
   }
 
   if(portx == 999) atk_offset = 45;
+}
+
+
+void storcimentoPortaOLD() {
+  int pluto;
+  pluto = portx - centrop;
+  // if((pluto >= 150) && (pluto <= 170)) atk_offset = 0;
+  // if(pluto <= 149) atk_offset = 30;
+  // if(pluto >= 171) atk_offset = 330;
+  atk_offset = pluto;
+  if(pluto >= 40)  atk_offset = 40;
+  if(pluto <= -40) atk_offset = -40;
+}
+
+void storcimentoPorta() {
+  if((portx >= 150) && (portx <= 170)) atk_direction = 0;
+  if(portx >= 171) atk_direction = 290;
+  if(portx <= 149) atk_direction = 30;
 }

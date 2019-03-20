@@ -217,7 +217,7 @@ extr int atk_offset;
 extr int Nint;
 
 // variabili camera
-#define centrop 110 // valore letto dalla camera come centro
+#define centrop 160 // valore letto dalla camera come centro
 extr int pAtk;      // variabile dello switch che decide dove bisogna attaccare
 extr int pDef;      // variabile dello switch che decide dove bisogna difendere
 extr bool XP_SX;
