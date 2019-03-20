@@ -125,9 +125,16 @@ void setup() {
 }
 
 void loop() {
+
+  // for ports: 1=Blue 0=Yellow
+  pAtk = 0;
+  pDef = 1 - pAtk; // the other port for the keeper
+
   // SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
   role = SWD;
+
+  role = LOW;
 
   // bluetooth and communication stuff
   teamZone();
@@ -144,10 +151,6 @@ void loop() {
   goalPosition();
   // Ao();
   // com(2000);
-
-  // for ports: 1=Blue 0=Yellow
-  pAtk = 1;
-  pDef = 1 - pAtk; // the other port for the keeper
 
   if (flag_interrupt) {
     int_nuovo();

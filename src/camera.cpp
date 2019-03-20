@@ -79,7 +79,7 @@ void goalPosition() {
     valB = oldGoal;
 
   if (datavalid == 1) {
-    if (role) {
+    if (role == HIGH) {
       if (pAtk == 1) { // leggi porta blu
         portx = valB;
       } else { // leggi porta gialla
