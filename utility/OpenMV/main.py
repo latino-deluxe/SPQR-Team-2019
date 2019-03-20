@@ -29,7 +29,7 @@ blue_led.off()
 #                (30, 45, 1, 40, -60, -19)]    # thresholds blue goal
 #
 
-thresholds = [  (43, 85, -7, 32, 40, 82),    # thresholds yellow goal
+thresholds = [  (73, 100, -21, 33, 15, 60),    # thresholds yellow goal
                 (23, 55, -24, 31, -60, -14)]    # thresholds blue goal
 
 
@@ -72,14 +72,14 @@ while(True):
 
 
     area,cx,cy,code = tt_yellow[ny-1]    # coordinata x del piu' grande y se montata al contrario
-    string_yellow = "Y"+str(cy)+"y"
+    string_yellow = "Y"+str(cx)+"y"
 
     #for c in range( 0, ny):
     #    print (tt_yellow[c])
 
 
     area,cx,cy,code = tt_blue[nb-1]      # coordinata x del piu' grande y se montata al contrario
-    string_blue = "B"+str(cy)+"b"
+    string_blue = "B"+str(cx)+"b"
 
     uart.write(string_yellow)   # scrivo su seriale
     uart.write(string_blue)     # scrivo su seriale
