@@ -28,12 +28,12 @@ float ball_distance_precise;
 
 void space_invaders_camera() {
   if (ball_sensor >= 1 && ball_sensor <= 6) {
-    if (portx > 60)
+    if (portx < 130)
       preparePID(90, 180);
     else
       preparePID(0, 0);
   } else if (ball_sensor >= 14 && ball_sensor <= 19) {
-    if (portx < 130)
+    if (portx > 60)
       preparePID(270, 180);
     else
       preparePID(0, 0);
@@ -83,4 +83,12 @@ void centerGoalPost() {
   } else {
     preparePID(0, 0);
   }
+}
+
+void centerGoalPostCamera() {
+  int vel = 150;
+  if(portx <= 85)  preparePID(90, vel);
+  if(portx >= 125) preparePID(270, vel);
+  if(portx <= 0) centerGoalPost();
+  if(zoneIndex <= 5) centerGoalPost();
 }

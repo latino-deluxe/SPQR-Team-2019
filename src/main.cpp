@@ -167,12 +167,10 @@ void loop() {
     if (role == HIGH)
       goCenter();
     else
-      centerGoalPost();
+      centerGoalPostCamera();
   }
 
   // final drive pid
-  // drivePID(globalDir, globalSpeed);
-  // gigaTestZone();
-  // testBall();
-  // DEBUG_PRINT.println(portx);
+  drivePID(globalDir, globalSpeed);
+  DEBUG_PRINT.println(portx);
 }

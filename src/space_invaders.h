@@ -1,5 +1,6 @@
 void space_invaders();
 void centerGoalPost();
+void centerGoalPostCamera();
 void space_invaders_m();
 void followBall();
 void keeper();
