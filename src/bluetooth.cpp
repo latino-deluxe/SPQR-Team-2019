@@ -4,14 +4,14 @@
 // init bluetooth on Serial1, look in vars.h for define
 void initBluetooth() {
   BT.begin(9600);
-  BT.print("$");  // Print three times individually
+  BT.print("$"); // Print three times individually
   BT.print("$");
-  BT.print("$");  // Enter command mode
-  delay(550);  // Short delay, wait for the Mate to send back CMD
-  //sets up a bunch of things for bluetooth to work correctly
+  BT.print("$"); // Enter command mode
+  delay(550);    // Short delay, wait for the Mate to send back CMD
+  // sets up a bunch of things for bluetooth to work correctly
   BT.println("SM,6");
   BT.println("SA,0");
-  BT.println("C");  // Temporarily Change the baudrate to 9600, no parity
+  BT.println("C"); // Temporarily Change the baudrate to 9600, no parity
 }
 
 // prints the serial read to bluetooth and bluetooth to serial monitor
@@ -46,29 +46,3 @@ void btZone () {
     ao = millis();
   }
 }*/
-
-
-bool com(int delay) {
-  int d;                           //funzione di comunicazione
-  if (BT.available() > 0) {
-    d = BT.read();
-  }
-  if (d == 42) {
-    comrade = true;
-    d = 0;
-    old_timer = millis();
-  }
-  if ((millis() - old_timer ) > delay) {
-    old_timer = millis();
-    comrade = false;
-  }
-  if(comrade) {
-    digitalWrite(Y, HIGH);
-    digitalWrite(R, LOW);
-  }
-  else {
-    digitalWrite(R, HIGH);
-    digitalWrite(Y, LOW);
-  }
-  return comrade ;
-}

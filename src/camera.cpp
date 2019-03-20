@@ -1,18 +1,19 @@
-#include "vars.h"
 #include "camera.h"
+#include "vars.h"
 
-int startpY = 0;                //inizio del dato
+int startpY = 0; // inizio del dato
 int startpB = 0;
-int endpY = 0;                  //fine del dato
+int endpY = 0; // fine del dato
 int endpB = 0;
-String valStringY = "";         //stringa dove si vanno a mettere i pacchetti di dati ricevuti
+String valStringY =
+    ""; // stringa dove si vanno a mettere i pacchetti di dati ricevuti
 String valStringB = "";
-int datavalid = 0;              //segnalo se il dato ricevuto è valido
+int datavalid = 0; // segnalo se il dato ricevuto è valido
 int oldGoal;
 
-
 void goalPosition() {
-  int valY;                       //variabile a cui attribuisco momentaneamente il valore dell x della porta
+  int valY; // variabile a cui attribuisco momentaneamente il valore dell x
+            // della porta
 
   int valB;
 
@@ -37,55 +38,65 @@ void goalPosition() {
       endpB = 1;
     }
 
-    if ( (startpY == 1) && (endpY == 0) ) {
-        if (isDigit(inChar)) {
-          // convert the incoming byte to a char and add it to the string:
-          valStringY += inChar;
-        }
+    if ((startpY == 1) && (endpY == 0)) {
+      if (isDigit(inChar)) {
+        // convert the incoming byte to a char and add it to the string:
+        valStringY += inChar;
+      }
     }
 
-    if ( (startpB == 1) && (endpB == 0) ) {
-        if (isDigit(inChar)) {
-          // convert the incoming byte to a char and add it to the string:
-          valStringB += inChar;
-        }
+    if ((startpB == 1) && (endpB == 0)) {
+      if (isDigit(inChar)) {
+        // convert the incoming byte to a char and add it to the string:
+        valStringB += inChar;
+      }
     }
 
-
-    if ( (startpY == 1) && (endpY == 1) ) {
-        valY = valStringY.toInt();  // valid data
-        valStringY = "";
-        startpY = 0;
-        endpY = 0;
-        datavalid = 1;
+    if ((startpY == 1) && (endpY == 1)) {
+      valY = valStringY.toInt(); // valid data
+      valStringY = "";
+      startpY = 0;
+      endpY = 0;
+      datavalid = 1;
     }
-    if ( (startpB == 1) && (endpB == 1) ) {
-        valB = valStringB.toInt();  // valid data
-        valStringB = "";
-        startpB = 0;
-        endpB = 0;
-        datavalid = 1;
+    if ((startpB == 1) && (endpB == 1)) {
+      valB = valStringB.toInt(); // valid data
+      valStringB = "";
+      startpB = 0;
+      endpB = 0;
+      datavalid = 1;
     }
 
-  }  // end of while
-  if(valY!=0) oldGoal=valY;
-  if(valB!=0) oldGoal=valB;
+  } // end of while
+  if (valY != 0)
+    oldGoal = valY;
+  if (valB != 0)
+    oldGoal = valB;
 
-  if(valY==0) valY=oldGoal;
-  if(valB==0) valB=oldGoal;
+  if (valY == 0)
+    valY = oldGoal;
+  if (valB == 0)
+    valB = oldGoal;
 
-if (datavalid==1)  {
-  if(p==1){          //leggi porta blu
-    portx=valB;
+  if (datavalid == 1) {
+    if (role) {
+      if (pAtk == 1) { // leggi porta blu
+        portx = valB;
+      } else { // leggi porta gialla
+        portx = valY;
+      }
+      datavalid = 0;
+    } else {
+      if (pDef == 1) { // leggi porta blu
+        portx = valB;
+      } else { // leggi porta gialla
+        portx = valY;
+      }
+      datavalid = 0;
+    }
   }
-  else {            //leggi porta gialla
-    portx=valY;
-  }
-  datavalid = 0;
-  }
-    // update_location_complete();
-  if(portx == 0) portx = 999;
-
-
+  // update_location_complete();
+  if (portx == 0)
+    portx = 999;
 }
-//un numero grande equivale a stare a destra, piccolo a sinistra
+// un numero grande equivale a stare a destra, piccolo a sinistra

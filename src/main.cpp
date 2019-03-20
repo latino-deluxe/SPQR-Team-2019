@@ -88,12 +88,11 @@ void setup() {
   Nint = 0;
 
   // CAMERA
-  p = 0;
-  XP_SX = false;
-  XP_DX = false;
+  pAtk = 0;
+  pDef = 0;
   portx = 0;
 
-  //BT
+  // BT
   topolino = 0;
 
   // disable those pins, damaged teensy
@@ -107,7 +106,8 @@ void setup() {
 
   // Setups a bunch of pins
   pinMode(27, OUTPUT);
-  for (int i = 29; i <= 31; i++) pinMode(i, OUTPUT);
+  for (int i = 29; i <= 31; i++)
+    pinMode(i, OUTPUT);
 
   // Misc inits
   initMotorsGPIO();
@@ -120,8 +120,8 @@ void setup() {
   initSoftwareSerial();
   CAMERA.begin(19200);
 
-  //digitalWrite(30, HIGH);
-  //digitalWrite(29, HIGH);
+  // digitalWrite(30, HIGH);
+  // digitalWrite(29, HIGH);
 }
 
 void loop() {
@@ -129,10 +129,10 @@ void loop() {
   SWD = digitalRead(SWITCH_DX);
   role = SWD;
 
-  //bluetooth and communication stuff
+  // bluetooth and communication stuff
   teamZone();
   whereAreYou();
-  //testBluetooth();
+  // testBluetooth();
   // game routine
 
   ball_read_position();
@@ -143,15 +143,17 @@ void loop() {
   calculateZoneIndex();
   goalPosition();
 
-  if (topolino < 30 ) {
+  if (topolino < 30) {
     topolino++;
-  }
-  else {
+  } else {
     topolino = 0;
     BT.write(42);
   }
 
-  p = 1; // dove 1=Blu 0=Gialla
+  // for ports: 1=Blue 0=Yellow
+  pAtk = 1;
+  pDef = 1 - pAtk; // the other port for the keeper
+
   if (flag_interrupt) {
     int_nuovo();
   }
@@ -159,7 +161,7 @@ void loop() {
     if (role == HIGH)
       goalie();
     else
-      space_invaders_3();
+      space_invaders_camera();
   } else {
     if (role == HIGH)
       goCenter();
@@ -168,10 +170,9 @@ void loop() {
   }
 
   // final drive pid
-  //drivePID(globalDir, globalSpeed);
+  // drivePID(globalDir, globalSpeed);
   // gigaTestZone();
   // testBall();
   // DEBUG_PRINT.println(portx);
-  com(1000);
-
+  com(2000);
 }

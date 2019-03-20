@@ -7,24 +7,35 @@
 
 int count = 0;
 
-// comunicate with the comrade
-bool comunicazione(int intervallo) {
-  if (BT.available() > 0) {                           //se c'è qualcosa nella seriale metto a true il compagno
-    comrade = true;                                   //da cambiare per sicurezza in modo che riconosca se è veramente il dato della zoneIndex
+bool com(int delay) {
+  int d; // funzione di comunicazione
+  if (BT.available() > 0) {
+    d = BT.read();
+  }
+  if (d == 42) {
+    comrade = true;
+    d = 0;
     old_timer = millis();
   }
-  if ((millis() - old_timer) > intervallo) {          //controlla se la comunicazione va in timeout
+  if ((millis() - old_timer) > delay) {
     old_timer = millis();
-    comrade = false;                                  //in caso imposta compagno a false
+    comrade = false;
   }
-  return comrade;                                     //returna la booleana
+  if (comrade) {
+    digitalWrite(Y, HIGH);
+    digitalWrite(R, LOW);
+  } else {
+    digitalWrite(R, HIGH);
+    digitalWrite(Y, LOW);
+  }
+  return comrade;
 }
 
 // sends via bt the value of the zoneIndex
-void teamZone() {                                     //DA METTERE IN OGNI LOOP
+void teamZone() { // DA METTERE IN OGNI LOOP
   // calculateZoneIndex();
   iAmHere = zoneIndex;
-  if (count < 30) {                                   //ogni 30 cicli invia il dato della zona al compagno
+  if (count < 30) { // ogni 30 cicli invia il dato della zona al compagno
     count++;
   } else {
     count = 0;
@@ -32,9 +43,10 @@ void teamZone() {                                     //DA METTERE IN OGNI LOOP
   }
 }
 
-//WHERE ARE YOU NOOOOWW
+// WHERE ARE YOU NOOOOWW
 void whereAreYou() {
-  //calculateZoneIndex();                               //forse va tolto ogni volta il richiamo a zoneIndex?? //già, andava proprio tolto :P
+  // calculateZoneIndex();                               //forse va tolto ogni
+  // volta il richiamo a zoneIndex?? //già, andava proprio tolto :P
   if (BT.available() > 0) {
     friendZone = BT.read();
   }
@@ -46,5 +58,7 @@ void whereAreYou() {
   // }
 
   /*-----NUOVA LOGICA DA SCRIVERE-----*/
-  //Se robot si trova da solo deve switchare il ruolo a PortiereViolento, funzione portiere completa con aggiunto di funzione di attacco menamoli (da scrivere)
+  // Se robot si trova da solo deve switchare il ruolo a PortiereViolento,
+  // funzione portiere completa con aggiunto di funzione di attacco menamoli (da
+  // scrivere)
 }
