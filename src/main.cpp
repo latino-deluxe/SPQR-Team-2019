@@ -12,6 +12,7 @@
 #include "interrupt.h"
 #include "linesensor.h"
 #include "motors.h"
+#include "music.h"
 #include "mysoftware_serial.h"
 #include "myspi_old.h"
 #include "pid.h"
@@ -25,6 +26,7 @@ int SWS = 0;
 int SWD = 0;
 
 void setup() {
+  startSetup();
   // analogWriteFrequency(4,  1000);
   // analogWriteFrequency(7,  1000);
   // analogWriteFrequency(10, 1000);
@@ -122,6 +124,7 @@ void setup() {
 
   // digitalWrite(30, HIGH);
   // digitalWrite(29, HIGH);
+  stopSetup();
 }
 
 void loop() {
@@ -138,7 +141,7 @@ void loop() {
 
   if(comrade) role = role;
   else role = 1 - role;
-  
+
   // bluetooth and communication stuff
   teamZone();
   whereAreYou();
