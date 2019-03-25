@@ -161,23 +161,22 @@ void loop() {
   // Ao();
   // com(2000);
 
-  // if (flag_interrupt) {
-  //   int_nuovo();
-  // }
-  //
-  // if (ball_seen == true) {
-  //   if (role == HIGH)
-  //     goalie();
-  //   else
-  //     space_invaders_camera();
-  // } else {
-  //   if (role == HIGH)
-  //     goCenter();
-  //   else
-  //     centerGoalPostCamera();
-  // }
+  if (flag_interrupt) {
+    int_nuovo();
+  }
+
+  if (ball_seen == true) {
+    if (role == HIGH)
+      goalie();
+    else
+      space_invaders_camera();
+  } else {
+    if (role == HIGH)
+      goCenter();
+    else
+      centerGoalPostCamera();
+  }
 
   // final drive pid
-  // drivePID(globalDir, globalSpeed);
-  Serial.println(ball_sensor);
+  drivePID(globalDir, globalSpeed);
 }

@@ -4,3 +4,4 @@ void palla_dietroP();
 void storcimentoPorta();
 void storcimentoPorta2();
 void storcimentoZone();
+void storcimentoPortaIncr();
