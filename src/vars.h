@@ -218,8 +218,10 @@ extr int Nint;
 
 // variabili camera
 #define centrop 160 // valore letto dalla camera come centro
-extr int pAtk;      // variabile dello switch che decide dove bisogna attaccare
-extr int pDef;      // variabile dello switch che decide dove bisogna difendere
+#define keeperMin 120
+#define keeperMax 180
+extr int pAtk; // variabile dello switch che decide dove bisogna attaccare
+extr int pDef; // variabile dello switch che decide dove bisogna difendere
 extr bool XP_SX;
 extr bool XP_DX;
 extr int portx;

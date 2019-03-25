@@ -26,7 +26,6 @@ int SWS = 0;
 int SWD = 0;
 
 void setup() {
-  startSetup();
   // analogWriteFrequency(4,  1000);
   // analogWriteFrequency(7,  1000);
   // analogWriteFrequency(10, 1000);
@@ -124,7 +123,6 @@ void setup() {
 
   // digitalWrite(30, HIGH);
   // digitalWrite(29, HIGH);
-  stopSetup();
 }
 
 void loop() {
@@ -160,23 +158,24 @@ void loop() {
   // Ao();
   // com(2000);
 
-  if (flag_interrupt) {
-    int_nuovo();
-  }
-
-  if (ball_seen == true) {
-    if (role == HIGH)
-      goalie();
-    else
-      space_invaders_camera();
-  } else {
-    if (role == HIGH)
-      goCenter();
-    else
-      centerGoalPostCamera();
-  }
+  // if (flag_interrupt) {
+  //   int_nuovo();
+  // }
+  //
+  // if (ball_seen == true) {
+  //   if (role == HIGH)
+  //     goalie();
+  //   else
+  //     space_invaders_camera();
+  // } else {
+  //   if (role == HIGH)
+  //     goCenter();
+  //   else
+  //     centerGoalPostCamera();
+  // }
 
   // final drive pid
-  drivePID(globalDir, globalSpeed);
-  // gigaTestZone();
+  // drivePID(globalDir, globalSpeed);
+  Serial.println("ciao");
+  delay(1000);
 }
