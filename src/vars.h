@@ -225,3 +225,5 @@ extr int pDef; // variabile dello switch che decide dove bisogna difendere
 extr bool XP_SX;
 extr bool XP_DX;
 extr int portx;
+
+extr int stincr;
