@@ -97,6 +97,9 @@ void setup() {
   // BT
   topolino = 0;
 
+  //stincr
+  stincr = 0;
+
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
   pinMode(16, INPUT_DISABLE); // pin 16 in corto tra 3.3V e massa
@@ -177,6 +180,6 @@ void loop() {
   }
 
   // final drive pid
-  drivePID(globalDir, globalSpeed);
-  // gigaTestZone();
+  // drivePID(globalDir, globalSpeed);
+  Serial.println(ball_sensor);
 }

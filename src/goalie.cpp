@@ -13,30 +13,19 @@ void goalie() {
                              AA14, AA15, AA16, AA17, AA18, AA19};
 
   atk_speed = 180; // forse inutile, lo imposto per livellare
-  atk_direction =
-      goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
 
   // PALLA DIETRO
   palla_dietro();
 
-  if ((ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) &&
-      (ball_distance <= 2)) {  storcimentoPorta();
-    // if (role == LOW || !CAMERA.available()) {
-    //   // STORCIMENTO (senza camera, alla vecchia maniera) FUNZNONA
-    //   storcimentoZone();
-    // } else {
-    //   // CENTROPORTA CON CAMERA
-    //   storcimentoPorta();
-    //   // storcimentoPorta2();
-    // }
-  } else{
-    atk_offset = 0;
-  }
+  atk_direction = goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
+
+  if ((ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) && (ball_distance <= 2)) storcimentoPortaIncr();
 
   // atk_direction = atk_direction + atk_offset;
   // atk_direction = (atk_direction + 360) % 360;
 
-  preparePID(atk_direction, atk_speed);
+  atk_speed = 220;
+  preparePID(atk_direction, atk_speed, stincr);
   // atk_offset = 0;
 }
 
@@ -194,7 +183,29 @@ void storcimentoPortaOLD() {
 }
 
 void storcimentoPorta() {
-  if((portx >= 150) && (portx <= 170)) atk_direction = 0;
-  if(portx >= 171) atk_direction = 290;
-  if(portx <= 149) atk_direction = 30;
+  if((portx >= 111) && (portx <= 239)) atk_direction = 0;
+  if(portx >= 240) atk_direction = 345;
+  if(portx <= 110) atk_direction = 15;
+}
+
+void storcimentoPortaIncr() {
+  if(portx >= 250) {
+    stincr++;                                 //la porta sta a sinistra
+    digitalWrite(Y, HIGH);
+    digitalWrite(R, LOW);
+  }
+  else if(portx <= 110) {
+    stincr--;                                 //la porta sta a destra
+    digitalWrite(Y, LOW);
+    digitalWrite(R, HIGH);
+  }
+  else {                                      //robot centrato con porta
+    digitalWrite(Y, HIGH);
+    digitalWrite(R, HIGH);
+  }
+  if(portx == 999) {                          //non vedo porta
+    stincr = 0;
+    digitalWrite(Y, LOW);
+    digitalWrite(R, LOW);
+  }
 }
