@@ -96,7 +96,7 @@ void setup() {
   // BT
   topolino = 0;
 
-  //stincr
+  // stincr
   stincr = 0;
 
   // disable those pins, damaged teensy
@@ -179,10 +179,5 @@ void loop() {
 
   // final drive pid
   // drivePID(globalDir, globalSpeed);
-<<<<<<< HEAD
-  Serial.println("ciao");
-  delay(1000);
-=======
   Serial.println(ball_sensor);
->>>>>>> c726b9284d8025cc463ad95281e7c24ea2e308b7
 }
