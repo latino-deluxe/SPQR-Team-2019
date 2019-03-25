@@ -117,7 +117,7 @@ extr int DxF;
 
 #define BT Serial1
 
-#define DEBUG_PRINT Serial
+#define DEBUG_PRINT BT
 
 #define CAMERA Serial4
 

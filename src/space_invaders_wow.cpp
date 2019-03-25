@@ -20,33 +20,31 @@ float bd = 0;
 long ta;
 bool atk_p = false;
 
-byte ball_array[5];
-short i;
-byte vel_por = 255;
-long diff;
-float ball_distance_precise;
-
 void space_invaders_camera() {
-  if (ball_sensor >= 1 && ball_sensor <= 6) {
-    if (portx < 130)
-      preparePID(90, 180);
-    else
-      preparePID(0, 0);
-  } else if (ball_sensor >= 14 && ball_sensor <= 19) {
-    if (portx > 105)
-      preparePID(270, 180);
-    else
-      preparePID(0, 0);
-  } else if (ball_sensor < 14 && ball_sensor > 6) {
-    goalie();
-    // preparePID(180, 180);
+  if (portx == 0 || portx == 999) {
+    space_invaders_us();
   } else {
-    preparePID(0, 0);
-  }
+    if (ball_sensor >= 1 && ball_sensor <= 6) {
+      if (portx < 130)
+        preparePID(90, 180);
+      else
+        preparePID(0, 0);
+    } else if (ball_sensor >= 14 && ball_sensor <= 19) {
+      if (portx > 105)
+        preparePID(270, 180);
+      else
+        preparePID(0, 0);
+    } else if (ball_sensor < 14 && ball_sensor > 6) {
+      goalie();
+      // preparePID(180, 180);
+    } else {
+      preparePID(0, 0);
+    }
 
-  // menamoli approssimato :D
-  if (ball_distance <= 2)
-    goalie();
+    // menamoli approssimato :D
+    if (ball_distance <= 2)
+      goalie();
+  }
 }
 
 void space_invaders_us() {
@@ -87,8 +85,12 @@ void centerGoalPost() {
 
 void centerGoalPostCamera() {
   int vel = 150;
-  if(portx <= 85)  preparePID(90, vel);
-  if(portx >= 125) preparePID(270, vel);
-  if(portx <= 0) centerGoalPost();
-  if(zoneIndex <= 5) centerGoalPost();
+  if (portx <= 85)
+    preparePID(90, vel);
+  if (portx >= 125)
+    preparePID(270, vel);
+  if (portx <= 0)
+    centerGoalPost();
+  if (zoneIndex <= 5)
+    centerGoalPost();
 }

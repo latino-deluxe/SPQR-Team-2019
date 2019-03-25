@@ -139,8 +139,10 @@ void loop() {
 
   comrade = true;
 
-  if(comrade) role = role;
-  else role = 1 - role;
+  if (comrade)
+    role = role;
+  else
+    role = 1 - role;
 
   // bluetooth and communication stuff
   teamZone();
@@ -176,4 +178,5 @@ void loop() {
 
   // final drive pid
   drivePID(globalDir, globalSpeed);
+  // gigaTestZone();
 }

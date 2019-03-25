@@ -4,5 +4,5 @@ void centerGoalPostCamera();
 void space_invaders_m();
 void followBall();
 void keeper();
-void space_invaders_3();
+void space_invaders_us();
 void space_invaders_camera();
