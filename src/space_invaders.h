@@ -6,3 +6,5 @@ void followBall();
 void keeper();
 void space_invaders_us();
 void space_invaders_camera();
+void super_duper_space_invaders();
+void menamoli();

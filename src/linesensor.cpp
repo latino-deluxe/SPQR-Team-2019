@@ -30,29 +30,34 @@ void line0() {
 void line1() {
   linea[1] = !digitalRead(LN1);
   flag_interrupt = true;
+  flag_menamoli = true;
   brakeI();
 }
 
 void line2() {
   linea[2] = !digitalRead(LN2);
   flag_interrupt = true;
+  flag_menamoli = true;
   brakeI();
 }
 
 void line3() {
   linea[3] = !digitalRead(LN3);
   flag_interrupt = true;
+  flag_menamoli = true;
   brakeI();
 }
 
 void line4() {
   linea[4] = !digitalRead(LN4);
   flag_interrupt = true;
+  flag_menamoli = true;
   brakeI();
 }
 
 void line5() {
   linea[5] = !digitalRead(LN5);
   flag_interrupt = true;
+  flag_menamoli = true;
   brakeI();
 }

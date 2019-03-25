@@ -19,8 +19,11 @@ void goalie() {
 
   atk_direction = goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
 
-  if ((ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) && (ball_distance <= 2)) storcimentoPortaIncr();
-
+  if(role){
+    if ((ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) && (ball_distance <= 2)) storcimentoPortaIncr();
+  }else{
+    storcimentoZone();
+  }
   // atk_direction = atk_direction + atk_offset;
   // atk_direction = (atk_direction + 360) % 360;
 

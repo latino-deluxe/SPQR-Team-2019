@@ -210,11 +210,16 @@ extr int globalDir;
 extr int globalSpeed;
 // extr int st;
 
-// attacco
+// attack
 extr int atk_direction;
 extr int atk_speed;
 extr int atk_offset;
 extr int Nint;
+//defense
+extr bool defGoRight;
+extr bool defGoLeft;
+extr bool defGoBehind;
+extr bool flag_menamoli;
 
 // variabili camera
 #define centrop 160 // valore letto dalla camera come centro

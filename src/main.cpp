@@ -81,10 +81,12 @@ void setup() {
   globalDir = 0;
   globalSpeed = 0;
   st = 0;
-  // attacco
+  // attack
   atk_direction = 0;
   atk_speed = 0;
   atk_offset = 0;
+  //defense
+  flag_interrupt = false;
   // end of variable set up
   Nint = 0;
 
@@ -169,7 +171,7 @@ void loop() {
     if (role == HIGH)
       goalie();
     else
-      space_invaders_camera();
+      super_duper_space_invaders();
   } else {
     if (role == HIGH)
       goCenter();
