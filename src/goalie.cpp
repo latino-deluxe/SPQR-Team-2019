@@ -213,3 +213,10 @@ void storcimentoPortaIncr() {
     digitalWrite(R, LOW);
   }
 }
+
+void leaveMeAlone() {
+  if(zoneIndex >= 6) goCenter();
+  //if((zoneIndex >= 3) && (zoneIndex <= 5)) {
+    //if(inSensorRange(10, 2)) goCenter();
+  //}
+}

@@ -149,8 +149,8 @@ void loop() {
   //   role = 1 - role;
 
   // bluetooth and communication stuff
-  teamZone();
-  whereAreYou();
+  // teamZone();
+  // whereAreYou();
   // testBluetooth();
   // game routine
 
@@ -161,10 +161,10 @@ void loop() {
   guessZone();
   calculateZoneIndex();
   goalPosition();
-  // Ao();
-  // com(2000);
-  WOW();
-  commy(2000);
+  Ao();
+  com(2000);
+  // WOW();
+  // commy(2000);
 
   if (flag_interrupt) {
     int_nuovo();
@@ -191,8 +191,8 @@ void loop() {
     }
   }
 
+  if((role) && (comrade)) leaveMeAlone();
+
   // final drive pid
-  // drivePID(globalDir, globalSpeed);
-  // testBall();
-  Serial.println(fpos);
+  drivePID(globalDir, globalSpeed);
 }
