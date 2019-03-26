@@ -219,12 +219,12 @@ extr int Nint;
 extr bool defGoRight;
 extr bool defGoLeft;
 extr bool defGoBehind;
-extr bool flag_menamoli;
+extr bool stop_menamoli;
 
 // variabili camera
 #define centrop 160 // valore letto dalla camera come centro
-#define keeperMin 120
-#define keeperMax 180
+#define keeperMin 70
+#define keeperMax 250
 extr int pAtk; // variabile dello switch che decide dove bisogna attaccare
 extr int pDef; // variabile dello switch che decide dove bisogna difendere
 extr bool XP_SX;
