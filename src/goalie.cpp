@@ -23,13 +23,12 @@ void goalie() {
     if ((ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) && (ball_distance <= 2)) storcimentoPortaIncr();
   }else{
     storcimentoZone();
+    atk_direction = atk_direction + atk_offset;
+    atk_direction = (atk_direction + 360) % 360;
   }
-  // atk_direction = atk_direction + atk_offset;
-  // atk_direction = (atk_direction + 360) % 360;
 
-  atk_speed = 220;
+  atk_speed = 200;
   preparePID(atk_direction, atk_speed, stincr);
-  // atk_offset = 0;
 }
 
 void palla_dietro() {
@@ -194,13 +193,13 @@ void storcimentoPorta() {
 void storcimentoPortaIncr() {
   if(portx >= 250) {
     stincr++;
-    if(stincr >= 90) stincr = 90;             //la porta sta a sinistra
+    if(stincr >= 45) stincr = 45;             //la porta sta a sinistra
     digitalWrite(Y, HIGH);
     digitalWrite(R, LOW);
   }
   else if(portx <= 110) {
     stincr--;                                 //la porta sta a destra
-    if(stincr <= -90) stincr = -90;
+    if(stincr <= -45) stincr = -45;
     digitalWrite(Y, LOW);
     digitalWrite(R, HIGH);
   }
