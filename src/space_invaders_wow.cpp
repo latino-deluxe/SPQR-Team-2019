@@ -33,7 +33,7 @@ void super_duper_space_invaders(){
   }
 
   //now go space_invaders
-  if (us_px > 35 && flag_menamoli) {
+  if (us_px > 35 && stop_menamoli) {
     centerGoalPostCamera();
   } else {
     if (ball_sensor >= 1 && ball_sensor <= 6) {
@@ -52,8 +52,8 @@ void super_duper_space_invaders(){
     } else {
       // menamoli approssimato :D
       //MENAMOLI DA FIXARE PER BENE
-      if (ball_distance <= 3 && !flag_menamoli)
-      menamoli();
+      if (ball_distance <= 3 && !stop_menamoli)
+      goalie();     //menamoli();
       else
       preparePID(0, 0);
     }

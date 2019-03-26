@@ -193,12 +193,14 @@ void storcimentoPorta() {
 
 void storcimentoPortaIncr() {
   if(portx >= 250) {
-    stincr++;                                 //la porta sta a sinistra
+    stincr++;
+    if(stincr >= 90) stincr = 90;             //la porta sta a sinistra
     digitalWrite(Y, HIGH);
     digitalWrite(R, LOW);
   }
   else if(portx <= 110) {
     stincr--;                                 //la porta sta a destra
+    if(stincr <= -90) stincr = -90;
     digitalWrite(Y, LOW);
     digitalWrite(R, HIGH);
   }
