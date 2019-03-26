@@ -171,7 +171,7 @@ void loop() {
     if (role == HIGH)
       goalie();
     else
-      super_duper_space_invaders();
+      space_invaders_camera();
   } else {
     if (role == HIGH)
       goCenter();
@@ -181,4 +181,5 @@ void loop() {
 
   // final drive pid
   drivePID(globalDir, globalSpeed);
+  // testBall();
 }
