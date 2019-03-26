@@ -140,12 +140,12 @@ void loop() {
   SWD = digitalRead(SWITCH_DX);
   role = SWD;
 
-  comrade = true;
-
-  if (comrade)
-    role = role;
-  else
-    role = 1 - role;
+  // comrade = true;
+  //
+  // if (comrade)
+  //   role = role;
+  // else
+  //   role = 1 - role;
 
   // bluetooth and communication stuff
   teamZone();
@@ -168,15 +168,24 @@ void loop() {
   }
 
   if (ball_seen == true) {
-    if (role == HIGH)
+    if (role == HIGH){
       goalie();
-    else
-      space_invaders_camera();
+    }else {
+      if(stop_menamoli) centerGoalPostCamera();
+      else {
+        if(ball_distance <= 2 && inSensorRange(0, 2)){
+          goalie();
+        }else{
+          space_invaders_camera();
+        }
+      }
+    }
   } else {
-    if (role == HIGH)
+    if (role == HIGH){
       goCenter();
-    else
+    }else{
       centerGoalPostCamera();
+    }
   }
 
   // final drive pid

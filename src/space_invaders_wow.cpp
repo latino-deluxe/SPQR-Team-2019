@@ -89,6 +89,7 @@ void centerGoalPost() {
   } else if (zoneIndex == 5 || zoneIndex == 8) {
     preparePID(270, vel);
   } else {
+    stop_menamoli = false;
     preparePID(0, 0);
   }
 }
@@ -109,69 +110,3 @@ void centerGoalPostCamera() {
     }
   }
 }
-
-
-void menamoli() {
-  // directions going around the ball
-  int goaliedirection[20] = {AA0,  AA1,  AA2,  AA3,  AA4,  AA5,  AA6,
-                             AA7,  AA8,  AA9,  AA10, AA11, AA12, AA13,
-                             AA14, AA15, AA16, AA17, AA18, AA19};
-
-  // PALLA DIETRO
-  palla_dietro();
-
-  atk_direction = goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
-
-  if(role){
-    if ((ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) && (ball_distance <= 2)) storcimentoPortaIncr();
-  }else{
-    storcimentoZone();
-    atk_direction = atk_direction + atk_offset;
-    atk_direction = (atk_direction + 360) % 360;
-  }
-
-
-  atk_speed = 250;
-  preparePID(atk_direction, atk_speed, stincr);
-}
-
-// void super_duper_space_invaders(){
-//   defGoRight = false;
-//   defGoLeft = false;
-//   if(portx == 0 || portx == 999){
-//     //check for the camera to work, if it doesn't use us
-//     if(us_dx > 60 || us_sx < 60) defGoRight = true;
-//     if(us_sx > 60 || us_dx < 60) defGoLeft = true;
-//   }else{
-//     //camera works, us it
-//     defGoRight = portx > keeperMin;
-//     defGoLeft = portx < keeperMax;
-//   }
-//
-//   //now go space_invaders
-//   if ( us_px < 45) {
-//     centerGoalPostCamera();
-//   } else {
-//     if (ball_sensor >= 1 && ball_sensor <= 6) {
-//       if (defGoRight)
-//       preparePID(90, vel);
-//       else
-//       preparePID(270, 90);
-//     } else if (ball_sensor >= 14 && ball_sensor <= 19) {
-//       if (defGoLeft)
-//       preparePID(270, vel);
-//       else
-//       preparePID(90, 90);
-//     } else if (ball_sensor < 14 && ball_sensor > 6) {
-//       goalie();
-//       // preparePID(180, 180);
-//     } else {
-//       // menamoli approssimato :D
-//       //MENAMOLI DA FIXARE PER BENE
-//       // if (ball_distance <= 3 && !stop_menamoli)
-//       // goalie();     //menamoli();
-//       // else
-//       preparePID(0, 0);
-//     }
-//   }
-// }
