@@ -84,6 +84,13 @@ void loop() {
 //    Serial1.write(254);
 }
 
+void blinkTest(){
+  digitalWrite(1,1);
+  delay(500);
+  digitalWrite(1,0);
+  delay(500);
+}
+
 void leggiSens() {
   //intcalled = 0;
   for(int i = 0;i<20;i++)contatore[i]=0;
@@ -147,7 +154,3 @@ ISR(SPI_STC_vect )
    // SPDR=PINC;
     SPCR = 64 |128;  // abilita interrupt
 }
-
-
-
-
