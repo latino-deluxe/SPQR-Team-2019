@@ -97,6 +97,7 @@ void setup() {
 
   // BT
   topolino = 0;
+  fpos = 0;
 
   // stincr
   stincr = 0;
@@ -162,6 +163,8 @@ void loop() {
   goalPosition();
   // Ao();
   // com(2000);
+  WOW();
+  commy(2000);
 
   if (flag_interrupt) {
     int_nuovo();
@@ -189,6 +192,7 @@ void loop() {
   }
 
   // final drive pid
-  drivePID(globalDir, globalSpeed);
+  // drivePID(globalDir, globalSpeed);
   // testBall();
+  Serial.println(fpos);
 }

@@ -31,6 +31,30 @@ bool com(int delay) {
   return comrade;
 }
 
+bool commy(int delay) {
+  int d; // funzione di comunicazione
+  if (BT.available() > 0) {
+    fpos = BT.read();
+  }
+  if ((fpos >= 1) && (fpos <= 9)) {
+    comrade = true;
+    fpos = fpos - 1;
+    old_timer = millis();
+  }
+  if ((millis() - old_timer) > delay) {
+    old_timer = millis();
+    comrade = false;
+  }
+  if (comrade) {
+    digitalWrite(Y, HIGH);
+    digitalWrite(R, LOW);
+  } else {
+    digitalWrite(R, HIGH);
+    digitalWrite(Y, LOW);
+  }
+  return comrade;
+}
+
 // sends via bt the value of the zoneIndex
 void teamZone() { // DA METTERE IN OGNI LOOP
   // calculateZoneIndex();
@@ -49,6 +73,15 @@ void Ao() {
   } else {
     topolino = 0;
     BT.write(42);
+  }
+}
+
+void WOW() {
+  if (topolino < 30) {
+    topolino++;
+  } else {
+    topolino = 0;
+    BT.write(zoneIndex + 1);
   }
 }
 

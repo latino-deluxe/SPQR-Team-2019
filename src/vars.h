@@ -232,3 +232,5 @@ extr bool XP_DX;
 extr int portx;
 
 extr int stincr;
+
+extr int fpos;
