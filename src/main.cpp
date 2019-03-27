@@ -27,6 +27,8 @@ int SWS = 0;
 int SWD = 0;
 
 void setup() {
+  delay(100);
+
   // analogWriteFrequency(4,  1000);
   // analogWriteFrequency(7,  1000);
   // analogWriteFrequency(10, 1000);
@@ -118,11 +120,11 @@ void setup() {
     pinMode(i, OUTPUT);
 
   // Misc inits
+  initIMU();
   initMotorsGPIO();
   initLineSensors();
   initSPI();
   initUS();
-  initIMU();
   initOmnidirectionalSins();
   initBluetooth();
   initSoftwareSerial();
@@ -135,7 +137,7 @@ void setup() {
 void loop() {
 
   // for ports: 1=Blue 0=Yellow
-  pAtk = 0;
+  pAtk = 1;
   pDef = 1 - pAtk; // the other port for the keeper
 
   // SWS = digitalRead(SWITCH_SX);

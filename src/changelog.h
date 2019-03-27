@@ -138,7 +138,14 @@
  *    Migliorare comunicazione bluetooth
  *    Migliorare tutto finché si può
  *
+ * 27/3/2019
+ *  Menu di test da Serial Monitor, a prova di scemo (Il Test 6 non serve a un cizzo)
+ *  Miglioramenti a space invaders per non uscire dietro
+ *  Miglioramenti storcimento incrementale per attaccante
  *
+ *  TODO:
+ *    Migliorare tutto quel che si può
+ *    Migliorare logica comrade col bluetooth
  *
  *
  *

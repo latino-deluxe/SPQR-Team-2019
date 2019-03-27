@@ -274,10 +274,10 @@ void gigaTestZone() {
     testGuessZone();
     testIMU();
 
-    if (comrade){
-      DEBUG_PRINT.print("FriendZone: ");
-      DEBUG_PRINT.println(friendZone);
-    }
+    // if (comrade){
+    //   DEBUG_PRINT.print("FriendZone: ");
+    //   DEBUG_PRINT.println(friendZone);
+    // }
     DEBUG_PRINT.println("------");
     ao = millis();
   }

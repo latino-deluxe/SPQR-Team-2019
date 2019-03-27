@@ -84,15 +84,14 @@ void goalPosition() {
       } else { // leggi porta gialla
         portx = valY;
       }
-      datavalid = 0;
     } else {
       if (pDef == 1) { // leggi porta blu
         portx = valB;
       } else { // leggi porta gialla
         portx = valY;
       }
-      datavalid = 0;
     }
+    datavalid = 0;
   }
   // update_location_complete();
   if (portx == 0)
