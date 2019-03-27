@@ -4,6 +4,7 @@
 #include "Wire.h"
 #include <Arduino.h>
 
+#include "test.h"
 #include "bluetooth.h"
 #include "camera.h"
 #include "chat.h"
@@ -140,6 +141,8 @@ void loop() {
   // SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
   role = SWD;
+
+  if ((flagtest == true) || (Serial.available() > 0)) testMenu();      //test
 
   // comrade = true;
   //

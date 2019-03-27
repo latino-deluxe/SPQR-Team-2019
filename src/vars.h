@@ -117,7 +117,7 @@ extr int DxF;
 
 #define BT Serial1
 
-#define DEBUG_PRINT Serial
+#define DEBUG_PRINT BT
 
 #define CAMERA Serial4
 
@@ -234,3 +234,7 @@ extr int portx;
 extr int stincr;
 
 extr int fpos;
+
+//test vars
+extr byte test;   //test select
+extr bool flagtest;
