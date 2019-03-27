@@ -8,7 +8,7 @@
 #include "motors.h"
 #include "pid.h"
 
-int testDelay = 500;
+int testDelay = 10;
 
 void testMenu(){
   brake();
@@ -32,7 +32,7 @@ void testMenu(){
   do{
     test = Serial.read();
     Serial.println();
-    Serial.print("Test "); Serial.print(test); Serial.print(" ");
+    Serial.print("Test "); Serial.print(test); Serial.println(" ");
 
     if (test == '0') Serial.println("Esce dal test e torna a giocare");
     else if (test == '1') Serial.println("Test Palla, accendere la palla e girarla tra i sensori");
@@ -72,8 +72,10 @@ void testMenu(){
         delay(testDelay);
       break;
       case '5'://test recenter
-        preparePID(0,0);
-        delay(testDelay);
+        readIMU();
+        delay(5);
+        drivePID(0,0);
+        //delay(testDelay);
       break;
       case '6'://test bt
         testBluetooth();
@@ -81,7 +83,7 @@ void testMenu(){
       break;
       case '7'://gigaTestZone
         gigaTestZone();
-        delay(testDelay);
+        delay(10);
       break;
       default://default, todo, maybe
       break;
