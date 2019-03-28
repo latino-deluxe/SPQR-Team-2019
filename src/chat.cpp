@@ -11,7 +11,6 @@ bool com(int delay) {
   int d; // funzione di comunicazione
   if (BT.available() > 0) {
     d = BT.read();
-    Serial.println(d);
   }
   if (d == 42) {
     comrade = true;
@@ -33,11 +32,12 @@ bool com(int delay) {
 }
 
 bool commy(int delay) {
-  if(millis() - count > 250){
+  if (millis() - count > 250) {
     int d; // funzione di comunicazione
     if (BT.available() > 0) {
       d = BT.read();
-      if(d != 0) fpos = d;
+      if (d != 0)
+        fpos = d;
     }
     if ((fpos >= 1) && (fpos <= 9)) {
       comrade = true;

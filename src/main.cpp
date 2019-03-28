@@ -206,8 +206,8 @@ void loop() {
     }
   }
 
-  if ((role) && (comrade))
-    leaveMeAlone();
+  // if ((role) && (comrade))
+  //   leaveMeAlone();
 
   // final drive pid
   drivePID(globalDir, globalSpeed);
