@@ -24,7 +24,7 @@ void space_invaders_camera() {
     if (portx == 0 || portx == 999) {
       centerGoalPost();
     } else {
-      if (us_px < 45) {
+      if (us_px > 35) {
         if (ball_sensor >= 1 && ball_sensor <= 6) {
           if (portx > keeperMin)
             preparePID(90, vel);
@@ -59,7 +59,7 @@ void space_invaders_camera() {
   }
 }
 void space_invaders_us() {
-  if (us_px < 45) {
+  if (us_px > 35) {
     if (ball_sensor >= 1 && ball_sensor <= 6) {
       if (us_dx > 60 || us_sx < 60)
         preparePID(90, vel);
