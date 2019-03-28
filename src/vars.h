@@ -224,7 +224,7 @@ extr bool stop_menamoli;
 // variabili camera
 #define centrop 160 // valore letto dalla camera come centro
 #define keeperMin 100
-#define keeperMax 230
+#define keeperMax 220
 
 // centro a 150
 #define goalieCamMin 120

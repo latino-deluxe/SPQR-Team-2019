@@ -19,28 +19,26 @@ int c = 0;
 float bd = 0;
 long ta;
 bool atk_p = false;
-int vel = 160;
+int vel = 255;
 
 void space_invaders_camera() {
-  if (CAMERA.available() <= 0) {
-    space_invaders_us();
-  } else {
+  if (CAMERA.available() > 0) {
     if (portx == 0 || portx == 999) {
       centerGoalPost();
     } else {
-      if (us_px > 45) {
+      if (us_px > 20 && portx > keeperMin && portx < keeperMax) {
+        preparePID(180, 100);
+      } else {
         if (ball_sensor >= 1 && ball_sensor <= 6) {
           if (portx > keeperMin)
-            preparePID(90, vel);
+            preparePID(90, 180);
           else
             preparePID(0, 0);
-          // preparePID(270, 120);
         } else if (ball_sensor >= 14 && ball_sensor <= 19) {
           if (portx < keeperMax)
-            preparePID(270, vel);
+            preparePID(270, 180);
           else
             preparePID(0, 0);
-          // preparePID(90, 120);
         } else if (ball_sensor < 14 && ball_sensor > 6) {
           menamoli();
         } else {
@@ -50,22 +48,23 @@ void space_invaders_camera() {
           // else
           preparePID(0, 0);
         }
-      } else {
-        centerGoalPostCamera();
+        // centerGoalPostCamera();
       }
     }
+  } else {
+    space_invaders_us();
   }
 }
 void space_invaders_us() {
-  if (us_px > 45) {
+  if (us_px < 35) {
     if (ball_sensor >= 1 && ball_sensor <= 6) {
       if (us_dx > 60 || us_sx < 60)
-        preparePID(90, vel);
+        preparePID(90, 180);
       else
         preparePID(0, 0);
     } else if (ball_sensor >= 14 && ball_sensor <= 19) {
       if (us_sx > 60 || us_dx < 60)
-        preparePID(270, vel);
+        preparePID(270, 180);
       else
         preparePID(0, 0);
     } else if (ball_sensor < 14 && ball_sensor > 6) {
@@ -79,7 +78,7 @@ void space_invaders_us() {
       preparePID(0, 0);
     }
   } else {
-    centerGoalPostCamera();
+    centerGoalPost();
   }
 }
 
