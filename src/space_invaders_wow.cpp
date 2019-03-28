@@ -15,16 +15,12 @@
 unsigned long t = 0;
 int c = 0;
 
-// VARIABILI PER IL PORTIERE
-float bd = 0;
-long ta;
-bool atk_p = false;
 int vel = 160;
 
 void space_invaders_camera() {
-  if(CAMERA.available() <= 0){
+  if (CAMERA.available() <= 0) {
     space_invaders_us();
-  }else{
+  } else {
     if (portx == 0 || portx == 999) {
       centerGoalPost();
     } else {
@@ -34,21 +30,27 @@ void space_invaders_camera() {
             preparePID(90, vel);
           else
             preparePID(0, 0);
-            // preparePID(270, 120);
         } else if (ball_sensor >= 14 && ball_sensor <= 19) {
           if (portx < keeperMax)
             preparePID(270, vel);
           else
             preparePID(0, 0);
-            // preparePID(90, 120);
         } else if (ball_sensor < 14 && ball_sensor > 6) {
           goalie();
+          // Testa questa roba qui e commenta il goalie() di sopra:
+          if (ball_sensor >= 10 && ball_sensor < 14) {
+            if (portx < keeperMax)
+              goalie();
+            else
+              preparePID(0, 0);
+          } else if (ball_sensor <= 10 && ball_sensor > 6) {
+            if (portx > keeperMin)
+              goalie();
+            else
+              preparePID(0, 0);
+          }
         } else {
-          // menamoli approssimato :D
-          // if (ball_distance <= 3)
-          //   goalie();
-          // else
-            preparePID(0, 0);
+          preparePID(0, 0);
         }
       } else {
         centerGoalPostCamera();
@@ -69,17 +71,25 @@ void space_invaders_us() {
       else
         preparePID(0, 0);
     } else if (ball_sensor < 14 && ball_sensor > 6) {
-      goalie();
-      // preparePID(180, 180);
+      // goalie();
+
+      // Testa questa roba qui e commenta il goalie() di sopra:
+      if (ball_sensor >= 10 && ball_sensor < 14) {
+        if (us_sx > 60 || us_dx < 60)
+          goalie();
+        else
+          preparePID(0, 0);
+      } else if (ball_sensor <= 10 && ball_sensor > 6) {
+        if (us_dx > 60 || us_sx < 60)
+          goalie();
+        else
+          preparePID(0, 0);
+      }
     } else {
-      // menamoli approssimato :D
-      // if (ball_distance <= 3)
-      //   goalie();
-      // else
-        preparePID(0, 0);
+      preparePID(0, 0);
     }
   } else {
-    centerGoalPostCamera();
+    centerGoalPost();
   }
 }
 
@@ -98,7 +108,7 @@ void centerGoalPost() {
 }
 
 void centerGoalPostCamera() {
-  if (portx == 0 || portx == 999) {
+  if (portx == 0 || portx == 999 || CAMERA.available <= 0) {
     centerGoalPost();
   } else {
     int vel = 150;
