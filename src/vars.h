@@ -223,9 +223,7 @@ extr bool stop_menamoli;
 
 // variabili camera
 #define centrop 160 // valore letto dalla camera come centro
-#define keeperMin 120
-#define keeperMax 200
-#define keeperMin 90
+#define keeperMin 100
 #define keeperMax 230
 
 // centro a 150

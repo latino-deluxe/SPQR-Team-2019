@@ -4,7 +4,6 @@
 #include "Wire.h"
 #include <Arduino.h>
 
-#include "test.h"
 #include "bluetooth.h"
 #include "camera.h"
 #include "chat.h"
@@ -19,6 +18,7 @@
 #include "pid.h"
 #include "position.h"
 #include "space_invaders.h"
+#include "test.h"
 #include "us.h"
 #include "vars.h"
 
@@ -88,7 +88,7 @@ void setup() {
   atk_direction = 0;
   atk_speed = 0;
   atk_offset = 0;
-  //defense
+  // defense
   flag_interrupt = false;
   // end of variable set up
   Nint = 0;
@@ -144,7 +144,8 @@ void loop() {
   SWD = digitalRead(SWITCH_DX);
   role = SWD;
 
-  if ((flagtest == true) || (Serial.available() > 0)) testMenu();      //test
+  if ((flagtest == true) || (Serial.available() > 0))
+    testMenu(); // test
 
   // comrade = true;
   //
@@ -174,32 +175,37 @@ void loop() {
   if (flag_interrupt) {
     int_nuovo();
   }
-  comrade = true;
 
   if (ball_seen == true) {
-    if (role == HIGH){
-      if(comrade) goalie();
-      else space_invaders_us();
-    }else {
-      if(stop_menamoli) centerGoalPostCamera();
+    if (role == HIGH) {
+      if (comrade)
+        goalie();
+      else
+        space_invaders_us();
+    } else {
+      if (stop_menamoli)
+        centerGoalPostCamera();
       else {
-        if(ball_distance <= 2 && inSensorRange(0, 2) && !comrade){
+        if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
           goalie();
-        }else{
+        } else {
           space_invaders_camera();
         }
       }
     }
   } else {
-    if (role == HIGH){
-      if(comrade) goCenter();
-      else centerGoalPost();
-    }else{
+    if (role == HIGH) {
+      if (comrade)
+        goCenter();
+      else
+        centerGoalPost();
+    } else {
       centerGoalPostCamera();
     }
   }
 
-  if((role) && (comrade)) leaveMeAlone();
+  if ((role) && (comrade))
+    leaveMeAlone();
 
   // final drive pid
   drivePID(globalDir, globalSpeed);

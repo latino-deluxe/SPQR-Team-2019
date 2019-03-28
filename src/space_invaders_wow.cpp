@@ -15,6 +15,10 @@
 unsigned long t = 0;
 int c = 0;
 
+// VARIABILI PER IL PORTIERE
+float bd = 0;
+long ta;
+bool atk_p = false;
 int vel = 160;
 
 void space_invaders_camera() {
@@ -24,32 +28,26 @@ void space_invaders_camera() {
     if (portx == 0 || portx == 999) {
       centerGoalPost();
     } else {
-      if (us_px > 35) {
+      if (us_px > 45) {
         if (ball_sensor >= 1 && ball_sensor <= 6) {
           if (portx > keeperMin)
             preparePID(90, vel);
           else
             preparePID(0, 0);
+          // preparePID(270, 120);
         } else if (ball_sensor >= 14 && ball_sensor <= 19) {
           if (portx < keeperMax)
             preparePID(270, vel);
           else
             preparePID(0, 0);
+          // preparePID(90, 120);
         } else if (ball_sensor < 14 && ball_sensor > 6) {
-          // goalie();
-          // Testa questa roba qui e commenta il goalie() di sopra:
-          if (ball_sensor >= 10 && ball_sensor < 14) {
-            if (portx < keeperMax)
-              goalie();
-            else
-              preparePID(0, 0);
-          } else if (ball_sensor <= 10 && ball_sensor > 6) {
-            if (portx > keeperMin)
-              goalie();
-            else
-              preparePID(0, 0);
-          }
+          menamoli();
         } else {
+          // menamoli approssimato :D
+          // if (ball_distance <= 3)
+          //   goalie();
+          // else
           preparePID(0, 0);
         }
       } else {
@@ -59,7 +57,7 @@ void space_invaders_camera() {
   }
 }
 void space_invaders_us() {
-  if (us_px > 35) {
+  if (us_px > 45) {
     if (ball_sensor >= 1 && ball_sensor <= 6) {
       if (us_dx > 60 || us_sx < 60)
         preparePID(90, vel);
@@ -71,25 +69,17 @@ void space_invaders_us() {
       else
         preparePID(0, 0);
     } else if (ball_sensor < 14 && ball_sensor > 6) {
-      // goalie();
-
-      // Testa questa roba qui e commenta il goalie() di sopra:
-      if (ball_sensor >= 10 && ball_sensor < 14) {
-        if (us_sx > 60 || us_dx < 60)
-          goalie();
-        else
-          preparePID(0, 0);
-      } else if (ball_sensor <= 10 && ball_sensor > 6) {
-        if (us_dx > 60 || us_sx < 60)
-          goalie();
-        else
-          preparePID(0, 0);
-      }
+      menamoli();
+      // preparePID(180, 180);
     } else {
+      // menamoli approssimato :D
+      // if (ball_distance <= 3)
+      //   goalie();
+      // else
       preparePID(0, 0);
     }
   } else {
-    centerGoalPost();
+    centerGoalPostCamera();
   }
 }
 
@@ -108,7 +98,7 @@ void centerGoalPost() {
 }
 
 void centerGoalPostCamera() {
-  if (portx == 0 || portx == 999 || CAMERA.available() <= 0) {
+  if (portx == 0 || portx == 999) {
     centerGoalPost();
   } else {
     int vel = 150;
@@ -122,4 +112,38 @@ void centerGoalPostCamera() {
       }
     }
   }
+}
+
+void menamoli() {
+  // directions going around the ball
+  int goaliedirection[20] = {AA0,  AA1,  AA2,  AA3,  AA4,  AA5,  AA6,
+                             AA7,  AA8,  AA9,  AA10, AA11, AA12, AA13,
+                             AA14, AA15, AA16, AA17, AA18, AA19};
+
+  atk_speed = 180; // forse inutile, lo imposto per livellare
+
+  // PALLA DIETRO
+  palla_dietro();
+
+  atk_direction =
+      goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
+
+  if (role) {
+    if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 ||
+         ball_sensor == 1 || ball_sensor == 2) &&
+        (ball_distance <= 3))
+      storcimentoPortaIncr();
+    else
+      stincr = 0;
+  } else {
+    storcimentoZone();
+    atk_direction = atk_direction + atk_offset;
+    atk_direction = (atk_direction + 360) % 360;
+    stincr = 0;
+  }
+
+  stincr = (stincr + 360) % 360;
+
+  atk_speed = vel;
+  preparePID(atk_direction, atk_speed, stincr);
 }
