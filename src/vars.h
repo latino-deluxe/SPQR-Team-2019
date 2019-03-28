@@ -215,7 +215,7 @@ extr int atk_direction;
 extr int atk_speed;
 extr int atk_offset;
 extr int Nint;
-//defense
+// defense
 extr bool defGoRight;
 extr bool defGoLeft;
 extr bool defGoBehind;
@@ -223,10 +223,10 @@ extr bool stop_menamoli;
 
 // variabili camera
 #define centrop 160 // valore letto dalla camera come centro
-#define keeperMin 110
-#define keeperMax 220
+#define keeperMin 120
+#define keeperMax 200
 
-//centro a 150
+// centro a 150
 #define goalieCamMin 120
 #define goalieCamMax 180
 
@@ -240,6 +240,6 @@ extr int stincr;
 
 extr int fpos;
 
-//test vars
-extr char test;   //test select
+// test vars
+extr char test; // test select
 extr bool flagtest;

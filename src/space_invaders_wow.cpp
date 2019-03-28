@@ -36,7 +36,7 @@ void space_invaders_camera() {
           else
             preparePID(0, 0);
         } else if (ball_sensor < 14 && ball_sensor > 6) {
-          goalie();
+          // goalie();
           // Testa questa roba qui e commenta il goalie() di sopra:
           if (ball_sensor >= 10 && ball_sensor < 14) {
             if (portx < keeperMax)
@@ -108,7 +108,7 @@ void centerGoalPost() {
 }
 
 void centerGoalPostCamera() {
-  if (portx == 0 || portx == 999 || CAMERA.available <= 0) {
+  if (portx == 0 || portx == 999 || CAMERA.available() <= 0) {
     centerGoalPost();
   } else {
     int vel = 150;
