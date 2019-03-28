@@ -141,9 +141,7 @@ void menamoli() {
     atk_direction = (atk_direction + 360) % 360;
     stincr = 0;
   }
-
   stincr = (stincr + 360) % 360;
-
-  atk_speed = vel;
+  atk_speed = 200;
   preparePID(atk_direction, atk_speed, stincr);
 }

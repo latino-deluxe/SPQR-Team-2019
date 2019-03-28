@@ -17,12 +17,17 @@ void goalie() {
   // PALLA DIETRO
   palla_dietro();
 
-  atk_direction = goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
+  atk_direction =
+      goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
 
-  if(role){
-    if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1 || ball_sensor == 2) && (ball_distance <= 3)) storcimentoPortaIncr();
-    else stincr = 0;
-  }else{
+  if (role) {
+    if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 ||
+         ball_sensor == 1 || ball_sensor == 2) &&
+        (ball_distance <= 3))
+      storcimentoPortaIncr();
+    else
+      stincr = 0;
+  } else {
     storcimentoZone();
     atk_direction = atk_direction + atk_offset;
     atk_direction = (atk_direction + 360) % 360;
@@ -67,54 +72,51 @@ void palla_dietro() {
 }
 
 void storcimentoPortaIncr() {
-  if(portx == 999) {                          //non vedo porta
+  if (portx == 999) { // non vedo porta
     stincr = 0;
     digitalWrite(Y, LOW);
     digitalWrite(R, LOW);
-  }
-  else if(portx >= goalieCamMax) {
-    stincr--;                                 //la porta sta a destra
-    if(stincr <= -45) stincr = -45;
+  } else if (portx >= goalieCamMax) {
+    stincr--; // la porta sta a destra
+    if (stincr <= -45)
+      stincr = -45;
     digitalWrite(Y, LOW);
     digitalWrite(R, HIGH);
-  }
-  else if(portx <= goalieCamMin) {
+  } else if (portx <= goalieCamMin) {
     stincr++;
-    if(stincr >= 45) stincr = 45;             //la porta sta a sinistra
+    if (stincr >= 45)
+      stincr = 45; // la porta sta a sinistra
     digitalWrite(Y, HIGH);
     digitalWrite(R, LOW);
-  }
-  else {                                      //robot centrato con porta
+  } else { // robot centrato con porta
     digitalWrite(Y, HIGH);
     digitalWrite(R, HIGH);
   }
 }
 
 void storcimentoZone() {
-  if(zoneIndex == 1) {
+  if (zoneIndex == 1) {
     atk_offset = 0;
     digitalWrite(Y, HIGH);
     digitalWrite(R, HIGH);
-  }
-  else if(zoneIndex == 0) {
+  } else if (zoneIndex == 0) {
     atk_offset = 45;
     digitalWrite(Y, LOW);
     digitalWrite(R, HIGH);
-  }
-  else if(zoneIndex == 2) {
+  } else if (zoneIndex == 2) {
     atk_offset = -45;
     digitalWrite(Y, HIGH);
     digitalWrite(R, LOW);
   }
-  if(zoneIndex >= 3) {
+  if (zoneIndex >= 3) {
     digitalWrite(Y, LOW);
     digitalWrite(R, LOW);
   }
 }
 
-
 void leaveMeAlone() {
-  if(zoneIndex >= 6) goCenter();
+  if (zoneIndex >= 6)
+    goCenter();
 }
 
 void storcimentoPorta2() {
@@ -126,9 +128,9 @@ void storcimentoPorta2() {
       pluto = centrop - portx;
       atk_offset = pluto + imu_current_euler;
       if (atk_offset > 60)
-      atk_offset = 60;
+        atk_offset = 60;
       if (atk_offset < -61)
-      atk_offset = -60;
+        atk_offset = -60;
     }
   }
 }
@@ -147,7 +149,7 @@ void storcimentoPortaOLDOLD() {
 
   pluto = portx - centrop;
   if ((pluto > -20) && (pluto < +20))
-  atk_offset = 0;
+    atk_offset = 0;
 
   if ((pluto < -20) && (pluto > -31)) {
     atk_offset = 330;
@@ -171,9 +173,9 @@ void storcimentoPortaOLDOLD() {
     digitalWrite(30, LOW);
   }
 
-  if(portx == 999) atk_offset = 45;
+  if (portx == 999)
+    atk_offset = 45;
 }
-
 
 void storcimentoPortaOLD() {
   int pluto;
@@ -182,12 +184,17 @@ void storcimentoPortaOLD() {
   // if(pluto <= 149) atk_offset = 30;
   // if(pluto >= 171) atk_offset = 330;
   atk_offset = pluto;
-  if(pluto >= 40)  atk_offset = 40;
-  if(pluto <= -40) atk_offset = -40;
+  if (pluto >= 40)
+    atk_offset = 40;
+  if (pluto <= -40)
+    atk_offset = -40;
 }
 
 void storcimentoPorta() {
-  if((portx >= 111) && (portx <= 239)) atk_direction = 0;
-  if(portx >= 240) atk_direction = 345;
-  if(portx <= 110) atk_direction = 15;
+  if ((portx >= 111) && (portx <= 239))
+    atk_direction = 0;
+  if (portx >= 240)
+    atk_direction = 345;
+  if (portx <= 110)
+    atk_direction = 15;
 }
