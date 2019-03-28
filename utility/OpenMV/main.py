@@ -29,8 +29,8 @@ blue_led.off()
 #                (30, 45, 1, 40, -60, -19)]    # thresholds blue goal
 #
 
-thresholds = [  (59, 88, -17, 29, 40, 70),    # thresholds yellow goal
-                (21, 46, -11, 32, -65, -25)]    # thresholds blue goal
+thresholds = [  (56, 85, 4, 27, 24, 68),    # thresholds yellow goal
+                (20, 72, -22, 22, -51, -24)]    # thresholds blue goal
 
 
 

@@ -137,7 +137,7 @@ void setup() {
 void loop() {
 
   // for ports: 1=Blue 0=Yellow
-  pAtk = 1;
+  pAtk = 0;
   pDef = 1 - pAtk; // the other port for the keeper
 
   // SWS = digitalRead(SWITCH_SX);
@@ -174,14 +174,16 @@ void loop() {
   if (flag_interrupt) {
     int_nuovo();
   }
+  comrade = true;
 
   if (ball_seen == true) {
     if (role == HIGH){
-      goalie();
+      if(comrade) goalie();
+      else space_invaders_us();
     }else {
       if(stop_menamoli) centerGoalPostCamera();
       else {
-        if(ball_distance <= 2 && inSensorRange(0, 2)){
+        if(ball_distance <= 2 && inSensorRange(0, 2) && !comrade){
           goalie();
         }else{
           space_invaders_camera();
@@ -190,7 +192,8 @@ void loop() {
     }
   } else {
     if (role == HIGH){
-      goCenter();
+      if(comrade) goCenter();
+      else centerGoalPost();
     }else{
       centerGoalPostCamera();
     }
@@ -200,5 +203,4 @@ void loop() {
 
   // final drive pid
   drivePID(globalDir, globalSpeed);
-  // testBall();
 }
