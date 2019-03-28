@@ -174,6 +174,7 @@ void loop() {
   if (flag_interrupt) {
     int_nuovo();
   }
+  comrade = true;
 
   if (ball_seen == true) {
     if (role == HIGH){
