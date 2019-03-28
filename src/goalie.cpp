@@ -28,7 +28,7 @@ void goalie() {
     atk_direction = (atk_direction + 360) % 360;
     stincr = 0;
   }
-  stincr= (stincr + 360) % 360;
+  stincr = (stincr + 360) % 360;
   atk_speed = 200;
   preparePID(atk_direction, atk_speed, stincr);
 }
@@ -91,27 +91,30 @@ void storcimentoPortaIncr() {
 }
 
 void storcimentoZone() {
-  if (ball_distance < 2) {
-    if (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) {
-      atk_speed = 255;
-      if (zoneIndex == 0)
-        atk_offset = 90;
-      if (zoneIndex == 1)
-        atk_offset = 0;
-      if (zoneIndex == 2)
-        atk_offset = -90;
-    }
-  } else {
+  if(zoneIndex == 1) {
     atk_offset = 0;
+    digitalWrite(Y, HIGH);
+    digitalWrite(R, HIGH);
+  }
+  else if(zoneIndex == 0) {
+    atk_offset = 45;
+    digitalWrite(Y, LOW);
+    digitalWrite(R, HIGH);
+  }
+  else if(zoneIndex == 2) {
+    atk_offset = -45;
+    digitalWrite(Y, HIGH);
+    digitalWrite(R, LOW);
+  }
+  if(zoneIndex >= 3) {
+    digitalWrite(Y, LOW);
+    digitalWrite(R, LOW);
   }
 }
 
 
 void leaveMeAlone() {
   if(zoneIndex >= 6) goCenter();
-  //if((zoneIndex >= 3) && (zoneIndex <= 5)) {
-    //if(inSensorRange(10, 2)) goCenter();
-  //}
 }
 
 void storcimentoPorta2() {
