@@ -256,13 +256,13 @@ void int_nuovo() {
   }
 
   t0 = millis();
-  VL_INT = 50;
+  VL_INT = 20;
   do {
     readIMU();
     drivePID(EXT_LINEA, VL_INT);
     if (VL_INT < 255)
       VL_INT++;
-    delay(1);
+    delay(5);
   } while ((millis() - t0) < dt);
 
   brake();
