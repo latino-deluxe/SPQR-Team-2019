@@ -12,10 +12,12 @@
 #include <Arduino.h>
 #include <math.h>
 
-int vel = 180;
+int vel = 160;
 
 void space_invaders_camera() {
-  if (us_px <= 35) {
+  if (us_px >= 35 || portx == 999) {
+    centerGoalPost();
+  } else {
     // dx
     if (ball_sensor >= 1 && ball_sensor <= 6) {
       if (portx > keeperMin) {
@@ -39,12 +41,10 @@ void space_invaders_camera() {
     // in front
     else {
       preparePID(0, 0);
-      if(ball_distance <= 3){
+      if (ball_distance <= 3) {
         goalie();
       }
     }
-  } else {
-    centerGoalPost();
   }
 }
 
@@ -73,7 +73,7 @@ void space_invaders_us() {
     // in front
     else {
       preparePID(0, 0);
-      if(ball_distance <= 3){
+      if (ball_distance <= 3) {
         goalie();
       }
     }

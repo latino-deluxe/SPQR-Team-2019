@@ -119,8 +119,8 @@ extr int DxF;
 #define DyF 91
 // con misura y OK e robot al CENTRO (tra le porte) con us_fx o us_px < DyP
 // sto a NORD o a SUD era - 22
-// #define DyP 69
-#define DyP 55
+#define DyP 69
+// #define DyP 55
 #define robot 21 // diametro del robot
 
 // IMU
@@ -228,8 +228,8 @@ extr bool stop_menamoli;
 
 // variabili camera
 #define centrop 160   // valore letto dalla camera come centro
-#define keeperMin 80  // dx limit
-#define keeperMax 230 // sx limit
+#define keeperMin 60  // dx limit
+#define keeperMax 240 // sx limit
 // ema e' scemo da morire (letta)
 // centro a 150
 #define goalieCamMin 30
