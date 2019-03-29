@@ -70,7 +70,7 @@ void space_invaders_us() {
       // preparePID(180, 180);
     } else {
       // spintina in avanti :D
-      if (ball_distance <= 2)
+      if (ball_distance <= 3)
         goalie();
       else
         preparePID(0, 0);
