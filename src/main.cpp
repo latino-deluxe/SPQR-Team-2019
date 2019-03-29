@@ -184,7 +184,7 @@ void loop() {
         space_invaders_us();
     } else {
       if (stop_menamoli)
-        centerGoalPostCamera();
+        centerGoalPost();
       else {
         if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
           goalie();
