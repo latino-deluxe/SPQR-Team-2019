@@ -268,7 +268,7 @@ void int_nuovo() {
 
   brake();
 
-  for (int i = 0; i < 30; i++) {
+  for (int i = 0; i < 30; i++) {     //prima 30
     readIMU();
     recenter(1.0);
     delay(10);
