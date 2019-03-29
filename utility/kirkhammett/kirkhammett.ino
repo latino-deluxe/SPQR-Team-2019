@@ -4,7 +4,7 @@
 #include "libraries/BNO055.h"
 #include "libraries/I2C.cpp"
 #include "libraries/I2C.h"
-#include "libraries/VL53L0X.h"
+//#include "libraries/VL53L0X.h"
 #define SerialTest Serial          //SERIALE TEST
 #define SerialOMV  Serial1         //SERIALE CAMERA
 #define bluetooth  Serial3         //SERIALE COMUNICAZIONE BT

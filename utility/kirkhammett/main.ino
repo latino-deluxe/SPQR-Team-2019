@@ -26,6 +26,8 @@ void setup()
 
 
 void loop() {
+  motori_test();
+  /*
   SWD = digitalRead(SWITCH_DX);                                         //lettura switch destro per cambio porta
   if (SWD == HIGH) p = 1;
   else  p = 0;
@@ -34,14 +36,7 @@ void loop() {
   if ((flagtest == true) || (SerialTest.available() > 0)) rtest();      //test
 
   update_sensors_all();
-  /*legge ultrasuoni bussola e palla
-     aggiorna le variabili globali:
-        us_fr us_px us_dx us_sx (cm)
-        imu_current_euler (gradi 0-359)
-        ball_sensor (0-19)
-        ball_distance (0-6)
-        ball_seen (true/false)
-  */
+ 
   if (flag_interrupt == true )                                            //c'e' stato un interrupt
   {
     gest_interrupt();                                                     //va a gestire l'interrupt
@@ -86,7 +81,7 @@ void loop() {
       else centroporta();
     }
   }
-  return;
+  return;*/
 }
 
 

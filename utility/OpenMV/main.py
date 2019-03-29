@@ -16,7 +16,7 @@ green_led = pyb.LED(2)
 blue_led = pyb.LED(3)
 
 red_led.off()
-green_led.off()
+green_led.on()
 blue_led.off()
 ##############################################################################
 
@@ -30,7 +30,7 @@ blue_led.off()
 #
 
 thresholds = [  (56, 85, 4, 27, 24, 68),    # thresholds yellow goal
-                (20, 72, -22, 22, -51, -24)]    # thresholds blue goal
+                (21, 54, -3, 37, -58, -17)]    # thresholds blue goal
 
 
 
