@@ -78,14 +78,14 @@ void storcimentoPortaIncr() {
     digitalWrite(R, LOW);
   } else if (portx >= goalieCamMax) {
     stincr--; // la porta sta a destra
-    if (stincr <= -45)
-      stincr = -45;
+    if (stincr <= -60)
+      stincr = -60;
     digitalWrite(Y, LOW);
     digitalWrite(R, HIGH);
   } else if (portx <= goalieCamMin) {
     stincr++;
-    if (stincr >= 45)
-      stincr = 45; // la porta sta a sinistra
+    if (stincr >= 60)
+      stincr = 60; // la porta sta a sinistra
     digitalWrite(Y, HIGH);
     digitalWrite(R, LOW);
   } else { // robot centrato con porta

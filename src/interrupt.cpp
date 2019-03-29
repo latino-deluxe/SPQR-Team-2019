@@ -20,7 +20,7 @@ bool stopFlag = false;
 int ldir = 0, lspeed = 180;
 
 void int_nuovo() {
-  long t0, dt, at;
+  unsigned long t0, dt, at;
   byte sens;
   byte si, sf;
 
@@ -255,19 +255,20 @@ void int_nuovo() {
     tone(BUZZER, 20000, 500); // avviso che sono uscito
   }
 
+  dt = 400;
   t0 = millis();
-  VL_INT = 20;
+  VL_INT = 50;
   do {
     readIMU();
     drivePID(EXT_LINEA, VL_INT);
     if (VL_INT < 255)
       VL_INT++;
-    delay(5);
+    delay(1);
   } while ((millis() - t0) < dt);
 
   brake();
 
-  for (int i = 0; i < 30; i++) {
+  for (int i = 0; i < 30; i++) {        //prima era 30
     readIMU();
     recenter(1.0);
     delay(10);

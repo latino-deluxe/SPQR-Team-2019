@@ -224,12 +224,12 @@ extr bool stop_menamoli;
 
 // variabili camera
 #define centrop 160 // valore letto dalla camera come centro
-#define keeperMin 80
-#define keeperMax 220
+#define keeperMin 170
+#define keeperMax 140
 
 // centro a 150
-#define goalieCamMin 120
-#define goalieCamMax 180
+#define goalieCamMin 30
+#define goalieCamMax 260
 
 extr int pAtk; // variabile dello switch che decide dove bisogna attaccare
 extr int pDef; // variabile dello switch che decide dove bisogna difendere
