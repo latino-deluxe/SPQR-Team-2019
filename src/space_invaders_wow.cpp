@@ -22,37 +22,35 @@ bool atk_p = false;
 int vel = 255;
 
 void space_invaders_camera() {
-  if (CAMERA.available() > 0) {
-    if (portx == 0 || portx == 999) {
-      centerGoalPost();
-    } else {
-      if (us_px > 20 && portx > keeperMin && portx < keeperMax) {
-        preparePID(180, 100);
-      } else {
-        if (ball_sensor >= 1 && ball_sensor <= 6) {
-          if (portx > keeperMin)
-            preparePID(90, 180);
-          else
-            preparePID(0, 0);
-        } else if (ball_sensor >= 14 && ball_sensor <= 19) {
-          if (portx < keeperMax)
-            preparePID(270, 180);
-          else
-            preparePID(0, 0);
-        } else if (ball_sensor < 14 && ball_sensor > 6) {
-          menamoli();
-        } else {
-          // menamoli approssimato :D
-          // if (ball_distance <= 3)
-          //   goalie();
-          // else
-          preparePID(0, 0);
-        }
-        // centerGoalPostCamera();
-      }
-    }
-  } else {
+  if (portx == 0 || portx == 999) {
     space_invaders_us();
+  } else {
+    if (us_px < 35) {
+      if (ball_sensor >= 1 && ball_sensor <= 6) {
+        if (portx > keeperMin)
+          preparePID(90, 180);
+        else
+          // preparePID(0, 0);
+          preparePID(270, 90);
+      } else if (ball_sensor >= 14 && ball_sensor <= 19) {
+        if (portx < keeperMax)
+          preparePID(270, 180);
+        else
+          // preparePID(0, 0);
+          preparePID(90, 90);
+      } else if (ball_sensor < 14 && ball_sensor > 6) {
+        goalie();
+      } else {
+        // menamoli approssimato :D
+        // if (ball_distance <= 3)
+        //   goalie();
+        // else
+        preparePID(0, 0);
+      }
+
+    } else {
+      preparePID(180, 120);
+    }
   }
 }
 void space_invaders_us() {
@@ -68,14 +66,14 @@ void space_invaders_us() {
       else
         preparePID(0, 0);
     } else if (ball_sensor < 14 && ball_sensor > 6) {
-      menamoli();
+      goalie();
       // preparePID(180, 180);
     } else {
-      // menamoli approssimato :D
-      // if (ball_distance <= 3)
-      //   goalie();
-      // else
-      preparePID(0, 0);
+      // spintina in avanti :D
+      if (ball_distance <= 2)
+        goalie();
+      else
+        preparePID(0, 0);
     }
   } else {
     centerGoalPost();
@@ -111,36 +109,4 @@ void centerGoalPostCamera() {
       }
     }
   }
-}
-
-void menamoli() {
-  // directions going around the ball
-  int goaliedirection[20] = {AA0,  AA1,  AA2,  AA3,  AA4,  AA5,  AA6,
-                             AA7,  AA8,  AA9,  AA10, AA11, AA12, AA13,
-                             AA14, AA15, AA16, AA17, AA18, AA19};
-
-  atk_speed = 180; // forse inutile, lo imposto per livellare
-
-  // PALLA DIETRO
-  palla_dietro();
-
-  atk_direction =
-      goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
-
-  if (role) {
-    if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 ||
-         ball_sensor == 1 || ball_sensor == 2) &&
-        (ball_distance <= 3))
-      storcimentoPortaIncr();
-    else
-      stincr = 0;
-  } else {
-    storcimentoZone();
-    atk_direction = atk_direction + atk_offset;
-    atk_direction = (atk_direction + 360) % 360;
-    stincr = 0;
-  }
-  stincr = (stincr + 360) % 360;
-  atk_speed = 200;
-  preparePID(atk_direction, atk_speed, stincr);
 }

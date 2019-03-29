@@ -5,7 +5,8 @@ int startpY = 0; // inizio del dato
 int startpB = 0;
 int endpY = 0; // fine del dato
 int endpB = 0;
-String valStringY = ""; // stringa dove si vanno a mettere i pacchetti di dati ricevuti
+String valStringY =
+    ""; // stringa dove si vanno a mettere i pacchetti di dati ricevuti
 String valStringB = "";
 int datavalid = 0; // segnalo se il dato ricevuto è valido
 int oldGoal;
@@ -16,6 +17,7 @@ void goalPosition() {
 
   int valB;
 
+  // portx = 999;
   while (CAMERA.available()) {
     // get the new byte:
     char inChar = (char)CAMERA.read();

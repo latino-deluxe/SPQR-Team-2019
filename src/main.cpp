@@ -191,7 +191,7 @@ void loop() {
         if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
           goalie();
         } else {
-          space_invaders_camera();
+          space_invaders_us();
         }
       }
     }

@@ -23,32 +23,6 @@
 #define F6 1396.91
 #define GB6 1479.98
 
-// You can modify this if you need
-// LIMITI DEL CAMPO
-#define Lx_min 115  // valore minimo accettabile di larghezza
-#define Lx_max 195  // valore massimo accettabile di larghezza (larghezza campo)
-#define LyF_min 190 // valore minimo accettabile di lunghezza sulle fasce
-#define LyF_max 270
-// valore massimo accettabile di lunghezza sulle fasce (lunghezza campo)
-#define LyP_min 139 // valore minimo accettabile di lunghezza tra le porte
-#define LyP_max 250
-// valore massimo accettabile di lunghezza tra le porte// con misura x OK
-// con us_dx o us_sx < DxF sto nelle fasce 30 + 30 - 1/2
-// robot
-
-#define DxF_Atk 48 // per attaccante, fascia centrale allargata
-#define DxF_Def 48 // per portiere, fascia centrale ristretta
-// questa roba viene fatta dentro WhereAmI
-extr int DxF;
-
-// con  misura y OK e robot a EST o A OVEST con us_fx o us_px < DyF sto a
-// NORD o a SUD  era - 10
-#define DyF 91
-// con misura y OK e robot al CENTRO (tra le porte) con us_fx o us_px < DyP
-// sto a NORD o a SUD era - 22
-#define DyP 69
-#define robot 21 // diametro del robot
-
 // ZONE DEL CAMPO // codici utilizzabili per una matice 3x3
 #define EST 2
 #define OVEST 0
@@ -120,6 +94,33 @@ extr int DxF;
 #define DEBUG_PRINT Serial
 
 #define CAMERA Serial4
+
+// You can modify this if you need
+// LIMITI DEL CAMPO
+#define Lx_min 115  // valore minimo accettabile di larghezza
+#define Lx_max 195  // valore massimo accettabile di larghezza (larghezza campo)
+#define LyF_min 190 // valore minimo accettabile di lunghezza sulle fasce
+#define LyF_max 270
+// valore massimo accettabile di lunghezza sulle fasce (lunghezza campo)
+#define LyP_min 139 // valore minimo accettabile di lunghezza tra le porte
+#define LyP_max 250
+// valore massimo accettabile di lunghezza tra le porte// con misura x OK
+// con us_dx o us_sx < DxF sto nelle fasce 30 + 30 - 1/2
+// robot
+
+#define DxF_Atk 48 // per attaccante, fascia centrale allargata
+#define DxF_Def 48 // per portiere, fascia centrale ristretta
+// questa roba viene fatta dentro WhereAmI
+extr int DxF;
+
+// con  misura y OK e robot a EST o A OVEST con us_fx o us_px < DyF sto a
+// NORD o a SUD  era - 10
+#define DyF 91
+// con misura y OK e robot al CENTRO (tra le porte) con us_fx o us_px < DyP
+// sto a NORD o a SUD era - 22
+#define DyP 69
+// #define DyP 55
+#define robot 21 // diametro del robot
 
 // IMU
 extr int imu_temp_euler, imu_current_euler;
@@ -223,7 +224,7 @@ extr bool stop_menamoli;
 
 // variabili camera
 #define centrop 160 // valore letto dalla camera come centro
-#define keeperMin 100
+#define keeperMin 80
 #define keeperMax 220
 
 // centro a 150
