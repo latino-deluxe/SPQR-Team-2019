@@ -119,8 +119,8 @@ extr int DxF;
 #define DyF 91
 // con misura y OK e robot al CENTRO (tra le porte) con us_fx o us_px < DyP
 // sto a NORD o a SUD era - 22
-#define DyP 69
-// #define DyP 55
+// #define DyP 69
+#define DyP 55
 #define robot 21 // diametro del robot
 
 // IMU

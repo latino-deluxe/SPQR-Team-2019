@@ -176,8 +176,6 @@ void loop() {
     int_nuovo();
   }
 
-  comrade = true;
-
   if (ball_seen == true) {
     if (role == HIGH) {
       if (comrade)
@@ -191,7 +189,7 @@ void loop() {
         if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
           goalie();
         } else {
-        space_invaders_camera();
+          space_invaders_us();
         }
       }
     }
@@ -206,7 +204,8 @@ void loop() {
     }
   }
 
-  if ((role) && (comrade)) leaveMeAlone();
+  if ((role) && (comrade))
+    leaveMeAlone();
 
   // final drive pid
   drivePID(globalDir, globalSpeed);

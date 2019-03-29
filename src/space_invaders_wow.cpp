@@ -13,9 +13,10 @@
 #include <math.h>
 
 int vel = 160;
+int usDist = 70;
 
 void space_invaders_camera() {
-  if (us_px >= 35 || portx == 999) {
+  if (us_px >= 30 || portx == 999) {
     centerGoalPost();
   } else {
     // dx
@@ -49,10 +50,10 @@ void space_invaders_camera() {
 }
 
 void space_invaders_us() {
-  if (us_px <= 35) {
+  if (us_px <= 30) {
     // dx
     if (ball_sensor >= 1 && ball_sensor <= 6) {
-      if (us_dx > 60 || us_sx < 60) {
+      if (us_dx > usDist || us_sx < usDist) {
         preparePID(90, vel);
       } else {
         preparePID(0, 0);
@@ -60,7 +61,7 @@ void space_invaders_us() {
     }
     // sx
     else if (ball_sensor <= 19 && ball_sensor >= 14) {
-      if (us_sx > 60 || us_dx < 60) {
+      if (us_sx > usDist || us_dx < usDist) {
         preparePID(270, vel);
       } else {
         preparePID(0, 0);
@@ -92,7 +93,10 @@ void centerGoalPost() {
     preparePID(270, vel);
   } else {
     stop_menamoli = false;
-    preparePID(0, 0);
+    if (us_px >= 30)
+      preparePID(180, vel);
+    else
+      preparePID(0, 0);
   }
 }
 
