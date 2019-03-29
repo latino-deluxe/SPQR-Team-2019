@@ -80,6 +80,7 @@
 #define AA9 180  // 135
 #define AA10 180 // 135
 #define AA11 180 // 135
+// il code non worka
 #define AA12 180 // 190
 #define AA13 200 // 210
 #define AA14 230 // 240
@@ -124,7 +125,7 @@ extr int DxF;
 
 // IMU
 extr int imu_temp_euler, imu_current_euler;
-
+// non serviiii
 // Line Sensors
 extr byte lineReading;
 extr volatile bool flag_interrupt;
@@ -146,7 +147,9 @@ extr byte mess, ball_sensor, ball_distance, old_s_ball, ball_degrees;
 extr long time_s_ball, tspi;
 extr bool ball_seen;
 // PID
-extr float errorePre;    // angolo di errore precedente
+extr float errorePre;
+// non servi a nullaaaaaa
+// angolo di errore precedente
 extr float integral;     // somisa degli angoli di errore
 extr bool reaching_ball; // serve per aumentare il PID del 20% GOALIE
 extr int st;             // storcimento sulle fasce
@@ -192,6 +195,7 @@ extr int zoneIndex;
 
 // BLUETOOTH
 extr int a;
+// puzzi tanto
 extr unsigned long old_timer;
 // Interrupt
 extr byte lineBallSensor;
@@ -223,10 +227,10 @@ extr bool defGoBehind;
 extr bool stop_menamoli;
 
 // variabili camera
-#define centrop 160 // valore letto dalla camera come centro
-#define keeperMin 170
-#define keeperMax 140
-
+#define centrop 160   // valore letto dalla camera come centro
+#define keeperMin 80  // dx limit
+#define keeperMax 230 // sx limit
+// ema e' scemo da morire (letta)
 // centro a 150
 #define goalieCamMin 30
 #define goalieCamMax 260

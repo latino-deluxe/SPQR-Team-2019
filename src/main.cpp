@@ -188,11 +188,11 @@ void loop() {
       if (stop_menamoli)
         centerGoalPostCamera();
       else {
-        if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
-          goalie();
-        } else {
-          space_invaders_us();
-        }
+        // if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
+        //   goalie();
+        // } else {
+        space_invaders_camera();
+        // }
       }
     }
   } else {
@@ -202,7 +202,7 @@ void loop() {
       else
         centerGoalPost();
     } else {
-      centerGoalPostCamera();
+      centerGoalPost();
     }
   }
 
