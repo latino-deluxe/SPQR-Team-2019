@@ -176,7 +176,7 @@ void loop() {
     int_nuovo();
   }
 
-  // comrade = true;
+  comrade = true;
 
   if (ball_seen == true) {
     if (role == HIGH) {
@@ -206,8 +206,7 @@ void loop() {
     }
   }
 
-  if ((role) && (comrade))
-    leaveMeAlone();
+  if ((role) && (comrade)) leaveMeAlone();
 
   // final drive pid
   drivePID(globalDir, globalSpeed);

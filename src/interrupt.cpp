@@ -255,6 +255,7 @@ void int_nuovo() {
     tone(BUZZER, 20000, 500); // avviso che sono uscito
   }
 
+  dt = 320;
   t0 = millis();
   VL_INT = 50;
   do {
