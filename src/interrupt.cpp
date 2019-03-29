@@ -20,7 +20,7 @@ bool stopFlag = false;
 int ldir = 0, lspeed = 180;
 
 void int_nuovo() {
-  unsigned long t0, dt, at;
+  long t0, dt, at;
   byte sens;
   byte si, sf;
 
@@ -255,7 +255,6 @@ void int_nuovo() {
     tone(BUZZER, 20000, 500); // avviso che sono uscito
   }
 
-  dt = 400;
   t0 = millis();
   VL_INT = 50;
   do {
@@ -268,7 +267,7 @@ void int_nuovo() {
 
   brake();
 
-  for (int i = 0; i < 30; i++) {        //prima era 30
+  for (int i = 0; i < 30; i++) {
     readIMU();
     recenter(1.0);
     delay(10);
@@ -346,7 +345,6 @@ void handleInterruptTrigonometry() {
   dovresti provare a vedere una specie di blocco da impostargli finché non
   risolve questo. Ho aggiunto il brakeI() nelle funzioni chiamate dagli
   interrupt
-
   -Emaletta
 */
 void handleInterruptEasy() {

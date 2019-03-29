@@ -39,11 +39,49 @@ void space_invaders_camera() {
     // in front
     else {
       preparePID(0, 0);
+      if(ball_distance <= 3){
+        goalie();
+      }
     }
   } else {
     centerGoalPost();
   }
 }
+
+void space_invaders_us() {
+  if (us_px <= 35) {
+    // dx
+    if (ball_sensor >= 1 && ball_sensor <= 6) {
+      if (us_dx > 60 || us_sx < 60) {
+        preparePID(90, vel);
+      } else {
+        preparePID(0, 0);
+      }
+    }
+    // sx
+    else if (ball_sensor <= 19 && ball_sensor >= 14) {
+      if (us_sx > 60 || us_dx < 60) {
+        preparePID(270, vel);
+      } else {
+        preparePID(0, 0);
+      }
+    }
+    // behind
+    else if (ball_sensor < 14 && ball_sensor > 6) {
+      goalie();
+    }
+    // in front
+    else {
+      preparePID(0, 0);
+      if(ball_distance <= 3){
+        goalie();
+      }
+    }
+  } else {
+    centerGoalPost();
+  }
+}
+
 void centerGoalPost() {
   int vel = 150;
   if ((zoneIndex >= 0 && zoneIndex <= 2) || zoneIndex == 4) {
