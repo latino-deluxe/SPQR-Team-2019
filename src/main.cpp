@@ -137,12 +137,13 @@ void setup() {
 void loop() {
 
   // for ports: 1=Blue 0=Yellow
-  pAtk = 1;
+  pAtk = 0;
   pDef = 1 - pAtk; // the other port for the keeper
 
   // SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
   role = SWD;
+  // comrade = true;
 
   if ((flagtest == true) || (Serial.available() > 0))
     testMenu(); // test
@@ -186,7 +187,7 @@ void loop() {
       if (stop_menamoli)
         centerGoalPost();
       else {
-        if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
+        if (ball_distance <= 3 && inSensorRange(0, 2) && !comrade) {
           goalie();
         } else {
           space_invaders_us();
@@ -204,8 +205,8 @@ void loop() {
     }
   }
 
-  if ((role) && (comrade))
-    leaveMeAlone();
+  // if ((role) && (comrade))
+  //   leaveMeAlone();
 
   // final drive pid
   drivePID(globalDir, globalSpeed);
