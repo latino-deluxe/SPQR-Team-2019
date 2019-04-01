@@ -73,7 +73,12 @@ void int_nuovo() {
       delay(1);
     } else
       break;
-  } while ((millis() - at) <= 1000);
+  } while ((millis() - at) <= 100);            //prima era 1sec
+
+  /*
+  *   ^Attesa una volta presa la linea, diminuendola rientriamo prima in campo
+  *    evitando spinte di altri robot dando di velocità e potenza
+  */
 
   switch (sens) {
   case 0b000001: // sensori singoli 1
@@ -268,7 +273,7 @@ void int_nuovo() {
 
   brake();
 
-  for (int i = 0; i < 30; i++) {     //prima 30
+  for (int i = 0; i < 30; i++) {
     readIMU();
     recenter(1.0);
     delay(10);
