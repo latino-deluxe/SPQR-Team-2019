@@ -73,7 +73,12 @@ void int_nuovo() {
       delay(1);
     } else
       break;
-  } while ((millis() - at) <= 1000);
+  } while ((millis() - at) <= 150);            //prima era 1sec
+
+  /*
+  *   ^Attesa una volta presa la linea, diminuendola rientriamo prima in campo
+  *    evitando spinte di altri robot dando di velocità e potenza
+  */
 
   switch (sens) {
   case 0b000001: // sensori singoli 1
@@ -249,13 +254,31 @@ void int_nuovo() {
 
   default: // Si sono attivati 6 sensori o caso non previsto inverto il moto
     dt = 450;
-    EXT_LINEA = new_Dir + 180;
-    if (EXT_LINEA > 360)
-      EXT_LINEA = EXT_LINEA - 360;
+    // EXT_LINEA = new_Dir + 180;
+    // if (EXT_LINEA > 360)
+    //   EXT_LINEA = EXT_LINEA - 360;
+
+    if(us_sx < 40 && us_dx > 40) {
+      EXT_LINEA = 90;
+      if(us_px < 40 && us_fr > 40) EXT_LINEA = 310;
+      else if(us_px > 40 && us_fr < 40) EXT_LINEA = 135;
+      else EXT_LINEA = 90;
+    }
+    else if(us_sx > 40 && us_dx < 40) {
+      EXT_LINEA = 270;
+      if(us_px < 40 && us_fr > 40) EXT_LINEA = 45;
+      else if(us_px > 40 && us_fr < 40) EXT_LINEA = 225;
+      else EXT_LINEA = 270;
+    }
+    else {
+      if(us_px < 40 && us_fr > 40) EXT_LINEA = 0;
+      if(us_px > 40 && us_fr < 40) EXT_LINEA = 180;
+    }
+
     tone(BUZZER, 20000, 500); // avviso che sono uscito
   }
 
-  dt = 320;
+  dt = 450;
   t0 = millis();
   VL_INT = 50;
   do {

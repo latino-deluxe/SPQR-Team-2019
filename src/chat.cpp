@@ -21,13 +21,13 @@ bool com(int delay) {
     old_timer = millis();
     comrade = false;
   }
-  // if (comrade) {
-  //   digitalWrite(Y, HIGH);
-  //   digitalWrite(R, LOW);
-  // } else {
-  //   digitalWrite(R, HIGH);
-  //   digitalWrite(Y, LOW);
-  // }
+  if (comrade) {
+    digitalWrite(Y, HIGH);
+    digitalWrite(R, LOW);
+  } else {
+    digitalWrite(R, HIGH);
+    digitalWrite(Y, LOW);
+  }
   return comrade;
 }
 

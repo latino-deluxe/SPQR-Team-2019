@@ -23,8 +23,11 @@ void goalie() {
   if (role) {
     if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 ||
          ball_sensor == 1 || ball_sensor == 2) &&
-        (ball_distance <= 3))
-      storcimentoPortaIncr();
+        (ball_distance <= 2))  storcimentoZone();
+        atk_direction = atk_direction + atk_offset;
+        atk_direction = (atk_direction + 360) % 360;
+        stincr = 0;
+    // storcimentoPortaIncr();
     else
       stincr = 0;
   } else {
@@ -78,14 +81,14 @@ void storcimentoPortaIncr() {
     digitalWrite(R, LOW);
   } else if (portx >= goalieCamMax) {
     stincr--; // la porta sta a destra
-    if (stincr <= -60)
-      stincr = -60;
+    if (stincr <= -30)
+      stincr = -30;
     digitalWrite(Y, LOW);
     digitalWrite(R, HIGH);
   } else if (portx <= goalieCamMin) {
     stincr++;
-    if (stincr >= 60)
-      stincr = 60; // la porta sta a sinistra
+    if (stincr >= 30)
+      stincr = 30; // la porta sta a sinistra
     digitalWrite(Y, HIGH);
     digitalWrite(R, LOW);
   } else { // robot centrato con porta

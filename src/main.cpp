@@ -137,16 +137,23 @@ void setup() {
 void loop() {
 
   // for ports: 1=Blue 0=Yellow
-  pAtk = 0;
+  pAtk = 1;
   pDef = 1 - pAtk; // the other port for the keeper
 
   // SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
   role = SWD;
+<<<<<<< HEAD
   comrade = false;
 
   if ((flagtest == true) || (Serial.available() > 0))
     testMenu(); // test
+=======
+
+  if ((flagtest == true) || (Serial.available() > 0)) testMenu(); // test
+
+  // testBluetooth();
+>>>>>>> f0f5631521df80766544e37d53c35779af87d66d
   // game routine
 
   ball_read_position();
@@ -156,10 +163,8 @@ void loop() {
   guessZone();
   calculateZoneIndex();
   goalPosition();
-  Ao();
-  com(2000);
-  // WOW();
-  // commy(2000);
+  // Ao();
+  // com(2000);
 
   if (flag_interrupt) {
     int_nuovo();
@@ -192,9 +197,9 @@ void loop() {
       centerGoalPost();
     }
   }
+  comrade = true;
 
-  // if ((role) && (comrade))
-  //   leaveMeAlone();
+  // if ((role) && (comrade)) leaveMeAlone();
 
   // final drive pid
   drivePID(globalDir, globalSpeed);
