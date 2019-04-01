@@ -7,11 +7,13 @@ void initBluetooth() {
   /*BT.print("$"); // Print three times individually
   BT.print("$");
   BT.print("$"); // Enter command mode
-  delay(550);    // Short delay, wait for the Mate to send back CMD
+  delay(1550);   // Short delay, wait for the Mate to send back CMD
   // sets up a bunch of things for bluetooth to work correctly
   BT.println("SM,6");
   BT.println("SA,0");
-  BT.println("C");*/ // Temporarily Change the baudrate to 9600, no parity
+  BT.println("SR,000666DC9082");
+  BT.println("SU,9600");
+  BT.println("C"); // Temporarily Change the baudrate to 9600, no parity*/
 }
 
 // prints the serial read to bluetooth and bluetooth to serial monitor

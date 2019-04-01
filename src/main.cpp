@@ -143,22 +143,10 @@ void loop() {
   // SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
   role = SWD;
-  // comrade = true;
+  comrade = false;
 
   if ((flagtest == true) || (Serial.available() > 0))
     testMenu(); // test
-
-  // comrade = true;
-  //
-  // if (comrade)
-  //   role = role;
-  // else
-  //   role = 1 - role;
-
-  // bluetooth and communication stuff
-  // teamZone();
-  // whereAreYou();
-  // testBluetooth();
   // game routine
 
   ball_read_position();
@@ -182,7 +170,7 @@ void loop() {
       if (comrade)
         goalie();
       else
-        space_invaders_us();
+        keeper();
     } else {
       if (stop_menamoli)
         centerGoalPost();
@@ -190,7 +178,7 @@ void loop() {
         if (ball_distance <= 3 && inSensorRange(0, 2) && !comrade) {
           goalie();
         } else {
-          space_invaders_us();
+          keeper();
         }
       }
     }
