@@ -17,9 +17,10 @@ int usDist = 70;
 
 int defDir = 0;
 int defSpeed = 0;
-int defDistance = 3;
+int defDistance = 2;
 
 void keeper() {
+
   switch (ball_sensor) {
   case 0:
     if (ball_distance > defDistance) {
