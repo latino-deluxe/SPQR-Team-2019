@@ -143,21 +143,9 @@ void loop() {
   // SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
   role = SWD;
-  // comrade = true;
 
-  if ((flagtest == true) || (Serial.available() > 0))
-    testMenu(); // test
+  if ((flagtest == true) || (Serial.available() > 0)) testMenu(); // test
 
-  // comrade = true;
-  //
-  // if (comrade)
-  //   role = role;
-  // else
-  //   role = 1 - role;
-
-  // bluetooth and communication stuff
-  // teamZone();
-  // whereAreYou();
   // testBluetooth();
   // game routine
 
@@ -170,8 +158,6 @@ void loop() {
   goalPosition();
   Ao();
   com(2000);
-  // WOW();
-  // commy(2000);
 
   if (flag_interrupt) {
     int_nuovo();
@@ -205,8 +191,7 @@ void loop() {
     }
   }
 
-  // if ((role) && (comrade))
-  //   leaveMeAlone();
+  if ((role) && (comrade)) leaveMeAlone();
 
   // final drive pid
   drivePID(globalDir, globalSpeed);
