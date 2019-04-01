@@ -156,8 +156,8 @@ void loop() {
   guessZone();
   calculateZoneIndex();
   goalPosition();
-  Ao();
-  com(2000);
+  // Ao();
+  // com(2000);
 
   if (flag_interrupt) {
     int_nuovo();
@@ -190,8 +190,9 @@ void loop() {
       centerGoalPost();
     }
   }
+  comrade = true;
 
-  if ((role) && (comrade)) leaveMeAlone();
+  // if ((role) && (comrade)) leaveMeAlone();
 
   // final drive pid
   drivePID(globalDir, globalSpeed);

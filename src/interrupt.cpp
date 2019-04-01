@@ -73,7 +73,7 @@ void int_nuovo() {
       delay(1);
     } else
       break;
-  } while ((millis() - at) <= 100);            //prima era 1sec
+  } while ((millis() - at) <= 150);            //prima era 1sec
 
   /*
   *   ^Attesa una volta presa la linea, diminuendola rientriamo prima in campo
