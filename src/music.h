@@ -100,7 +100,7 @@
 #define D8  4698.64
 #define Eb8 4978.03
 //Costanti durata note
-#define BPM  240
+#define BPM  120
 #define H 2*Q                               //half 2/4
 #define Q 60000/BPM                         //quarter 1/4
 #define E Q/2                               //eighth 1/8
@@ -113,3 +113,4 @@ void imperial_march();
 void super_mario();
 void startSetup();
 void stopSetup();
+void miiChannel();

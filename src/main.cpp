@@ -27,7 +27,10 @@ int SWS = 0;
 int SWD = 0;
 
 void setup() {
+  startSetup();
+  // miiChannel();
   delay(100);
+  // super_mario();
 
   // analogWriteFrequency(4,  1000);
   // analogWriteFrequency(7,  1000);
@@ -132,10 +135,10 @@ void setup() {
 
   // digitalWrite(30, HIGH);
   // digitalWrite(29, HIGH);
+  stopSetup();
 }
 
 void loop() {
-
   // for ports: 1=Blue 0=Yellow
   pAtk = 1;
   pDef = 1 - pAtk; // the other port for the keeper

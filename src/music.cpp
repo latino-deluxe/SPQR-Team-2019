@@ -61,18 +61,51 @@ void super_mario() {
 
 void startSetup(){
   tone(buzzer, LA3, 100);
+  delay (100);
   noTone(buzzer);
   tone(buzzer, LA3, 100);
+  delay (100);
   noTone(buzzer);
   tone(buzzer, LA5, 100);
+  delay (100);
   noTone(buzzer);
 }
 
 void stopSetup() {
   tone(buzzer, LA5, 100);
+  delay (100);
   noTone(buzzer);
   tone(buzzer, LA5, 100);
+  delay (100);
   noTone(buzzer);
   tone(buzzer, LA2, 100);
+  delay (100);
+  noTone(buzzer);
+}
+
+void miiChannel() {
+  tone(buzzer, F3, 500);
+  delay(500);
+  noTone(buzzer);
+  tone(buzzer, LA3, 200);
+  delay(200);
+  noTone(buzzer);
+  tone(buzzer, B5, 600);
+  delay(600);
+  noTone(buzzer);
+  tone(buzzer, LA3, 450);
+  delay(450);
+  noTone(buzzer);
+  tone(buzzer, F3, 500);
+  delay(500);
+  noTone(buzzer);
+  tone(buzzer, C2, 350);
+  delay(350);
+  noTone(buzzer);
+  tone(buzzer, C2, 350);
+  delay(350);
+  noTone(buzzer);
+  tone(buzzer, C2, 350);
+  delay(350);
   noTone(buzzer);
 }
