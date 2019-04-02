@@ -116,5 +116,5 @@ void inchioda() {
   it = millis();
   do {
     drivePID(((180 + globalDir) % 360), 255);
-  }while((millis() - it) < 100);            //prima era 100
+  }while((millis() - it) < 300);            //prima era 100
 }

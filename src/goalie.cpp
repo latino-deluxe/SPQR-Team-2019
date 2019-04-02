@@ -23,13 +23,13 @@ void goalie() {
   if (role) {
     if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 ||
          ball_sensor == 1 || ball_sensor == 2) &&
-        (ball_distance <= 2))   storcimentoZone();
-        atk_direction = atk_direction + atk_offset;
-        atk_direction = (atk_direction + 360) % 360;
-        stincr = 0;
+        (ball_distance <= 2) && zoneIndex <= 2)   storcimentoPortaIncr();
+        // atk_direction = atk_direction + atk_offset;
+        // atk_direction = (atk_direction + 360) % 360;
+        // stincr = 0;
         // storcimentoPortaIncr();
-        // else
-        //   stincr = 0;
+        else
+          stincr = 0;
   } else {
     storcimentoZone();
     atk_direction = atk_direction + atk_offset;

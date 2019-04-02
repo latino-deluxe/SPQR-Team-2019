@@ -253,27 +253,29 @@ void int_nuovo() {
     break;
 
   default: // Si sono attivati 6 sensori o caso non previsto inverto il moto
-    dt = 450;
+    // dt = 450;
     // EXT_LINEA = new_Dir + 180;
     // if (EXT_LINEA > 360)
     //   EXT_LINEA = EXT_LINEA - 360;
 
-    if(us_sx < 40 && us_dx > 40) {
-      EXT_LINEA = 90;
-      if(us_px < 40 && us_fr > 40) EXT_LINEA = 310;
-      else if(us_px > 40 && us_fr < 40) EXT_LINEA = 135;
-      else EXT_LINEA = 90;
-    }
-    else if(us_sx > 40 && us_dx < 40) {
-      EXT_LINEA = 270;
-      if(us_px < 40 && us_fr > 40) EXT_LINEA = 45;
-      else if(us_px > 40 && us_fr < 40) EXT_LINEA = 225;
-      else EXT_LINEA = 270;
-    }
-    else {
-      if(us_px < 40 && us_fr > 40) EXT_LINEA = 0;
-      if(us_px > 40 && us_fr < 40) EXT_LINEA = 180;
-    }
+    // if(us_sx < 40 && us_dx > 40) {
+    //   EXT_LINEA = 90;
+    //   if(us_px < 40 && us_fr > 40) EXT_LINEA = 310;
+    //   else if(us_px > 40 && us_fr < 40) EXT_LINEA = 135;
+    //   else EXT_LINEA = 90;
+    // }
+    // else if(us_sx > 40 && us_dx < 40) {
+    //   EXT_LINEA = 270;
+    //   if(us_px < 40 && us_fr > 40) EXT_LINEA = 45;
+    //   else if(us_px > 40 && us_fr < 40) EXT_LINEA = 225;
+    //   else EXT_LINEA = 270;
+    // }
+    // else {
+    //   if(us_px < 40 && us_fr > 40) EXT_LINEA = 0;
+    //   if(us_px > 40 && us_fr < 40) EXT_LINEA = 180;
+    // }
+
+    goCenter();
 
     tone(BUZZER, 20000, 500); // avviso che sono uscito
   }
