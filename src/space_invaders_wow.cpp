@@ -17,7 +17,7 @@ int usDist = 70;
 
 int defDir = 0;
 int defSpeed = 0;
-int defDistance = 1;
+int defDistance = 2;
 
 void keeper() {
   if(us_px >= 30 && comrade){
@@ -26,24 +26,64 @@ void keeper() {
 
 
     switch (ball_sensor) {
-    case 0:
-      if (ball_distance > defDistance) {
-        defDir = 0;
-        defSpeed = 0;
-      } else {
-        defDir = 0;
-        defSpeed = 180;
-      }
+      case 0:
+        if (us_px < 15) {
+          if (ball_distance > defDistance) {
+            defDir = 0;
+            defSpeed = 0;
+          } else {
+            defDir = 0;
+            defSpeed = 180;
+          }
+        } else {
+          if (ball_distance > defDistance) {
+            centerGoalPost();
+            // defDir = 120;
+            // defSpeed = 180;
+          } else {
+            defDir = 0;
+            defSpeed = 180;
+          }
+        }
       break;
     case 1:
-      if (ball_distance > defDistance) {
-        defDir = 0;
-        defSpeed = 0;
+      if (us_px < 15) {
+        if (ball_distance > defDistance) {
+          defDir = 0;
+          defSpeed = 0;
+        } else {
+          defDir = 10;
+          defSpeed = 180;
+        }
       } else {
-        defDir = 10;
-        defSpeed = 180;
+        if (ball_distance > defDistance) {
+          centerGoalPost();
+          // defDir = 120;
+          // defSpeed = 180;
+        } else {
+          defDir = 10;
+          defSpeed = 180;
+        }
       }
       break;
+    // case 0:
+    //   if (ball_distance > defDistance) {
+    //     defDir = 0;
+    //     defSpeed = 0;
+    //   } else {
+    //     defDir = 0;
+    //     defSpeed = 180;
+    //   }
+    //   break;
+    // case 1:
+    //   if (ball_distance > defDistance) {
+    //     defDir = 0;
+    //     defSpeed = 0;
+    //   } else {
+    //     defDir = 10;
+    //     defSpeed = 180;
+    //   }
+    //   break;
     case 2:
       if (ball_distance > defDistance) {
         defDir = 90;
@@ -255,13 +295,32 @@ void keeper() {
       }
       break;
     case 19:
-      if (ball_distance > defDistance) {
-        defDir = 0;
-        defSpeed = 0;
+
+      if (us_px < 15) {
+        if (ball_distance > defDistance) {
+          defDir = 0;
+          defSpeed = 0;
+        } else {
+          defDir = 350;
+          defSpeed = 180;
+        }
       } else {
-        defDir = 350;
-        defSpeed = 180;
+        if (ball_distance > defDistance) {
+          centerGoalPost();
+          // defDir = 120;
+          // defSpeed = 180;
+        } else {
+          defDir = 350;
+          defSpeed = 180;
+        }
       }
+      // if (ball_distance > defDistance) {
+      //   defDir = 0;
+      //   defSpeed = 0;
+      // } else {
+      //   defDir = 350;
+      //   defSpeed = 180;
+      // }
       break;
     default:
       tone(BUZZER, 50000, 500);

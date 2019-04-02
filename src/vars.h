@@ -241,7 +241,7 @@ extr bool XP_SX;
 extr bool XP_DX;
 extr int portx;
 
-extr int stincr;
+extr float stincr;
 
 extr int fpos;
 

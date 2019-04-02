@@ -36,7 +36,7 @@ void goalie() {
     atk_direction = (atk_direction + 360) % 360;
     stincr = 0;
   }
-  stincr = (stincr + 360) % 360;
+  stincr = (((int)stincr) + 360) % 360;
   atk_speed = 200;
   preparePID(atk_direction, atk_speed, stincr);
 }
@@ -80,13 +80,13 @@ void storcimentoPortaIncr() {
     digitalWrite(Y, LOW);
     digitalWrite(R, LOW);
   } else if (portx >= goalieCamMax) {
-    stincr--; // la porta sta a destra
+    stincr -= 0.01; // la porta sta a destra
     if (stincr <= -30)
       stincr = -30;
     digitalWrite(Y, LOW);
     digitalWrite(R, HIGH);
   } else if (portx <= goalieCamMin) {
-    stincr++;
+    stincr += 0.01;
     if (stincr >= 30)
       stincr = 30; // la porta sta a sinistra
     digitalWrite(Y, HIGH);
