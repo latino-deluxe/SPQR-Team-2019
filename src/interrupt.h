@@ -6,3 +6,5 @@ void handleInterruptTrigonometry();
 void handleInterruptEasy();
 void calculate();
 void int_nuovo();
+
+void goCenterINT();

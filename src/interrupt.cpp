@@ -232,6 +232,26 @@ void int_nuovo() {
     EXT_LINEA = 310;
     break;
 
+  case 0b010010:
+    dt = 340;
+    EXT_LINEA = 160;
+    break;
+
+  
+
+  // case 0b001001:
+  // case 0b101000:
+
+
+  case 0b100100:
+    dt = 350;
+    EXT_LINEA = 270;
+    break;
+
+
+
+
+
   case 0b000000: // Tutti i sensori sono disattivi interrupt strano (line sensor
                  // =0)?
     // sporco sul campo?
@@ -243,14 +263,14 @@ void int_nuovo() {
     return;
     break;
 
-  case 0b010010: // robot a cavallo della linea con fuori solo o 1,6 oppure 4,3
-                 // (attivi 5 e 2)
-    if ((ball_sensor > 14) || (ball_sensor < 6))
-      EXT_LINEA = 180; // vede la palla in avanti valutare
-    if ((ball_sensor > 7) && (ball_sensor < 13))
-      EXT_LINEA = 0; // vede la palla dietro valutare
-    dt = 400;
-    break;
+  // case 0b010010: // robot a cavallo della linea con fuori solo o 1,6 oppure 4,3
+  //                // (attivi 5 e 2)
+  //   if ((ball_sensor > 14) || (ball_sensor < 6))
+  //     EXT_LINEA = 180; // vede la palla in avanti valutare
+  //   if ((ball_sensor > 7) && (ball_sensor < 13))
+  //     EXT_LINEA = 0; // vede la palla dietro valutare
+  //   dt = 400;
+  //   break;
 
   default: // Si sono attivati 6 sensori o caso non previsto inverto il moto
     // dt = 450;
@@ -275,12 +295,14 @@ void int_nuovo() {
     //   if(us_px > 40 && us_fr < 40) EXT_LINEA = 180;
     // }
 
-    goCenter();
+    // goCenterINT();
 
+    drivePID(0, 0);
     tone(BUZZER, 20000, 500); // avviso che sono uscito
+    flag_interrupt = false;
   }
 
-  dt = 450;
+  dt = 520;
   t0 = millis();
   VL_INT = 50;
   do {
@@ -386,4 +408,27 @@ void handleInterruptEasy() {
   }
 
   flag_interrupt = false;
+}
+
+void goCenterINT() {
+  if (zoneIndex == 8)
+    preparePID(330, 180);
+  if (zoneIndex == 7)
+    preparePID(0, 180);
+  if (zoneIndex == 6)
+    preparePID(45, 180);
+  if (zoneIndex == 5)
+    preparePID(270, 180);
+  if (zoneIndex == 4)
+    preparePID(0, 0);
+  if (zoneIndex == 3)
+    preparePID(90, 180);
+  if (zoneIndex == 2)
+    preparePID(255, 180);
+  if (zoneIndex == 1)
+    preparePID(180, 180);
+  if (zoneIndex == 0)
+    preparePID(135, 180);
+
+  return;
 }
