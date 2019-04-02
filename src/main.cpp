@@ -157,8 +157,8 @@ void loop() {
   guessZone();
   calculateZoneIndex();
   goalPosition();
-  Ao();
-  com(2000);
+  // Ao();
+  // com(2000);
 
   if (flag_interrupt) {
     int_nuovo();
@@ -191,9 +191,18 @@ void loop() {
       centerGoalPost();
     }
   }
-  // if ((role) && (comrade)) leaveMeAlone();
-  globalSpeed = 140;
+  comrade = true;
+
+  // commentare se il robot sta fermo dopo essere uscito anche se la posizione
+  // della palla cambia di tanto
+  if (ball_sensor == lineBallSensor && ball_distance == lineBallDistance &&
+      (globalDir > (((globalDir - 10) + 360) % 360)) &&
+      (globalDir < (((globalDir + 10) + 360) % 360))) {
+    preparePID(0, 0);
+  }
 
   // final drive pid
+  if (globalSpeed != 0)
+    globalSpeed = 160;
   drivePID(globalDir, globalSpeed);
 }

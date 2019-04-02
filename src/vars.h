@@ -200,6 +200,7 @@ extr unsigned long old_timer;
 // Interrupt
 extr byte lineBallSensor;
 extr byte lineBallDistance;
+extr int lineBallDir;
 // extr float angle;
 // extr int ldir, lspeed;
 

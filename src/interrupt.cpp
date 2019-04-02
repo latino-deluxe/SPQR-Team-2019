@@ -1,5 +1,5 @@
-#include "imu.h"
 #include "interrupt.h"
+#include "imu.h"
 #include "motors.h"
 #include "myspi_old.h"
 #include "pid.h"
@@ -23,6 +23,8 @@ void int_nuovo() {
   long t0, dt, at;
   byte sens;
   byte si, sf;
+
+  lineBallDir = globalDir;
 
   inchioda(); // al posto di brake, fa 100ms di corsa nella direzione opposta
   t0 = millis();
@@ -73,12 +75,12 @@ void int_nuovo() {
       delay(1);
     } else
       break;
-  } while ((millis() - at) <= 150);            //prima era 1sec
+  } while ((millis() - at) <= 150); // prima era 1sec
 
   /*
-  *   ^Attesa una volta presa la linea, diminuendola rientriamo prima in campo
-  *    evitando spinte di altri robot dando di velocità e potenza
-  */
+   *   ^Attesa una volta presa la linea, diminuendola rientriamo prima in campo
+   *    evitando spinte di altri robot dando di velocità e potenza
+   */
 
   switch (sens) {
   case 0b000001: // sensori singoli 1
@@ -237,20 +239,13 @@ void int_nuovo() {
     EXT_LINEA = 160;
     break;
 
-  
-
-  // case 0b001001:
-  // case 0b101000:
-
+    // case 0b001001:
+    // case 0b101000:
 
   case 0b100100:
     dt = 350;
     EXT_LINEA = 270;
     break;
-
-
-
-
 
   case 0b000000: // Tutti i sensori sono disattivi interrupt strano (line sensor
                  // =0)?
@@ -263,14 +258,15 @@ void int_nuovo() {
     return;
     break;
 
-  // case 0b010010: // robot a cavallo della linea con fuori solo o 1,6 oppure 4,3
-  //                // (attivi 5 e 2)
-  //   if ((ball_sensor > 14) || (ball_sensor < 6))
-  //     EXT_LINEA = 180; // vede la palla in avanti valutare
-  //   if ((ball_sensor > 7) && (ball_sensor < 13))
-  //     EXT_LINEA = 0; // vede la palla dietro valutare
-  //   dt = 400;
-  //   break;
+    // case 0b010010: // robot a cavallo della linea con fuori solo o 1,6 oppure
+    // 4,3
+    //                // (attivi 5 e 2)
+    //   if ((ball_sensor > 14) || (ball_sensor < 6))
+    //     EXT_LINEA = 180; // vede la palla in avanti valutare
+    //   if ((ball_sensor > 7) && (ball_sensor < 13))
+    //     EXT_LINEA = 0; // vede la palla dietro valutare
+    //   dt = 400;
+    //   break;
 
   default: // Si sono attivati 6 sensori o caso non previsto inverto il moto
     // dt = 450;
@@ -326,7 +322,12 @@ void int_nuovo() {
   for (int i = 0; i < 6; i++)
     linea[i] = 0;
   flag_interrupt = false;
+
+  // finita la routine di rientro, si rilegge la palla per avere il sensore che
+  // la vede e la distanza
+  ball_read_position();
   lineBallSensor = ball_sensor;
+  lineBallDistance = ball_distance;
 }
 
 // brand new way to handle the interrupt: trigonometry!
