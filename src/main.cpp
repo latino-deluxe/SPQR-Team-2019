@@ -194,7 +194,6 @@ void loop() {
       centerGoalPost();
     }
   }
-  comrade = true;
 
   // commentare se il robot sta fermo dopo essere uscito anche se la posizione
   // della palla cambia di tanto

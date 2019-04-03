@@ -268,7 +268,18 @@ void keeper() {
       defSpeed = 0;
       break;
     }
+
+    limitKeeperUS();
+
     preparePID(defDir, defSpeed);
+  }
+}
+
+void limitKeeperUS() {
+  if ((defDir < 90 && (us_dx < 40 || us_sx > 70)) ||
+      (defDir > 270 && (us_sx < 40 || us_dx > 70))) {
+    defDir = 0;
+    defSpeed = 0;
   }
 }
 
