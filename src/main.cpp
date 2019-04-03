@@ -205,7 +205,7 @@ void loop() {
   // }
 
   // final drive pid
-  if (globalSpeed != 0) globalSpeed = 190;
+  if (globalSpeed != 0) globalSpeed = 180;
 
   drivePID(globalDir, globalSpeed);
 }
