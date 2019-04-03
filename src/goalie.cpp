@@ -60,7 +60,7 @@ void palla_dietro() {
       if (zoneIndex == 0 || zoneIndex == 3 || zoneIndex == 9)
         atk_direction = 160;
       if (zoneIndex == 1 || zoneIndex == 4 || zoneIndex == 7)
-        atk_direction = 180;
+        atk_direction = 135;
     } else if (ball_distance < 2) {
       // se la palla è incredibilmente vicina VIRI ESTREMO
       atk_speed = 255;
