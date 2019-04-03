@@ -246,7 +246,7 @@ void keeper() {
       break;
     case 18:
       if (ball_distance > defDistance) {
-        defDir = 90;
+        defDir = 270;
         defSpeed = 80;
       } else {
         defDir = 325;
