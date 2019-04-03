@@ -269,7 +269,7 @@ void keeper() {
       break;
     }
 
-    limitKeeperUS();
+    // limitKeeperUS();
 
     preparePID(defDir, defSpeed);
   }

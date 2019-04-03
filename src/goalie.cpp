@@ -75,23 +75,23 @@ void palla_dietro() {
 }
 
 void storcimentoPortaIncr() {
-  if (portx == 999) { // non vedo porta
+  if (portx == 999) {                          // non vedo porta
     stincr = 0;
     digitalWrite(Y, LOW);
     digitalWrite(R, LOW);
   } else if (portx >= goalieCamMax) {
-    stincr -= 0.01; // la porta sta a destra
-    if (stincr <= -30)
-      stincr = -30;
+    stincr -= 0.01;                            // la porta sta a destra
+    if (stincr <= -45)
+      stincr = -45;
     digitalWrite(Y, LOW);
     digitalWrite(R, HIGH);
   } else if (portx <= goalieCamMin) {
     stincr += 0.01;
-    if (stincr >= 30)
-      stincr = 30; // la porta sta a sinistra
+    if (stincr >= 45)
+      stincr = 45;                             // la porta sta a sinistra
     digitalWrite(Y, HIGH);
     digitalWrite(R, LOW);
-  } else { // robot centrato con porta
+  } else {                                     // robot centrato con porta
     digitalWrite(Y, HIGH);
     digitalWrite(R, HIGH);
   }
