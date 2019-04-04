@@ -198,7 +198,7 @@ void loop() {
 
   // commentare se il robot sta fermo dopo essere uscito anche se la posizione
   // della palla cambia di tanto
-  if (ball_sensor == lineBallSensor && ball_distance == lineBallDistance &&
+  if (ball_seen && ball_sensor == lineBallSensor && ball_distance == lineBallDistance &&   //potrebbe dar fastidio a portiere
       (globalDir > (((globalDir - 10) + 360) % 360)) &&
       (globalDir < (((globalDir + 10) + 360) % 360))) {
     preparePID(0, 0);
