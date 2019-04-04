@@ -20,22 +20,33 @@ void goalie() {
   atk_direction =
       goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
 
-  if (role) {
-    if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 ||
-         ball_sensor == 1 || ball_sensor == 2) &&
-        (ball_distance <= 2) && zoneIndex <= 2)   storcimentoPortaIncr();
-        // atk_direction = atk_direction + atk_offset;
-        // atk_direction = (atk_direction + 360) % 360;
-        // stincr = 0;
-        // storcimentoPortaIncr();
-        else
-          stincr = 0;
-  } else {
-    storcimentoZone();
-    atk_direction = atk_direction + atk_offset;
-    atk_direction = (atk_direction + 360) % 360;
+  if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 ||
+       ball_sensor == 1 || ball_sensor == 2) &&
+      (ball_distance <= 2) && zoneIndex <= 2)
+    storcimentoPortaIncr();
+  // atk_direction = atk_direction + atk_offset;
+  // atk_direction = (atk_direction + 360) % 360;
+  // stincr = 0;
+  // storcimentoPortaIncr();
+  else
     stincr = 0;
-  }
+  // if (role) {
+  //   if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 ||
+  //        ball_sensor == 1 || ball_sensor == 2) &&
+  //       (ball_distance <= 2) && zoneIndex <= 2)   storcimentoPortaIncr();
+  //       // atk_direction = atk_direction + atk_offset;
+  //       // atk_direction = (atk_direction + 360) % 360;
+  //       // stincr = 0;
+  //       // storcimentoPortaIncr();
+  //       else
+  //         stincr = 0;
+  // } else {
+  //   storcimentoZone();
+  //   atk_direction = atk_direction + atk_offset;
+  //   atk_direction = (atk_direction + 360) % 360;
+  //   stincr = 0;
+  // }
+
   stincr = (((int)stincr) + 360) % 360;
   atk_speed = 200;
   preparePID(atk_direction, atk_speed, stincr);
@@ -75,12 +86,12 @@ void palla_dietro() {
 }
 
 void storcimentoPortaIncr() {
-  if (portx == 999) {                          // non vedo porta
+  if (portx == 999) { // non vedo porta
     stincr = 0;
     digitalWrite(Y, LOW);
     digitalWrite(R, LOW);
   } else if (portx >= goalieCamMax) {
-    stincr -= 0.1;                            // la porta sta a destra
+    stincr -= 0.1; // la porta sta a destra
     if (stincr <= -45)
       stincr = -45;
     digitalWrite(Y, LOW);
@@ -88,10 +99,10 @@ void storcimentoPortaIncr() {
   } else if (portx <= goalieCamMin) {
     stincr += 0.1;
     if (stincr >= 45)
-      stincr = 45;                             // la porta sta a sinistra
+      stincr = 45; // la porta sta a sinistra
     digitalWrite(Y, HIGH);
     digitalWrite(R, LOW);
-  } else {                                     // robot centrato con porta
+  } else { // robot centrato con porta
     digitalWrite(Y, HIGH);
     digitalWrite(R, HIGH);
   }
