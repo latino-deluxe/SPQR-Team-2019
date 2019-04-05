@@ -125,7 +125,7 @@ void setup() {
   // Misc inits
   initIMU();
   initMotorsGPIO();
-  initLineSensors();\
+  initLineSensors();
   initSPI();
   initUS();
   initOmnidirectionalSins();
@@ -140,7 +140,7 @@ void setup() {
 
 void loop() {
   // for ports: 1=Blue 0=Yellow
-  pAtk = 1;
+  pAtk = 0;
   pDef = 1 - pAtk; // the other port for the keeper
   // comrade = true;
 
@@ -198,14 +198,21 @@ void loop() {
 
   // commentare se il robot sta fermo dopo essere uscito anche se la posizione
   // della palla cambia di tanto
-  if (ball_seen && ball_sensor == lineBallSensor && ball_distance == lineBallDistance &&   //potrebbe dar fastidio a portiere
+  if (ball_seen && ball_sensor == lineBallSensor &&
+      ball_distance == lineBallDistance && // potrebbe dar fastidio a portiere
       (globalDir > (((globalDir - 10) + 360) % 360)) &&
       (globalDir < (((globalDir + 10) + 360) % 360))) {
     preparePID(0, 0);
   }
 
   // final drive pid
-  if (globalSpeed != 0) globalSpeed = 150;
+  if (globalSpeed != 0) {
+    if (role) {
+      globalSpeed = 150;
+    } else {
+      globalSpeed = 170;
+    }
+  }
 
   drivePID(globalDir, globalSpeed);
 }
