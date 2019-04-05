@@ -140,7 +140,7 @@ void setup() {
 
 void loop() {
   // for ports: 1=Blue 0=Yellow
-  pAtk = 0;
+  pAtk = 1;
   pDef = 1 - pAtk; // the other port for the keeper
   // comrade = true;
 
