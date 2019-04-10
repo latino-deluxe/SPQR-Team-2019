@@ -108,6 +108,11 @@ void setup() {
   // stincr
   stincr = 0;
 
+  // ;)
+  analogWriteFrequency(4 , 15000);
+  analogWriteFrequency(7 , 15000);
+  analogWriteFrequency(10, 15000);
+
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
   pinMode(16, INPUT_DISABLE); // pin 16 in corto tra 3.3V e massa
@@ -161,8 +166,10 @@ void loop() {
   guessZone();
   calculateZoneIndex();
   goalPosition();
-  Ao();
-  com(2000);
+  // Ao();
+  // com(2000);
+
+  comrade = true;
 
   if (flag_interrupt) {
     int_nuovo();
@@ -208,7 +215,7 @@ void loop() {
   // final drive pid
   if (globalSpeed != 0) {
     if (role) {
-      globalSpeed = 150;
+      globalSpeed = 255;
     } else {
       globalSpeed = 170;
     }
