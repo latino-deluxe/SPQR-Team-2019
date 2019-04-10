@@ -10,6 +10,9 @@
 #define G 31
 #define Y 30
 
+//MULTITHREAD
+extr int THRD1, THRD2;
+
 // IR shield pin
 #define BUZZER 27
 //#define SWITCH_SX 28

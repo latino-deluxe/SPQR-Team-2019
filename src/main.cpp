@@ -3,6 +3,7 @@
 
 #include "Wire.h"
 #include <Arduino.h>
+#include <TeensyThreads.h>
 
 #include "bluetooth.h"
 #include "camera.h"
@@ -135,6 +136,7 @@ void setup() {
 
   // digitalWrite(30, HIGH);
   // digitalWrite(29, HIGH);
+  threads.addThread(imperial_thread);
   stopSetup();
 }
 

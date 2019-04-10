@@ -1,5 +1,6 @@
 #include "vars.h"
 #include "music.h"
+#include "TeensyThreads.h"
 
 void imperial_march() {
   //tone(pin, note, duration)
@@ -108,4 +109,48 @@ void miiChannel() {
   tone(buzzer, C2, 350);
   delay(350);
   noTone(buzzer);
+}
+
+void imperial_thread() {
+  while(1) {
+    //tone(pin, note, duration)
+    tone(buzzer, LA3, Q);
+    threads.delay(1 + Q / 2); //delay duration should always be 1 ms more than the note in order to separate them.
+    noTone(buzzer);
+    threads.delay(1 + Q / 2);
+    tone(buzzer, LA3, Q);
+    threads.delay(1 + Q/2);
+    noTone(buzzer);
+    threads.delay(1 + Q / 2);
+    tone(buzzer, LA3, Q);
+    threads.delay(1 + Q/2);
+    noTone(buzzer);
+    threads.delay(1 + Q / 2);
+    tone(buzzer, F3, E + S);
+    threads.delay(1 + (E + S) / 2);
+    noTone(buzzer);
+    threads.delay(1 + (E + S) / 2);
+    tone(buzzer, C4, S);
+    threads.delay(1 + S / 2);
+    noTone(buzzer);
+    threads.delay(1 + S / 2);
+    tone(buzzer, LA3, Q);
+    threads.delay(1 + Q / 2);
+    noTone(buzzer);
+    threads.delay(1 + Q / 2);
+    tone(buzzer, F3, E + S);
+    threads.delay(1 + (E + S) / 2);
+    noTone(buzzer);
+    threads.delay(1 + (E + S) / 2);
+    tone(buzzer, C4, S);
+    threads.delay(1 + S / 2);
+    noTone(buzzer);
+    threads.delay(1+S/2);
+    tone(buzzer, LA3, H);
+    threads.delay(1 + H/2);
+    noTone(buzzer);
+    threads.delay(1 + H/2);
+    noTone(buzzer);
+  }
+  threads.yield();
 }
