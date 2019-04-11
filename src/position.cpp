@@ -7,6 +7,7 @@
 #include "us.h"
 #include "vars.h"
 #include <Arduino.h>
+#include <TeensyThreads.h>
 
 void WhereAmI() {
   // decide la posizione in orizzontale e verticale

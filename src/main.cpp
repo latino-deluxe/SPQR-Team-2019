@@ -20,6 +20,7 @@
 #include "position.h"
 #include "space_invaders.h"
 #include "test.h"
+#include "threads.h"
 #include "us.h"
 #include "vars.h"
 
@@ -109,6 +110,18 @@ void setup() {
   // stincr
   stincr = 0;
 
+  //Misc
+  ball = false;
+
+  //thread id's
+  THRD1 = 0;
+  THRD2 = 0;
+
+  // Motors PWM frequency
+  analogWriteFrequency(4 , 15000);
+  analogWriteFrequency(7 , 15000);
+  analogWriteFrequency(10, 15000);
+
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
   pinMode(16, INPUT_DISABLE); // pin 16 in corto tra 3.3V e massa
@@ -136,7 +149,9 @@ void setup() {
 
   // digitalWrite(30, HIGH);
   // digitalWrite(29, HIGH);
-  threads.addThread(imperial_thread);
+  THRD1 = threads.addThread(update_everything_pos);
+  THRD2 = threads.addThread(imperial_thread);
+  delay(50);
   stopSetup();
 }
 
@@ -150,25 +165,15 @@ void loop() {
   SWD = digitalRead(SWITCH_DX);
   role = SWD;
 
-  if ((flagtest == true) || (Serial.available() > 0))
-    testMenu(); // test
+  if ((flagtest == true) || (Serial.available() > 0)) testMenu(); // test
 
-  // testBluetooth();
   // game routine
-
   ball_read_position();
-  readIMU();
-  readUS();
-  WhereAmI();
-  guessZone();
-  calculateZoneIndex();
   goalPosition();
   Ao();
   com(2000);
 
-  if (flag_interrupt) {
-    int_nuovo();
-  }
+  if (flag_interrupt) int_nuovo();
 
   if (ball_seen == true) {
     if (role == HIGH) {
@@ -207,10 +212,17 @@ void loop() {
     preparePID(0, 0);
   }
 
+  //letteralmente se ho palla faccio la marcia imperiale
+  if(ball_distance <= 1 && (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1)) ball = true;
+  else ball = false;
+
+  if(ball) threads.restart(THRD2);
+  else threads.suspend(THRD2);
+
   // final drive pid
   if (globalSpeed != 0) {
     if (role) {
-      globalSpeed = 150;
+      globalSpeed = 255;
     } else {
       globalSpeed = 170;
     }

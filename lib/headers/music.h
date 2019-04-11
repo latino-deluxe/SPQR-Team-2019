@@ -114,4 +114,3 @@ void super_mario();
 void startSetup();
 void stopSetup();
 void miiChannel();
-void imperial_thread();
