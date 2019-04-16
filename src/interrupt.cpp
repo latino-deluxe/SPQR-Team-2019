@@ -7,6 +7,7 @@
 #include "vars.h"
 #include <Arduino.h>
 #include <math.h>
+#include <TeensyThreads.h>
 
 // Degrees: 60, 0, 300, 240, 180,120
 float lCosins[INT_LUNG] = {0.5, 1, 0.5, -0.5, -1, -0.5};
@@ -385,6 +386,7 @@ void handleInterruptTrigonometry() {
   stopFlag = true;
   lineBallSensor = ball_sensor;
   lineBallDistance = ball_distance;
+  threads.restart(THRD1);
 }
 
 /*Per Ematino che oggi è l'unico che può

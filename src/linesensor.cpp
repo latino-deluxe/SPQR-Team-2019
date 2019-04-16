@@ -2,6 +2,7 @@
 #include "motors.h"
 #include "vars.h"
 #include <Arduino.h>
+#include <TeensyThreads.h>
 
 // init line sensors and attaches interrput
 void initLineSensors() {
@@ -22,12 +23,14 @@ void initLineSensors() {
 
 // Each interrupt construct a byte
 void line0() {
+  threads.restart(THRD1);
   linea[0] = !digitalRead(LN0);
   flag_interrupt = true;
   brakeI();
 }
 
 void line1() {
+  threads.restart(THRD1);
   linea[1] = !digitalRead(LN1);
   flag_interrupt = true;
   stop_menamoli = true;
@@ -35,6 +38,7 @@ void line1() {
 }
 
 void line2() {
+  threads.restart(THRD1);
   linea[2] = !digitalRead(LN2);
   flag_interrupt = true;
   stop_menamoli = true;
@@ -42,6 +46,7 @@ void line2() {
 }
 
 void line3() {
+  threads.restart(THRD1);
   linea[3] = !digitalRead(LN3);
   flag_interrupt = true;
   stop_menamoli = true;
@@ -49,6 +54,7 @@ void line3() {
 }
 
 void line4() {
+  threads.restart(THRD1);
   linea[4] = !digitalRead(LN4);
   flag_interrupt = true;
   stop_menamoli = true;
@@ -56,6 +62,7 @@ void line4() {
 }
 
 void line5() {
+  threads.restart(THRD1);
   linea[5] = !digitalRead(LN5);
   flag_interrupt = true;
   stop_menamoli = true;

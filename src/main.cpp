@@ -172,7 +172,7 @@ void loop() {
   ball_read_position();
   // Ao();
   // com(2000);
-
+  readIMU();
   comrade = true;
 
   if (flag_interrupt) int_nuovo();

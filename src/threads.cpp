@@ -9,11 +9,13 @@
 
 void update_everything_pos() {
   while(1) {
-    readIMU();
+    digitalWrite(G, HIGH);
+    // readIMU();
     readUS();
     WhereAmI();
     guessZone();
     calculateZoneIndex();
+    digitalWrite(G, LOW);
   }
   threads.yield();
 }
