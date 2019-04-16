@@ -116,6 +116,7 @@ void setup() {
   //thread id's
   THRD1 = 0;
   THRD2 = 0;
+  THRD3 = 0;
 
   // Motors PWM frequency
   analogWriteFrequency(4 , 15000);
@@ -150,8 +151,8 @@ void setup() {
   // digitalWrite(30, HIGH);
   // digitalWrite(29, HIGH);
   THRD1 = threads.addThread(update_everything_pos);
-  THRD2 = threads.addThread(imperial_thread);
-  delay(50);
+  // THRD2 = threads.addThread(imperial_thread);
+  THRD3 = threads.addThread(goalPosition);
   stopSetup();
 }
 
@@ -169,9 +170,10 @@ void loop() {
 
   // game routine
   ball_read_position();
-  goalPosition();
-  Ao();
-  com(2000);
+  // Ao();
+  // com(2000);
+
+  comrade = true;
 
   if (flag_interrupt) int_nuovo();
 
@@ -216,8 +218,8 @@ void loop() {
   if(ball_distance <= 1 && (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1)) ball = true;
   else ball = false;
 
-  if(ball) threads.restart(THRD2);
-  else threads.suspend(THRD2);
+  // if(ball) threads.restart(THRD2);
+  // else threads.suspend(THRD2);
 
   // final drive pid
   if (globalSpeed != 0) {
