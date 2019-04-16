@@ -166,10 +166,8 @@ void loop() {
   guessZone();
   calculateZoneIndex();
   goalPosition();
-  // Ao();
-  // com(2000);
-
-  comrade = true;
+  Ao();
+  com(2000);
 
   if (flag_interrupt) {
     int_nuovo();
@@ -217,7 +215,7 @@ void loop() {
     if (role) {
       globalSpeed = 255;
     } else {
-      globalSpeed = 170;
+      globalSpeed = 255;
     }
   }
 
