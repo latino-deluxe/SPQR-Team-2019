@@ -221,6 +221,6 @@ void loop() {
   // }
 
   // storcimentoPortaIncr();
-  preparePID(0, 100, 0);
+  preparePID(0, 150, 0);
   drivePID(globalDir, globalSpeed);
 }
