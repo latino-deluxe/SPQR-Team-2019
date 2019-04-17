@@ -109,8 +109,8 @@ void setup() {
   stincr = 0;
 
   // ;)
-  analogWriteFrequency(4 , 15000);
-  analogWriteFrequency(7 , 15000);
+  analogWriteFrequency(4, 15000);
+  analogWriteFrequency(7, 15000);
   analogWriteFrequency(10, 15000);
 
   // disable those pins, damaged teensy
@@ -169,55 +169,58 @@ void loop() {
   Ao();
   com(2000);
 
-  if (flag_interrupt) {
-    int_nuovo();
-  }
+  // if (flag_interrupt) {
+  //   int_nuovo();
+  // }
+  //
+  // if (ball_seen == true) {
+  //   if (role == HIGH) {
+  //     if (comrade)
+  //       goalie();
+  //     else
+  //       keeper();
+  //   } else {
+  //     if (stop_menamoli)
+  //       centerGoalPost();
+  //     else {
+  //       if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
+  //         goalie();
+  //       } else {
+  //         keeper();
+  //       }
+  //     }
+  //   }
+  // } else {
+  //   if (role == HIGH) {
+  //     if (comrade)
+  //       goCenter();
+  //     else
+  //       centerGoalPost();
+  //   } else {
+  //     centerGoalPost();
+  //   }
+  // }
+  //
+  // // commentare se il robot sta fermo dopo essere uscito anche se la
+  // posizione
+  // // della palla cambia di tanto
+  // if (ball_seen && ball_sensor == lineBallSensor &&
+  //     ball_distance == lineBallDistance && // potrebbe dar fastidio a
+  //     portiere (globalDir > (((globalDir - 10) + 360) % 360)) && (globalDir <
+  //     (((globalDir + 10) + 360) % 360))) {
+  //   preparePID(0, 0);
+  // }
+  //
+  // // final drive pid
+  // if (globalSpeed != 0) {
+  //   if (role) {
+  //     globalSpeed = 255;
+  //   } else {
+  //     globalSpeed = 255;
+  //   }
+  // }
 
-  if (ball_seen == true) {
-    if (role == HIGH) {
-      if (comrade)
-        goalie();
-      else
-        keeper();
-    } else {
-      if (stop_menamoli)
-        centerGoalPost();
-      else {
-        if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
-          goalie();
-        } else {
-          keeper();
-        }
-      }
-    }
-  } else {
-    if (role == HIGH) {
-      if (comrade)
-        goCenter();
-      else
-        centerGoalPost();
-    } else {
-      centerGoalPost();
-    }
-  }
-
-  // commentare se il robot sta fermo dopo essere uscito anche se la posizione
-  // della palla cambia di tanto
-  if (ball_seen && ball_sensor == lineBallSensor &&
-      ball_distance == lineBallDistance && // potrebbe dar fastidio a portiere
-      (globalDir > (((globalDir - 10) + 360) % 360)) &&
-      (globalDir < (((globalDir + 10) + 360) % 360))) {
-    preparePID(0, 0);
-  }
-
-  // final drive pid
-  if (globalSpeed != 0) {
-    if (role) {
-      globalSpeed = 255;
-    } else {
-      globalSpeed = 255;
-    }
-  }
-
+  // storcimentoPortaIncr();
+  preparePID(0, 100, 0);
   drivePID(globalDir, globalSpeed);
 }

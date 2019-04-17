@@ -68,7 +68,6 @@ void palla_dietro() {
 
 void storcimentoPortaIncr() {
   if (portx == 999) { // non vedo porta
-    stincr = 0;
     digitalWrite(Y, LOW);
     digitalWrite(R, LOW);
   } else if (portx >= goalieCamMax) {

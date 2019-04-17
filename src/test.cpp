@@ -111,6 +111,7 @@ void testMenu() {
     case '9':
       storcimentoPortaIncr();
       preparePID(0, 0, stincr);
+      drivePID(0, 0);
       break;
     default: // default, todo, maybe
       break;
