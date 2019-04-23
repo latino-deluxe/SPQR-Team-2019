@@ -22,6 +22,8 @@
 #include "us.h"
 #include "vars.h"
 
+//commento di test
+
 // Switch management vars
 int SWS = 0;
 int SWD = 0;
