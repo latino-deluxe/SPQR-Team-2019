@@ -127,7 +127,7 @@ extr int DxF;
 #define robot 21 // diametro del robot
 
 // IMU
-extr int imu_temp_euler, imu_current_euler;
+extr volatile int imu_temp_euler, imu_current_euler;
 // non serviiii
 // Line Sensors
 extr byte lineReading;

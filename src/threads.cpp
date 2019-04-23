@@ -10,7 +10,7 @@
 void update_everything_pos() {
   while(1) {
     digitalWrite(G, HIGH);
-    // readIMU();
+    readIMU();
     readUS();
     WhereAmI();
     guessZone();
