@@ -30,11 +30,11 @@ void update_atk() {
 }
 
 void friendo() {
-  while(1) {
+  while(1) {        //this loop says Ao to the other robot and hear the friendly Aoes.
     Ao();
     com(500);
   }
-  threads.yield();
+  threads.yield();  //slices the time in another thread
 }
 
 
