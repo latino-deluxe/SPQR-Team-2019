@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include <TeensyThreads.h>
+#include "camera.h"
+#include "chat.h"
 #include "music.h"
+#include "myspi_old.h"
 #include "imu.h"
 #include "position.h"
 #include "us.h"
@@ -8,14 +11,28 @@
 
 
 void update_everything_pos() {
-  while(1) {
-    digitalWrite(G, HIGH);
-    readIMU();
+  while(1) {        //this loop reads every sensor and calculates the zone
+    // readIMU();     imu doesn't work with threads, dunno
     readUS();
     WhereAmI();
     guessZone();
     calculateZoneIndex();
-    digitalWrite(G, LOW);
+  }
+  threads.yield();  //slices the time in another thread
+}
+
+void update_atk() {
+  while(1) {        //this loop updates ball position and goal position
+    ball_read_position();
+    goalPosition();
+  }
+  threads.yield();  //slices the time in another thread
+}
+
+void friendo() {
+  while(1) {
+    Ao();
+    com(500);
   }
   threads.yield();
 }

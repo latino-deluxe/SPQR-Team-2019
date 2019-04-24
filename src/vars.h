@@ -11,7 +11,7 @@
 #define Y 30
 
 //MULTITHREAD
-extr int THRD1, THRD2, THRD3;
+extr int THRD1, THRD2, THRD3, THRD4;
 
 // IR shield pin
 #define BUZZER 27

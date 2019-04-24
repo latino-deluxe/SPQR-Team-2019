@@ -30,13 +30,7 @@ int SWD = 0;
 
 void setup() {
   startSetup();
-  // miiChannel();
-  delay(100);
-  // super_mario();
-
-  // analogWriteFrequency(4,  1000);
-  // analogWriteFrequency(7,  1000);
-  // analogWriteFrequency(10, 1000);
+  
   // Now assign value to variables, first thing to do
   // IMU
   imu_current_euler = 0;
@@ -62,14 +56,11 @@ void setup() {
   // Position
   old_status_x = CENTRO;
   old_status_y = CENTRO;
-  // old_guessedlocation = CENTRO_CENTRO;
   goal_zone = false;
   good_field_x = true;
   good_field_y = true;
   status_x = CENTRO;
   status_y = CENTRO;
-  // currentlocation = CENTRO_CENTRO;
-  // guessedlocation = CENTRO_CENTRO;
   // Linesensors and interrupt
   flag_interrupt = false;
   nint = 0;
@@ -117,6 +108,7 @@ void setup() {
   THRD1 = 0;
   THRD2 = 0;
   THRD3 = 0;
+  THRD4 = 0;
 
   // Motors PWM frequency
   analogWriteFrequency(4 , 15000);
@@ -128,9 +120,6 @@ void setup() {
   pinMode(16, INPUT_DISABLE); // pin 16 in corto tra 3.3V e massa
 
   pinMode(SWITCH_DX, INPUT);
-
-  // Enable Serial for test
-  Serial.begin(9600);
 
   // Setups a bunch of pins
   pinMode(27, OUTPUT);
@@ -146,13 +135,16 @@ void setup() {
   initOmnidirectionalSins();
   initBluetooth();
   initSoftwareSerial();
+
+  // Enable Serial 
+  Serial.begin(9600);
   CAMERA.begin(19200);
 
-  // digitalWrite(30, HIGH);
-  // digitalWrite(29, HIGH);
+  //Init threads
   THRD1 = threads.addThread(update_everything_pos);
-  // THRD2 = threads.addThread(imperial_thread);
-  THRD3 = threads.addThread(goalPosition);
+  THRD2 = threads.addThread(update_atk);
+  THRD3 = threads.addThread(friendo);
+
   stopSetup();
 }
 
@@ -160,7 +152,6 @@ void loop() {
   // for ports: 1=Blue 0=Yellow
   pAtk = 0;
   pDef = 1 - pAtk; // the other port for the keeper
-  // comrade = true;
 
   // SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
@@ -169,11 +160,9 @@ void loop() {
   if ((flagtest == true) || (Serial.available() > 0)) testMenu(); // test
 
   // game routine
-  ball_read_position();
-  // Ao();
-  // com(2000);
-  // readIMU();
-  comrade = true;
+  readIMU();
+
+  // comrade = true;
 
   if (flag_interrupt) int_nuovo();
 
