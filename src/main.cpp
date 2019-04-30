@@ -32,6 +32,8 @@ void setup() {
   startSetup();
   
   // Now assign value to variables, first thing to do
+
+
   // IMU
   imu_current_euler = 0;
   imu_temp_euler = 0;
@@ -110,10 +112,10 @@ void setup() {
   THRD3 = 0;
   THRD4 = 0;
 
-  // Motors PWM frequency
-  analogWriteFrequency(4 , 15000);
-  analogWriteFrequency(7 , 15000);
-  analogWriteFrequency(10, 15000);
+  // Motors PWM frequency  STOCK PER DIMOSTRAZIONE 10 MAGGIO
+  // analogWriteFrequency(4 , 15000);
+  // analogWriteFrequency(7 , 15000);
+  // analogWriteFrequency(10, 15000);
 
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
@@ -144,11 +146,17 @@ void setup() {
   THRD1 = threads.addThread(update_everything_pos);
   THRD2 = threads.addThread(update_atk);
   THRD3 = threads.addThread(friendo);
+  THRD4 = threads.addThread(imperial_thread);
+
+  //suspend imperial thread at the start
+  threads.suspend(THRD4);
 
   stopSetup();
 }
 
 void loop() {
+  //NEL LOOP TENGO STRATEGIE DI GIOCO, LETTURA IMU, INTERRUPT
+
   // for ports: 1=Blue 0=Yellow
   pAtk = 0;
   pDef = 1 - pAtk; // the other port for the keeper
@@ -160,7 +168,8 @@ void loop() {
   if ((flagtest == true) || (Serial.available() > 0)) testMenu(); // test
 
   // game routine
-  readIMU();
+  //readIMU here because it doesnt work in the thready thingy
+  readIMU();          
 
   // comrade = true;
 
@@ -207,13 +216,13 @@ void loop() {
   if(ball_distance <= 1 && (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1)) ball = true;
   else ball = false;
 
-  // if(ball) threads.restart(THRD2);
-  // else threads.suspend(THRD2);
+  if(ball) threads.restart(THRD4);
+  else threads.suspend(THRD4);
 
   // final drive pid
   if (globalSpeed != 0) {
     if (role) {
-      globalSpeed = 255;
+      globalSpeed = 150;
     } else {
       globalSpeed = 170;
     }

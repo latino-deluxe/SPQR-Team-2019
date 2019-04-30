@@ -32,13 +32,13 @@ void update_atk() {
 void friendo() {
   while(1) {        //this loop says Ao to the other robot and hear the friendly Aoes.
     Ao();
-    com(500);
+    com(500);       //500 'cause they're always talking I guess, even with the interrupt.
   }
   threads.yield();  //slices the time in another thread
 }
 
 
-void imperial_thread() {//tone(pin, note, duration)
+void imperial_thread() {  //imperial march but with threads ;)
   while(1) {
     tone(buzzer,LA3,Q);
     threads.delay(1+Q); //threads.delay duration should always be 1 ms more than the note in order to separate them.
