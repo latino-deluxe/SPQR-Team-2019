@@ -2,10 +2,15 @@
 #include <TeensyThreads.h>
 #include "camera.h"
 #include "chat.h"
+#include "goalie.h"
 #include "music.h"
 #include "myspi_old.h"
 #include "imu.h"
+#include "interrupt.h"
+#include "pid.h"
 #include "position.h"
+#include "space_invaders.h"
+#include "test.h"
 #include "us.h"
 #include "vars.h"
 
@@ -33,6 +38,77 @@ void friendo() {
   while(1) {        //this loop says Ao to the other robot and hear the friendly Aoes.
     Ao();
     com(500);       //500 'cause they're always talking I guess, even with the interrupt.
+  }
+  threads.yield();  //slices the time in another thread
+}
+
+void gameroutine() {  // the old loop in a thread
+  while(1) {
+    
+    // for ports: 1=Blue 0=Yellow
+    pAtk = 0;
+    pDef = 1 - pAtk; // the other port for the keeper
+
+    if ((flagtest == true) || (Serial.available() > 0)) testMenu(); // test
+
+    // game routine
+
+    if (flag_interrupt) int_nuovo();
+
+    if (ball_seen == true) {
+      if (role == HIGH) {
+        if (comrade)
+          goalie();
+        else
+          keeper();
+      } else {
+        if (stop_menamoli)
+          centerGoalPost();
+        else {
+          if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
+            goalie();
+          } else {
+            keeper();
+          }
+        }
+      }
+    } else {
+      if (role == HIGH) {
+        if (comrade)
+          goCenter();
+        else
+          centerGoalPost();
+      } else {
+        centerGoalPost();
+      }
+    }
+
+    // commentare se il robot sta fermo dopo essere uscito anche se la posizione
+    // della palla cambia di tanto
+    if (ball_seen && ball_sensor == lineBallSensor &&
+        ball_distance == lineBallDistance && // potrebbe dar fastidio a portiere
+        (globalDir > (((globalDir - 10) + 360) % 360)) &&
+        (globalDir < (((globalDir + 10) + 360) % 360))) {
+      preparePID(0, 0);
+    }
+
+    //letteralmente se ho palla faccio la marcia imperiale
+    if(ball_distance <= 1 && (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1)) ball = true;
+    else ball = false;
+
+    if(ball) threads.restart(THRD4);
+    else threads.suspend(THRD4);
+
+    // final drive pid
+    if (globalSpeed != 0) {
+      if (role) {
+        globalSpeed = 150;
+      } else {
+        globalSpeed = 170;
+      }
+    }
+
+    drivePID(globalDir, globalSpeed);
   }
   threads.yield();  //slices the time in another thread
 }

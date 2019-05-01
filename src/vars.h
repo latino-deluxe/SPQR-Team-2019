@@ -11,20 +11,22 @@
 #define Y 30
 
 //MULTITHREAD
-extr int THRD1, THRD2, THRD3, THRD4;
+extr int THRD1, THRD2, THRD3, THRD4, THRD5;
 
 // IR shield pin
 #define BUZZER 27
 //#define SWITCH_SX 28
 #define SWITCH_DX 26
 
+
+
 // Note
-#define LA3 220.00
-#define C4 261.63
-#define F3 174.61
-#define E6 1318.51
-#define F6 1396.91
-#define GB6 1479.98
+// #define LA3 220.00
+// #define C4 261.63
+// #define F3 174.61
+// #define E6 1318.51
+// #define F6 1396.91
+// #define GB6 1479.98
 
 // ZONE DEL CAMPO // codici utilizzabili per una matice 3x3
 #define EST 2

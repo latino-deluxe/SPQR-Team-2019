@@ -33,7 +33,6 @@ void setup() {
   
   // Now assign value to variables, first thing to do
 
-
   // IMU
   imu_current_euler = 0;
   imu_temp_euler = 0;
@@ -111,6 +110,7 @@ void setup() {
   THRD2 = 0;
   THRD3 = 0;
   THRD4 = 0;
+  THRD5 = 0;
 
   // Motors PWM frequency  STOCK PER DIMOSTRAZIONE 10 MAGGIO
   // analogWriteFrequency(4 , 15000);
@@ -147,6 +147,7 @@ void setup() {
   THRD2 = threads.addThread(update_atk);
   THRD3 = threads.addThread(friendo);
   THRD4 = threads.addThread(imperial_thread);
+  THRD5 = threads.addThread(gameroutine);
 
   //suspend imperial thread at the start
   threads.suspend(THRD4);
@@ -155,78 +156,10 @@ void setup() {
 }
 
 void loop() {
-  //NEL LOOP TENGO STRATEGIE DI GIOCO, LETTURA IMU, INTERRUPT
-
-  // for ports: 1=Blue 0=Yellow
-  pAtk = 0;
-  pDef = 1 - pAtk; // the other port for the keeper
-
-  // SWS = digitalRead(SWITCH_SX);
-  SWD = digitalRead(SWITCH_DX);
-  role = SWD;
-
-  if ((flagtest == true) || (Serial.available() > 0)) testMenu(); // test
-
-  // game routine
   //readIMU here because it doesnt work in the thready thingy
-  readIMU();          
+    readIMU(); 
 
-  // comrade = true;
-
-  if (flag_interrupt) int_nuovo();
-
-  if (ball_seen == true) {
-    if (role == HIGH) {
-      if (comrade)
-        goalie();
-      else
-        keeper();
-    } else {
-      if (stop_menamoli)
-        centerGoalPost();
-      else {
-        if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
-          goalie();
-        } else {
-          keeper();
-        }
-      }
-    }
-  } else {
-    if (role == HIGH) {
-      if (comrade)
-        goCenter();
-      else
-        centerGoalPost();
-    } else {
-      centerGoalPost();
-    }
-  }
-
-  // commentare se il robot sta fermo dopo essere uscito anche se la posizione
-  // della palla cambia di tanto
-  if (ball_seen && ball_sensor == lineBallSensor &&
-      ball_distance == lineBallDistance && // potrebbe dar fastidio a portiere
-      (globalDir > (((globalDir - 10) + 360) % 360)) &&
-      (globalDir < (((globalDir + 10) + 360) % 360))) {
-    preparePID(0, 0);
-  }
-
-  //letteralmente se ho palla faccio la marcia imperiale
-  if(ball_distance <= 1 && (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1)) ball = true;
-  else ball = false;
-
-  if(ball) threads.restart(THRD4);
-  else threads.suspend(THRD4);
-
-  // final drive pid
-  if (globalSpeed != 0) {
-    if (role) {
-      globalSpeed = 150;
-    } else {
-      globalSpeed = 170;
-    }
-  }
-
-  drivePID(globalDir, globalSpeed);
+  // and this 'cause yeah
+    SWD = digitalRead(SWITCH_DX);
+    role = SWD;
 }
