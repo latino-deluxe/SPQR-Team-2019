@@ -151,7 +151,7 @@ void setup() {
 
   //suspend imperial thread at the start
   threads.suspend(THRD4);         
-  threads.suspend(THRD3);     //per gioco da solo
+  // threads.suspend(THRD3);     //per gioco da solo
 
   stopSetup();
 }

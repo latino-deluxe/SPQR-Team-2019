@@ -37,7 +37,7 @@ void update_atk() {
 void friendo() {
   while(1) {        //this loop says Ao to the other robot and hear the friendly Aoes.
     Ao();
-    com(500);       //500 'cause they're always talking I guess, even with the interrupt.
+    com(200);       //500 'cause they're always talking I guess, even with the interrupt.
   }
   threads.yield();  //slices the time in another thread
 }
