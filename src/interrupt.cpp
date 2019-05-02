@@ -299,9 +299,9 @@ void int_nuovo() {
     flag_interrupt = false;
   }
 
-  dt = 520;
+  dt = 500;         //250
   t0 = millis();
-  VL_INT = 50;
+  VL_INT = 250;     //50
   do {
     readIMU();
     drivePID(EXT_LINEA, VL_INT);

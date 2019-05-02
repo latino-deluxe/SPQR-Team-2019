@@ -93,11 +93,11 @@ void gameroutine() {  // the old loop in a thread
     }
 
     //letteralmente se ho palla faccio la marcia imperiale
-    if(ball_distance <= 1 && (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1)) ball = true;
-    else ball = false;
+    // if(ball_distance <= 1 && (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1)) ball = true;
+    // else ball = false;
 
-    if(ball) threads.restart(THRD4);
-    else threads.suspend(THRD4);
+    // if(ball) threads.restart(THRD4);
+    // else threads.suspend(THRD4);
 
     // final drive pid
     if (globalSpeed != 0) {

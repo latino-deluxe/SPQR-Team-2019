@@ -1,8 +1,3 @@
-# color tracking - By: paolix - ven mag 18 2018
-
-# Automatic RGB565 Color Tracking Example
-#
-
 import sensor, image, time, pyb
 
 from pyb import UART

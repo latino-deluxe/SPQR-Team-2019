@@ -113,9 +113,9 @@ void setup() {
   THRD5 = 0;
 
   // Motors PWM frequency  STOCK PER DIMOSTRAZIONE 10 MAGGIO
-  // analogWriteFrequency(4 , 15000);
-  // analogWriteFrequency(7 , 15000);
-  // analogWriteFrequency(10, 15000);
+  analogWriteFrequency(4 , 15000);
+  analogWriteFrequency(7 , 15000);
+  analogWriteFrequency(10, 15000);
 
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
@@ -147,10 +147,11 @@ void setup() {
   THRD2 = threads.addThread(update_atk);
   THRD3 = threads.addThread(friendo);
   THRD4 = threads.addThread(imperial_thread);
-  THRD5 = threads.addThread(gameroutine);
+  // THRD5 = threads.addThread(gameroutine);      NON VA
 
   //suspend imperial thread at the start
-  threads.suspend(THRD4);
+  threads.suspend(THRD4);         
+  threads.suspend(THRD3);     //per gioco da solo
 
   stopSetup();
 }
@@ -162,4 +163,71 @@ void loop() {
   // and this 'cause yeah
     SWD = digitalRead(SWITCH_DX);
     role = SWD;
+
+  // for ports: 1=Blue 0=Yellow
+    pAtk = 0;
+    pDef = 1 - pAtk; // the other port for the keeper
+
+    if ((flagtest == true) || (Serial.available() > 0)) testMenu(); // test
+
+    // game routine
+
+    comrade = true;
+
+    if (flag_interrupt) int_nuovo();
+
+    if (ball_seen == true) {
+      if (role == HIGH) {
+        if (comrade)
+          goalie();
+        else
+          keeper();
+      } else {
+        if (stop_menamoli)
+          centerGoalPost();
+        else {
+          if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
+            goalie();
+          } else {
+            keeper();
+          }
+        }
+      }
+    } else {
+      if (role == HIGH) {
+        if (comrade)
+          goCenter();
+        else
+          centerGoalPost();
+      } else {
+        centerGoalPost();
+      }
+    }
+
+    // commentare se il robot sta fermo dopo essere uscito anche se la posizione
+    // della palla cambia di tanto
+    if (ball_seen && ball_sensor == lineBallSensor &&
+        ball_distance == lineBallDistance && // potrebbe dar fastidio a portiere
+        (globalDir > (((globalDir - 10) + 360) % 360)) &&
+        (globalDir < (((globalDir + 10) + 360) % 360))) {
+      preparePID(0, 0);
+    }
+
+    //letteralmente se ho palla faccio la marcia imperiale
+    // if(ball_distance <= 1 && (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1)) ball = true;
+    // else ball = false;
+
+    // if(ball) threads.restart(THRD4);
+    // else threads.suspend(THRD4);
+
+    // final drive pid
+    if (globalSpeed != 0) {
+      if (role) {
+        globalSpeed = 255;
+      } else {
+        globalSpeed = 170;
+      }
+    }
+
+    drivePID(globalDir, globalSpeed);
 }
