@@ -151,7 +151,9 @@ void setup() {
 
   //suspend imperial thread at the start
   threads.suspend(THRD4);         
-  // threads.suspend(THRD3);     //per gioco da solo
+
+  //per gioco da solo
+  threads.suspend(THRD3);     
 
   stopSetup();
 }
@@ -204,26 +206,26 @@ void loop() {
       }
     }
 
-    // commentare se il robot sta fermo dopo essere uscito anche se la posizione
-    // della palla cambia di tanto
-    if (ball_seen && ball_sensor == lineBallSensor &&
-        ball_distance == lineBallDistance && // potrebbe dar fastidio a portiere
-        (globalDir > (((globalDir - 10) + 360) % 360)) &&
-        (globalDir < (((globalDir + 10) + 360) % 360))) {
-      preparePID(0, 0);
-    }
+    // // commentare se il robot sta fermo dopo essere uscito anche se la posizione
+    // // della palla cambia di tanto
+    // if (ball_seen && ball_sensor == lineBallSensor &&
+    //     ball_distance == lineBallDistance && // potrebbe dar fastidio a portiere
+    //     (globalDir > (((globalDir - 10) + 360) % 360)) &&
+    //     (globalDir < (((globalDir + 10) + 360) % 360))) {
+    //   preparePID(0, 0);
+    // }
 
-    //letteralmente se ho palla faccio la marcia imperiale
-    // if(ball_distance <= 1 && (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1)) ball = true;
-    // else ball = false;
+    // letteralmente se ho palla faccio la marcia imperiale
+    if(ball_distance <= 2 && (ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) || ball_sensor == 2) ball = true;
+    else ball = false;
 
-    // if(ball) threads.restart(THRD4);
-    // else threads.suspend(THRD4);
+    if(ball) threads.restart(THRD4);
+    else threads.suspend(THRD4);
 
     // final drive pid
     if (globalSpeed != 0) {
       if (role) {
-        globalSpeed = 255;
+        globalSpeed = 200;
       } else {
         globalSpeed = 170;
       }

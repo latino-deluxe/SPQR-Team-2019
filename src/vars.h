@@ -46,12 +46,20 @@ extr int THRD1, THRD2, THRD3, THRD4, THRD5;
 #define SUD_EST 9
 
 // VARIABILI E COSTANTI DEL PID
-#define KP 1.7 // K proporzionale
-#define KI 0.1 // K integrativo
-#define KD 5   // K derivativo
-// #define KP 1.4
-// #define KI 0.1
-// #define KD 0.5
+
+//PIDNUOVO
+#define KP 2.75  // K proporzionale
+#define KI 0.01 // K integrativo
+#define KD 6 // K derivativo
+
+//PIDVECCHIO
+// #define KP 1.7 // K proporzionale
+// #define KI 0.1 // K integrativo
+// #define KD 5   // K derivativo
+
+#define IMAX 20000
+// IMAX * KI deve essere meno di 255 (massimo per il PWM) (es. KI = 0.01, IMAX 20000)
+
 // SPI
 #define SS_PIN 2
 // Linesensors e interrupt
