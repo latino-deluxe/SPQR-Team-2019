@@ -42,6 +42,47 @@ void friendo() {
   threads.yield();  //slices the time in another thread
 }
 
+float tmp=0;
+int time=0;
+
+void storcimentoFigo() {
+  stincr = 0;
+  while(1) {
+    if(millis() - time >= 300){
+      stincr = tmp;
+      time = millis();
+    }else{
+      if (inSensorRange(0,3) && (ball_distance <= 3)) {
+        // if((portx > goalieCamMin) && (portx < goalieCamMax)) tmp = 0;
+        // else if(portx <= goalieCamMin) tmp = -30;
+        // else if(portx >= goalieCamMax) tmp = 30;
+        if (portx == 999) { // non vedo porta
+          tmp = tmp * 0.8;
+          digitalWrite(Y, LOW);
+          digitalWrite(R, LOW);
+        } else if (portx >= goalieCamMax) {
+          tmp -= 0.75; // la porta sta a destra
+          if (tmp <= -30)
+            tmp = -30;
+          digitalWrite(Y, LOW);
+          digitalWrite(R, HIGH);
+        } else if (portx <= goalieCamMin) {
+          tmp += 0.75;
+          if (tmp >= 30)
+            tmp = 30; // la porta sta a sinistra
+          digitalWrite(Y, HIGH);
+          digitalWrite(R, LOW);
+        } else { // robot centrato con porta
+          digitalWrite(Y, HIGH);
+          digitalWrite(R, HIGH);
+        }
+      }
+      else tmp = 0;
+    }
+  }
+  threads.yield();
+}
+
 void gameroutine() {  // the old loop in a thread
   while(1) {
     
