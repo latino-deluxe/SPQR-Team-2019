@@ -48,16 +48,16 @@ extr int THRD1, THRD2, THRD3, THRD4, THRD5;
 // VARIABILI E COSTANTI DEL PID
 
 //PIDNUOVO
-#define KP 2.75  // K proporzionale
-#define KI 0.01 // K integrativo
-#define KD 6 // K derivativo
+// #define KP 2.75  // K proporzionale
+// #define KI 0.01 // K integrativo
+// #define KD 6 // K derivativo
 
 //PIDVECCHIO
-// #define KP 1.7 // K proporzionale
-// #define KI 0.1 // K integrativo
-// #define KD 5   // K derivativo
+#define KP 1.7 // K proporzionale
+#define KI 0.1 // K integrativo
+#define KD 3   // K derivativo
 
-#define IMAX 20000
+// #define IMAX 20000
 // IMAX * KI deve essere meno di 255 (massimo per il PWM) (es. KI = 0.01, IMAX 20000)
 
 // SPI
@@ -246,8 +246,8 @@ extr bool stop_menamoli;
 #define keeperMax 240 // sx limit
 // ema e' scemo da morire (letta)
 // centro a 150
-#define goalieCamMin 150
-#define goalieCamMax 170
+#define goalieCamMin 140
+#define goalieCamMax 180
 
 extr int pAtk; // variabile dello switch che decide dove bisogna attaccare
 extr int pDef; // variabile dello switch che decide dove bisogna difendere
