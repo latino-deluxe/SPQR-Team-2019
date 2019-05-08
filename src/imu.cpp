@@ -5,18 +5,21 @@
 
 Adafruit_BNO055 bno = Adafruit_BNO055();
 
+unsigned long tImu = 0;
+
 void initIMU() {
   bno.begin(bno.OPERATION_MODE_IMUPLUS);
   bno.setExtCrystalUse(true);
 }
 
 void readIMU() {
-  imu::Vector<3> euler = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
+  if(millis() - tImu > 10){
+    imu::Vector<3> euler = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
 
-  if (euler.x() != imu_current_euler) {
-    imu_current_euler = euler.x();
+    if (euler.x() != imu_current_euler) {
+      imu_current_euler = euler.x();
+    }
   }
-  return;
 }
 
 void testIMU() {

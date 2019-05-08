@@ -43,117 +43,65 @@ void friendo() {
 }
 
 float tmp=0;
-int time=0;
+int time=0, timeCam = 0;;
+int imuOff = 0, fst = 0, stport = 0;
 
 void storcimentoFigo() {
   stincr = 0;
   while(1) {
-    if(millis() - time >= 300){
+    if(millis() - time >= 350){
       stincr = tmp;
       time = millis();
     }else{
-      if (inSensorRange(0,3) && (ball_distance <= 3)) {
-        // if((portx > goalieCamMin) && (portx < goalieCamMax)) tmp = 0;
-        // else if(portx <= goalieCamMin) tmp = -30;
-        // else if(portx >= goalieCamMax) tmp = 30;
-        if (portx == 999) { // non vedo porta
-          tmp = tmp * 0.8;
-          digitalWrite(Y, LOW);
-          digitalWrite(R, LOW);
-        } else if (portx >= goalieCamMax) {
-          tmp -= 0.75; // la porta sta a destra
-          if (tmp <= -30)
-            tmp = -30;
-          digitalWrite(Y, LOW);
-          digitalWrite(R, HIGH);
-        } else if (portx <= goalieCamMin) {
-          tmp += 0.75;
-          if (tmp >= 30)
-            tmp = 30; // la porta sta a sinistra
-          digitalWrite(Y, HIGH);
-          digitalWrite(R, LOW);
-        } else { // robot centrato con porta
-          digitalWrite(Y, HIGH);
-          digitalWrite(R, HIGH);
+      if (inSensorRange(0,1) && (ball_distance <= 2)) {
+        //camera portx fix based on imu
+        //-30° --> -100 on camera x
+        //+30° --> +100 on camera x
+
+        // if(millis() - time >= 20){
+          if(portx != 999) {
+            imuOff = imu_current_euler;
+            if(imu_current_euler > 30 && imu_current_euler < 180) imuOff = 30;
+            else if(imu_current_euler < 330 && imu_current_euler >= 180) imuOff = -30;
+            else if (imu_current_euler <= 360 && imu_current_euler >= 330) imuOff = imu_current_euler - 360;
+            else imuOff = imu_current_euler;
+
+            fst = map(imuOff, -30, 30, -90, 90);
+            stport = portx - fst;
+            //Serial.println(stport);
+          }
+
+          // if((portx > goalieCamMin) && (portx < goalieCamMax)) tmp = 0;
+          // else if(portx <= goalieCamMin) tmp = -30;
+          // else if(portx >= goalieCamMax) tmp = 30;
+
+          if (stport == 999) { // non vedo porta
+            tmp = tmp * 0.8;
+            digitalWrite(Y, LOW);
+            digitalWrite(R, LOW);
+          } else if (stport >= 170) {
+            tmp -= 0.75; // la porta sta a destra
+            if (tmp <= -30)
+              tmp = -30;
+            digitalWrite(Y, LOW);
+            digitalWrite(R, HIGH);
+          } else if (stport <= 150) {
+            tmp += 0.75;
+            if (tmp >= 30)
+              tmp = 30; // la porta sta a sinistra
+            digitalWrite(Y, HIGH);
+            digitalWrite(R, LOW);
+          } else { // robot centrato con porta
+            digitalWrite(Y, HIGH);
+            digitalWrite(R, HIGH);
+          }
         }
-      }
+      // }
       else tmp *= 0.5;
     }
   }
   threads.yield();
 }
-
-void gameroutine() {  // the old loop in a thread
-  while(1) {
-    
-    // for ports: 1=Blue 0=Yellow
-    pAtk = 0;
-    pDef = 1 - pAtk; // the other port for the keeper
-
-    if ((flagtest == true) || (Serial.available() > 0)) testMenu(); // test
-
-    // game routine
-
-    if (flag_interrupt) int_nuovo();
-
-    if (ball_seen == true) {
-      if (role == HIGH) {
-        if (comrade)
-          goalie();
-        else
-          keeper();
-      } else {
-        if (stop_menamoli)
-          centerGoalPost();
-        else {
-          if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
-            goalie();
-          } else {
-            keeper();
-          }
-        }
-      }
-    } else {
-      if (role == HIGH) {
-        if (comrade)
-          goCenter();
-        else
-          centerGoalPost();
-      } else {
-        centerGoalPost();
-      }
-    }
-
-    // commentare se il robot sta fermo dopo essere uscito anche se la posizione
-    // della palla cambia di tanto
-    if (ball_seen && ball_sensor == lineBallSensor &&
-        ball_distance == lineBallDistance && // potrebbe dar fastidio a portiere
-        (globalDir > (((globalDir - 10) + 360) % 360)) &&
-        (globalDir < (((globalDir + 10) + 360) % 360))) {
-      preparePID(0, 0);
-    }
-
-    //letteralmente se ho palla faccio la marcia imperiale
-    // if(ball_distance <= 1 && (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1)) ball = true;
-    // else ball = false;
-
-    // if(ball) threads.restart(THRD4);
-    // else threads.suspend(THRD4);
-
-    // final drive pid
-    if (globalSpeed != 0) {
-      if (role) {
-        globalSpeed = 150;
-      } else {
-        globalSpeed = 170;
-      }
-    }
-
-    drivePID(globalDir, globalSpeed);
-  }
-  threads.yield();  //slices the time in another thread
-}
-
 
 void imperial_thread() {  //imperial march but with threads ;)
   while(1) {

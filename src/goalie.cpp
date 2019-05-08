@@ -20,8 +20,7 @@ void goalie() {
 
   atk_direction = goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
 
-  
-
+  // storcimentoPortaIncr(); 
   atk_speed = 200;
   preparePID(atk_direction, atk_speed, stincr);
 }
@@ -60,25 +59,29 @@ void palla_dietro() {
 }
 
 void storcimentoPortaIncr() {
-  if (portx == 999) { // non vedo porta
-    stincr = stincr * 0.8;
-    digitalWrite(Y, LOW);
-    digitalWrite(R, LOW);
-  } else if (portx >= goalieCamMax) {
-    stincr -= 5; // la porta sta a destra
-    if (stincr <= -45)
-      stincr = -45;
-    digitalWrite(Y, LOW);
-    digitalWrite(R, HIGH);
-  } else if (portx <= goalieCamMin) {
-    stincr += 5;
-    if (stincr >= 45)
-      stincr = 45; // la porta sta a sinistra
-    digitalWrite(Y, HIGH);
-    digitalWrite(R, LOW);
-  } else { // robot centrato con porta
-    digitalWrite(Y, HIGH);
-    digitalWrite(R, HIGH);
+  if(inSensorRange(0,2) && ball_distance <= 3){
+    if (portx == 999) { // non vedo porta
+      stincr = stincr * 0.8;
+      digitalWrite(Y, LOW);
+      digitalWrite(R, LOW);
+    } else if (portx >= goalieCamMax) {
+      stincr -= 5; // la porta sta a destra
+      if (stincr <= -45)
+        stincr = -45;
+      digitalWrite(Y, LOW);
+      digitalWrite(R, HIGH);
+    } else if (portx <= goalieCamMin) {
+      stincr += 5;
+      if (stincr >= 45)
+        stincr = 45; // la porta sta a sinistra
+      digitalWrite(Y, HIGH);
+      digitalWrite(R, LOW);
+    } else { // robot centrato con porta
+      digitalWrite(Y, HIGH);
+      digitalWrite(R, HIGH);
+    }
+  }else{
+    stincr = 0;
   }
 }
 

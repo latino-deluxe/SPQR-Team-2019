@@ -20,7 +20,7 @@
 #include "position.h"
 #include "space_invaders.h"
 #include "test.h"
-#include "threads.h"
+#include "threads.h"100
 #include "us.h"
 #include "vars.h"
 
@@ -114,9 +114,9 @@ void setup() {
   THRD6 = 0;
 
   // Motors PWM frequency
-  analogWriteFrequency(4 , 15000);
-  analogWriteFrequency(7 , 15000);
-  analogWriteFrequency(10, 15000);
+  // analogWriteFrequency(4 , 1000);
+  // analogWriteFrequency(7 , 1000);
+  // analogWriteFrequency(10, 1000);
 
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
@@ -198,6 +198,7 @@ void loop() {
         }
       }
     } else {
+      stincr = 0;
       if (role == HIGH) {
         if (comrade)
           goCenter();

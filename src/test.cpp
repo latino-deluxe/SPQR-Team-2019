@@ -29,6 +29,7 @@ void testMenu(){
   Serial.println("6)Test BT");
   Serial.println("7)GigaTestZone");
   Serial.println("8)Test Camera");
+  Serial.println("9)Test Storcimento Camera");
 
   do{
     test = Serial.read();
