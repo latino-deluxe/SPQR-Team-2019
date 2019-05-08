@@ -77,7 +77,7 @@ void storcimentoFigo() {
           digitalWrite(R, HIGH);
         }
       }
-      else tmp = 0;
+      else tmp *= 0.5;
     }
   }
   threads.yield();
