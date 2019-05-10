@@ -14,6 +14,7 @@ Spostato di prepotenza in un thread tutto il loop tranne lettura IMU. Da testare
 
 
 # TODO:
-*IMU nei thread*
-*Motori compatibili e stabili a 15kHz*
-*Varie ed eventuali. Sentiti libero di aggiornare*
+IMU nei thread
+Storcimento buono
+
+Varie ed eventuali. Sentiti libero di aggiornare
