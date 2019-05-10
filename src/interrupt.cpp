@@ -25,6 +25,9 @@ void int_nuovo() {
   byte sens;
   byte si, sf;
 
+  st=0;
+  stincr=0;
+
   lineBallDir = globalDir;
 
   inchioda(); // al posto di brake, fa 100ms di corsa nella direzione opposta

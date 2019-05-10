@@ -225,7 +225,7 @@ void loop() {
     // final drive pid
     if (globalSpeed != 0) {
       if (role) {
-        globalSpeed = 200;
+        globalSpeed = 180;
       } else {
         globalSpeed = 200;
       }
