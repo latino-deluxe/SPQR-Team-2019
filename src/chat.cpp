@@ -8,7 +8,7 @@
 int count = 0;
 
 bool com(int delay) {
-  int d; // funzione di comunicazione
+  int d = 0; // funzione di comunicazione
   if (BT.available() > 0) {
     d = BT.read();
   }

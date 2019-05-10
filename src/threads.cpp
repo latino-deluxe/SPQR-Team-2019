@@ -49,7 +49,7 @@ int imuOff = 0, fst = 0, stport = 0;
 void storcimentoFigo() {
   stincr = 0;
   while(1) {
-    if(millis() - time >= 350){
+    if(millis() - time >= 250){
       stincr = tmp;
       time = millis();
     }else{
@@ -78,18 +78,18 @@ void storcimentoFigo() {
           if (stport == 999) { // non vedo porta
             tmp = tmp * 0.8;
           } else if (stport >= 170) {
-            tmp -= 3; // la porta sta a destra
+            tmp -= 15; // la porta sta a destra
             if (tmp <= -30)
               tmp = -30;
           } else if (stport <= 150) {
-            tmp += 3;
+            tmp += 15;
             if (tmp >= 30)
               tmp = 30; // la porta sta a sinistra
           } else { // robot centrato con porta
           }
         }
       }
-      else tmp *= 0.5;
+      else tmp = 0;
     }
   }
   threads.yield();

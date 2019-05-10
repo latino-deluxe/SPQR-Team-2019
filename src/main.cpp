@@ -164,20 +164,17 @@ void loop() {
   //readIMU here because it doesnt work in the thready thingy
     readIMU(); 
 
-  // and this 'cause yeah
+    // and this 'cause yeah
     SWD = digitalRead(SWITCH_DX);
     role = SWD;
 
-  // for ports: 1=Blue 0=Yellow
+    // for ports: 1=Blue 0=Yellow
     pAtk = 0;
     pDef = 1 - pAtk; // the other port for the keeper
 
     if ((flagtest == true) || (Serial.available() > 0)) testMenu(); // test
 
     // game routine
-
-    comrade = true;
-
     if (flag_interrupt) int_nuovo();
 
     if (ball_seen == true) {
@@ -230,7 +227,7 @@ void loop() {
       if (role) {
         globalSpeed = 200;
       } else {
-        globalSpeed = 170;
+        globalSpeed = 200;
       }
     }
 
