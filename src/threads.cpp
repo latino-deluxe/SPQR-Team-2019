@@ -58,7 +58,7 @@ void storcimentoFigo() {
         //-30° --> -100 on camera x
         //+30° --> +100 on camera x
 
-        // if(millis() - time >= 20){
+        if(millis() - time >= 20){
           if(portx != 999) {
             imuOff = imu_current_euler;
             if(imu_current_euler > 30 && imu_current_euler < 180) imuOff = 30;
@@ -80,13 +80,13 @@ void storcimentoFigo() {
             digitalWrite(Y, LOW);
             digitalWrite(R, LOW);
           } else if (stport >= 170) {
-            tmp -= 0.75; // la porta sta a destra
+            tmp -= 3; // la porta sta a destra
             if (tmp <= -30)
               tmp = -30;
             digitalWrite(Y, LOW);
             digitalWrite(R, HIGH);
           } else if (stport <= 150) {
-            tmp += 0.75;
+            tmp += 3;
             if (tmp >= 30)
               tmp = 30; // la porta sta a sinistra
             digitalWrite(Y, HIGH);
@@ -96,7 +96,7 @@ void storcimentoFigo() {
             digitalWrite(R, HIGH);
           }
         }
-      // }
+      }
       else tmp *= 0.5;
     }
   }

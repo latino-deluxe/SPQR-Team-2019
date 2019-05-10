@@ -155,7 +155,7 @@ void setup() {
   threads.suspend(THRD4);         
 
   //per gioco da solo
-  threads.suspend(THRD3);     
+  // threads.suspend(THRD3);     
 
   stopSetup();
 }
