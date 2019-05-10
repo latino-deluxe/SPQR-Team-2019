@@ -77,23 +77,15 @@ void storcimentoFigo() {
 
           if (stport == 999) { // non vedo porta
             tmp = tmp * 0.8;
-            digitalWrite(Y, LOW);
-            digitalWrite(R, LOW);
           } else if (stport >= 170) {
             tmp -= 3; // la porta sta a destra
             if (tmp <= -30)
               tmp = -30;
-            digitalWrite(Y, LOW);
-            digitalWrite(R, HIGH);
           } else if (stport <= 150) {
             tmp += 3;
             if (tmp >= 30)
               tmp = 30; // la porta sta a sinistra
-            digitalWrite(Y, HIGH);
-            digitalWrite(R, LOW);
           } else { // robot centrato con porta
-            digitalWrite(Y, HIGH);
-            digitalWrite(R, HIGH);
           }
         }
       }
