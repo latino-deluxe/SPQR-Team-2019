@@ -153,24 +153,19 @@ void loop() {
   if ((flagtest == true) || (Serial.available() > 0))
     testMenu(); // test
 
-  // testBluetooth();
-  // game routine
-
   ball_read_position();
   readIMU();
   readUS();
   WhereAmI();
   guessZone();
   calculateZoneIndex();
-
-  //flagcamera;
-  //timercamera
   
-  if(millis() > (timercamera + 20)) {
+  if( (millis()-timercamera) > 35) {
     goalPosition();
     timercamera = millis();
-    flagcamera = 1;
+    Serial.println(stincr);
   }
+
   // Ao();
   // com(2000);
 
@@ -178,42 +173,37 @@ void loop() {
     int_nuovo();
   }
 
-  // if (ball_seen == true) {
-  //   if (role == HIGH) {
-  //     if (comrade)
-  //       goalie();
-  //     else
-  //       keeper();
-  //   } else {
-  //     if (stop_menamoli)
-  //       centerGoalPost();
-  //     else {
-  //       if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
-  //         goalie();
-  //       } else {
-  //         keeper();
-  //       }
-  //     }
-  //   }
-  // } else {
-  //   if (role == HIGH) {
-  //     if (comrade)
-  //       goCenter();
-  //     else
-  //       centerGoalPost();
-  //   } else {
-  //     centerGoalPost();
-  //   }
-  // }
+  if (ball_seen == true) {
+    if (role == HIGH) {
+      if (comrade)
+        goalie();
+      else
+        keeper();
+    } else {
+      if (stop_menamoli)
+        centerGoalPost();
+      else {
+        if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
+          goalie();
+        } else {
+          keeper();
+        }
+      }
+    }
+  } else {
+    if (role == HIGH) {
+      if (comrade)
+        goCenter();
+      else
+        centerGoalPost();
+    } else {
+      centerGoalPost();
+    }
+  }
 
   // commentare se il robot sta fermo dopo essere uscito anche se la posizione
   // della palla cambia di tanto
-  if (ball_seen && ball_sensor == lineBallSensor &&
-      ball_distance == lineBallDistance && // potrebbe dar fastidio a portiere
-      (globalDir > (((globalDir - 10) + 360) % 360)) &&
-      (globalDir < (((globalDir + 10) + 360) % 360))) {
-    preparePID(0, 0);
-  }
+  sameSensorStop();
 
   // final drive pid
   if (globalSpeed != 0) {
@@ -223,16 +213,6 @@ void loop() {
       globalSpeed = 170;
     }
   }
-  if (flagcamera == 1) {
-    storcimentoPortaIncr();
-    Serial.print("portx:  ");
-    Serial.println(portx);
-    Serial.print("stincr: ");
-    Serial.println(stincr);
-    flagcamera = 0; 
-  }
 
-  // delay(100);
-  preparePID(0,0, stincr);
   drivePID(globalDir, globalSpeed);
 }

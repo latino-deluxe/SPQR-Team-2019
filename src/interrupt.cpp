@@ -330,6 +330,15 @@ void int_nuovo() {
   lineBallDistance = ball_distance;
 }
 
+void sameSensorStop(){
+  if (ball_seen && ball_sensor == lineBallSensor &&
+      ball_distance == lineBallDistance && // potrebbe dar fastidio a portiere
+      (globalDir > (((globalDir - 10) + 360) % 360)) &&
+      (globalDir < (((globalDir + 10) + 360) % 360))) {
+    preparePID(0, 0);
+  }
+}
+
 // brand new way to handle the interrupt: trigonometry!
 void handleInterruptTrigonometry() {
   if (stopFlag) {

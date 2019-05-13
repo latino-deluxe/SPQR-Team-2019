@@ -7,6 +7,7 @@
 #include "imu.h"
 #include "motors.h"
 #include "pid.h"
+#include "camera.h"
 
 int testDelay = 10;
 
@@ -88,6 +89,7 @@ void testMenu(){
         delay(10);
       break;
       case '8':
+        goalPosition();
         Serial.println(portx);
         delay(100);
       break;
