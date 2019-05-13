@@ -12,39 +12,22 @@ void drivePID(signed int direzione, float vMot) {
   // old_vMot = new_vMot;
   // new_vMot = vMot;
 
-  int dir2 = (direzione - imu_current_euler + 360) % 360;
+  speed1 = ((-(sins[((direzione - 60) + 360) % 360])) * vMot); // mot 1
+  speed2 = ((sins[(direzione + 360) % 360]) * vMot);           // mot 2
+  speed3 = ((-(sins[(direzione + 60) % 360])) * vMot);         // mot 3
 
-  speed1 = ((-(sins[((dir2 - 60) + 360) % 360])) * vMot); // mot 1
-  speed2 = ((sins[(dir2 + 360) % 360]) * vMot);           // mot 2
-  speed3 = ((-(sins[(dir2 + 60) % 360])) * vMot);         // mot 3
+  pidfactor = updatePid();
 
-  // int dead = 35;
-  pidfactor = orientationPid(st);
-  speed1 -= pidfactor;
-  speed2 -= pidfactor;
-  speed3 -= pidfactor;
-  // if (pidfactor > 0) {
-  //   speed1 = map(pidfactor, 0, 225, -dead, -vMot);
-  //   speed2 = map(pidfactor, 0, 225, -dead, -vMot);
-  //   speed3 = map(pidfactor, 0, 225, -dead, -vMot);
-  // } else {
-  //   speed1 = map(pidfactor, 0, -225, dead, vMot);
-  //   speed2 = map(pidfactor, 0, -225, dead, vMot);
-  //   speed3 = map(pidfactor, 0, -225, dead, vMot);
-  // }
+  speed1 += pidfactor;
+  speed2 += pidfactor;
+  speed3 += pidfactor;
 
-  // Serial.println(pidfactor);
   // CheckSpeed(); // normalizza la velocita' a 255 max al motore piu' veloce e
   // gli altri in proporzione
 
-  // rinomarlizzo al massimo del maggiore
-  // un giorno metteremo una spiegazione più semplice
-  int speedMax = max(speed1, max(speed2, speed3));
-  if (speedMax > 255) {
-    speed1 = (speed1 / speedMax) * 255;
-    speed2 = (speed2 / speedMax) * 255;
-    speed3 = (speed3 / speedMax) * 255;
-  }
+  speed1 = constrain(speed1, -255, 255);
+  speed2 = constrain(speed2, -255, 255);
+  speed3 = constrain(speed3, -255, 255);
 
   // Send every speed to his motor
   mot(2, int(speed2));
@@ -68,70 +51,40 @@ void preparePID(int direction, int speed, int offset) {
   st = offset;
 }
 
-float errorP, errorD, errorI, er;
-unsigned long timePid = 0;
+float updatePid() {
+  float errorP, errorD, errorI;
+  float delta; // assumiamo che la bussola dia un intero positivo, questo lo
+               // rende da -179 a +180
 
-float orientationPid(int dir) {
-  if (micros() < timePid + 4000)
-    return errorD + errorP + errorI;
-  timePid = micros();
+  // calcola l'errore di posizione rispetto allo 0
+  // if (imu_current_euler < 180)
+  //   // delta = float(imu_current_euler);
+  //   delta = float(imu_current_euler + st);
+  // else
+  //   delta = float((imu_current_euler - 360) - st);
+  // delta = (imu_current_euler - 360);
 
-  // calcola l'errore di posizione rispetto allo 0 con logica -10<-|0|-> 10
-  er = (dir - imu_current_euler + 360) % 360;
-  // Serial.print(er);
-  // Serial.print("  ");
-  if (er > 180)
-    // delta = float(imu_current_euler);
-    er -= 360;
-  Serial.print(er);
-  Serial.print("  ");
+  delta = imu_current_euler;
+  if(delta > 180) delta = delta-360;
+  delta = delta-st;
+
   // calcola correzione proporzionale
-  errorP = KP * er;
+  errorP = KP * delta;
 
   // calcola correzione derivativa
-  errorD = KD * (er - errorePre);
-  errorePre = er;
+  errorD = KD * (delta - errorePre);
+  errorePre = delta;
+
+  // DEBUG_PRINT.println(errorD);
 
   // calcola correzione integrativa
-  if (abs(integral + er) < IMAX) {
-    integral += er; // corretta per non far divergere il contributo
-    errorI = KI * integral;
-  }
-  Serial.println((errorD + errorP + errorI));
-  // calcota correzione complessiva
-  return (errorD + errorP + errorI);
-}
+  integral =
+      0.5 * integral + delta; // corretta per non far divergere il contributo
+  errorI = KI * integral;
 
-// float updatePid() {
-//   float errorP, errorD, errorI;
-//   float delta; // assumiamo che la bussola dia un intero positivo, questo lo
-//                // rende da -179 a +180
-//
-//   // calcola l'errore di posizione rispetto allo 0
-//   if (imu_current_euler < 180)
-//     // delta = float(imu_current_euler);
-//     delta = float(imu_current_euler + st);
-//   else
-//     delta = float((imu_current_euler - 360) - st);
-//   // delta = (imu_current_euler - 360);
-//
-//   // calcola correzione proporzionale
-//   errorP = KP * delta;
-//
-//   // calcola correzione derivativa
-//   errorD = KD * (delta - errorePre);
-//   errorePre = delta;
-//
-//   // DEBUG_PRINT.println(errorD);
-//
-//   // calcola correzione integrativa
-//   integral =
-//       0.5 * integral + delta; // corretta per non far divergere il contributo
-//   errorI = KI * integral;
-//
-//   // calcota correzione complessiva
-//   return errorD + errorP + errorI;
-// }
+  // calcota correzione complessiva
+  return errorD + errorP + errorI;
+}
 
 void CheckSpeed() {
   float Max, Min;

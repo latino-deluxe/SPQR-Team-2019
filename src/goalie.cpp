@@ -20,13 +20,13 @@ void goalie() {
   atk_direction =
       goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
 
-  if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 ||
-       ball_sensor == 1 || ball_sensor == 2) &&
-      (ball_distance <= 2))
+  // if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 ||
+  //      ball_sensor == 1 || ball_sensor == 2) &&
+  //     (ball_distance <= 2))
     storcimentoPortaIncr();
-
-  else
-    stincr = 0;
+  // else
+  //   stincr = 0;
+  
 
   stincr = (((int)stincr) + 360) % 360;
   atk_speed = 200;
@@ -68,23 +68,35 @@ void palla_dietro() {
 
 void storcimentoPortaIncr() {
   if (portx == 999) { // non vedo porta
-    digitalWrite(Y, LOW);
-    digitalWrite(R, LOW);
-  } else if (portx >= goalieCamMax) {
-    stincr -= 0.1; // la porta sta a destra
+    //digitalWrite(Y, LOW);
+    //digitalWrite(R, LOW);
+    //digitalWrite(BUZZER, 0);
+    return;
+  } 
+  
+  if (portx == 0) {
+    stincr = stincr * 0.8;
+    digitalWrite(BUZZER, 1);
+    return;
+    }
+    if (portx >= goalieCamMax) {
+    stincr -= 1.5; // la porta sta a destra
     if (stincr <= -45)
       stincr = -45;
     digitalWrite(Y, LOW);
     digitalWrite(R, HIGH);
+    digitalWrite(BUZZER, 0);
   } else if (portx <= goalieCamMin) {
-    stincr += 0.1;
+    stincr += 1.5;
     if (stincr >= 45)
       stincr = 45; // la porta sta a sinistra
     digitalWrite(Y, HIGH);
     digitalWrite(R, LOW);
+    digitalWrite(BUZZER, 0);
   } else { // robot centrato con porta
     digitalWrite(Y, HIGH);
     digitalWrite(R, HIGH);
+    digitalWrite(BUZZER, 0);
   }
 }
 
@@ -111,4 +123,84 @@ void storcimentoZone() {
 void leaveMeAlone() {
   if (zoneIndex >= 6)
     goCenter();
+}
+
+void storcimentoPorta2() {
+  int pluto;
+  atk_offset = 0;
+
+  if (ball_distance <= 2) {
+    if (ball_sensor == 19 || ball_sensor == 0 || ball_sensor == 1) {
+      pluto = centrop - portx;
+      atk_offset = pluto + imu_current_euler;
+      if (atk_offset > 60)
+        atk_offset = 60;
+      if (atk_offset < -61)
+        atk_offset = -60;
+    }
+  }
+}
+
+void storcimentoPortaOLDOLD() {
+  // sistema di corsie di attacco
+  // prendi il centro dalla costante centrop
+  // fai meno -20 +20 e hai la tua fascia di non-storcimento
+  // da -21 a -31 hai la prima fascia destra di attacco verso sinistra
+  // da -31 in poi hai la seconda più violenta
+  // da +21 a +31 hai la prima fascia sinistra di attacco verso destra
+  // da +31 in poi hai la seconda più violenta
+  // perché sottraendo si inverte!
+  // i valori delle correzioni sono un po' a caso, da provare
+  int pluto;
+
+  pluto = portx - centrop;
+  if ((pluto > -20) && (pluto < +20))
+    atk_offset = 0;
+
+  if ((pluto < -20) && (pluto > -31)) {
+    atk_offset = 330;
+    digitalWrite(30, HIGH);
+    digitalWrite(29, LOW);
+  }
+  if (pluto < -31) {
+    atk_offset = 315;
+    digitalWrite(30, HIGH);
+    digitalWrite(29, LOW);
+  }
+
+  if ((pluto > +20) && (pluto < +31)) {
+    atk_offset = 30;
+    digitalWrite(29, HIGH);
+    digitalWrite(30, LOW);
+  }
+  if (pluto > +31) {
+    atk_offset = 45;
+    digitalWrite(29, HIGH);
+    digitalWrite(30, LOW);
+  }
+
+  if (portx == 999)
+    atk_offset = 45;
+}
+
+void storcimentoPortaOLD() {
+  int pluto;
+  pluto = portx - centrop;
+  // if((pluto >= 150) && (pluto <= 170)) atk_offset = 0;
+  // if(pluto <= 149) atk_offset = 30;
+  // if(pluto >= 171) atk_offset = 330;
+  atk_offset = pluto;
+  if (pluto >= 40)
+    atk_offset = 40;
+  if (pluto <= -40)
+    atk_offset = -40;
+}
+
+void storcimentoPorta() {
+  if ((portx >= 111) && (portx <= 239))
+    atk_direction = 0;
+  if (portx >= 240)
+    atk_direction = 345;
+  if (portx <= 110)
+    atk_direction = 15;
 }
