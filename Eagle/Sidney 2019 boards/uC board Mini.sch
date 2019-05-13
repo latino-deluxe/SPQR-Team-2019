@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -10701,6 +10701,7 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/0460/0900766b80460da1
 <wire x1="419.1" y1="68.58" x2="421.64" y2="68.58" width="0.1524" layer="91"/>
 <pinref part="SUPPLY4" gate="G$1" pin="+5V/1"/>
 <wire x1="421.64" y1="68.58" x2="421.64" y2="71.12" width="0.1524" layer="91"/>
+<label x="421.64" y="68.58" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 </nets>
