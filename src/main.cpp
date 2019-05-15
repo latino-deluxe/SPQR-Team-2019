@@ -22,8 +22,6 @@
 #include "us.h"
 #include "vars.h"
 
-//commento di test
-
 // Switch management vars
 int SWS = 0;
 int SWD = 0;
@@ -31,12 +29,12 @@ int SWD = 0;
 void setup() {
   startSetup();
   // miiChannel();
-  delay(100);
+  // delay(100);
   // super_mario();
 
-  // analogWriteFrequency(4,  1000);
-  // analogWriteFrequency(7,  1000);
-  // analogWriteFrequency(10, 1000);
+  analogWriteFrequency(4,  10000);
+  analogWriteFrequency(7,  10000);
+  analogWriteFrequency(10, 10000);
   // Now assign value to variables, first thing to do
   // IMU
   imu_current_euler = 0;
@@ -109,11 +107,8 @@ void setup() {
 
   // stincr
   stincr = 0;
-
-  // ;)
-  analogWriteFrequency(4, 15000);
-  analogWriteFrequency(7, 15000);
-  analogWriteFrequency(10, 15000);
+  flagcamera = 0;
+  timercamera = 0;
 
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
@@ -149,7 +144,7 @@ void loop() {
   // for ports: 1=Blue 0=Yellow
   pAtk = 0;
   pDef = 1 - pAtk; // the other port for the keeper
-  // comrade = true;
+  comrade = true;
 
   // SWS = digitalRead(SWITCH_SX);
   SWD = digitalRead(SWITCH_DX);
@@ -158,71 +153,66 @@ void loop() {
   if ((flagtest == true) || (Serial.available() > 0))
     testMenu(); // test
 
-  // testBluetooth();
-  // game routine
-
   ball_read_position();
   readIMU();
   readUS();
   WhereAmI();
   guessZone();
   calculateZoneIndex();
-  goalPosition();
-  Ao();
-  com(2000);
+  
+  if( (millis()-timercamera) > 35) {
+    goalPosition();
+    timercamera = millis();
+    Serial.println(stincr);
+  }
 
-  // if (flag_interrupt) {
-  //   int_nuovo();
-  // }
-  //
-  // if (ball_seen == true) {
-  //   if (role == HIGH) {
-  //     if (comrade)
-  //       goalie();
-  //     else
-  //       keeper();
-  //   } else {
-  //     if (stop_menamoli)
-  //       centerGoalPost();
-  //     else {
-  //       if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
-  //         goalie();
-  //       } else {
-  //         keeper();
-  //       }
-  //     }
-  //   }
-  // } else {
-  //   if (role == HIGH) {
-  //     if (comrade)
-  //       goCenter();
-  //     else
-  //       centerGoalPost();
-  //   } else {
-  //     centerGoalPost();
-  //   }
-  // }
-  //
-  // // commentare se il robot sta fermo dopo essere uscito anche se la
-  // posizione
-  // // della palla cambia di tanto
-  // if (ball_seen && ball_sensor == lineBallSensor &&
-  //     ball_distance == lineBallDistance && // potrebbe dar fastidio a
-  //     portiere (globalDir > (((globalDir - 10) + 360) % 360)) && (globalDir <
-  //     (((globalDir + 10) + 360) % 360))) {
-  //   preparePID(0, 0);
-  // }
-  //
-  // // final drive pid
-  // if (globalSpeed != 0) {
-  //   if (role) {
-  //     globalSpeed = 255;
-  //   } else {
-  //     globalSpeed = 255;
-  //   }
-  // }
+  // Ao();
+  // com(2000);
 
-  // storcimentoPortaIncr();
-  preparePID(0, 150, 0);
+  if (flag_interrupt) {
+    int_nuovo();
+  }
+
+  if (ball_seen == true) {
+    if (role == HIGH) {
+      if (comrade)
+        goalie();
+      else
+        keeper();
+    } else {
+      if (stop_menamoli)
+        centerGoalPost();
+      else {
+        if (ball_distance <= 2 && inSensorRange(0, 2) && !comrade) {
+          goalie();
+        } else {
+          keeper();
+        }
+      }
+    }
+  } else {
+    if (role == HIGH) {
+      if (comrade)
+        goCenter();
+      else
+        centerGoalPost();
+    } else {
+      centerGoalPost();
+    }
+  }
+
+  // commentare se il robot sta fermo dopo essere uscito anche se la posizione
+  // della palla cambia di tanto
+  sameSensorStop();
+
+  // final drive pid
+  if (globalSpeed != 0) {
+    if (role) {
+      globalSpeed = 220;
+    } else {
+      globalSpeed = 170;
+    }
+  }
+
   drivePID(globalDir, globalSpeed);
 }

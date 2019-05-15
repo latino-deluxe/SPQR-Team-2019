@@ -6,6 +6,8 @@
 #include "vars.h"
 #include <Arduino.h>
 
+unsigned long timerstr = 0;
+
 void goalie() {
   // directions going around the ball
   int goaliedirection[20] = {AA0,  AA1,  AA2,  AA3,  AA4,  AA5,  AA6,
@@ -20,15 +22,15 @@ void goalie() {
   atk_direction =
       goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
 
-  if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 ||
-       ball_sensor == 1 || ball_sensor == 2) &&
-      (ball_distance <= 2))
-    storcimentoPortaIncr();
-
+  if (inSensorRange(0,2) && ball_distance <= 3){
+    if( (millis()-timerstr) > 35) {
+      storcimentoPortaIncr();
+      timerstr = millis();
+    }
+  }
   else
     stincr = 0;
 
-  stincr = (((int)stincr) + 360) % 360;
   atk_speed = 200;
   preparePID(atk_direction, atk_speed, stincr);
 }
@@ -68,23 +70,34 @@ void palla_dietro() {
 
 void storcimentoPortaIncr() {
   if (portx == 999) { // non vedo porta
-    digitalWrite(Y, LOW);
-    digitalWrite(R, LOW);
-  } else if (portx >= goalieCamMax) {
-    stincr -= 0.1; // la porta sta a destra
-    if (stincr <= -45)
+    //digitalWrite(Y, LOW);
+    //digitalWrite(R, LOW);
+    //digitalWrite(BUZZER, 0);
+    return;
+  } 
+  
+  if (portx == 0) {
+    stincr = stincr * 0.8;
+    digitalWrite(BUZZER, 1);
+    return;
+  }else if (portx >= goalieCamMax) {
+    stincr -= 5; // la porta sta a destra
+    if (stincr < -45)
       stincr = -45;
     digitalWrite(Y, LOW);
     digitalWrite(R, HIGH);
+    digitalWrite(BUZZER, 0);
   } else if (portx <= goalieCamMin) {
-    stincr += 0.1;
-    if (stincr >= 45)
+    stincr += 5;
+    if (stincr > 45)
       stincr = 45; // la porta sta a sinistra
     digitalWrite(Y, HIGH);
     digitalWrite(R, LOW);
+    digitalWrite(BUZZER, 0);
   } else { // robot centrato con porta
     digitalWrite(Y, HIGH);
     digitalWrite(R, HIGH);
+    digitalWrite(BUZZER, 0);
   }
 }
 
