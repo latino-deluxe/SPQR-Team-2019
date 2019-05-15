@@ -666,6 +666,27 @@ http://www.national.com&lt;br&gt;
 </package>
 </packages>
 </library>
+<library name="adafruit">
+<packages>
+<package name="R1206">
+<description>&lt;b&gt;RESISTOR&lt;/b&gt;&lt;p&gt;
+chip</description>
+<wire x1="0.9525" y1="-0.8128" x2="-0.9652" y2="-0.8128" width="0.1524" layer="51"/>
+<wire x1="0.9525" y1="0.8128" x2="-0.9652" y2="0.8128" width="0.1524" layer="51"/>
+<wire x1="-2.473" y1="0.983" x2="2.473" y2="0.983" width="0.0508" layer="39"/>
+<wire x1="2.473" y1="0.983" x2="2.473" y2="-0.983" width="0.0508" layer="39"/>
+<wire x1="2.473" y1="-0.983" x2="-2.473" y2="-0.983" width="0.0508" layer="39"/>
+<wire x1="-2.473" y1="-0.983" x2="-2.473" y2="0.983" width="0.0508" layer="39"/>
+<smd name="2" x="1.422" y="0" dx="1.6" dy="1.803" layer="1"/>
+<smd name="1" x="-1.422" y="0" dx="1.6" dy="1.803" layer="1"/>
+<text x="-1.397" y="1.143" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.397" y="-2.413" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-1.6891" y1="-0.8763" x2="-0.9525" y2="0.8763" layer="51"/>
+<rectangle x1="0.9525" y1="-0.8763" x2="1.6891" y2="0.8763" layer="51"/>
+<rectangle x1="-0.3" y1="-0.7" x2="0.3" y2="0.7" layer="35"/>
+</package>
+</packages>
+</library>
 <library name="switch">
 <description>&lt;b&gt;Switches&lt;/b&gt;&lt;p&gt;
 Marquardt, Siemens, C&amp;K, ITT, and others&lt;p&gt;
@@ -1864,22 +1885,6 @@ for trimmer refence see : &lt;u&gt;www.electrospec-inc.com/cross_references/trim
 <vertex x="-2.25" y="3.15"/>
 </polygon>
 </package>
-<package name="R1206" urn="urn:adsk.eagle:footprint:23047/1" library_version="10">
-<description>&lt;b&gt;RESISTOR&lt;/b&gt;</description>
-<wire x1="0.9525" y1="-0.8128" x2="-0.9652" y2="-0.8128" width="0.1524" layer="51"/>
-<wire x1="0.9525" y1="0.8128" x2="-0.9652" y2="0.8128" width="0.1524" layer="51"/>
-<wire x1="-2.473" y1="0.983" x2="2.473" y2="0.983" width="0.0508" layer="39"/>
-<wire x1="2.473" y1="0.983" x2="2.473" y2="-0.983" width="0.0508" layer="39"/>
-<wire x1="2.473" y1="-0.983" x2="-2.473" y2="-0.983" width="0.0508" layer="39"/>
-<wire x1="-2.473" y1="-0.983" x2="-2.473" y2="0.983" width="0.0508" layer="39"/>
-<smd name="2" x="1.422" y="0" dx="1.6" dy="1.803" layer="1"/>
-<smd name="1" x="-1.422" y="0" dx="1.6" dy="1.803" layer="1"/>
-<text x="-1.27" y="1.27" size="1.27" layer="25">&gt;NAME</text>
-<text x="-1.27" y="-2.54" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="-1.6891" y1="-0.8763" x2="-0.9525" y2="0.8763" layer="51"/>
-<rectangle x1="0.9525" y1="-0.8763" x2="1.6891" y2="0.8763" layer="51"/>
-<rectangle x1="-0.3" y1="-0.7" x2="0.3" y2="0.7" layer="35"/>
-</package>
 </packages>
 <packages3d>
 <package3d name="C1206" urn="urn:adsk.eagle:package:23618/2" type="model" library_version="10">
@@ -1898,12 +1903,6 @@ for trimmer refence see : &lt;u&gt;www.electrospec-inc.com/cross_references/trim
 <description>Panasonic Aluminium Electrolytic Capacitor VS-Serie Package E</description>
 <packageinstances>
 <packageinstance name="PANASONIC_E"/>
-</packageinstances>
-</package3d>
-<package3d name="R1206" urn="urn:adsk.eagle:package:23540/2" type="model" library_version="10">
-<description>RESISTOR</description>
-<packageinstances>
-<packageinstance name="R1206"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -2445,14 +2444,16 @@ design rules under a new name.</description>
 <element name="MOTOR_DRIVER_1" library="DRIVER POLOLU" package="VNH5019" value="VNH5019" x="81.28" y="104.14" smashed="yes">
 <attribute name="NAME" x="93.98" y="124.841" size="1.27" layer="25" ratio="10"/>
 </element>
-<element name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="330" x="104.14" y="35.56" smashed="yes">
+<element name="R3" library="adafruit" package="R1206" value="1.5K" x="114.3" y="36.83" smashed="yes">
+<attribute name="NAME" x="112.903" y="37.973" size="1.27" layer="25"/>
+<attribute name="VALUE" x="112.903" y="34.417" size="1.27" layer="27"/>
+</element>
+<element name="R4" library="adafruit" package="R1206" value="" x="104.14" y="35.56" smashed="yes">
 <attribute name="NAME" x="102.743" y="36.703" size="1.27" layer="25"/>
-<attribute name="SPICEPREFIX" value="R" x="104.14" y="35.56" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="102.743" y="33.147" size="1.27" layer="27"/>
 </element>
-<element name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="1,2k" x="99.06" y="35.56" smashed="yes">
+<element name="R5" library="adafruit" package="R1206" value="" x="99.06" y="35.56" smashed="yes">
 <attribute name="NAME" x="97.663" y="36.703" size="1.27" layer="25"/>
-<attribute name="SPICEPREFIX" value="R" x="99.06" y="35.56" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="97.663" y="33.147" size="1.27" layer="27"/>
 </element>
 <element name="S_ELETTR." library="switch" package="320-916" value="" x="120.65" y="62.23" smashed="yes">
@@ -2463,7 +2464,7 @@ design rules under a new name.</description>
 <attribute name="NAME" x="50.8" y="69.85" size="1.778" layer="25" ratio="10"/>
 <attribute name="VALUE" x="50.8" y="52.705" size="1.778" layer="27" ratio="10"/>
 </element>
-<element name="L1" library="inductor-coilcraft" package="MSS1260" value="47uH" x="124.46" y="38.1" smashed="yes" rot="MR180">
+<element name="L1" library="inductor-coilcraft" package="MSS1260" value="47/470uH (?)" x="124.46" y="38.1" smashed="yes" rot="MR180">
 <attribute name="NAME" x="121.46" y="37.6" size="1.27" layer="26" rot="MR180"/>
 <attribute name="VALUE" x="121.46" y="40.1" size="1.27" layer="28" rot="MR180"/>
 </element>
@@ -2586,11 +2587,6 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="C" x="33.46614375" y="-54.12238125" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="31.66614375" y="-56.34738125" size="1.016" layer="27"/>
 </element>
-<element name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="330" x="30.96294375" y="-61.37198125" smashed="yes">
-<attribute name="NAME" x="29.69294375" y="-60.10198125" size="1.27" layer="25"/>
-<attribute name="SPICEPREFIX" value="R" x="30.96294375" y="-61.37198125" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="29.69294375" y="-63.91198125" size="1.27" layer="27"/>
-</element>
 </elements>
 <signals>
 <signal name="GND" class="1">
@@ -2601,7 +2597,7 @@ design rules under a new name.</description>
 <contactref element="C1" pad="2"/>
 <contactref element="C2" pad="2"/>
 <contactref element="D1" pad="2"/>
-<contactref element="R1" pad="1"/>
+<contactref element="R4" pad="1"/>
 <contactref element="IC1" pad="5"/>
 <contactref element="IC1" pad="3"/>
 <contactref element="LED2" pad="1"/>
@@ -2688,14 +2684,14 @@ design rules under a new name.</description>
 </signal>
 <signal name="+5V">
 <contactref element="D2" pad="1"/>
+<contactref element="R3" pad="2"/>
 <contactref element="SUPPLY_CON" pad="3"/>
 <contactref element="C6" pad="1"/>
 <contactref element="C5" pad="+"/>
-<contactref element="R3" pad="1"/>
-<wire x1="75.87" y1="35.56" x2="149.03" y2="59" width="0" layer="19" extent="1-1"/>
+<wire x1="115.722" y1="36.83" x2="149.03" y2="59" width="0" layer="19" extent="1-1"/>
+<wire x1="75.87" y1="35.56" x2="115.722" y2="36.83" width="0" layer="19" extent="1-1"/>
 <wire x1="29.56294375" y1="-24.17358125" x2="75.87" y2="35.56" width="0" layer="19" extent="1-1"/>
 <wire x1="36.46614375" y1="-54.12238125" x2="29.56294375" y2="-24.17358125" width="0" layer="19" extent="1-1"/>
-<wire x1="29.54094375" y1="-61.37198125" x2="36.46614375" y2="-54.12238125" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$6">
 <contactref element="IC1" pad="2"/>
@@ -2706,14 +2702,14 @@ design rules under a new name.</description>
 </signal>
 <signal name="N$7">
 <contactref element="IC1" pad="4"/>
-<contactref element="R1" pad="2"/>
-<contactref element="R2" pad="2"/>
+<contactref element="R4" pad="2"/>
+<contactref element="R5" pad="2"/>
 <wire x1="100.482" y1="35.56" x2="96.0882" y2="62.4078" width="0" layer="19" extent="1-16"/>
 <wire x1="105.562" y1="35.56" x2="100.482" y2="35.56" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="5.7V-DIRAMAZIONE2">
 <contactref element="L1" pad="P$1"/>
-<contactref element="R2" pad="1"/>
+<contactref element="R5" pad="1"/>
 <contactref element="D2" pad="2"/>
 <contactref element="IC2" pad="1"/>
 <contactref element="C8" pad="1"/>
@@ -2837,9 +2833,9 @@ design rules under a new name.</description>
 <wire x1="36.46614375" y1="-45.82078125" x2="29.56294375" y2="-30.32038125" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$3">
+<contactref element="R3" pad="1"/>
 <contactref element="LED2" pad="2"/>
-<contactref element="R3" pad="2"/>
-<wire x1="32.38494375" y1="-61.37198125" x2="88.43" y2="44.45" width="0" layer="19" extent="1-1"/>
+<wire x1="88.43" y1="44.45" x2="112.878" y2="36.83" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="S1_UP">
 <contactref element="SIGN_CON" pad="20"/>
