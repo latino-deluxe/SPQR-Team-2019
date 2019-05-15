@@ -156,8 +156,7 @@ void loop() {
   ball_read_position();
   readIMU();
   readUS();
-  WhereAmI();
-  guessZone();
+  update_location_complete();
   calculateZoneIndex();
   
   if( (millis()-timercamera) > 35) {

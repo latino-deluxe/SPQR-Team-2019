@@ -1,4 +1,5 @@
 #include "goalie.h"
+#include "camera.h"
 #include "myspi_old.h"
 #include "pid.h"
 #include "position.h"
@@ -68,7 +69,7 @@ void palla_dietro() {
   }
 }
 
-int imuOff, fst, stport;
+int stport;
 void storcimentoPortaIncr() {
   if(ball_seen){
     if (portx == 999) { // non vedo porta
@@ -78,14 +79,7 @@ void storcimentoPortaIncr() {
       return;
     } 
 
-    //fix for camera distortion when the robot twists
-    if(imu_current_euler > 30 && imu_current_euler < 180) imuOff = 30;
-    else if(imu_current_euler < 330 && imu_current_euler >= 180) imuOff = -30;
-    else if (imu_current_euler <= 360 && imu_current_euler >= 330) imuOff = imu_current_euler - 360;
-    else imuOff = imu_current_euler;
-
-    fst = map(imuOff, -30, 30, -90, 90);
-    stport = portx - fst;
+    stport = fixCamIMU();
 
     // stport = portx;
 

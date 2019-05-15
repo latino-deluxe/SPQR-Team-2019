@@ -100,3 +100,16 @@ void goalPosition() {
   //   portx = 999;
 }
 // un numero grande equivale a stare a destra, piccolo a sinistra
+
+//fix the camera value change caused by the robot twist
+int imuOff, fst;
+int fixCamIMU(){
+    //fix for camera distortion when the robot twists
+    if(imu_current_euler > 30 && imu_current_euler < 180) imuOff = 30;
+    else if(imu_current_euler < 330 && imu_current_euler >= 180) imuOff = -30;
+    else if (imu_current_euler <= 360 && imu_current_euler >= 330) imuOff = imu_current_euler - 360;
+    else imuOff = imu_current_euler;
+
+    fst = map(imuOff, -30, 30, -90, 90);
+    return portx - fst;
+}
