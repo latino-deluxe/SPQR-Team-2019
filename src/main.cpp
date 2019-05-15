@@ -163,11 +163,11 @@ void loop() {
   if( (millis()-timercamera) > 35) {
     goalPosition();
     timercamera = millis();
-    Serial.println(stincr);
+    storcimentoPortaIncr();
   }
 
-  // Ao();
-  // com(2000);
+  Ao();
+  com(2000);
 
   if (flag_interrupt) {
     int_nuovo();
@@ -201,8 +201,6 @@ void loop() {
     }
   }
 
-  // commentare se il robot sta fermo dopo essere uscito anche se la posizione
-  // della palla cambia di tanto
   sameSensorStop();
 
   // final drive pid

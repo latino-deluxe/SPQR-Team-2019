@@ -68,36 +68,52 @@ void palla_dietro() {
   }
 }
 
+int imuOff, fst, stport;
 void storcimentoPortaIncr() {
-  if (portx == 999) { // non vedo porta
-    //digitalWrite(Y, LOW);
-    //digitalWrite(R, LOW);
-    //digitalWrite(BUZZER, 0);
-    return;
-  } 
-  
-  if (portx == 0) {
-    stincr = stincr * 0.8;
-    digitalWrite(BUZZER, 1);
-    return;
-  }else if (portx >= goalieCamMax) {
-    stincr -= 5; // la porta sta a destra
-    if (stincr < -45)
-      stincr = -45;
-    digitalWrite(Y, LOW);
-    digitalWrite(R, HIGH);
-    digitalWrite(BUZZER, 0);
-  } else if (portx <= goalieCamMin) {
-    stincr += 5;
-    if (stincr > 45)
-      stincr = 45; // la porta sta a sinistra
-    digitalWrite(Y, HIGH);
-    digitalWrite(R, LOW);
-    digitalWrite(BUZZER, 0);
-  } else { // robot centrato con porta
-    digitalWrite(Y, HIGH);
-    digitalWrite(R, HIGH);
-    digitalWrite(BUZZER, 0);
+  if(ball_seen){
+    if (portx == 999) { // non vedo porta
+      //digitalWrite(Y, LOW);
+      //digitalWrite(R, LOW);
+      //digitalWrite(BUZZER, 0);
+      return;
+    } 
+
+    //fix for camera distortion when the robot twists
+    if(imu_current_euler > 30 && imu_current_euler < 180) imuOff = 30;
+    else if(imu_current_euler < 330 && imu_current_euler >= 180) imuOff = -30;
+    else if (imu_current_euler <= 360 && imu_current_euler >= 330) imuOff = imu_current_euler - 360;
+    else imuOff = imu_current_euler;
+
+    fst = map(imuOff, -30, 30, -90, 90);
+    stport = portx - fst;
+
+    // stport = portx;
+
+    if (stport == 0) {
+      stincr = stincr * 0.8;
+      // digitalWrite(BUZZER, 1);
+      return;
+    }else if (stport >= goalieCamMax) {
+      stincr -= 3.5; // la porta sta a destra
+      if (stincr < -35)
+        stincr = -35;
+      digitalWrite(Y, LOW);
+      digitalWrite(R, HIGH);
+      digitalWrite(BUZZER, 0);
+    } else if (stport <= goalieCamMin) {
+      stincr += 3.5;
+      if (stincr > 35)
+        stincr = 35; // la porta sta a sinistra
+      digitalWrite(Y, HIGH);
+      digitalWrite(R, LOW);
+      digitalWrite(BUZZER, 0);
+    } else { // robot centrato con porta
+      digitalWrite(Y, HIGH);
+      digitalWrite(R, HIGH);
+      digitalWrite(BUZZER, 0);
+    }
+  }else{
+    stincr = 0;
   }
 }
 
