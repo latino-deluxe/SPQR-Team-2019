@@ -18138,11 +18138,9 @@ PC board mounted ribbon cable connectors (IEC 52141), vertical&lt;p&gt;
 </instance>
 <instance part="R1" gate="G$1" x="73.66" y="60.96" smashed="yes" rot="R90">
 <attribute name="NAME" x="76.2" y="58.42" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="76.962" y="57.15" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="R2" gate="G$1" x="81.28" y="68.58" smashed="yes" rot="R180">
 <attribute name="NAME" x="78.74" y="66.04" size="1.778" layer="95"/>
-<attribute name="VALUE" x="85.09" y="71.882" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="GND29" gate="1" x="129.54" y="35.56" smashed="yes">
 <attribute name="VALUE" x="127" y="33.02" size="1.778" layer="96"/>
