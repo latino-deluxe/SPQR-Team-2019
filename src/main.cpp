@@ -100,6 +100,7 @@ void setup() {
   pAtk = 0;
   pDef = 0;
   portx = 0;
+  CameraReady = 0;
 
   // BT
   topolino = 0;
@@ -158,12 +159,17 @@ void loop() {
   readUS();
   update_location_complete();
   calculateZoneIndex();
-  
-  if( (millis()-timercamera) > 35) {
-    goalPosition();
-    timercamera = millis();
+
+
+  goalPosition();
+
+  if( CameraReady == 1) {
     storcimentoPortaIncr();
+    CameraReady = 0;
+//    Serial.print("valore :");
+//    Serial.println(portx);
   }
+
 
   Ao();
   com(2000);

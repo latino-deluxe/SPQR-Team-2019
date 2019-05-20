@@ -5,11 +5,10 @@ int startpY = 0; // inizio del dato
 int startpB = 0;
 int endpY = 0; // fine del dato
 int endpB = 0;
-String valStringY =
-    ""; // stringa dove si vanno a mettere i pacchetti di dati ricevuti
+String valStringY = ""; // stringa dove si vanno a mettere i pacchetti di dati ricevuti
 String valStringB = "";
 int datavalid = 0; // segnalo se il dato ricevuto è valido
-int oldGoal;
+int oldGoalY,oldGoalB;
 
 void goalPosition() {
   int valY; // variabile a cui attribuisco momentaneamente il valore dell x
@@ -58,28 +57,29 @@ void goalPosition() {
       valStringY = "";
       startpY = 0;
       endpY = 0;
-      datavalid = 1;
+      datavalid ++;
     }
     if ((startpB == 1) && (endpB == 1)) {
       valB = valStringB.toInt(); // valid data
       valStringB = "";
       startpB = 0;
       endpB = 0;
-      datavalid = 1;
+      datavalid ++;
     }
 
   } // end of while
+
   if (valY != 0)
-    oldGoal = valY;
+    oldGoalY = valY;
   if (valB != 0)
-    oldGoal = valB;
+    oldGoalB = valB;
 
   if (valY == 0)
-    valY = oldGoal;
+    valY = oldGoalY;
   if (valB == 0)
-    valB = oldGoal;
+    valB = oldGoalB;
 
-  if (datavalid == 1) {
+  if (datavalid > 1) {  ///entro qui solo se ho ricevuto i pacchetti completi sia del blu che del giallo
     if (role == HIGH) {
       if (pAtk == 1) { // leggi porta blu
         portx = valB;
@@ -92,8 +92,10 @@ void goalPosition() {
       } else { // leggi porta gialla
         portx = valY;
       }
+
     }
     datavalid = 0;
+    CameraReady = 1;  //attivo flag di ricezione pacchetto
   }
   // update_location_complete();
   // if (portx == 0)

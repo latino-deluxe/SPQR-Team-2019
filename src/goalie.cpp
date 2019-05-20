@@ -24,16 +24,13 @@ void goalie() {
       goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
 
   if (inSensorRange(0,2) && ball_distance <= 3){
-    if( (millis()-timerstr) > 35) {
-      storcimentoPortaIncr();
-      timerstr = millis();
-    }
+    atk_speed = 200;
+    preparePID(atk_direction, atk_speed, stincr);
+  }else{
+    atk_speed = 200;
+    preparePID(atk_direction, atk_speed, 0);    
   }
-  else
-    stincr = 0;
 
-  atk_speed = 200;
-  preparePID(atk_direction, atk_speed, stincr);
 }
 
 void palla_dietro() {
@@ -77,7 +74,7 @@ void storcimentoPortaIncr() {
       //digitalWrite(R, LOW);
       //digitalWrite(BUZZER, 0);
       return;
-    } 
+    }
 
     stport = fixCamIMU();
 
