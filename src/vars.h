@@ -44,11 +44,14 @@
 #define KP 1.7 // K proporzionale
 #define KI 0.1 // K integrativo
 #define KD 5   // K derivativo
+
 // #define KP 1.4
 // #define KI 0.1
 // #define KD 0.5
+
 // SPI
 #define SS_PIN 2
+
 // Linesensors e interrupt
 #define LN0 A14
 #define LN1 A15
@@ -91,10 +94,72 @@
 #define AA19 340
 
 #define BT Serial1
-
 #define DEBUG_PRINT Serial
-
 #define CAMERA Serial4
+
+// IMU
+extr int imu_temp_euler, imu_current_euler;
+
+// non serviiii
+// Line Sensors
+extr byte lineReading;
+extr volatile bool flag_interrupt;
+extr volatile byte
+    nint; // numero di interrupt consecutivi prima della fine della gestione
+extr volatile byte linea[INT_LUNG];
+extr int VL_INT;    // velocitá di uscita dalle linee
+extr int EXT_LINEA; // direzione di uscita dalla linea
+extr byte n_us;     // ultrasuono da controllare dopo la fuga dalla linea
+extr int attesa;    // tempo di attesa palla dopo un interrupt (utilizzata dallo
+                    // switch destro)
+extr bool danger;   // avviso che terminata da poco la gestione interrupt
+extr unsigned long
+    tdanger; // misura il tempo dal termine della gestione interrupt
+
+// Motors
+extr float speed1, speed2, speed3, pidfactor, sins[360];
+
+// MySPI
+extr byte mess, ball_sensor, ball_distance, old_s_ball, ball_degrees;
+extr long time_s_ball, tspi;
+extr bool ball_seen;
+
+// PID
+extr float errorePre;
+// non servi a nullaaaaaa
+// angolo di errore precedente
+extr float integral;     // somisa degli angoli di errore
+extr bool reaching_ball; // serve per aumentare il PID del 20% GOALIE
+extr int st;             // storcimento sulle fasce
+// da utilizzare per sviluppi futuri
+extr signed int old_Dir; // angolo di direzione precedente a quella attuale
+extr signed int new_Dir; // angolo di direzione corrente del moto
+extr float old_vMot;     // velocitá di moto precedente
+extr float new_vMot;     // velocitá di moto corrente
+
+// US
+extr int reading;
+extr long us_t0;                     // US measure start
+extr long us_t1;                     // time value during measure
+extr bool us_flag;                   // is it measuring or not?
+extr int us_values[4];               // US values array
+extr int us_sx, us_dx, us_px, us_fr; // copies with other names in the array
+
+// POSITION
+extr int old_status_x; // posizione precedente nel campo vale EST, OVEST o
+                       // CENTRO o 255 >USI FUTURI<
+extr int old_status_y; // posizione precedente nel campo vale SUD, NORD o
+                       // CENTRO o 255 >USI FUTURI<
+extr bool goal_zone; // sto al centro rispetto alle porte         assegnata// da
+                     // WhereAmI ma non usata
+extr bool good_field_x; // vedo tutta la larghezza del campo si/no
+extr bool good_field_y; // vedo tutta la lunghezza del campo si/no
+extr int status_x;      // posizione nel campo vale EST, OVEST o CENTRO o 255
+extr int status_y;      // posizione nel campo vale SUD, NORD o CENTRO o 255
+extr int guessed_x, guessed_y;
+extr int zoneIndex;
+extr bool calcPhyZoneCam;
+#define ZONE_MAX_VALUE 150
 
 // You can modify this if you need
 // LIMITI DEL CAMPO
@@ -122,76 +187,6 @@ extr int DxF;
 // #define DyP 69
 #define DyP 55
 #define robot 21 // diametro del robot
-
-// IMU
-extr int imu_temp_euler, imu_current_euler;
-// non serviiii
-// Line Sensors
-extr byte lineReading;
-extr volatile bool flag_interrupt;
-extr volatile byte
-    nint; // numero di interrupt consecutivi prima della fine della gestione
-extr volatile byte linea[INT_LUNG];
-extr int VL_INT;    // velocitá di uscita dalle linee
-extr int EXT_LINEA; // direzione di uscita dalla linea
-extr byte n_us;     // ultrasuono da controllare dopo la fuga dalla linea
-extr int attesa;    // tempo di attesa palla dopo un interrupt (utilizzata dallo
-                    // switch destro)
-extr bool danger;   // avviso che terminata da poco la gestione interrupt
-extr unsigned long
-    tdanger; // misura il tempo dal termine della gestione interrupt
-// Motors
-extr float speed1, speed2, speed3, pidfactor, sins[360];
-// MySPI
-extr byte mess, ball_sensor, ball_distance, old_s_ball, ball_degrees;
-extr long time_s_ball, tspi;
-extr bool ball_seen;
-// PID
-extr float errorePre;
-// non servi a nullaaaaaa
-// angolo di errore precedente
-extr float integral;     // somisa degli angoli di errore
-extr bool reaching_ball; // serve per aumentare il PID del 20% GOALIE
-extr int st;             // storcimento sulle fasce
-// da utilizzare per sviluppi futuri
-extr signed int old_Dir; // angolo di direzione precedente a quella attuale
-extr signed int new_Dir; // angolo di direzione corrente del moto
-extr float old_vMot;     // velocitá di moto precedente
-extr float new_vMot;     // velocitá di moto corrente
-// US
-extr int reading;
-extr long us_t0;                     // US measure start
-extr long us_t1;                     // time value during measure
-extr bool us_flag;                   // is it measuring or not?
-extr int us_values[4];               // US values array
-extr int us_sx, us_dx, us_px, us_fr; // copies with other names in the array
-// POSITION
-extr int old_status_x; // posizione precedente nel campo vale EST, OVEST o
-                       // CENTRO o 255 >USI FUTURI<
-extr int old_status_y; // posizione precedente nel campo vale SUD, NORD o
-                       // CENTRO o 255 >USI FUTURI<
-extr bool goal_zone; // sto al centro rispetto alle porte         assegnata// da
-                     // WhereAmI ma non usata
-extr bool good_field_x; // vedo tutta la larghezza del campo si/no
-extr bool good_field_y; // vedo tutta la lunghezza del campo si/no
-extr int status_x;      // posizione nel campo vale EST, OVEST o CENTRO o 255
-extr int status_y;      // posizione nel campo vale SUD, NORD o CENTRO o 255
-extr int guessed_x, guessed_y;
-extr int zoneIndex;
-
-// extr int currentlocation; // risultato misure zone campo da 1 a 9 o 255 se
-//                           // undefined
-// extr int guessedlocation; // risultato misure zone campo da 1 a 9 (da
-// CENTRO_CENTRO a SUD_OVEST)
-// extr int old_currentlocation; // zona precedente del robot in campo da 1 a 9
-// o
-//                               // 255 se undefined >USI FUTURI<
-// extr int old_guessedlocation; // zona precedente del robot in campo da 1 a 9
-// (da
-//                               // CENTRO_CENTRO a SUD_OVEST) >USI FUTURI<
-// extr byte zone[3][3];     // il primo indice = NORD SUD CENTRO  il secondo
-//                           // indice  EST OVEST CENTRO
-// signed int zone_prob[3][3];
 
 // BLUETOOTH
 extr int a;

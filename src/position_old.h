@@ -1,0 +1,13 @@
+void testPosition();
+void WhereAmI();
+void update_location_complete();
+void goCenter();
+void fugacentro();
+void goGoalPost(int);
+void update_sensors_all();
+void guessZone();
+void updateGuessZone();
+void testGuessZone();
+void gigaTestZone();
+void calculateZoneIndex();
+void phyZoneCam();

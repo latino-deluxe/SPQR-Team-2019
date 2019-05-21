@@ -157,19 +157,15 @@ void loop() {
   ball_read_position();
   readIMU();
   readUS();
-  update_location_complete();
-  calculateZoneIndex();
-
-
   goalPosition();
 
   if( CameraReady == 1) {
     storcimentoPortaIncr();
+    calcPhyZoneCam = true;
     CameraReady = 0;
-//    Serial.print("valore :");
-//    Serial.println(portx);
   }
 
+  updateLogicZone();
 
   Ao();
   com(2000);
