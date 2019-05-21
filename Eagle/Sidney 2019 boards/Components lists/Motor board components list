@@ -1,10 +1,17 @@
+SUPPLY_CON				Connector Mini-Fit Jr Molex 4pin	RS 484-1899P		*
+SIGN_CON				Connector 20pins/2rows			RS 409-8815		*
+IC1					Buck converter LM2596S-ADJ		RS 533-3715
+IC2					Linear regulator LM2940CS-5V		RS 2508123693		X
+C1,C2,C4,C6,C8,C10			Cap 100nF 25V SMD1206			RS 174-4528		*
+C3					Cap 100uF 25V SMD7343			RS 144-7495
+C5,C7,C9				Cap 100uF 25V SMD E			RS 747-2875
+D1					Schottky Diode SS34A			RS 171-1454
+D2					Schottky Diode SE20FG-M3/H		RS 894-9262P
+L1					Inductor 47uH 3,8A			RS 789-6805
+R1,R3					Resistor 330Ω 1% SMD1206		RS 669-6525
+R2					Resistor 1,2kΩ 1% SMD1206		RS 223-2271
+LED1,LED2				LED white 1205 2V 20mA			RS 176-6130
 
-C1,C2,C4,C6,C8,C10		Cap 100nF 25V SMD1206		RS 174-4528
-C3				Cap 100uF 25V SMD7343		RS 144-7495
-C5,C7,C9			Cap 100uF 25V SMD E		RS 747-2875
-D1				Schottky Diode SS34A		RS 171-1454
-D2				Schottky Diode SE20FG-M3/H	RS 894-9262P
-L1				Inductor 47uH 3,8A		RS 789-6805
-R1,R3				Resistor 330Ω 1%SMD1206		RS 669-6525
-R2				Resistor 1,2kΩ 1% SMD1206	RS 223-2271
-LED1,LED2			LED white 1205 2V 20mA		RS 176-6130
+
+* = also found on the other board
+X = discontinued on RS

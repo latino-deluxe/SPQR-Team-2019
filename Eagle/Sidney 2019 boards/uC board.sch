@@ -9047,11 +9047,11 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/0460/0900766b80460da1
 <part name="CB4" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="0.1uF"/>
 <part name="SW_SX" library="switch" library_urn="urn:adsk.eagle:library:380" deviceset="TL38PO" device="" package3d_urn="urn:adsk.eagle:package:27745/1"/>
 <part name="GND28" library="supply1" deviceset="GND" device=""/>
-<part name="R_SW_SX" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="330"/>
+<part name="R_SW_SX" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="330"/>
 <part name="LED_SW_SX" library="SparkFun-LED" deviceset="LED" device="3MM"/>
 <part name="SW_DX" library="switch" library_urn="urn:adsk.eagle:library:380" deviceset="TL38PO" device="" package3d_urn="urn:adsk.eagle:package:27745/1"/>
 <part name="GND38" library="supply1" deviceset="GND" device=""/>
-<part name="R_SW_DX" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="330"/>
+<part name="R_SW_DX" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="330"/>
 <part name="LED_SW_DX" library="SparkFun-LED" deviceset="LED" device="3MM"/>
 <part name="R_SDA" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="3.3k"/>
 <part name="R_SCL" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="3.3k"/>
@@ -10062,22 +10062,12 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/0460/0900766b80460da1
 <wire x1="58.42" y1="17.78" x2="66.04" y2="17.78" width="0.1524" layer="91"/>
 <label x="58.42" y="17.78" size="1.778" layer="95"/>
 </segment>
-<segment>
-<pinref part="SIGN_CON" gate="G$1" pin="20"/>
-<wire x1="58.42" y1="104.14" x2="71.12" y2="104.14" width="0.1524" layer="91"/>
-<label x="71.12" y="104.14" size="1.778" layer="95" align="bottom-right"/>
-</segment>
 </net>
 <net name="S1_DOWN" class="0">
 <segment>
 <pinref part="TEENSY_3.5" gate="G$1" pin="34/A15"/>
 <wire x1="58.42" y1="20.32" x2="66.04" y2="20.32" width="0.1524" layer="91"/>
 <label x="58.42" y="20.32" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="SIGN_CON" gate="G$1" pin="19"/>
-<wire x1="43.18" y1="104.14" x2="30.48" y2="104.14" width="0.1524" layer="91"/>
-<label x="30.48" y="104.14" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="M1_PWM" class="0">
@@ -10230,22 +10220,12 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/0460/0900766b80460da1
 <wire x1="58.42" y1="22.86" x2="66.04" y2="22.86" width="0.1524" layer="91"/>
 <label x="58.42" y="22.86" size="1.778" layer="95"/>
 </segment>
-<segment>
-<pinref part="SIGN_CON" gate="G$1" pin="17"/>
-<wire x1="43.18" y1="106.68" x2="30.48" y2="106.68" width="0.1524" layer="91"/>
-<label x="30.48" y="106.68" size="1.778" layer="95"/>
-</segment>
 </net>
 <net name="S2_DOWN" class="0">
 <segment>
 <pinref part="TEENSY_3.5" gate="G$1" pin="36/A17"/>
 <wire x1="58.42" y1="25.4" x2="66.04" y2="25.4" width="0.1524" layer="91"/>
 <label x="58.42" y="25.4" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="SIGN_CON" gate="G$1" pin="15"/>
-<wire x1="43.18" y1="109.22" x2="30.48" y2="109.22" width="0.1524" layer="91"/>
-<label x="30.48" y="109.22" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="S4_DOWN" class="0">
@@ -10254,22 +10234,12 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/0460/0900766b80460da1
 <wire x1="58.42" y1="50.8" x2="66.04" y2="50.8" width="0.1524" layer="91"/>
 <label x="58.42" y="50.8" size="1.778" layer="95"/>
 </segment>
-<segment>
-<pinref part="SIGN_CON" gate="G$1" pin="7"/>
-<wire x1="43.18" y1="119.38" x2="30.48" y2="119.38" width="0.1524" layer="91"/>
-<label x="30.48" y="119.38" size="1.778" layer="95"/>
-</segment>
 </net>
 <net name="S4_UP" class="0">
 <segment>
 <pinref part="TEENSY_3.5" gate="G$1" pin="15/A1"/>
 <wire x1="58.42" y1="48.26" x2="66.04" y2="48.26" width="0.1524" layer="91"/>
 <label x="58.42" y="48.26" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="SIGN_CON" gate="G$1" pin="9"/>
-<wire x1="43.18" y1="116.84" x2="30.48" y2="116.84" width="0.1524" layer="91"/>
-<label x="30.48" y="116.84" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="S3_UP" class="0">
@@ -10278,22 +10248,12 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/0460/0900766b80460da1
 <wire x1="58.42" y1="33.02" x2="66.04" y2="33.02" width="0.1524" layer="91"/>
 <label x="58.42" y="33.02" size="1.778" layer="95"/>
 </segment>
-<segment>
-<pinref part="SIGN_CON" gate="G$1" pin="13"/>
-<wire x1="43.18" y1="111.76" x2="30.48" y2="111.76" width="0.1524" layer="91"/>
-<label x="30.48" y="111.76" size="1.778" layer="95"/>
-</segment>
 </net>
 <net name="S3_DOWN" class="0">
 <segment>
 <pinref part="TEENSY_3.5" gate="G$1" pin="14/A0"/>
 <wire x1="58.42" y1="45.72" x2="66.04" y2="45.72" width="0.1524" layer="91"/>
 <label x="58.42" y="45.72" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="SIGN_CON" gate="G$1" pin="11"/>
-<wire x1="43.18" y1="114.3" x2="30.48" y2="114.3" width="0.1524" layer="91"/>
-<label x="30.48" y="114.3" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SDA_I2C" class="0">
@@ -10703,6 +10663,62 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/0460/0900766b80460da1
 <pinref part="SUPPLY4" gate="G$1" pin="+5V/1"/>
 <wire x1="421.64" y1="68.58" x2="421.64" y2="71.12" width="0.1524" layer="91"/>
 <label x="421.64" y="68.58" size="1.778" layer="95" rot="R90"/>
+</segment>
+</net>
+<net name="S1_IN" class="0">
+<segment>
+<pinref part="SIGN_CON" gate="G$1" pin="20"/>
+<wire x1="58.42" y1="104.14" x2="71.12" y2="104.14" width="0.1524" layer="91"/>
+<label x="71.12" y="104.14" size="1.778" layer="95" align="bottom-right"/>
+</segment>
+</net>
+<net name="S1_OUT" class="0">
+<segment>
+<pinref part="SIGN_CON" gate="G$1" pin="19"/>
+<wire x1="43.18" y1="104.14" x2="30.48" y2="104.14" width="0.1524" layer="91"/>
+<label x="30.48" y="104.14" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="S2_IN" class="0">
+<segment>
+<pinref part="SIGN_CON" gate="G$1" pin="17"/>
+<wire x1="43.18" y1="106.68" x2="30.48" y2="106.68" width="0.1524" layer="91"/>
+<label x="30.48" y="106.68" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="S2_OUT" class="0">
+<segment>
+<pinref part="SIGN_CON" gate="G$1" pin="15"/>
+<wire x1="43.18" y1="109.22" x2="30.48" y2="109.22" width="0.1524" layer="91"/>
+<label x="30.48" y="109.22" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="S3_IN" class="0">
+<segment>
+<pinref part="SIGN_CON" gate="G$1" pin="13"/>
+<wire x1="43.18" y1="111.76" x2="30.48" y2="111.76" width="0.1524" layer="91"/>
+<label x="30.48" y="111.76" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="S3_OUT" class="0">
+<segment>
+<pinref part="SIGN_CON" gate="G$1" pin="11"/>
+<wire x1="43.18" y1="114.3" x2="30.48" y2="114.3" width="0.1524" layer="91"/>
+<label x="30.48" y="114.3" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="S4_IN" class="0">
+<segment>
+<pinref part="SIGN_CON" gate="G$1" pin="9"/>
+<wire x1="43.18" y1="116.84" x2="30.48" y2="116.84" width="0.1524" layer="91"/>
+<label x="30.48" y="116.84" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="S4_OUT" class="0">
+<segment>
+<pinref part="SIGN_CON" gate="G$1" pin="7"/>
+<wire x1="43.18" y1="119.38" x2="30.48" y2="119.38" width="0.1524" layer="91"/>
+<label x="30.48" y="119.38" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>

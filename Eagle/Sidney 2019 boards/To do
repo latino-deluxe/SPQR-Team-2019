@@ -1,5 +1,5 @@
 To do list, arranged by priority
 
-- write uC board components list
-- fix line sensors pinout on motor board
+- write uC board components list				*DONE
+- fix line sensors pinout on motor board 			*DONE
 - put grove connectors near molex on both boards
