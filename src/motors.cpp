@@ -3,9 +3,9 @@
 #include "pid.h"
 #include <Arduino.h>
 
-byte INA_MOT[5] = {0, 17, 5, 8, 11}; //{0,  16,  5,  8};           // INA pin
-byte INB_MOT[5] = {0, 15, 6, 9, 12}; //{0,  15,  6,  9};           // INB pin
-byte PWM_MOT[5] = {0, 4, 7, 10, 14}; //{0,  4,   7,   10};         // PWM pin
+byte INA_MOT[5] = {0, 6, 33, 34, 7}; //{0,  16,  5,  8};           // INA pin
+byte INB_MOT[5] = {0, 10,21, 20, 5}; //{0,  15,  6,  9};           // INB pin
+byte PWM_MOT[5] = {0, 8, 23, 35, 9}; //{0,  4,   7,   10};         // PWM pin
 
 void initMotorsGPIO() {
   pinMode(PWM_MOT[1], OUTPUT);
