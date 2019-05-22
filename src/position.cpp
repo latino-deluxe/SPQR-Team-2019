@@ -36,7 +36,7 @@ void calculateLogicZone(){
     //decrease all
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
-            increaseIndex(i, j, -1);
+            increaseIndex(i, j, -7);
         }
     }
 
@@ -176,25 +176,24 @@ void phyZoneUS(){
 
 int p = 4;
 void phyZoneCam(){
-    if(calcPhyZoneCam){
-        if(portx != 0 && portx < 999){
-            int camPort = fixCamIMU();
-            if(camPort < 80){
-                p = 0;
-            }else if(camPort > 220){
-                p = 2;
-            }else if(camPort >= 80&& camPort <= 220){
-                p = 1;
-            }
-            increaseCol(2, 3);
-        }
-        calcPhyZoneCam = false;
-    }
+  if(portx != 0 && portx < 999){
+      int camPort = fixCamIMU();
+      if(camPort < 80){
+          p = 0;
+      }else if(camPort > 220){
+          p = 2;
+      }else if(camPort >= 80&& camPort <= 220){
+          p = 1;
+      }
+      increaseCol(p, 10);
+  }
+  calcPhyZoneCam = false;
 }
 
 
 void testPhyZone(){
     ball_read_position();
+
     readUS();
     readIMU();
     goalPosition();
@@ -206,7 +205,7 @@ void testPhyZone(){
     DEBUG_PRINT.print(" | ");
     DEBUG_PRINT.println(status_y);
     DEBUG_PRINT.print("Measured Cam Column (4 is error):\t");
-    DEBUG_PRINT.print(p);
+    DEBUG_PRINT.println(p);
 }
 
 void testLogicZone(){
@@ -233,7 +232,7 @@ unsigned long ao;
 void gigaTestZone(){
 
     //outpus the matrix
-    if (millis() - ao >= 100) {
+    if (millis() - ao >= 500) {
         DEBUG_PRINT.println("------");
         for (int i = 0; i < 4; i++) {
         DEBUG_PRINT.print("US: ");
@@ -252,13 +251,72 @@ void gigaTestZone(){
     DEBUG_PRINT.println("------");
     ao = millis();
   }
-
 }
 
-void goCenter(){
+void goCenter() {
+  if (zoneIndex == 8)
+    preparePID(330, 180);
+  if (zoneIndex == 7)
+    preparePID(0, 180);
+  if (zoneIndex == 6)
+    preparePID(45, 180);
+  if (zoneIndex == 5)
+    preparePID(270, 180);
+  if (zoneIndex == 4)
+    preparePID(0, 0);
+  if (zoneIndex == 3)
+    preparePID(90, 180);
+  if (zoneIndex == 2)
+    preparePID(255, 180);
+  if (zoneIndex == 1)
+    preparePID(180, 180);
+  if (zoneIndex == 0)
+    preparePID(135, 180);
 
+  return;
 }
 
-void goGoalPost(){
+// called by keeper
+void goGoalPost(int posizione) {
+  if (posizione == 255) {
+    preparePID(0, 0);
+  } else {
+    switch (posizione) {
+    case NORD_CENTRO:
+      preparePID(180, VEL_RET);
+      break;
+    case NORD_EST:
+      preparePID(210, VEL_RET);
+      break;
+    case NORD_OVEST:
+      preparePID(150, VEL_RET);
+      break;
+    case SUD_CENTRO:
+      preparePID(0, 0);
+      break;
+    case SUD_EST:
+      preparePID(270, VEL_RET);
+      break;
+    case SUD_OVEST:
+      preparePID(90, VEL_RET);
+      break;
+    case CENTRO_CENTRO:
+      preparePID(180, VEL_RET);
+      break;
+    case CENTRO_EST:
+      preparePID(270, VEL_RET);
+      break;
+    case CENTRO_OVEST:
+      preparePID(90, VEL_RET);
+      break;
+    }
+  }
+  return;
+}
 
+void update_sensors_all() {
+  ball_read_position();
+  readIMU();
+  readUS();
+  return;
 }

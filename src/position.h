@@ -3,7 +3,7 @@ void increaseIndex(int, int, int);
 void increaseCol(int, int);
 void increaseRow(int, int);
 
-void updateLogicZone();
+void calculateLogicZone();
 void phyZoneCam();
 void phyZoneUS();
 

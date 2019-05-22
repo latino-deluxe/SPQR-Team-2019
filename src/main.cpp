@@ -165,7 +165,7 @@ void loop() {
     CameraReady = 0;
   }
 
-  updateLogicZone();
+  calculateLogicZone();
 
   Ao();
   com(2000);
