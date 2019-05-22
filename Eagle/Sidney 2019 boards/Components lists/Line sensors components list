@@ -1,8 +1,10 @@
-LS_CON					Connector Grove 4pins			RS 179-3735	*
-R1,R2,R3,R4				Resistor 330Ω 5% SMD0805		RS 895-2586
-R5,R6					Resistor 10kΩ 1% SMD0805		RS 125-1189
-C1,C2,C3,C4				Cap 100nF 50V 10% SMD0805		RS 264-4416
-LED1,LED2,LED3,LED4			Fototransistor 3mm			RS 665-5384
+													LAB	TO_BUY
+
+LS_CON					Connector Grove 4pins			RS 179-3735	*	90+	/
+R1,R2,R3,R4				Resistor 330Ω 5% SMD0805		RS 223-0354		/	100	
+R5,R6					Resistor 10kΩ 1% SMD0805		RS 125-1189		/	100
+C1,C2,C3,C4				Cap 100nF 50V 10% SMD0805		RS 264-4416		/	100
+LED1,LED2,LED3,LED4			Fototransistor 3mm			RS 665-5384		20+	100
 
 
 
