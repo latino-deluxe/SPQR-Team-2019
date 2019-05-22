@@ -12,6 +12,7 @@ LED_BALL,LED_SW_SX,LED_SW_DX		Led 3mm green 30mA			RS 815-4388		25+	/
 LED1,LED2,LED3				Led 3mm red 30mA			RS 815-4341		25+	/
 CB1,CB2,CB3,CB4				Cap 100nF 50V SMD1206			RS 766-1126	*	/	250
 S1,S2...S16				IR sensor PNA460XM			RS 919-5848		10+	90
+ARDUINO_PRO_MINI			Arduino Pro Mini 5V Adafruit		RS 124-5507		/	5
 					Strip femmina 2.54mm			RS 776-6648	*	30	20
 					Strip maschio 2.54mm			RS 156-049	*	10(?)	50
 
