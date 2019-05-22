@@ -1,58 +1,62 @@
 #include "linesensor.h"
+#include "pid.h"
 #include "motors.h"
 #include "vars.h"
 #include <Arduino.h>
 
 // init line sensors and attaches interrput
 void initLineSensors() {
-  pinMode(LN0, INPUT);
-  pinMode(LN1, INPUT);
-  pinMode(LN2, INPUT);
-  pinMode(LN3, INPUT);
-  pinMode(LN4, INPUT);
-  pinMode(LN5, INPUT);
-
-  attachInterrupt(LN0, line0, FALLING);
-  attachInterrupt(LN1, line1, FALLING);
-  attachInterrupt(LN2, line2, FALLING);
-  attachInterrupt(LN3, line3, FALLING);
-  attachInterrupt(LN4, line4, FALLING);
-  attachInterrupt(LN5, line5, FALLING);
+  pinMode(S0, INPUT);
+  pinMode(S1, INPUT);
+  pinMode(S2, INPUT);
+  pinMode(S3, INPUT);
 }
 
-// Each interrupt construct a byte
-void line0() {
-  linea[0] = !digitalRead(LN0);
-  flag_interrupt = true;
-  brakeI();
+void checkLineSensors() {
+  LN0 = analogRead(S0);
+  LN1 = analogRead(S1);
+  LN2 = analogRead(S2);
+  LN3 = analogRead(S3);
+  if(LN0 > 500) U0 = true;
+  else U0 = false;
+  if(LN1 > 500) U1 = true;
+  else U1 = false;
+  if(LN2 > 500) U2 = true;
+  else U2 = false;
+  if(LN3 > 500) U3 = true;
+  else U3 = false;
+
+  if((U0 + U1 + U2 + U3) > 0) outOfBounds();
 }
 
-void line1() {
-  linea[1] = !digitalRead(LN1);
-  flag_interrupt = true;
-  brakeI();
-}
+void outOfBounds() {
+  //  S0        180
+  //  S1        270
+  //  S2        0
+  //  S3        90
 
-void line2() {
-  linea[2] = !digitalRead(LN2);
-  flag_interrupt = true;
-  brakeI();
-}
+  if(U0) {
+    Ux0 = 0;
+    Uy0 = -1;
+  }
+  if(U1) {
+    Ux1 = -1;
+    Uy1 = 0;
+  }
+  if(U2) {
+    Ux2 = 0;
+    Uy2 = 1;
+  }
+  if(U3) {
+    Ux3 = 1;
+    Uy3 = 0;
+  }
 
-void line3() {
-  linea[3] = !digitalRead(LN3);
-  flag_interrupt = true;
-  brakeI();
-}
+  Ux = ((U0 * Ux0) + (U1 * Ux1) + (U2 * Ux2) + (U3 * Ux3));
+  Uy = ((U0 * Uy0) + (U1 * Uy1) + (U2 * Uy2) + (U3 * Uy3));
 
-void line4() {
-  linea[4] = !digitalRead(LN4);
-  flag_interrupt = true;
-  brakeI();
-}
+  U = (-(atan2(Uy, Ux) * 180 / 3.14) + 90) - imu_current_euler;
 
-void line5() {
-  linea[5] = !digitalRead(LN5);
-  flag_interrupt = true;
-  brakeI();
+  preparePID(U, 250);
+
 }

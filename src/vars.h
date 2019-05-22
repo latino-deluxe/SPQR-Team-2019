@@ -6,10 +6,14 @@
 #define extr
 #endif
 
+#define R 29
+#define G 31
+#define Y 30
+
 // IR shield pin
 #define BUZZER 27
-#define SWITCH_SX 26
-#define SWITCH_DX 28
+//#define SWITCH_SX 28
+#define SWITCH_DX 26
 
 // Note
 #define LA3 220.00
@@ -18,27 +22,6 @@
 #define E6 1318.51
 #define F6 1396.91
 #define GB6 1479.98
-
-// You can modify this if you need
-// LIMITI DEL CAMPO
-#define Lx_min 115  // valore minimo accettabile di larghezza
-#define Lx_max 195  // valore massimo accettabile di larghezza (larghezza campo)
-#define LyF_min 190 // valore minimo accettabile di lunghezza sulle fasce
-#define LyF_max 270
-// valore massimo accettabile di lunghezza sulle fasce (lunghezza campo)
-#define LyP_min 139 // valore minimo accettabile di lunghezza tra le porte
-#define LyP_max 250
-// valore massimo accettabile di lunghezza tra le porte// con misura x OK
-// con us_dx o us_sx < DxF sto nelle fasce 30 + 30 - 1/2
-// robot
-#define DxF 48
-// con  misura y OK e robot a EST o A OVEST con us_fx o us_px < DyF sto a
-// NORD o a SUD  era - 10
-#define DyF 91
-// con misura y OK e robot al CENTRO (tra le porte) con us_fx o us_px < DyP
-// sto a NORD o a SUD era - 22
-#define DyP 69
-#define robot 21 // diametro del robot
 
 // ZONE DEL CAMPO // codici utilizzabili per una matice 3x3
 #define EST 2
@@ -58,22 +41,32 @@
 #define SUD_EST 9
 
 // VARIABILI E COSTANTI DEL PID
-  #define KP 1.5   // K proporzionale
-  #define KI 0.1 // K integrativo
-  #define KD 3 // K derivativo
-  // #define KP 1.4
-  // #define KI 0.1
-  // #define KD 0.5
+#define KP 1.7 // K proporzionale
+#define KI 0.01 // K integrativo
+#define KD 3   // K derivativo
+// #define KP 1.4
+// #define KI 0.1
+// #define KD 0.5
 // SPI
 #define SS_PIN 2
 // Linesensors e interrupt
-#define LN0 A14
-#define LN1 A15
-#define LN2 A7
-#define LN3 A6
-#define LN4 A9
-#define LN5 A16
+#define S0 A14
+#define S1 A15
+#define S2 A7
+#define S3 A6
 #define INT_LUNG 6
+
+extr int LN0;
+extr int LN1;
+extr int LN2;
+extr int LN3;
+
+extr bool U0;
+extr bool U1;
+extr bool U2;       // ;)
+extr bool U3;
+
+extr int Ux0, Uy0, Ux1, Uy1, Ux2, Uy2, Ux3, Uy3, Ux, Uy, U;
 
 #define BNO055_SAMPLERATE_DELAY_MS (60)
 
@@ -86,32 +79,63 @@
 #define VEL_RET 180
 #define GOALIE_P 255 // velocità portiere
 #define AA0 0        // angoli di attacco in funzione del sensore palla
-#define AA1 30
-#define AA2 60
-#define AA3 80
-#define AA4 90
-#define AA5 120
-#define AA6 130
+#define AA1 20
+#define AA2 50
+#define AA3 70
+#define AA4 80
+#define AA5 140
+#define AA6 150
 #define AA7 160
 #define AA8 180
-#define AA9 135
-#define AA10 135
-#define AA11 135
-#define AA12 180
-#define AA13 200
-#define AA14 230
-#define AA15 240
-#define AA16 280
-#define AA17 280
-#define AA18 300
-#define AA19 330
+#define AA9 180  // 135
+#define AA10 180 // 135
+#define AA11 180 // 135
+// il code non worka
+#define AA12 180 // 190
+#define AA13 200 // 210
+#define AA14 230 // 240
+#define AA15 220 // 240
+#define AA16 280 // 280
+#define AA17 290
+#define AA18 310
+#define AA19 340
 
 #define BT Serial1
 
-#define DEBUG_PRINT BT
+#define DEBUG_PRINT Serial
+
+#define CAMERA Serial4
+
+// You can modify this if you need
+// LIMITI DEL CAMPO
+#define Lx_min 115  // valore minimo accettabile di larghezza
+#define Lx_max 195  // valore massimo accettabile di larghezza (larghezza campo)
+#define LyF_min 190 // valore minimo accettabile di lunghezza sulle fasce
+#define LyF_max 270
+// valore massimo accettabile di lunghezza sulle fasce (lunghezza campo)
+#define LyP_min 139 // valore minimo accettabile di lunghezza tra le porte
+#define LyP_max 250
+// valore massimo accettabile di lunghezza tra le porte// con misura x OK
+// con us_dx o us_sx < DxF sto nelle fasce 30 + 30 - 1/2
+// robot
+
+#define DxF_Atk 48 // per attaccante, fascia centrale allargata
+#define DxF_Def 48 // per portiere, fascia centrale ristretta
+// questa roba viene fatta dentro WhereAmI
+extr int DxF;
+
+// con  misura y OK e robot a EST o A OVEST con us_fx o us_px < DyF sto a
+// NORD o a SUD  era - 10
+#define DyF 91
+// con misura y OK e robot al CENTRO (tra le porte) con us_fx o us_px < DyP
+// sto a NORD o a SUD era - 22
+// #define DyP 69
+#define DyP 55
+#define robot 21 // diametro del robot
 
 // IMU
 extr int imu_temp_euler, imu_current_euler;
+// non serviiii
 // Line Sensors
 extr byte lineReading;
 extr volatile bool flag_interrupt;
@@ -127,13 +151,15 @@ extr bool danger;   // avviso che terminata da poco la gestione interrupt
 extr unsigned long
     tdanger; // misura il tempo dal termine della gestione interrupt
 // Motors
-extr float speed1, speed2, speed3, pidfactor, sins[360];
+extr float vx, vy, speed1, speed2, speed3, speed4, pidfactor, sins[360], cosin[360];
 // MySPI
 extr byte mess, ball_sensor, ball_distance, old_s_ball, ball_degrees;
 extr long time_s_ball, tspi;
 extr bool ball_seen;
 // PID
-extr float errorePre;    // angolo di errore precedente
+extr float errorePre;
+// non servi a nullaaaaaa
+// angolo di errore precedente
 extr float integral;     // somisa degli angoli di errore
 extr bool reaching_ball; // serve per aumentare il PID del 20% GOALIE
 extr int st;             // storcimento sulle fasce
@@ -179,26 +205,57 @@ extr int zoneIndex;
 
 // BLUETOOTH
 extr int a;
+// puzzi tanto
 extr unsigned long old_timer;
 // Interrupt
 extr byte lineBallSensor;
 extr byte lineBallDistance;
+extr int lineBallDir;
 // extr float angle;
 // extr int ldir, lspeed;
+
 // Comunicazione compagno
 extr int iAmHere;
 extr int friendZone;
 extr int role;
 extr bool comrade;
+extr int topolino;
 
 // test new angle
 extr int globalDir;
 extr int globalSpeed;
 // extr int st;
 
-// attacco
+// attack
 extr int atk_direction;
 extr int atk_speed;
 extr int atk_offset;
-
 extr int Nint;
+// defense
+extr bool defGoRight;
+extr bool defGoLeft;
+extr bool defGoBehind;
+extr bool stop_menamoli;
+
+// variabili camera
+#define centrop 160   // valore letto dalla camera come centro
+#define keeperMin 60  // dx limit
+#define keeperMax 240 // sx limit
+// ema e' scemo da morire (letta)
+// centro a 150
+#define goalieCamMin 150
+#define goalieCamMax 170
+
+extr int pAtk; // variabile dello switch che decide dove bisogna attaccare
+extr int pDef; // variabile dello switch che decide dove bisogna difendere
+extr bool XP_SX;
+extr bool XP_DX;
+extr int portx;
+
+extr float stincr;
+
+extr int fpos;
+
+// test vars
+extr char test; // test select
+extr bool flagtest;

@@ -1,6 +1,6 @@
-void space_invaders();
 void centerGoalPost();
-void space_invaders_2();
-void followBall();
+void centerGoalPostCamera();
 void keeper();
-void space_invaders_3();
+void space_invaders_us();
+void space_invaders_camera();
+void limitKeeperUS();

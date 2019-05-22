@@ -7,39 +7,73 @@
 
 int count = 0;
 
-// comunicate with the comrade
-bool comunicazione(int intervallo) {
+bool com(int delay) {
+  int d; // funzione di comunicazione
   if (BT.available() > 0) {
+    d = BT.read();
+  }
+  if (d == 42) {
     comrade = true;
+    d = 0;
     old_timer = millis();
   }
-  if ((millis() - old_timer) > intervallo) {
+  if ((millis() - old_timer) > delay) {
     old_timer = millis();
     comrade = false;
+  }
+  if (comrade) {
+    digitalWrite(Y, HIGH);
+    digitalWrite(R, LOW);
+  } else {
+    digitalWrite(R, HIGH);
+    digitalWrite(Y, LOW);
   }
   return comrade;
 }
 
-void teamZone() {
-  calculateZoneIndex();
-  iAmHere = zoneIndex;
-  if (count < 30) {
-    count++;
-  } else {
-    count = 0;
-    BT.write(iAmHere);
+bool commy(int delay) {
+  if (millis() - count > 250) {
+    int d; // funzione di comunicazione
+    if (BT.available() > 0) {
+      d = BT.read();
+      if (d != 0)
+        fpos = d;
+    }
+    if ((fpos >= 1) && (fpos <= 9)) {
+      comrade = true;
+      fpos = fpos - 1;
+      old_timer = millis();
+    }
+    if ((millis() - old_timer) > delay) {
+      old_timer = millis();
+      comrade = false;
+    }
+    if (comrade) {
+      digitalWrite(Y, HIGH);
+      digitalWrite(R, LOW);
+    } else {
+      digitalWrite(R, HIGH);
+      digitalWrite(Y, LOW);
+    }
+    count = millis();
+    return comrade;
   }
 }
 
-void whereAreYou() {
-  calculateZoneIndex();
-  if (BT.available() > 0) {
-    friendZone = BT.read();
+void Ao() {
+  if (topolino < 100) {
+    topolino++;
+  } else {
+    topolino = 0;
+    BT.write(42);
   }
-  if (zoneIndex == friendZone) {
-    if (role == HIGH)
-      goalie();
-    else
-      centerGoalPost();
+}
+
+void WOW() {
+  if (topolino < 100) {
+    topolino++;
+  } else {
+    topolino = 0;
+    BT.write(zoneIndex + 1);
   }
 }

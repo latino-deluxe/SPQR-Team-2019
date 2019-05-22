@@ -1,10 +1,11 @@
 #include "motors.h"
 #include "vars.h"
+#include "pid.h"
 #include <Arduino.h>
 
-byte INA_MOT[4] = {0, 17, 5, 8}; //{0,  16,  5,  8};           // INA pin
-byte INB_MOT[4] = {0, 15, 6, 9}; //{0,  15,  6,  9};           // INB pin
-byte PWM_MOT[4] = {0, 4, 7, 10}; //{0,  4,   7,   10};         // PWM pin
+byte INA_MOT[5] = {0, 17, 5, 8, 11}; //{0,  16,  5,  8};           // INA pin
+byte INB_MOT[5] = {0, 15, 6, 9, 12}; //{0,  15,  6,  9};           // INB pin
+byte PWM_MOT[5] = {0, 4, 7, 10, 14}; //{0,  4,   7,   10};         // PWM pin
 
 void initMotorsGPIO() {
   pinMode(PWM_MOT[1], OUTPUT);
@@ -16,6 +17,9 @@ void initMotorsGPIO() {
   pinMode(PWM_MOT[3], OUTPUT);
   pinMode(INA_MOT[3], OUTPUT);
   pinMode(INB_MOT[3], OUTPUT);
+  pinMode(PWM_MOT[4], OUTPUT);
+  pinMode(INA_MOT[4], OUTPUT);
+  pinMode(INB_MOT[4], OUTPUT);
 }
 
 /**
@@ -41,9 +45,12 @@ void brake() {
   digitalWrite(INB_MOT[2], 1);
   digitalWrite(INA_MOT[3], 1);
   digitalWrite(INB_MOT[3], 1);
+  digitalWrite(INA_MOT[4], 1);
+  digitalWrite(INB_MOT[4], 1);
   analogWrite(PWM_MOT[1], 255);
   analogWrite(PWM_MOT[2], 255);
   analogWrite(PWM_MOT[3], 255);
+  analogWrite(PWM_MOT[4], 255);
   return;
 }
 
@@ -54,9 +61,12 @@ void brakeI() {
   digitalWrite(INB_MOT[2], 1);
   digitalWrite(INA_MOT[3], 1);
   digitalWrite(INB_MOT[3], 1);
+  digitalWrite(INA_MOT[4], 1);
+  digitalWrite(INB_MOT[4], 1);
   analogWrite(PWM_MOT[1], 255);
   analogWrite(PWM_MOT[2], 255);
   analogWrite(PWM_MOT[3], 255);
+  analogWrite(PWM_MOT[4], 255);
   return;
 }
 
@@ -65,10 +75,13 @@ float torad(float deg) // degrees to radiant converting
   return (deg * PI / 180.0);
 }
 
-void initOmnidirectionalSins() { // calculates sins of integer angles from 0 to
+void initSinCos() { // calculates sins of integer angles from 0 to
                                  // 359
   for (int i = 0; i < 360; i++) {
     sins[i] = sin(torad(i));
+  }
+  for (int i = 0; i < 360; i++) {
+    cosin[i] = cos(torad(i));
   }
 }
 
@@ -97,7 +110,7 @@ void mot(byte mot, int vel) {
 }
 
 void testMotors() {
-  for (int i = 1; i < 4; i++) {
+  for (int i = 1; i < 5; i++) {
     turnMotor(i, 0, 1, 100);
     delay(1000);
     turnMotor(i, 0, 0, 100);
@@ -107,4 +120,13 @@ void testMotors() {
     turnMotor(i, 0, 0, 100);
     delay(300);
   }
+}
+
+void inchioda() {
+  unsigned long it;
+
+  it = millis();
+  do {
+    drivePID(((180 + globalDir) % 360), 255);
+  }while((millis() - it) < 50);            //prima era 100
 }

@@ -9,18 +9,29 @@
 void drivePID(signed int direzione, float vMot) {
   // mette in variabili globali direzione e velocitá precedenti e attuali
   new_Dir = direzione;
-  // old_vMot = new_vMot;
-  // new_vMot = vMot;
+  
+  // vx = vMot * sins[direzione];
+  // vy = vMot * cosin[direzione];
 
-  speed1 = ((-(sins[((direzione - 60) + 360) % 360])) * vMot); // mot 1
-  speed2 = ((sins[(direzione + 360) % 360]) * vMot);           // mot 2
-  speed3 = ((-(sins[(direzione + 60) % 360])) * vMot);         // mot 3
+  // speed1 = (-vx * cosin[45]) + (vy * cosin[45]);
+  // speed2 = (vx * cosin[45]) + (vy * cosin[45]);
+  // speed3 = (-speed1);
+  // speed4 = (-speed2);
+
+  vx = vMot * cosin[direzione + 12];
+  vy = -vMot * sins[direzione + 12];
+
+  speed1 = ((vx * sins[45] ) + (vy * cosin[45] ));
+  speed2 = ((vx * sins[135]) + (vy * cosin[135]));
+  speed3 = ((vx * sins[225]) + (vy * cosin[225]));
+  speed4 = ((vx * sins[315]) + (vy * cosin[315]));
 
   pidfactor = updatePid();
 
   speed1 += pidfactor;
   speed2 += pidfactor;
   speed3 += pidfactor;
+  speed4 += pidfactor;
 
   // CheckSpeed(); // normalizza la velocita' a 255 max al motore piu' veloce e
   // gli altri in proporzione
@@ -28,19 +39,23 @@ void drivePID(signed int direzione, float vMot) {
   speed1 = constrain(speed1, -255, 255);
   speed2 = constrain(speed2, -255, 255);
   speed3 = constrain(speed3, -255, 255);
+  speed4 = constrain(speed4, -255, 255);
 
   // Send every speed to his motor
-  mot(2, int(speed2));
   mot(1, int(speed1));
+  mot(2, int(speed2));
   mot(3, int(speed3));
+  mot(4, int(speed4));
 
-  // Serial.print(speed1);
-  // Serial.print("   ");
-  // Serial.print(speed2);
-  // Serial.print("   ");
-  // Serial.print(speed3);
-  // Serial.println("   ");
   old_Dir = direzione;
+
+  Serial.print(speed1);
+  Serial.print("|");
+  Serial.print(speed2);
+  Serial.print("|");
+  Serial.print(speed3);
+  Serial.print("|");
+  Serial.println(speed4);
 }
 
 void preparePID(int direction, int speed) { preparePID(direction, speed, 0); }
@@ -58,9 +73,11 @@ float updatePid() {
 
   // calcola l'errore di posizione rispetto allo 0
   if (imu_current_euler < 180)
+    // delta = float(imu_current_euler);
     delta = float(imu_current_euler + st);
   else
     delta = float((imu_current_euler - 360) - st);
+  // delta = (imu_current_euler - 360);
 
   // calcola correzione proporzionale
   errorP = KP * delta;
@@ -84,25 +101,32 @@ void CheckSpeed() {
   float Max, Min;
   if ((speed1 <= 255.0 && speed1 >= -255.0) &&
       (speed2 <= 255.0 && speed2 >= -255.0) &&
-      (speed3 <= 255.0 && speed3 >= -255.0))
+      (speed3 <= 255.0 && speed3 >= -255.0) &&
+      (speed4 <= 255.0 && speed4 >= -255.0))
     return;
 
-  Max = speed1;
+    Max = speed1;
   if (speed2 > Max)
     Max = speed2;
   if (speed3 > Max)
     Max = speed3;
-  Min = speed1;
+  if (speed4 > Max)
+    Max = speed4;
+
+    Min = speed1;
   if (speed2 < Min)
     Min = speed2;
   if (speed3 < Min)
     Min = speed3;
+  if (speed4 < Min)
+    Min = speed4;
 
   if (Max > 255.0) {
     Max = 255.0 / Max;
     speed1 = speed1 * Max;
     speed2 = speed2 * Max;
     speed3 = speed3 * Max;
+    speed4 = speed4 * Max;
     // speedx = 255.0 * speedx / Max;
   }
   if (Min < -255.0) {
@@ -110,6 +134,7 @@ void CheckSpeed() {
     speed1 = speed1 * Min;
     speed2 = speed2 * Min;
     speed3 = speed3 * Min;
+    speed4 = speed4 * Min;
     // speedx = -255.0 * speedx / Min;
   }
 }
@@ -121,13 +146,15 @@ void recenter(float spd) {
   speed1 = spd * pidfactor;
   speed2 = spd * pidfactor;
   speed3 = spd * pidfactor;
+  speed4 = spd * pidfactor;
 
   CheckSpeed();
 
   // Send every speed to his motor
-  mot(2, int(speed2));
   mot(1, int(speed1));
+  mot(2, int(speed2));
   mot(3, int(speed3));
+  mot(4, int(speed4));
 
   return;
 }

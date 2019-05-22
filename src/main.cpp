@@ -5,17 +5,19 @@
 #include <Arduino.h>
 
 #include "bluetooth.h"
+#include "camera.h"
 #include "chat.h"
 #include "goalie.h"
 #include "imu.h"
-#include "interrupt.h"
 #include "linesensor.h"
 #include "motors.h"
+#include "music.h"
 #include "mysoftware_serial.h"
 #include "myspi_old.h"
 #include "pid.h"
 #include "position.h"
 #include "space_invaders.h"
+#include "test.h"
 #include "us.h"
 #include "vars.h"
 
@@ -24,9 +26,7 @@ int SWS = 0;
 int SWD = 0;
 
 void setup() {
-  // analogWriteFrequency(4,  1000);
-  // analogWriteFrequency(7,  1000);
-  // analogWriteFrequency(10, 1000);
+  // startSetup();
   // Now assign value to variables, first thing to do
   // IMU
   imu_current_euler = 0;
@@ -79,83 +79,66 @@ void setup() {
   globalDir = 0;
   globalSpeed = 0;
   st = 0;
-  // attacco
+  // attack
   atk_direction = 0;
   atk_speed = 0;
   atk_offset = 0;
+  // defense
+  flag_interrupt = false;
   // end of variable set up
   Nint = 0;
+
+  // CAMERA
+  pAtk = 0;
+  pDef = 0;
+  portx = 0;
+
+  // BT
+  topolino = 0;
+  fpos = 0;
+
+  // stincr
+  stincr = 0;
+
+  // ;)
+  // analogWriteFrequency(4 , 15000);
+  // analogWriteFrequency(7 , 15000);
+  // analogWriteFrequency(10, 15000);
 
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
   pinMode(16, INPUT_DISABLE); // pin 16 in corto tra 3.3V e massa
 
+  // pinMode(SWITCH_DX, INPUT);
+
   // Enable Serial for test
   Serial.begin(9600);
+  delay(1000);
 
   // Setups a bunch of pins
-  pinMode(27, OUTPUT);
-  for (int i = 29; i <= 31; i++)
-    pinMode(i, OUTPUT);
+  // pinMode(27, OUTPUT);
+  // for (int i = 29; i <= 31; i++)
+  //   pinMode(i, OUTPUT);
 
   // Misc inits
-  initMotorsGPIO();
-  initLineSensors();
-  initSPI();
-  initUS();
   initIMU();
-  initOmnidirectionalSins();
-  initBluetooth();
-  initSoftwareSerial();
-  // valStringY.reserve(30);                                     //riserva
-  // 30byte per le stringhe valStringB.reserve(30);  //  tone(27, 1000, 500);
-  digitalWrite(31, HIGH);
+  initMotorsGPIO();
+  // initLineSensors();
+  // initSPI();
+  // initUS();
+  initSinCos();
+  // initBluetooth();
+  // initSoftwareSerial();
+  // CAMERA.begin(19200);
+
+  // digitalWrite(30, HIGH);
+  // digitalWrite(29, HIGH);
+  // digitalWrite(LED_BUILTIN, LOW);
+  // stopSetup();
 }
 
 void loop() {
-  SWS = digitalRead(SWITCH_SX);
-  SWD = digitalRead(SWITCH_DX);
-
-  // update_sensors_all();
-  // WhereAmI();
-  // space_invaders();
-
-  // comunicazione(2000);u
-  // teamZone();
-  // whereAreYou();
-  // if(millis() - t1 >= 200){
-  //   BT.println(imu_current_euler);
-  // }
-
-  // // game routine
-
-  ball_read_position();
   readIMU();
-  readUS();
-  WhereAmI();
-  guessZone();
-  calculateZoneIndex();
-
-  // currently setting the role by code
-  role = HIGH;
-
-  if (flag_interrupt) {
-    // handleInterruptTrigonometry();
-    // handleInterruptEasy();
-    // gest_interrupt();
-    int_nuovo();
-  }
-
-  if (ball_seen == true) {
-    if (role == HIGH) goalie();
-    else space_invaders_3();
-  }
-  else {
-    if (role == HIGH) goCenter();
-    else centerGoalPost();
-  }
-
-  // final drive pid
-  drivePID(globalDir, globalSpeed);
-  // DEBUG_PRINT.println(ball_sensor);
+  checkLineSensors();
+  drivePID(0, 0);
 }

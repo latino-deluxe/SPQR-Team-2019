@@ -31,6 +31,11 @@ void WhereAmI() {
   good_field_y = false; // non é buona y
   goal_zone = false;    // non sono davanti alla porta avversaria
 
+  if (role == HIGH)
+    DxF = DxF_Atk;
+  else
+    DxF = DxF_Def;
+
   Lx_mis = us_dx + us_sx + robot; // larghezza totale stimata
   Ly_mis = us_fr + us_px + robot; // lunghezza totale stimata
 
@@ -109,64 +114,24 @@ void WhereAmI() {
 }
 
 void goCenter() {
-
-  // if (status_x == EST) {
-  //   if (status_y == SUD) {
-  //     preparePID(330, VEL_RET);
-  //   } else if (status_y == CENTRO) {
-  //     preparePID(270, VEL_RET);
-  //   } else if (status_y == NORD) {
-  //     preparePID(225, VEL_RET);
-  //   } else { // non conosco la y
-  //     preparePID(0, 0);
-  //   }
-  // }
-  // if (status_x == OVEST) {
-  //   if (status_y == SUD) {
-  //     preparePID(45, VEL_RET);
-  //   } else if (status_y == CENTRO) {
-  //     preparePID(90, VEL_RET);
-  //   } else if (status_y == NORD) {
-  //     preparePID(135, VEL_RET);
-  //   } else { // non conosco la y
-  //     preparePID(0, 0);
-  //   }
-  // }
-  // if (status_x == CENTRO) {
-  //   if (status_y == SUD) {
-  //     preparePID(0, VEL_RET);
-  //   } else if (status_y == CENTRO) {
-  //     preparePID(0, 0);
-  //   } else if (status_y == NORD) {
-  //     preparePID(180, VEL_RET);
-  //   } else { // non conosco la y
-  //     preparePID(0, 0);
-  //   }
-  // }
-  // if (status_x == 255) {
-  //   if (status_y == SUD) {
-  //     preparePID(0, VEL_RET);
-  //
-  //   } else if (status_y == CENTRO) {
-  //     preparePID(0, 0);
-  //
-  //   } else if (status_y == NORD) {
-  //     preparePID(180, VEL_RET);
-  //
-  //   } else { // non conosco la y
-  //     preparePID(0, 0);
-  //   }
-  // }
-
-  if(zoneIndex == 8) preparePID(330, 180);
-  if(zoneIndex == 7) preparePID(0, 180);
-  if(zoneIndex == 6) preparePID(45, 180);
-  if(zoneIndex == 5) preparePID(270, 180);
-  if(zoneIndex == 4) preparePID(0, 0);
-  if(zoneIndex == 3) preparePID(90, 180);
-  if(zoneIndex == 2) preparePID(255, 180);
-  if(zoneIndex == 1) preparePID(180, 180);
-  if(zoneIndex == 0) preparePID(135, 180);
+  if (zoneIndex == 8)
+    preparePID(330, 180);
+  if (zoneIndex == 7)
+    preparePID(0, 180);
+  if (zoneIndex == 6)
+    preparePID(45, 180);
+  if (zoneIndex == 5)
+    preparePID(270, 180);
+  if (zoneIndex == 4)
+    preparePID(0, 0);
+  if (zoneIndex == 3)
+    preparePID(90, 180);
+  if (zoneIndex == 2)
+    preparePID(255, 180);
+  if (zoneIndex == 1)
+    preparePID(180, 180);
+  if (zoneIndex == 0)
+    preparePID(135, 180);
 
   return;
 }
@@ -233,7 +198,7 @@ int zone[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
 void testGuessZone() {
   guessZone();
-  Serial.println("-----------------");
+  DEBUG_PRINT.println("-----------------");
 
   for (int j = 0; j < 3; j++) {
     for (int i = 0; i < 3; i++) {
@@ -247,6 +212,8 @@ void testGuessZone() {
   DEBUG_PRINT.print(guessed_x);
   DEBUG_PRINT.print(" | ");
   DEBUG_PRINT.println(guessed_y);
+  DEBUG_PRINT.print("Zone Index: ");
+  DEBUG_PRINT.println(zoneIndex);
 }
 
 void guessZone() {
@@ -266,22 +233,22 @@ void updateGuessZone() {
   if (status_x == 255 && status_y != 255) {
     for (int i = 0; i < 3; i++) {
       if (zone[i][status_y] < 150)
-        zone[i][status_y] += 2;
+        zone[i][status_y] += 3;
     }
   } else if (status_x != 255 && status_y == 255) {
     for (int i = 0; i < 3; i++) {
       if (zone[status_x][i] < 150)
-        zone[status_x][i] += 2;
+        zone[status_x][i] += 3;
     }
   } else {
     if (zone[status_x][status_y] < 150)
-      zone[status_x][status_y] += 6;
+      zone[status_x][status_y] += 8;
   }
 
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
       if (zone[i][j] - 1 >= 0)
-        zone[i][j] -= 1;
+        zone[i][j] -= 2;
     }
   }
 }
@@ -305,7 +272,12 @@ void gigaTestZone() {
     DEBUG_PRINT.println();
     testPosition();
     testGuessZone();
+    testIMU();
 
+    // if (comrade){
+    //   DEBUG_PRINT.print("FriendZone: ");
+    //   DEBUG_PRINT.println(friendZone);
+    // }
     DEBUG_PRINT.println("------");
     ao = millis();
   }

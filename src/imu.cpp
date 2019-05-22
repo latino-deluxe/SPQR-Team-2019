@@ -21,5 +21,6 @@ void readIMU() {
 
 void testIMU() {
   readIMU();
+  DEBUG_PRINT.print("IMU: ");
   DEBUG_PRINT.println(imu_current_euler);
 }

@@ -1,3 +1,6 @@
 void whereAreYou();
 void teamZone();
-bool comunicazione(int);
+bool com(int);
+bool commy(int);
+void Ao();
+void WOW();

@@ -1,3 +1,5 @@
+#include "bluetooth.h"
+#include "chat.h"
 #include "goalie.h"
 #include "imu.h"
 #include "motors.h"
@@ -10,78 +12,374 @@
 #include <Arduino.h>
 #include <math.h>
 
-unsigned long t = 0;
-int c = 0;
+int vel = 160;
+int usDist = 70;
+
+int defDir = 0;
+int defSpeed = 0;
+int defDistance = 2;
 
 void keeper() {
-  // recenter(2.0);
-  // if(ball_distance)
+  if (us_px >= 30 && comrade) {
+    centerGoalPost();
+  } else {
+
+    switch (ball_sensor) {
+    case 0:
+      if (ball_distance > defDistance) {
+        defDir = 0;
+        defSpeed = 0;
+      } else {
+        defDir = 0;
+        defSpeed = 180;
+      }
+      break;
+    case 1:
+      if (ball_distance > defDistance) {
+        defDir = 0;
+        defSpeed = 0;
+      } else {
+        defDir = 10;
+        defSpeed = 180;
+      }
+      break;
+    case 2:
+      if (ball_distance > defDistance) {
+        defDir = 90;
+        defSpeed = 80;
+      } else {
+        defDir = 35;
+        defSpeed = 180;
+      }
+      break;
+    case 3:
+    case 4:
+    case 5:
+      if (ball_distance > defDistance) {
+        defDir = 90;
+        defSpeed = 80;
+      } else {
+        defDir = 90;
+        defSpeed = 180;
+      }
+    case 6:
+      if (us_px < 15) {
+        if (ball_distance > defDistance) {
+          defDir = 90;
+          defSpeed = 180;
+        } else {
+          defDir = 90;
+          defSpeed = 180;
+        }
+      } else {
+        if (ball_distance > defDistance) {
+          defDir = 120;
+          defSpeed = 180;
+        } else {
+          defDir = 120;
+          defSpeed = 180;
+        }
+      }
+      break;
+    case 7:
+      if (us_px < 15) {
+        if (ball_distance > defDistance) {
+          defDir = 90;
+          defSpeed = 180;
+        } else {
+          defDir = 90;
+          defSpeed = 180;
+        }
+      } else {
+        if (ball_distance > defDistance) {
+          defDir = 160;
+          defSpeed = 180;
+        } else {
+          defDir = 160;
+          defSpeed = 180;
+        }
+      }
+      break;
+    case 8:
+      if (us_px < 15) {
+        if (ball_distance > defDistance) {
+          defDir = 90;
+          defSpeed = 180;
+        } else {
+          defDir = 90;
+          defSpeed = 180;
+        }
+      } else {
+        if (ball_distance > defDistance) {
+          defDir = 180;
+          defSpeed = 180;
+        } else {
+          defDir = 180;
+          defSpeed = 180;
+        }
+      }
+      break;
+    case 9:
+      if (us_px < 15) {
+        if (ball_distance > defDistance) {
+          defDir = 90;
+          defSpeed = 180;
+        } else {
+          defDir = 90;
+          defSpeed = 90;
+        }
+      } else {
+        if (ball_distance > defDistance) {
+          defDir = 200;
+          defSpeed = 180;
+        } else {
+          defDir = 200;
+          defSpeed = 180;
+        }
+      }
+      break;
+    case 10:
+      if (us_px < 15) {
+        if (ball_distance > defDistance) {
+          defDir = 90;
+          defSpeed = 180;
+        } else {
+          defDir = 0;
+          defSpeed = 0;
+        }
+      } else {
+        if (ball_distance > defDistance) {
+          defDir = 200;
+          defSpeed = 180;
+        } else {
+          defDir = 200;
+          defSpeed = 180;
+        }
+      }
+      break;
+    case 11:
+      if (us_px < 15) {
+        if (ball_distance > defDistance) {
+          defDir = 270;
+          defSpeed = 180;
+        } else {
+          defDir = 270;
+          defSpeed = 90;
+        }
+      } else {
+        if (ball_distance > defDistance) {
+          defDir = 160;
+          defSpeed = 180;
+        } else {
+          defDir = 160;
+          defSpeed = 180;
+        }
+      }
+      break;
+    case 12:
+      if (us_px < 15) {
+        if (ball_distance > defDistance) {
+          defDir = 270;
+          defSpeed = 180;
+        } else {
+          defDir = 270;
+          defSpeed = 180;
+        }
+      } else {
+        if (ball_distance > defDistance) {
+          defDir = 180;
+          defSpeed = 180;
+        } else {
+          defDir = 180;
+          defSpeed = 180;
+        }
+      }
+      break;
+    case 13:
+      if (us_px < 15) {
+        if (ball_distance > defDistance) {
+          defDir = 270;
+          defSpeed = 180;
+        } else {
+          defDir = 270;
+          defSpeed = 180;
+        }
+      } else {
+        if (ball_distance > defDistance) {
+          defDir = 200;
+          defSpeed = 180;
+        } else {
+          defDir = 200;
+          defSpeed = 180;
+        }
+      }
+      break;
+    case 14:
+      if (us_px < 15) {
+        if (ball_distance > defDistance) {
+          defDir = 270;
+          defSpeed = 180;
+        } else {
+          defDir = 240;
+          defSpeed = 180;
+        }
+      } else {
+        if (ball_distance > defDistance) {
+          defDir = 120;
+          defSpeed = 180;
+        } else {
+          defDir = 120;
+          defSpeed = 180;
+        }
+      }
+      break;
+    case 15:
+    case 16:
+    case 17:
+      if (ball_distance > defDistance) {
+        defDir = 270;
+        defSpeed = 80;
+      } else {
+        defDir = 270;
+        defSpeed = 180;
+      }
+      break;
+    case 18:
+      if (ball_distance > defDistance) {
+        defDir = 270;
+        defSpeed = 80;
+      } else {
+        defDir = 325;
+        defSpeed = 180;
+      }
+      break;
+    case 19:
+      if (ball_distance > defDistance) {
+        defDir = 0;
+        defSpeed = 0;
+      } else {
+        defDir = 350;
+        defSpeed = 180;
+      }
+      break;
+    default:
+      tone(BUZZER, 50000, 500);
+      defDir = 0;
+      defSpeed = 0;
+      break;
+    }
+
+    // limitKeeperUS();
+
+    preparePID(defDir, defSpeed);
+  }
 }
 
-void space_invaders_3() {
-  int dir = 0, vel = 215;
-
-  if (zoneIndex >= 6) {
-    if (ball_sensor >= 1 && ball_sensor <= 6) {
-      if (zoneIndex < 8) {
-        preparePID(90, vel);
-      } else {
-        preparePID(0, 0);
-      }
-    } else if (ball_sensor >= 14 && ball_sensor <= 19) {
-      if (zoneIndex > 6) {
-        preparePID(270, vel);
-      } else {
-        preparePID(0, 0);
-      }
-    } else {
-      preparePID(0, 0);
-    }
-  } else {
-    centerGoalPost();
+void limitKeeperUS() {
+  if ((defDir < 90 && (us_dx < 40 || us_sx > 70)) ||
+      (defDir > 270 && (us_sx < 40 || us_dx > 70))) {
+    defDir = 0;
+    defSpeed = 0;
   }
-  // if (ball_sensor >= 1 && ball_sensor <= 6) {
-  //   // if it's not in the right zone (8), go right
-  //   if (zoneIndex != 8) {
-  //     dir = 90;
-  //   } else {
-  //     vel = 0;
-  //   }
-  // } else if (ball_sensor >= 14 && ball_sensor <= 19) {
-  //   // if it's not in the left zone (6), go left
-  //   if (zoneIndex != 6) {
-  //     dir = 270;
-  //   } else {
-  //     vel = 0;
-  //   }
-  // } else if (ball_sensor > 6 && ball_sensor < 14) {
-  //   goalie(); // ball behind: goalie
-  // } else {
-  //   vel = 0;
-  //   dir = 0; // ball in front of the robot: stop
-  // }
-  // preparePID(dir, vel);
 }
 
 void centerGoalPost() {
-  int vel = 200;
-
-  if ((zoneIndex >= 0 && zoneIndex <= 2) || zoneIndex == 4)
+  int vel = 150;
+  if ((zoneIndex >= 0 && zoneIndex <= 2) || zoneIndex == 4) {
     preparePID(180, vel);
-  else if (zoneIndex == 3 || zoneIndex == 6)
+  } else if (zoneIndex == 3 || zoneIndex == 6) {
     preparePID(90, vel);
-  else if (zoneIndex == 5 || zoneIndex == 8)
+  } else if (zoneIndex == 5 || zoneIndex == 8) {
     preparePID(270, vel);
-  else
-    preparePID(0, 0);
-
-  // if (zoneIndex < 6) {
-  //   preparePID(180, vel);
-  // } else if (zoneIndex == 8) {
-  //   preparePID(270, vel);
-  // } else if (zoneIndex == 6) {
-  //   preparePID(90, vel);
-  // } else if (zoneIndex == 7) {
-  //   preparePID(0, 0);
-  // }
+  } else {
+    stop_menamoli = false;
+    if (us_px >= 25)
+      preparePID(180, vel);
+    else
+      preparePID(0, 0);
+  }
 }
+
+void centerGoalPostCamera() {
+  if (portx == 0 || portx == 999) {
+    centerGoalPost();
+  } else {
+    if (zoneIndex < 6) {
+      centerGoalPost();
+    } else {
+      if (portx < keeperMin) {
+        preparePID(270, vel);
+      } else if (portx > keeperMax) {
+        preparePID(90, vel);
+      }
+    }
+  }
+}
+
+// void space_invaders_camera() {
+//   if (us_px >= 35 || portx == 999) {
+//     centerGoalPost();
+//   } else {
+//     // dx
+//     if (ball_sensor >= 1 && ball_sensor <= 6) {
+//       if (portx > keeperMin) {
+//         preparePID(90, vel);
+//       } else {
+//         preparePID(0, 0);
+//       }
+//     }
+//     // sx
+//     else if (ball_sensor <= 19 && ball_sensor >= 14) {
+//       if (portx < keeperMax) {
+//         preparePID(270, vel);
+//       } else {
+//         preparePID(0, 0);
+//       }
+//     }
+//     // behind
+//     else if (ball_sensor < 14 && ball_sensor > 6) {
+//       goalie();
+//     }
+//     // in front
+//     else {
+//       preparePID(0, 0);
+//       if (ball_distance <= 3) {
+//         goalie();
+//       }
+//     }
+//   }
+// }
+//
+// void space_invaders_us() {
+//   if (us_px <= 35) {
+//     // dx
+//     if (ball_sensor >= 1 && ball_sensor <= 6) {
+//       if (us_dx > usDist || us_sx < usDist) {
+//         preparePID(90, vel);
+//       } else {
+//         preparePID(0, 0);
+//       }
+//     }
+//     // sx
+//     else if (ball_sensor <= 19 && ball_sensor >= 14) {
+//       if (us_sx > usDist || us_dx < usDist) {
+//         preparePID(270, vel);
+//       } else {
+//         preparePID(0, 0);
+//       }
+//     }
+//     // behind
+//     else if (ball_sensor < 14 && ball_sensor > 6) {
+//       goalie();
+//     }
+//     // in front
+//     else {
+//       preparePID(0, 0);
+//       if (ball_distance <= 2) {
+//         goalie();
+//       }
+//     }
+//   } else {
+//     centerGoalPost();
+//   }
+// }

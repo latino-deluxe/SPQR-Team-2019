@@ -129,5 +129,27 @@
  * TODO:
  *  Vedi lavagnetta o foto su whatsapp
  *
+ * 18/3/2019
+ *  Sistemati i robot che non riuscivano a giocare. Telecamera su robot attaccante,
+ *  da sistemare ancora un po' lo storcimento nella fascia di sinistra (Ematino).
+ *  Iniziato bluetooth tra i due robot, si connettono ma non comunicano la zona
+ *
+ *  TODO:
+ *    Migliorare comunicazione bluetooth
+ *    Migliorare tutto finché si può
+ *
+ * 27/3/2019
+ *  Menu di test da Serial Monitor, a prova di scemo (Il Test 6 non serve a un cizzo)
+ *  Miglioramenti a space invaders per non uscire dietro
+ *  Miglioramenti storcimento incrementale per attaccante
+ *
+ *  TODO:
+ *    Migliorare tutto quel che si può
+ *    Migliorare logica comrade col bluetooth
+ *
+ *
+ *
+ *
+ *
  *
  */
