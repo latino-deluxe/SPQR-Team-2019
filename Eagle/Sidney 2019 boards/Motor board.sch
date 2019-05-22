@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -19925,6 +19925,10 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <part name="BAT_+" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="3,81/1,4" device="" package3d_urn="urn:adsk.eagle:package:30835/1"/>
 <part name="BAT_-" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="3,81/1,4" device="" package3d_urn="urn:adsk.eagle:package:30835/1"/>
 <part name="IC1" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="LM2596S" device="" package3d_urn="urn:adsk.eagle:package:16438/2"/>
+<part name="SUPPLY2_CON" library="CONNECTER" deviceset="TWIG_2.0" device=""/>
+<part name="P+6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
+<part name="SUPPLY10" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="+5V/1" device=""/>
+<part name="GND12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -19962,6 +19966,10 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <wire x1="299.72" y1="2.54" x2="185.42" y2="2.54" width="0.1524" layer="95"/>
 <text x="279.4" y="0" size="1.778" layer="95">MOTOR_DRIVERS</text>
 <wire x1="170.18" y1="88.9" x2="170.18" y2="116.84" width="0.1524" layer="95"/>
+<wire x1="139.7" y1="147.32" x2="162.56" y2="147.32" width="0.1524" layer="95"/>
+<wire x1="162.56" y1="147.32" x2="162.56" y2="121.92" width="0.1524" layer="95"/>
+<wire x1="162.56" y1="121.92" x2="139.7" y2="121.92" width="0.1524" layer="95"/>
+<wire x1="139.7" y1="121.92" x2="139.7" y2="147.32" width="0.1524" layer="95"/>
 </plain>
 <instances>
 <instance part="MOTOR_DRIVER_1" gate="G$1" x="205.74" y="40.64" smashed="yes">
@@ -20173,6 +20181,17 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <attribute name="NAME" x="40.64" y="80.01" size="1.778" layer="95"/>
 <attribute name="VALUE" x="50.8" y="80.01" size="1.778" layer="96"/>
 </instance>
+<instance part="SUPPLY2_CON" gate="G$1" x="147.32" y="134.62" smashed="yes" rot="MR0">
+<attribute name="NAME" x="162.56" y="119.38" size="1.27" layer="95" rot="MR0"/>
+<attribute name="VALUE" x="149.098" y="128.016" size="1.27" layer="96" rot="MR0"/>
+</instance>
+<instance part="P+6" gate="1" x="154.94" y="144.78" smashed="yes">
+<attribute name="VALUE" x="154.94" y="138.43" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="SUPPLY10" gate="G$1" x="158.75" y="142.24" smashed="yes"/>
+<instance part="GND12" gate="1" x="153.67" y="127" smashed="yes">
+<attribute name="VALUE" x="151.13" y="124.46" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -20338,6 +20357,16 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <pinref part="GND11" gate="1" pin="GND"/>
 <wire x1="256.54" y1="12.7" x2="256.54" y2="10.16" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="SUPPLY2_CON" gate="G$1" pin="2"/>
+<pinref part="GND12" gate="1" pin="GND"/>
+<wire x1="151.13" y1="135.89" x2="153.67" y2="135.89" width="0.1524" layer="91"/>
+<wire x1="153.67" y1="135.89" x2="153.67" y2="130.81" width="0.1524" layer="91"/>
+<pinref part="SUPPLY2_CON" gate="G$1" pin="4"/>
+<wire x1="153.67" y1="130.81" x2="153.67" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="151.13" y1="130.81" x2="153.67" y2="130.81" width="0.1524" layer="91"/>
+<junction x="153.67" y="130.81"/>
+</segment>
 </net>
 <net name="+5V" class="0">
 <segment>
@@ -20362,6 +20391,12 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <wire x1="142.24" y1="109.22" x2="142.24" y2="104.14" width="0.1524" layer="91"/>
 <pinref part="SUPPLY_CON" gate="G$1" pin="3"/>
 <wire x1="142.24" y1="104.14" x2="147.32" y2="104.14" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="P+6" gate="1" pin="+5V"/>
+<wire x1="154.94" y1="142.24" x2="154.94" y2="138.43" width="0.1524" layer="91"/>
+<pinref part="SUPPLY2_CON" gate="G$1" pin="1"/>
+<wire x1="154.94" y1="138.43" x2="151.13" y2="138.43" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$6" class="0">
@@ -20564,6 +20599,13 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <pinref part="MOTOR_DRIVER_4" gate="G$1" pin="+5V"/>
 <wire x1="256.54" y1="22.86" x2="259.08" y2="22.86" width="0.1524" layer="91"/>
 <label x="256.54" y="25.4" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<pinref part="SUPPLY10" gate="G$1" pin="+5V/1"/>
+<pinref part="SUPPLY2_CON" gate="G$1" pin="3"/>
+<wire x1="158.75" y1="139.7" x2="158.75" y2="133.35" width="0.1524" layer="91"/>
+<wire x1="158.75" y1="133.35" x2="151.13" y2="133.35" width="0.1524" layer="91"/>
+<label x="158.75" y="134.874" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="N$3" class="0">

@@ -9069,6 +9069,10 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/0460/0900766b80460da1
 <part name="GND34" library="supply1" deviceset="GND" device=""/>
 <part name="P+16" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="SUPPLY4" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="+5V/1" device=""/>
+<part name="SUPPLY2_CON" library="CONNECTER" deviceset="TWIG_2.0" device=""/>
+<part name="P+10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
+<part name="SUPPLY10" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="+5V/1" device=""/>
+<part name="GND18" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -9141,6 +9145,10 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/0460/0900766b80460da1
 <wire x1="424.18" y1="50.8" x2="424.18" y2="78.74" width="0.1524" layer="95"/>
 <wire x1="391.16" y1="78.74" x2="424.18" y2="78.74" width="0.1524" layer="95"/>
 <text x="408.94" y="48.26" size="1.778" layer="95">SUPPLY_CON</text>
+<wire x1="358.14" y1="129.54" x2="381" y2="129.54" width="0.1524" layer="95"/>
+<wire x1="381" y1="129.54" x2="381" y2="104.14" width="0.1524" layer="95"/>
+<wire x1="381" y1="104.14" x2="358.14" y2="104.14" width="0.1524" layer="95"/>
+<wire x1="358.14" y1="104.14" x2="358.14" y2="129.54" width="0.1524" layer="95"/>
 </plain>
 <instances>
 <instance part="TEENSY_3.5" gate="G$1" x="38.1" y="63.5" smashed="yes"/>
@@ -9489,6 +9497,17 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/0460/0900766b80460da1
 <attribute name="VALUE" x="393.7" y="68.58" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="SUPPLY4" gate="G$1" x="421.64" y="73.66" smashed="yes"/>
+<instance part="SUPPLY2_CON" gate="G$1" x="365.76" y="116.84" smashed="yes" rot="MR0">
+<attribute name="NAME" x="381" y="101.6" size="1.27" layer="95" rot="MR0"/>
+<attribute name="VALUE" x="367.538" y="110.236" size="1.27" layer="96" rot="MR0"/>
+</instance>
+<instance part="P+10" gate="1" x="373.38" y="127" smashed="yes">
+<attribute name="VALUE" x="373.38" y="120.65" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="SUPPLY10" gate="G$1" x="377.19" y="124.46" smashed="yes"/>
+<instance part="GND18" gate="1" x="372.11" y="109.22" smashed="yes">
+<attribute name="VALUE" x="369.57" y="106.68" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -9726,6 +9745,16 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/0460/0900766b80460da1
 <wire x1="408.94" y1="58.42" x2="408.94" y2="60.96" width="0.1524" layer="91"/>
 <junction x="408.94" y="60.96"/>
 </segment>
+<segment>
+<pinref part="SUPPLY2_CON" gate="G$1" pin="2"/>
+<pinref part="GND18" gate="1" pin="GND"/>
+<wire x1="369.57" y1="118.11" x2="372.11" y2="118.11" width="0.1524" layer="91"/>
+<wire x1="372.11" y1="118.11" x2="372.11" y2="113.03" width="0.1524" layer="91"/>
+<pinref part="SUPPLY2_CON" gate="G$1" pin="4"/>
+<wire x1="372.11" y1="113.03" x2="372.11" y2="111.76" width="0.1524" layer="91"/>
+<wire x1="369.57" y1="113.03" x2="372.11" y2="113.03" width="0.1524" layer="91"/>
+<junction x="372.11" y="113.03"/>
+</segment>
 </net>
 <net name="SP3" class="0">
 <segment>
@@ -9938,6 +9967,12 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/0460/0900766b80460da1
 <wire x1="398.78" y1="66.04" x2="393.7" y2="66.04" width="0.1524" layer="91"/>
 <pinref part="P+16" gate="1" pin="+5V"/>
 <wire x1="393.7" y1="73.66" x2="393.7" y2="66.04" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="P+10" gate="1" pin="+5V"/>
+<wire x1="373.38" y1="124.46" x2="373.38" y2="120.65" width="0.1524" layer="91"/>
+<pinref part="SUPPLY2_CON" gate="G$1" pin="1"/>
+<wire x1="373.38" y1="120.65" x2="369.57" y2="120.65" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="TX3" class="0">
@@ -10663,6 +10698,13 @@ Source: &lt;a href="http://docs-emea.rs-online.com/webdocs/0460/0900766b80460da1
 <pinref part="SUPPLY4" gate="G$1" pin="+5V/1"/>
 <wire x1="421.64" y1="68.58" x2="421.64" y2="71.12" width="0.1524" layer="91"/>
 <label x="421.64" y="68.58" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<pinref part="SUPPLY10" gate="G$1" pin="+5V/1"/>
+<pinref part="SUPPLY2_CON" gate="G$1" pin="3"/>
+<wire x1="377.19" y1="121.92" x2="377.19" y2="115.57" width="0.1524" layer="91"/>
+<wire x1="377.19" y1="115.57" x2="369.57" y2="115.57" width="0.1524" layer="91"/>
+<label x="377.19" y="117.094" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="S1_IN" class="0">
