@@ -8,6 +8,7 @@
 #include "motors.h"
 #include "pid.h"
 #include "camera.h"
+#include "testdisplay.h"
 
 int testDelay = 10;
 
@@ -30,7 +31,7 @@ void testMenu(){
   Serial.println("6)Test BT");
   Serial.println("7)GigaTestZone");
   Serial.println("8)Test Camera");
-
+  Serial.println("9)Test Display");
   do{
     test = Serial.read();
     Serial.println();
@@ -45,6 +46,7 @@ void testMenu(){
     else if (test == '6') Serial.println("Test BT, connettersi al BT");
     else if (test == '7') Serial.println("GigaTestZone, test grafico matrice zone (1-->9), US, IMU e zona compagno (se presente)");
     else if (test == '8') Serial.println("CAMERA");
+    else if (test == '8') Serial.println("Display");
     else {
       Serial.println(" Comando sconosciuto");
       flagtest = false;
@@ -92,6 +94,16 @@ void testMenu(){
         goalPosition();
         Serial.println(portx);
         delay(100);
+      break;
+      case '9':
+        for(int i = 0; i < 3; i++){
+          for(int j = 0; j < 10; j++){
+            deepClearDisplay();
+            writeDigit(i,j);
+            writeDigit(i+1,j);
+            delay(500);
+          }
+        }
       break;
       default://default, todo, maybe
       break;

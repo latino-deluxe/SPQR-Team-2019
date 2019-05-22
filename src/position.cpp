@@ -4,6 +4,7 @@
 #include "imu.h"
 #include "myspi_old.h"
 #include "vars.h"
+#include "testdisplay.h"
 #include "position.h"
 
 int zone[3][3];
@@ -32,17 +33,20 @@ void increaseCol(int i, int ammount){
     }
 }
 
+void readPhyZone(){
+  phyZoneUS();
+  // phyZoneCam();
+}
+
 void calculateLogicZone(){
     //decrease all
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
-            increaseIndex(i, j, -7);
+            increaseIndex(i, j, -13);
         }
     }
 
-    phyZoneUS();
-    phyZoneCam();
-
+    readPhyZone();
     //calculates guessed_x and guessed_y and zoneIndex
     //zoneIndex is just 2D to 1D of the guessed x and y
     //(y_position * width + x_position)
@@ -58,6 +62,8 @@ void calculateLogicZone(){
         }
     }
     zoneIndex = guessed_y * 3 + guessed_x;
+    deepClearDisplay();
+    writeDigit(0,zoneIndex);
 }
 
 //old WhereAmI. Renamed to be coerent. Now also adds to the logic zone
@@ -198,8 +204,7 @@ void testPhyZone(){
     readIMU();
     goalPosition();
 
-    phyZoneUS();
-    phyZoneCam();
+    readPhyZone();
     DEBUG_PRINT.print("Measured US location:\t");
     DEBUG_PRINT.print(status_x);
     DEBUG_PRINT.print(" | ");
