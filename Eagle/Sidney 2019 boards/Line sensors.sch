@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.3.0">
+<eagle version="9.4.1">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
+<setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
@@ -4237,79 +4238,168 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 <part name="U$1" library="SparkFun" deviceset="5V" device=""/>
 <part name="GND1" library="SUPPLY" deviceset="GND" device=""/>
 <part name="LS1" library="Connector" deviceset="TWIG-4P-2.0" device="-2.0"/>
-<part name="R2" library="resistor" deviceset="R-EU_" device="M0805" value="330"/>
-<part name="D2" library="Wurth_Elektronik_Optoelectronics_rev15b" deviceset="WL-SMTW" device="-150141AS73100-A"/>
+<part name="R1" library="resistor" deviceset="R-EU_" device="M0805" value="330"/>
+<part name="D1" library="Wurth_Elektronik_Optoelectronics_rev15b" deviceset="WL-SMTW" device="-150141AS73100-A"/>
 <part name="U$4" library="SparkFun" deviceset="5V" device=""/>
 <part name="GND4" library="SUPPLY" deviceset="GND" device=""/>
 <part name="U$5" library="SparkFun" deviceset="5V" device=""/>
-<part name="LED2" library="SparkFun" deviceset="LED" device="3MM"/>
-<part name="C2" library="resistor" deviceset="R-EU_" device="M0805" value="100n"/>
-<part name="R5" library="resistor" deviceset="R-EU_" device="M0805" value="330"/>
-<part name="D3" library="Wurth_Elektronik_Optoelectronics_rev15b" deviceset="WL-SMTW" device="-150141AS73100-A"/>
+<part name="LED1" library="SparkFun" deviceset="LED" device="3MM"/>
+<part name="C1" library="resistor" deviceset="R-EU_" device="M0805" value="100n"/>
+<part name="R2" library="resistor" deviceset="R-EU_" device="M0805" value="330"/>
+<part name="D2" library="Wurth_Elektronik_Optoelectronics_rev15b" deviceset="WL-SMTW" device="-150141AS73100-A"/>
 <part name="U$6" library="SparkFun" deviceset="5V" device=""/>
 <part name="GND6" library="SUPPLY" deviceset="GND" device=""/>
 <part name="GND7" library="SUPPLY" deviceset="GND" device=""/>
 <part name="U$7" library="SparkFun" deviceset="5V" device=""/>
-<part name="LED3" library="SparkFun" deviceset="LED" device="3MM"/>
-<part name="C3" library="resistor" deviceset="R-EU_" device="M0805" value="100n"/>
-<part name="R6" library="resistor" deviceset="R-EU_" device="M0805" value="10k"/>
-<part name="R9" library="resistor" deviceset="R-EU_" device="M0805" value="330"/>
-<part name="D5" library="Wurth_Elektronik_Optoelectronics_rev15b" deviceset="WL-SMTW" device="-150141AS73100-A"/>
+<part name="LED2" library="SparkFun" deviceset="LED" device="3MM"/>
+<part name="C2" library="resistor" deviceset="R-EU_" device="M0805" value="100n"/>
+<part name="R5" library="resistor" deviceset="R-EU_" device="M0805" value="10k"/>
+<part name="R3" library="resistor" deviceset="R-EU_" device="M0805" value="330"/>
+<part name="D3" library="Wurth_Elektronik_Optoelectronics_rev15b" deviceset="WL-SMTW" device="-150141AS73100-A"/>
 <part name="U$10" library="SparkFun" deviceset="5V" device=""/>
 <part name="GND10" library="SUPPLY" deviceset="GND" device=""/>
 <part name="U$11" library="SparkFun" deviceset="5V" device=""/>
-<part name="LED5" library="SparkFun" deviceset="LED" device="3MM"/>
-<part name="C5" library="resistor" deviceset="R-EU_" device="M0805" value="100n"/>
-<part name="R13" library="resistor" deviceset="R-EU_" device="M0805" value="330"/>
-<part name="D7" library="Wurth_Elektronik_Optoelectronics_rev15b" deviceset="WL-SMTW" device="-150141AS73100-A"/>
+<part name="LED3" library="SparkFun" deviceset="LED" device="3MM"/>
+<part name="C3" library="resistor" deviceset="R-EU_" device="M0805" value="100n"/>
+<part name="R4" library="resistor" deviceset="R-EU_" device="M0805" value="330"/>
+<part name="D4" library="Wurth_Elektronik_Optoelectronics_rev15b" deviceset="WL-SMTW" device="-150141AS73100-A"/>
 <part name="U$14" library="SparkFun" deviceset="5V" device=""/>
 <part name="GND14" library="SUPPLY" deviceset="GND" device=""/>
 <part name="GND15" library="SUPPLY" deviceset="GND" device=""/>
 <part name="U$15" library="SparkFun" deviceset="5V" device=""/>
-<part name="LED7" library="SparkFun" deviceset="LED" device="3MM"/>
-<part name="C7" library="resistor" deviceset="R-EU_" device="M0805" value="100n"/>
-<part name="R14" library="resistor" deviceset="R-EU_" device="M0805" value="10k"/>
+<part name="LED4" library="SparkFun" deviceset="LED" device="3MM"/>
+<part name="C4" library="resistor" deviceset="R-EU_" device="M0805" value="100n"/>
+<part name="R6" library="resistor" deviceset="R-EU_" device="M0805" value="10k"/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 </plain>
 <instances>
-<instance part="U$1" gate="G$1" x="-7.62" y="88.9"/>
-<instance part="GND1" gate="1" x="-10.16" y="73.66"/>
-<instance part="LS1" gate="G$1" x="-15.24" y="82.55" rot="MR0"/>
-<instance part="R2" gate="G$1" x="20.32" y="88.9" rot="R90"/>
-<instance part="D2" gate="G$1" x="20.32" y="76.2" rot="R90"/>
-<instance part="U$4" gate="G$1" x="20.32" y="99.06"/>
-<instance part="GND4" gate="1" x="20.32" y="63.5"/>
-<instance part="U$5" gate="G$1" x="99.06" y="99.06"/>
-<instance part="LED2" gate="G$1" x="99.06" y="88.9"/>
-<instance part="C2" gate="G$1" x="11.938" y="86.614" rot="R90"/>
-<instance part="R5" gate="G$1" x="66.04" y="88.9" rot="R90"/>
-<instance part="D3" gate="G$1" x="66.04" y="76.2" rot="R90"/>
-<instance part="U$6" gate="G$1" x="66.04" y="99.06"/>
-<instance part="GND6" gate="1" x="66.04" y="63.5"/>
-<instance part="GND7" gate="1" x="81.28" y="63.246"/>
-<instance part="U$7" gate="G$1" x="78.74" y="99.06"/>
-<instance part="LED3" gate="G$1" x="78.74" y="88.9"/>
-<instance part="C3" gate="G$1" x="57.658" y="86.614" rot="R90"/>
-<instance part="R6" gate="G$1" x="78.74" y="74.676" rot="R90"/>
-<instance part="R9" gate="G$1" x="20.32" y="45.72" rot="R90"/>
-<instance part="D5" gate="G$1" x="20.32" y="33.02" rot="R90"/>
-<instance part="U$10" gate="G$1" x="20.32" y="55.88"/>
-<instance part="GND10" gate="1" x="20.32" y="17.78"/>
-<instance part="U$11" gate="G$1" x="91.44" y="55.88"/>
-<instance part="LED5" gate="G$1" x="91.44" y="45.72"/>
-<instance part="C5" gate="G$1" x="11.938" y="43.434" rot="R90"/>
-<instance part="R13" gate="G$1" x="66.04" y="45.72" rot="R90"/>
-<instance part="D7" gate="G$1" x="66.04" y="33.02" rot="R90"/>
-<instance part="U$14" gate="G$1" x="66.04" y="55.88"/>
-<instance part="GND14" gate="1" x="66.04" y="17.78"/>
-<instance part="GND15" gate="1" x="78.74" y="17.526"/>
-<instance part="U$15" gate="G$1" x="78.74" y="55.88"/>
-<instance part="LED7" gate="G$1" x="78.74" y="45.72"/>
-<instance part="C7" gate="G$1" x="57.658" y="43.434" rot="R90"/>
-<instance part="R14" gate="G$1" x="78.74" y="31.496" rot="R90"/>
+<instance part="U$1" gate="G$1" x="-7.62" y="88.9" smashed="yes">
+<attribute name="VALUE" x="-8.636" y="92.456" size="1.778" layer="96"/>
+</instance>
+<instance part="GND1" gate="1" x="-10.16" y="73.66" smashed="yes">
+<attribute name="VALUE" x="-12.7" y="71.12" size="1.778" layer="96"/>
+</instance>
+<instance part="LS1" gate="G$1" x="-15.24" y="82.55" smashed="yes" rot="MR0">
+<attribute name="NAME" x="-13.97" y="87.63" size="1.27" layer="95" rot="MR0"/>
+<attribute name="VALUE" x="-17.78" y="78.74" size="1.27" layer="96" rot="MR90"/>
+</instance>
+<instance part="R1" gate="G$1" x="20.32" y="88.9" smashed="yes" rot="R90">
+<attribute name="NAME" x="18.8214" y="85.09" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="23.622" y="85.09" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="D1" gate="G$1" x="20.32" y="76.2" smashed="yes" rot="R90">
+<attribute name="NAME" x="15.148" y="74.912" size="1.27" layer="95" rot="R90"/>
+<attribute name="VALUE" x="25.848" y="74.972" size="1.27" layer="96" rot="R90"/>
+</instance>
+<instance part="U$4" gate="G$1" x="20.32" y="99.06" smashed="yes">
+<attribute name="VALUE" x="19.304" y="102.616" size="1.778" layer="96"/>
+</instance>
+<instance part="GND4" gate="1" x="20.32" y="63.5" smashed="yes">
+<attribute name="VALUE" x="17.78" y="60.96" size="1.778" layer="96"/>
+</instance>
+<instance part="U$5" gate="G$1" x="99.06" y="99.06" smashed="yes">
+<attribute name="VALUE" x="98.044" y="102.616" size="1.778" layer="96"/>
+</instance>
+<instance part="LED1" gate="G$1" x="99.06" y="88.9" smashed="yes">
+<attribute name="NAME" x="102.616" y="84.328" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="104.775" y="84.328" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="C1" gate="G$1" x="11.938" y="86.614" smashed="yes" rot="R90">
+<attribute name="NAME" x="10.4394" y="82.804" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="15.24" y="82.804" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R2" gate="G$1" x="66.04" y="88.9" smashed="yes" rot="R90">
+<attribute name="NAME" x="64.5414" y="85.09" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="69.342" y="85.09" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="D2" gate="G$1" x="66.04" y="76.2" smashed="yes" rot="R90">
+<attribute name="NAME" x="60.868" y="74.912" size="1.27" layer="95" rot="R90"/>
+<attribute name="VALUE" x="71.568" y="74.972" size="1.27" layer="96" rot="R90"/>
+</instance>
+<instance part="U$6" gate="G$1" x="66.04" y="99.06" smashed="yes">
+<attribute name="VALUE" x="65.024" y="102.616" size="1.778" layer="96"/>
+</instance>
+<instance part="GND6" gate="1" x="66.04" y="63.5" smashed="yes">
+<attribute name="VALUE" x="63.5" y="60.96" size="1.778" layer="96"/>
+</instance>
+<instance part="GND7" gate="1" x="81.28" y="63.246" smashed="yes">
+<attribute name="VALUE" x="78.74" y="60.706" size="1.778" layer="96"/>
+</instance>
+<instance part="U$7" gate="G$1" x="78.74" y="99.06" smashed="yes">
+<attribute name="VALUE" x="77.724" y="102.616" size="1.778" layer="96"/>
+</instance>
+<instance part="LED2" gate="G$1" x="78.74" y="88.9" smashed="yes">
+<attribute name="NAME" x="82.296" y="84.328" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="84.455" y="84.328" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="C2" gate="G$1" x="57.658" y="86.614" smashed="yes" rot="R90">
+<attribute name="NAME" x="56.1594" y="82.804" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="60.96" y="82.804" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R5" gate="G$1" x="78.74" y="74.676" smashed="yes" rot="R90">
+<attribute name="NAME" x="77.2414" y="70.866" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="82.042" y="70.866" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R3" gate="G$1" x="20.32" y="45.72" smashed="yes" rot="R90">
+<attribute name="NAME" x="18.8214" y="41.91" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="23.622" y="41.91" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="D3" gate="G$1" x="20.32" y="33.02" smashed="yes" rot="R90">
+<attribute name="NAME" x="15.148" y="31.732" size="1.27" layer="95" rot="R90"/>
+<attribute name="VALUE" x="25.848" y="31.792" size="1.27" layer="96" rot="R90"/>
+</instance>
+<instance part="U$10" gate="G$1" x="20.32" y="55.88" smashed="yes">
+<attribute name="VALUE" x="19.304" y="59.436" size="1.778" layer="96"/>
+</instance>
+<instance part="GND10" gate="1" x="20.32" y="17.78" smashed="yes">
+<attribute name="VALUE" x="17.78" y="15.24" size="1.778" layer="96"/>
+</instance>
+<instance part="U$11" gate="G$1" x="91.44" y="55.88" smashed="yes">
+<attribute name="VALUE" x="90.424" y="59.436" size="1.778" layer="96"/>
+</instance>
+<instance part="LED3" gate="G$1" x="91.44" y="45.72" smashed="yes">
+<attribute name="NAME" x="94.996" y="41.148" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="97.155" y="41.148" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="C3" gate="G$1" x="11.938" y="43.434" smashed="yes" rot="R90">
+<attribute name="NAME" x="10.4394" y="39.624" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="15.24" y="39.624" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R4" gate="G$1" x="66.04" y="45.72" smashed="yes" rot="R90">
+<attribute name="NAME" x="64.5414" y="41.91" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="69.342" y="41.91" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="D4" gate="G$1" x="66.04" y="33.02" smashed="yes" rot="R90">
+<attribute name="NAME" x="60.868" y="31.732" size="1.27" layer="95" rot="R90"/>
+<attribute name="VALUE" x="71.568" y="31.792" size="1.27" layer="96" rot="R90"/>
+</instance>
+<instance part="U$14" gate="G$1" x="66.04" y="55.88" smashed="yes">
+<attribute name="VALUE" x="65.024" y="59.436" size="1.778" layer="96"/>
+</instance>
+<instance part="GND14" gate="1" x="66.04" y="17.78" smashed="yes">
+<attribute name="VALUE" x="63.5" y="15.24" size="1.778" layer="96"/>
+</instance>
+<instance part="GND15" gate="1" x="78.74" y="17.526" smashed="yes">
+<attribute name="VALUE" x="76.2" y="14.986" size="1.778" layer="96"/>
+</instance>
+<instance part="U$15" gate="G$1" x="78.74" y="55.88" smashed="yes">
+<attribute name="VALUE" x="77.724" y="59.436" size="1.778" layer="96"/>
+</instance>
+<instance part="LED4" gate="G$1" x="78.74" y="45.72" smashed="yes">
+<attribute name="NAME" x="82.296" y="41.148" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="84.455" y="41.148" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="C4" gate="G$1" x="57.658" y="43.434" smashed="yes" rot="R90">
+<attribute name="NAME" x="56.1594" y="39.624" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="60.96" y="39.624" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R6" gate="G$1" x="78.74" y="31.496" smashed="yes" rot="R90">
+<attribute name="NAME" x="77.2414" y="27.686" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="82.042" y="27.686" size="1.778" layer="96" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -4323,14 +4413,14 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 </segment>
 <segment>
 <wire x1="99.06" y1="91.44" x2="99.06" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="LED2" gate="G$1" pin="A"/>
+<pinref part="LED1" gate="G$1" pin="A"/>
 <pinref part="U$5" gate="G$1" pin="5V"/>
 <wire x1="99.06" y1="99.06" x2="99.06" y2="96.52" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R2" gate="G$1" pin="2"/>
+<pinref part="R1" gate="G$1" pin="2"/>
 <wire x1="20.32" y1="96.52" x2="20.32" y2="94.996" width="0.1524" layer="91"/>
-<pinref part="C2" gate="G$1" pin="2"/>
+<pinref part="C1" gate="G$1" pin="2"/>
 <wire x1="20.32" y1="94.996" x2="20.32" y2="93.98" width="0.1524" layer="91"/>
 <wire x1="11.938" y1="91.694" x2="11.938" y2="94.996" width="0.1524" layer="91"/>
 <wire x1="11.938" y1="94.996" x2="20.32" y2="94.996" width="0.1524" layer="91"/>
@@ -4339,9 +4429,9 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 <wire x1="20.32" y1="99.06" x2="20.32" y2="96.52" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R9" gate="G$1" pin="2"/>
+<pinref part="R3" gate="G$1" pin="2"/>
 <wire x1="20.32" y1="53.34" x2="20.32" y2="51.816" width="0.1524" layer="91"/>
-<pinref part="C5" gate="G$1" pin="2"/>
+<pinref part="C3" gate="G$1" pin="2"/>
 <wire x1="20.32" y1="51.816" x2="20.32" y2="50.8" width="0.1524" layer="91"/>
 <wire x1="11.938" y1="48.514" x2="11.938" y2="51.816" width="0.1524" layer="91"/>
 <wire x1="11.938" y1="51.816" x2="20.32" y2="51.816" width="0.1524" layer="91"/>
@@ -4351,16 +4441,16 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 </segment>
 <segment>
 <wire x1="91.44" y1="48.26" x2="91.44" y2="50.8" width="0.1524" layer="91"/>
-<pinref part="LED5" gate="G$1" pin="A"/>
+<pinref part="LED3" gate="G$1" pin="A"/>
 <pinref part="U$11" gate="G$1" pin="5V"/>
 <wire x1="91.44" y1="50.8" x2="91.44" y2="53.34" width="0.1524" layer="91"/>
 <wire x1="91.44" y1="55.88" x2="91.44" y2="50.8" width="0.1524" layer="91"/>
 <junction x="91.44" y="50.8"/>
 </segment>
 <segment>
-<pinref part="R13" gate="G$1" pin="2"/>
+<pinref part="R4" gate="G$1" pin="2"/>
 <wire x1="66.04" y1="53.34" x2="66.04" y2="51.816" width="0.1524" layer="91"/>
-<pinref part="C7" gate="G$1" pin="2"/>
+<pinref part="C4" gate="G$1" pin="2"/>
 <wire x1="66.04" y1="51.816" x2="66.04" y2="50.8" width="0.1524" layer="91"/>
 <wire x1="57.658" y1="48.514" x2="57.658" y2="51.816" width="0.1524" layer="91"/>
 <wire x1="57.658" y1="51.816" x2="66.04" y2="51.816" width="0.1524" layer="91"/>
@@ -4370,20 +4460,20 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 </segment>
 <segment>
 <wire x1="78.74" y1="48.26" x2="78.74" y2="53.34" width="0.1524" layer="91"/>
-<pinref part="LED7" gate="G$1" pin="A"/>
+<pinref part="LED4" gate="G$1" pin="A"/>
 <pinref part="U$15" gate="G$1" pin="5V"/>
 <wire x1="78.74" y1="55.88" x2="78.74" y2="53.34" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <wire x1="78.74" y1="91.44" x2="78.74" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="LED3" gate="G$1" pin="A"/>
+<pinref part="LED2" gate="G$1" pin="A"/>
 <pinref part="U$7" gate="G$1" pin="5V"/>
 <wire x1="78.74" y1="99.06" x2="78.74" y2="96.52" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R5" gate="G$1" pin="2"/>
+<pinref part="R2" gate="G$1" pin="2"/>
 <wire x1="66.04" y1="96.52" x2="66.04" y2="94.996" width="0.1524" layer="91"/>
-<pinref part="C3" gate="G$1" pin="2"/>
+<pinref part="C2" gate="G$1" pin="2"/>
 <wire x1="66.04" y1="94.996" x2="66.04" y2="93.98" width="0.1524" layer="91"/>
 <wire x1="57.658" y1="91.694" x2="57.658" y2="94.996" width="0.1524" layer="91"/>
 <wire x1="57.658" y1="94.996" x2="66.04" y2="94.996" width="0.1524" layer="91"/>
@@ -4403,9 +4493,9 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 <junction x="-11.43" y="78.74"/>
 </segment>
 <segment>
-<pinref part="D2" gate="G$1" pin="K"/>
+<pinref part="D1" gate="G$1" pin="K"/>
 <wire x1="20.32" y1="68.58" x2="20.32" y2="69.342" width="0.1524" layer="91"/>
-<pinref part="C2" gate="G$1" pin="1"/>
+<pinref part="C1" gate="G$1" pin="1"/>
 <wire x1="20.32" y1="69.342" x2="20.32" y2="71.12" width="0.1524" layer="91"/>
 <wire x1="11.938" y1="81.534" x2="11.938" y2="69.342" width="0.1524" layer="91"/>
 <wire x1="11.938" y1="69.342" x2="20.32" y2="69.342" width="0.1524" layer="91"/>
@@ -4414,9 +4504,9 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 <wire x1="20.32" y1="66.04" x2="20.32" y2="68.58" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="D3" gate="G$1" pin="K"/>
+<pinref part="D2" gate="G$1" pin="K"/>
 <wire x1="66.04" y1="68.58" x2="66.04" y2="69.342" width="0.1524" layer="91"/>
-<pinref part="C3" gate="G$1" pin="1"/>
+<pinref part="C2" gate="G$1" pin="1"/>
 <wire x1="66.04" y1="69.342" x2="66.04" y2="71.12" width="0.1524" layer="91"/>
 <wire x1="57.658" y1="81.534" x2="57.658" y2="69.342" width="0.1524" layer="91"/>
 <wire x1="57.658" y1="69.342" x2="66.04" y2="69.342" width="0.1524" layer="91"/>
@@ -4425,7 +4515,7 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 <wire x1="66.04" y1="68.58" x2="66.04" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R6" gate="G$1" pin="1"/>
+<pinref part="R5" gate="G$1" pin="1"/>
 <wire x1="78.74" y1="66.04" x2="78.74" y2="68.326" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="69.596" x2="78.74" y2="66.04" width="0.1524" layer="91"/>
 <pinref part="GND7" gate="1" pin="GND"/>
@@ -4434,9 +4524,9 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 <junction x="78.74" y="66.04"/>
 </segment>
 <segment>
-<pinref part="D7" gate="G$1" pin="K"/>
+<pinref part="D4" gate="G$1" pin="K"/>
 <wire x1="66.04" y1="25.4" x2="66.04" y2="26.162" width="0.1524" layer="91"/>
-<pinref part="C7" gate="G$1" pin="1"/>
+<pinref part="C4" gate="G$1" pin="1"/>
 <wire x1="66.04" y1="26.162" x2="66.04" y2="27.94" width="0.1524" layer="91"/>
 <wire x1="57.658" y1="38.354" x2="57.658" y2="26.162" width="0.1524" layer="91"/>
 <wire x1="57.658" y1="26.162" x2="66.04" y2="26.162" width="0.1524" layer="91"/>
@@ -4445,7 +4535,7 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 <wire x1="66.04" y1="25.4" x2="66.04" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R14" gate="G$1" pin="1"/>
+<pinref part="R6" gate="G$1" pin="1"/>
 <wire x1="78.74" y1="22.86" x2="78.74" y2="25.146" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="26.416" x2="78.74" y2="22.86" width="0.1524" layer="91"/>
 <pinref part="GND15" gate="1" pin="GND"/>
@@ -4453,9 +4543,9 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 <junction x="78.74" y="22.86"/>
 </segment>
 <segment>
-<pinref part="D5" gate="G$1" pin="K"/>
+<pinref part="D3" gate="G$1" pin="K"/>
 <wire x1="20.32" y1="25.4" x2="20.32" y2="26.162" width="0.1524" layer="91"/>
-<pinref part="C5" gate="G$1" pin="1"/>
+<pinref part="C3" gate="G$1" pin="1"/>
 <wire x1="20.32" y1="26.162" x2="20.32" y2="27.94" width="0.1524" layer="91"/>
 <wire x1="11.938" y1="38.354" x2="11.938" y2="26.162" width="0.1524" layer="91"/>
 <wire x1="11.938" y1="26.162" x2="20.32" y2="26.162" width="0.1524" layer="91"/>
@@ -4471,14 +4561,14 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 <label x="-10.16" y="83.82" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="R6" gate="G$1" pin="2"/>
-<pinref part="LED3" gate="G$1" pin="C"/>
+<pinref part="R5" gate="G$1" pin="2"/>
+<pinref part="LED2" gate="G$1" pin="C"/>
 <wire x1="78.74" y1="79.756" x2="78.74" y2="81.28" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="81.28" x2="78.74" y2="83.82" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="81.28" x2="91.44" y2="81.28" width="0.1524" layer="91"/>
 <junction x="78.74" y="81.28"/>
 <wire x1="91.44" y1="81.28" x2="99.06" y2="81.28" width="0.1524" layer="91"/>
-<pinref part="LED2" gate="G$1" pin="C"/>
+<pinref part="LED1" gate="G$1" pin="C"/>
 <wire x1="99.06" y1="81.28" x2="99.06" y2="83.82" width="0.1524" layer="91"/>
 <label x="86.36" y="81.28" size="1.778" layer="95"/>
 </segment>
@@ -4490,11 +4580,11 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 <label x="-10.16" y="81.28" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="LED7" gate="G$1" pin="C"/>
-<pinref part="R14" gate="G$1" pin="2"/>
+<pinref part="LED4" gate="G$1" pin="C"/>
+<pinref part="R6" gate="G$1" pin="2"/>
 <wire x1="78.74" y1="40.64" x2="78.74" y2="38.1" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="38.1" x2="78.74" y2="36.576" width="0.1524" layer="91"/>
-<pinref part="LED5" gate="G$1" pin="C"/>
+<pinref part="LED3" gate="G$1" pin="C"/>
 <wire x1="91.44" y1="40.64" x2="91.44" y2="38.1" width="0.1524" layer="91"/>
 <wire x1="91.44" y1="38.1" x2="78.74" y2="38.1" width="0.1524" layer="91"/>
 <junction x="78.74" y="38.1"/>
@@ -4503,29 +4593,29 @@ Details see: &lt;a href="http://katalog.we-online.de/en/led/WL-SMTW?m"&gt;http:/
 </net>
 <net name="N$3" class="0">
 <segment>
-<pinref part="R2" gate="G$1" pin="1"/>
-<pinref part="D2" gate="G$1" pin="A"/>
+<pinref part="R1" gate="G$1" pin="1"/>
+<pinref part="D1" gate="G$1" pin="A"/>
 <wire x1="20.32" y1="83.82" x2="20.32" y2="81.28" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$4" class="0">
 <segment>
-<pinref part="R5" gate="G$1" pin="1"/>
-<pinref part="D3" gate="G$1" pin="A"/>
+<pinref part="R2" gate="G$1" pin="1"/>
+<pinref part="D2" gate="G$1" pin="A"/>
 <wire x1="66.04" y1="83.82" x2="66.04" y2="81.28" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$13" class="0">
 <segment>
-<pinref part="R9" gate="G$1" pin="1"/>
-<pinref part="D5" gate="G$1" pin="A"/>
+<pinref part="R3" gate="G$1" pin="1"/>
+<pinref part="D3" gate="G$1" pin="A"/>
 <wire x1="20.32" y1="40.64" x2="20.32" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$16" class="0">
 <segment>
-<pinref part="R13" gate="G$1" pin="1"/>
-<pinref part="D7" gate="G$1" pin="A"/>
+<pinref part="R4" gate="G$1" pin="1"/>
+<pinref part="D4" gate="G$1" pin="A"/>
 <wire x1="66.04" y1="40.64" x2="66.04" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 </net>

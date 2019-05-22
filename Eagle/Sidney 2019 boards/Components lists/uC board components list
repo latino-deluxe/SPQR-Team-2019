@@ -1,17 +1,18 @@
-SUPPLY_CON				Connector Mini-Fit Jr Molex 4pin	RS 484-1899P		*
-SIGN_CON				Connector 20pins/2rows			RS 409-8815		*
-US_CONS					Connector Grove 4pins			RS 179-3735
+SUPPLY_CON				Connector Mini-Fit Jr Molex 4pin	RS 484-1899P	*
+SUPPLY2_CON				Connector Grove 4pins			RS 179-3735	*
+SIGN_CON				Connector 20pins/2rows			RS 409-8815	*
+US_CONS					Connector Grove 4pins			RS 179-3735	*
 R_SDA,R_SCL,R_SDA1,R_SCL1		Resistor 3,3kΩ SMD0805			RS 807-5800
 RB1,RB2,RB3,RB4				Resistor 33Ω 1% SMD0805			RS 223-0225
 R_LED1,R_LED2,R_LED3			Resistor 68Ω 5% SMD0805			RS 223-0275
 R_BALL,R_SW_SX,R_SW_DX			Resistor 330Ω 1% SMD1206		RS 669-6525
 LED_BALL,LED_SW_SX,LED_SW_DX		Led 3mm green 30mA			RS 815-4388
 LED1,LED2,LED3				Led 3mm red 30mA			RS 815-4341
-CB1,CB2,CB3,CB4				Cap 100nF 25V SMD1206			RS 174-4528		*
+CB1,CB2,CB3,CB4				Cap 100nF 25V SMD1206			RS 174-4528	*
 S1,S2...S16				IR sensor PNA460XM			RS ?
 
 
-* = also found on the other board
+* = also found on other boards
 
 
 

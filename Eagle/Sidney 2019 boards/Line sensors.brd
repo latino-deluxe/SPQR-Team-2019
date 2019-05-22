@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.3.0">
+<eagle version="9.4.1">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
+<setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="0.1" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.025" altunitdist="inch" altunit="inch"/>
@@ -1595,10 +1596,14 @@ design rules under a new name.</description>
 <param name="slThermalsForVias" value="0"/>
 <param name="dpMaxLengthDifference" value="10mm"/>
 <param name="dpGapFactor" value="2.5"/>
-<param name="checkGrid" value="0"/>
 <param name="checkAngle" value="0"/>
 <param name="checkFont" value="1"/>
 <param name="checkRestrict" value="1"/>
+<param name="checkStop" value="0"/>
+<param name="checkValues" value="0"/>
+<param name="checkNames" value="1"/>
+<param name="checkWireStubs" value="1"/>
+<param name="checkPolygonWidth" value="0"/>
 <param name="useDiameter" value="13"/>
 <param name="maxErrors" value="50"/>
 </designrules>
@@ -1699,12 +1704,15 @@ design rules under a new name.</description>
 </pass>
 </autorouter>
 <elements>
-<element name="LS1" library="Connector" package="4P-2.0" value="" x="-37.819" y="0.428" rot="MR270"/>
-<element name="R2" library="resistor" package="M0805" value="330" x="-42.982" y="4.5444" smashed="yes" rot="R90">
+<element name="LS1" library="Connector" package="4P-2.0" value="" x="-37.819" y="0.428" smashed="yes" rot="MR270">
+<attribute name="NAME" x="-40.273" y="4.095" size="1.778" layer="26" font="vector" ratio="10" rot="MR270"/>
+<attribute name="VALUE" x="-36.93" y="5.127" size="1.778" layer="28" font="vector" ratio="10" rot="MR270"/>
+</element>
+<element name="R1" library="resistor" package="M0805" value="330" x="-42.982" y="4.5444" smashed="yes" rot="R90">
 <attribute name="NAME" x="-44.252" y="3.2744" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="-40.442" y="3.2744" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="D2" library="Wurth_Elektronik_Optoelectronics_rev15b" package="3528-2PIN" value="" x="-42.8332" y="-0.197" smashed="yes" rot="R90">
+<element name="D1" library="Wurth_Elektronik_Optoelectronics_rev15b" package="3528-2PIN" value="" x="-42.8332" y="-0.197" smashed="yes" rot="R90">
 <attribute name="COMPANY-URL" value="http://www.we-online.de" x="-31.4032" y="16.313" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="CREATED-BY" value="Christin Otto" x="-31.4032" y="16.313" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="CREATED-DATE" value="APR 2013" x="-31.4032" y="16.313" size="1.778" layer="27" rot="R90" display="off"/>
@@ -1713,19 +1721,19 @@ design rules under a new name.</description>
 <attribute name="NAME" x="-45.2732" y="-1.737" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="-39.0232" y="-2.737" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="LED2" library="SparkFun" package="LED3MM" value="" x="-49.438" y="0.001" smashed="yes" rot="R180">
+<element name="LED1" library="SparkFun" package="LED3MM" value="" x="-49.438" y="0.001" smashed="yes" rot="R180">
 <attribute name="NAME" x="-46.743" y="5.82" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="-51.343" y="1.652" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="C2" library="resistor" package="M0805" value="100n" x="-43.0082" y="-4.9486" smashed="yes" rot="R270">
+<element name="C1" library="resistor" package="M0805" value="100n" x="-43.0082" y="-4.9486" smashed="yes" rot="R270">
 <attribute name="NAME" x="-45.6382" y="-3.6786" size="1.27" layer="25" rot="R270"/>
 <attribute name="VALUE" x="-41.4482" y="-2.5786" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="R5" library="resistor" package="M0805" value="330" x="-56.582" y="4.5444" smashed="yes" rot="R90">
+<element name="R2" library="resistor" package="M0805" value="330" x="-56.582" y="4.5444" smashed="yes" rot="R90">
 <attribute name="NAME" x="-57.852" y="3.2744" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="-54.042" y="3.2744" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="D3" library="Wurth_Elektronik_Optoelectronics_rev15b" package="3528-2PIN" value="" x="-56.4332" y="-0.197" smashed="yes" rot="R90">
+<element name="D2" library="Wurth_Elektronik_Optoelectronics_rev15b" package="3528-2PIN" value="" x="-56.4332" y="-0.197" smashed="yes" rot="R90">
 <attribute name="COMPANY-URL" value="http://www.we-online.de" x="-45.0032" y="16.313" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="CREATED-BY" value="Christin Otto" x="-45.0032" y="16.313" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="CREATED-DATE" value="APR 2013" x="-45.0032" y="16.313" size="1.778" layer="27" rot="R90" display="off"/>
@@ -1734,23 +1742,23 @@ design rules under a new name.</description>
 <attribute name="NAME" x="-58.7732" y="-1.837" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="-52.6232" y="-2.737" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="LED3" library="SparkFun" package="LED3MM" value="" x="-63.038" y="0.001" smashed="yes" rot="R180">
+<element name="LED2" library="SparkFun" package="LED3MM" value="" x="-63.038" y="0.001" smashed="yes" rot="R180">
 <attribute name="NAME" x="-60.543" y="5.82" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="-64.943" y="1.652" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="C3" library="resistor" package="M0805" value="100n" x="-56.5918" y="-5.1514" smashed="yes" rot="R90">
+<element name="C2" library="resistor" package="M0805" value="100n" x="-56.5918" y="-5.1514" smashed="yes" rot="R90">
 <attribute name="NAME" x="-53.9618" y="-6.0214" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="-58.3518" y="-6.9214" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="R6" library="resistor" package="M0805" value="10k" x="-62.996" y="-4.562" smashed="yes" rot="R90">
+<element name="R5" library="resistor" package="M0805" value="10k" x="-62.996" y="-4.562" smashed="yes" rot="R90">
 <attribute name="NAME" x="-64.266" y="-5.832" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="-60.456" y="-5.832" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="R9" library="resistor" package="M0805" value="330" x="-69.582" y="4.5444" smashed="yes" rot="R90">
+<element name="R3" library="resistor" package="M0805" value="330" x="-69.582" y="4.5444" smashed="yes" rot="R90">
 <attribute name="NAME" x="-70.852" y="3.2744" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="-67.042" y="3.2744" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="D5" library="Wurth_Elektronik_Optoelectronics_rev15b" package="3528-2PIN" value="" x="-69.4332" y="-0.197" smashed="yes" rot="R90">
+<element name="D3" library="Wurth_Elektronik_Optoelectronics_rev15b" package="3528-2PIN" value="" x="-69.4332" y="-0.197" smashed="yes" rot="R90">
 <attribute name="COMPANY-URL" value="http://www.we-online.de" x="-58.0032" y="16.313" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="CREATED-BY" value="Christin Otto" x="-58.0032" y="16.313" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="CREATED-DATE" value="APR 2013" x="-58.0032" y="16.313" size="1.778" layer="27" rot="R90" display="off"/>
@@ -1759,19 +1767,19 @@ design rules under a new name.</description>
 <attribute name="NAME" x="-71.7732" y="-1.637" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="-65.6232" y="-2.737" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="LED5" library="SparkFun" package="LED3MM" value="" x="-76.038" y="-0.199" smashed="yes" rot="R180">
+<element name="LED3" library="SparkFun" package="LED3MM" value="" x="-76.038" y="-0.199" smashed="yes" rot="R180">
 <attribute name="NAME" x="-73.543" y="5.52" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="-77.943" y="1.452" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="C5" library="resistor" package="M0805" value="100n" x="-69.6082" y="-4.9486" smashed="yes" rot="R270">
+<element name="C3" library="resistor" package="M0805" value="100n" x="-69.6082" y="-4.9486" smashed="yes" rot="R270">
 <attribute name="NAME" x="-72.2382" y="-3.5786" size="1.27" layer="25" rot="R270"/>
 <attribute name="VALUE" x="-67.8482" y="-2.5786" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="R13" library="resistor" package="M0805" value="330" x="-83.182" y="4.3444" smashed="yes" rot="R90">
+<element name="R4" library="resistor" package="M0805" value="330" x="-83.182" y="4.3444" smashed="yes" rot="R90">
 <attribute name="NAME" x="-84.452" y="3.0744" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="-80.642" y="3.0744" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="D7" library="Wurth_Elektronik_Optoelectronics_rev15b" package="3528-2PIN" value="" x="-83.0332" y="-0.397" smashed="yes" rot="R90">
+<element name="D4" library="Wurth_Elektronik_Optoelectronics_rev15b" package="3528-2PIN" value="" x="-83.0332" y="-0.397" smashed="yes" rot="R90">
 <attribute name="COMPANY-URL" value="http://www.we-online.de" x="-71.6032" y="16.113" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="CREATED-BY" value="Christin Otto" x="-71.6032" y="16.113" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="CREATED-DATE" value="APR 2013" x="-71.6032" y="16.113" size="1.778" layer="27" rot="R90" display="off"/>
@@ -1780,15 +1788,15 @@ design rules under a new name.</description>
 <attribute name="NAME" x="-85.2732" y="-1.537" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="-79.2232" y="-2.937" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="LED7" library="SparkFun" package="LED3MM" value="" x="-89.638" y="-0.199" smashed="yes" rot="R180">
+<element name="LED4" library="SparkFun" package="LED3MM" value="" x="-89.638" y="-0.199" smashed="yes" rot="R180">
 <attribute name="NAME" x="-86.943" y="5.52" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="VALUE" x="-91.543" y="1.452" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="C7" library="resistor" package="M0805" value="100n" x="-83.2082" y="-5.1486" smashed="yes" rot="R270">
+<element name="C4" library="resistor" package="M0805" value="100n" x="-83.2082" y="-5.1486" smashed="yes" rot="R270">
 <attribute name="NAME" x="-85.4382" y="-3.7786" size="1.27" layer="25" rot="R270"/>
 <attribute name="VALUE" x="-81.4482" y="-2.7786" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="R14" library="resistor" package="M0805" value="10k" x="-89.596" y="-4.762" smashed="yes" rot="R90">
+<element name="R6" library="resistor" package="M0805" value="10k" x="-89.596" y="-4.762" smashed="yes" rot="R90">
 <attribute name="NAME" x="-90.866" y="-6.032" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="-87.056" y="-6.032" size="1.27" layer="27" rot="R90"/>
 </element>
@@ -1796,18 +1804,18 @@ design rules under a new name.</description>
 <signals>
 <signal name="5V">
 <contactref element="LS1" pad="1"/>
+<contactref element="LED1" pad="A"/>
+<contactref element="R1" pad="2"/>
+<contactref element="C1" pad="2"/>
+<contactref element="R3" pad="2"/>
+<contactref element="C3" pad="2"/>
+<contactref element="LED3" pad="A"/>
+<contactref element="R4" pad="2"/>
+<contactref element="C4" pad="2"/>
+<contactref element="LED4" pad="A"/>
 <contactref element="LED2" pad="A"/>
 <contactref element="R2" pad="2"/>
 <contactref element="C2" pad="2"/>
-<contactref element="R9" pad="2"/>
-<contactref element="C5" pad="2"/>
-<contactref element="LED5" pad="A"/>
-<contactref element="R13" pad="2"/>
-<contactref element="C7" pad="2"/>
-<contactref element="LED7" pad="A"/>
-<contactref element="LED3" pad="A"/>
-<contactref element="R5" pad="2"/>
-<contactref element="C3" pad="2"/>
 <wire x1="-37.819" y1="3.428" x2="-37.819" y2="6.119" width="0.3048" layer="1"/>
 <wire x1="-37.819" y1="6.119" x2="-39.4" y2="7.7" width="0.3048" layer="1"/>
 <wire x1="-39.4" y1="7.7" x2="-42.9" y2="7.7" width="0.3048" layer="1"/>
@@ -1866,16 +1874,16 @@ design rules under a new name.</description>
 </signal>
 <signal name="GND">
 <contactref element="LS1" pad="4"/>
+<contactref element="D1" pad="1"/>
+<contactref element="C1" pad="1"/>
 <contactref element="D2" pad="1"/>
 <contactref element="C2" pad="1"/>
+<contactref element="R5" pad="1"/>
+<contactref element="D4" pad="1"/>
+<contactref element="C4" pad="1"/>
+<contactref element="R6" pad="1"/>
 <contactref element="D3" pad="1"/>
 <contactref element="C3" pad="1"/>
-<contactref element="R6" pad="1"/>
-<contactref element="D7" pad="1"/>
-<contactref element="C7" pad="1"/>
-<contactref element="R14" pad="1"/>
-<contactref element="D5" pad="1"/>
-<contactref element="C5" pad="1"/>
 <wire x1="-69.4332" y1="-1.622" x2="-69.4332" y2="-3.8236" width="0.3048" layer="1"/>
 <wire x1="-69.4332" y1="-3.8236" x2="-69.6082" y2="-3.9986" width="0.3048" layer="1"/>
 <wire x1="-43.0082" y1="-3.9986" x2="-43.0082" y2="-1.797" width="0.3048" layer="1"/>
@@ -1949,9 +1957,9 @@ design rules under a new name.</description>
 </signal>
 <signal name="SIG1">
 <contactref element="LS1" pad="2"/>
-<contactref element="R6" pad="2"/>
-<contactref element="LED3" pad="K"/>
+<contactref element="R5" pad="2"/>
 <contactref element="LED2" pad="K"/>
+<contactref element="LED1" pad="K"/>
 <wire x1="-62.996" y1="-3.612" x2="-64.308" y2="-2.3" width="0.3048" layer="1"/>
 <wire x1="-64.308" y1="-2.3" x2="-64.308" y2="0.001" width="0.3048" layer="1"/>
 <wire x1="-64.308" y1="0.001" x2="-64.308" y2="3.192" width="0.3048" layer="1"/>
@@ -1975,9 +1983,9 @@ design rules under a new name.</description>
 </signal>
 <signal name="SIG2">
 <contactref element="LS1" pad="3"/>
-<contactref element="LED7" pad="K"/>
-<contactref element="R14" pad="2"/>
-<contactref element="LED5" pad="K"/>
+<contactref element="LED4" pad="K"/>
+<contactref element="R6" pad="2"/>
+<contactref element="LED3" pad="K"/>
 <wire x1="-37.819" y1="-0.572" x2="-36.828" y2="-0.572" width="0.3048" layer="1"/>
 <wire x1="-91.9" y1="-7.9" x2="-37.9" y2="-7.9" width="0.3048" layer="1"/>
 <wire x1="-36.828" y1="-0.572" x2="-36.1" y2="-1.3" width="0.3048" layer="1"/>
@@ -2003,26 +2011,26 @@ design rules under a new name.</description>
 <wire x1="-92.8" y1="-0.6" x2="-92.5" y2="-0.3" width="0.3048" layer="1"/>
 </signal>
 <signal name="N$3">
-<contactref element="R2" pad="1"/>
-<contactref element="D2" pad="2"/>
+<contactref element="R1" pad="1"/>
+<contactref element="D1" pad="2"/>
 <wire x1="-42.982" y1="3.5944" x2="-42.982" y2="1.3768" width="0.3048" layer="1"/>
 <wire x1="-42.982" y1="1.3768" x2="-42.8332" y2="1.228" width="0.3048" layer="1"/>
 </signal>
 <signal name="N$4">
-<contactref element="R5" pad="1"/>
-<contactref element="D3" pad="2"/>
+<contactref element="R2" pad="1"/>
+<contactref element="D2" pad="2"/>
 <wire x1="-56.582" y1="3.5944" x2="-56.582" y2="1.3768" width="0.3048" layer="1"/>
 <wire x1="-56.582" y1="1.3768" x2="-56.4332" y2="1.228" width="0.3048" layer="1"/>
 </signal>
 <signal name="N$13">
-<contactref element="R9" pad="1"/>
-<contactref element="D5" pad="2"/>
+<contactref element="R3" pad="1"/>
+<contactref element="D3" pad="2"/>
 <wire x1="-69.582" y1="3.5944" x2="-69.582" y2="1.3768" width="0.3048" layer="1"/>
 <wire x1="-69.582" y1="1.3768" x2="-69.4332" y2="1.228" width="0.3048" layer="1"/>
 </signal>
 <signal name="N$16">
-<contactref element="R13" pad="1"/>
-<contactref element="D7" pad="2"/>
+<contactref element="R4" pad="1"/>
+<contactref element="D4" pad="2"/>
 <wire x1="-83.0332" y1="1.028" x2="-83.0332" y2="3.2456" width="0.3048" layer="1"/>
 <wire x1="-83.0332" y1="3.2456" x2="-83.182" y2="3.3944" width="0.3048" layer="1"/>
 </signal>
@@ -2107,6 +2115,13 @@ design rules under a new name.</description>
 <wire x1="-45.5" y1="7.3" x2="-45.2" y2="7.6" width="0.3048" layer="1"/>
 </signal>
 </signals>
+<mfgpreviewcolors>
+<mfgpreviewcolor name="soldermaskcolor" color="0xC8008000"/>
+<mfgpreviewcolor name="silkscreencolor" color="0xFFFEFEFE"/>
+<mfgpreviewcolor name="backgroundcolor" color="0xFF282828"/>
+<mfgpreviewcolor name="coppercolor" color="0xFFFFBF00"/>
+<mfgpreviewcolor name="substratecolor" color="0xFF786E46"/>
+</mfgpreviewcolors>
 </board>
 </drawing>
 </eagle>
