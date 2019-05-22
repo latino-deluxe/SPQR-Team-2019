@@ -3,7 +3,7 @@
 <eagle version="9.4.1">
 <drawing>
 <settings>
-<setting alwaysvectorfont="no"/>
+<setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="25" altunitdist="mil" altunit="mil"/>
@@ -194,12 +194,12 @@
 <circle x="122.64191875" y="94.5061" radius="2" width="0.001" layer="20"/>
 <wire x1="30" y1="53" x2="140" y2="53" width="0.001" layer="20"/>
 <wire x1="30" y1="175" x2="140" y2="175" width="0.001" layer="20"/>
+<text x="138.43" y="160.02" size="1.778" layer="25" rot="R90">US_NORD</text>
+<text x="138.43" y="144.78" size="1.778" layer="25" rot="R90">US_EST</text>
+<text x="138.43" y="129.54" size="1.778" layer="25" rot="R90">US_SUD</text>
+<text x="138.43" y="114.3" size="1.778" layer="25" rot="R90">US_OVEST</text>
 <text x="133.35" y="54.61" size="1.778" layer="25">5V/S</text>
 <text x="128.27" y="54.61" size="1.778" layer="25">5V</text>
-<text x="137.16" y="160.02" size="1.778" layer="25" rot="R90">LS_NORD</text>
-<text x="137.16" y="144.78" size="1.778" layer="25" rot="R90">LS_EST</text>
-<text x="137.16" y="129.54" size="1.778" layer="25" rot="R90">LS_SUD</text>
-<text x="137.16" y="114.3" size="1.778" layer="25" rot="R90">LS_OVEST</text>
 </plain>
 <libraries>
 <library name="con-phoenix-508" urn="urn:adsk.eagle:library:176">
