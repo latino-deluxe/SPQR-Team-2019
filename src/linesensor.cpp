@@ -58,5 +58,4 @@ void outOfBounds() {
   U = (-(atan2(Uy, Ux) * 180 / 3.14) + 90) - imu_current_euler;
 
   preparePID(U, 250);
-
 }

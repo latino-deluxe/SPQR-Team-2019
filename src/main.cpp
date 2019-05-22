@@ -140,6 +140,11 @@ void setup() {
 void loop() {
   readIMU();
   // checkLineSensors();
-  // drivePID(0, 0);
-  testMotors();
+  // drivePID(0, 100);
+  // delay(250);
+  drivePID(90, 100);
+  delay(1000);
+  drivePID(270, 100);
+  delay(1000);
+  // testMotors();
 }
