@@ -19858,89 +19858,6 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 </deviceset>
 </devicesets>
 </library>
-<library name="LM3940IS-3.3">
-<description>&lt;Low Dropout Regulator&lt;/b&gt;&lt;p&gt;
-&lt;author&gt;Created by SamacSys&lt;/author&gt;</description>
-<packages>
-<package name="TO254P1435X457-4N">
-<description>&lt;b&gt;TO254P1435X457-4N&lt;/b&gt;&lt;br&gt;
-</description>
-<smd name="1" x="-2.54" y="-9.0424" dx="2.6924" dy="1.016" layer="1" rot="R90"/>
-<smd name="2" x="0" y="-9.0424" dx="2.6924" dy="1.016" layer="1" rot="R90"/>
-<smd name="3" x="2.54" y="-9.0424" dx="2.6924" dy="1.016" layer="1" rot="R90"/>
-<smd name="4" x="0" y="0.1524" dx="10.16" dy="8.9408" layer="1"/>
-<text x="-4.5974" y="5.1054" size="1.27" layer="25" align="center">&gt;NAME</text>
-<text x="-5.588" y="-12.7254" size="1.27" layer="27" align="center">&gt;VALUE</text>
-<wire x1="-2.0574" y1="-4.318" x2="-3.0226" y2="-4.318" width="0.1524" layer="51"/>
-<wire x1="-3.0226" y1="-4.318" x2="-3.0226" y2="-10.033" width="0.1524" layer="51"/>
-<wire x1="-3.0226" y1="-10.033" x2="-2.0574" y2="-10.033" width="0.1524" layer="51"/>
-<wire x1="-2.0574" y1="-10.033" x2="-2.0574" y2="-4.318" width="0.1524" layer="51"/>
-<wire x1="0.4826" y1="-4.318" x2="-0.4826" y2="-4.318" width="0.1524" layer="51"/>
-<wire x1="-0.4826" y1="-4.318" x2="-0.4826" y2="-10.033" width="0.1524" layer="51"/>
-<wire x1="-0.4826" y1="-10.033" x2="0.4826" y2="-10.033" width="0.1524" layer="51"/>
-<wire x1="0.4826" y1="-10.033" x2="0.4826" y2="-4.318" width="0.1524" layer="51"/>
-<wire x1="3.0226" y1="-4.318" x2="2.0574" y2="-4.318" width="0.1524" layer="51"/>
-<wire x1="2.0574" y1="-4.318" x2="2.0574" y2="-10.033" width="0.1524" layer="51"/>
-<wire x1="2.0574" y1="-10.033" x2="3.0226" y2="-10.033" width="0.1524" layer="51"/>
-<wire x1="3.0226" y1="-10.033" x2="3.0226" y2="-4.318" width="0.1524" layer="51"/>
-<wire x1="-5.08" y1="-4.318" x2="5.08" y2="-4.318" width="0.1524" layer="51"/>
-<wire x1="5.08" y1="-4.318" x2="5.08" y2="4.318" width="0.1524" layer="51"/>
-<wire x1="5.08" y1="4.318" x2="-5.08" y2="4.318" width="0.1524" layer="51"/>
-<wire x1="-5.08" y1="4.318" x2="-5.08" y2="-4.318" width="0.1524" layer="51"/>
-<wire x1="-3.0226" y1="-4.9276" x2="-3.0226" y2="-7.3406" width="0.1524" layer="21"/>
-<wire x1="-0.4826" y1="-4.9276" x2="-0.4826" y2="-7.3406" width="0.1524" layer="21"/>
-<wire x1="2.0574" y1="-4.9276" x2="2.0574" y2="-7.3406" width="0.1524" layer="21"/>
-<wire x1="-2.0574" y1="-4.9276" x2="-2.0574" y2="-7.3406" width="0.1524" layer="21"/>
-<wire x1="0.4826" y1="-4.9276" x2="0.4826" y2="-7.3406" width="0.1524" layer="21"/>
-<wire x1="3.0226" y1="-4.9276" x2="3.0226" y2="-7.3406" width="0.1524" layer="21"/>
-</package>
-</packages>
-<symbols>
-<symbol name="LM3940IS-3.3">
-<wire x1="5.08" y1="2.54" x2="22.86" y2="2.54" width="0.254" layer="94"/>
-<wire x1="22.86" y1="-5.08" x2="22.86" y2="2.54" width="0.254" layer="94"/>
-<wire x1="22.86" y1="-5.08" x2="5.08" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="5.08" y1="2.54" x2="5.08" y2="-5.08" width="0.254" layer="94"/>
-<text x="24.13" y="7.62" size="1.778" layer="95" align="center-left">&gt;NAME</text>
-<text x="24.13" y="5.08" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
-<pin name="IN" x="0" y="0" length="middle"/>
-<pin name="GND_2" x="0" y="-2.54" length="middle"/>
-<pin name="OUT" x="27.94" y="0" length="middle" rot="R180"/>
-<pin name="GND" x="27.94" y="-2.54" length="middle" rot="R180"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="LM3940IS-3.3" prefix="IC">
-<description>&lt;b&gt;Low Dropout Regulator&lt;/b&gt;&lt;p&gt;
-Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
-<gates>
-<gate name="G$1" symbol="LM3940IS-3.3" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="TO254P1435X457-4N">
-<connects>
-<connect gate="G$1" pin="GND" pad="4"/>
-<connect gate="G$1" pin="GND_2" pad="2"/>
-<connect gate="G$1" pin="IN" pad="1"/>
-<connect gate="G$1" pin="OUT" pad="3"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="DESCRIPTION" value="Low Dropout Regulator" constant="no"/>
-<attribute name="HEIGHT" value="mm" constant="no"/>
-<attribute name="MANUFACTURER_NAME" value="Texas Instruments" constant="no"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="LM3940IS-3.3" constant="no"/>
-<attribute name="MOUSER_PART_NUMBER" value="926-LM3940IS-33" constant="no"/>
-<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.com/Search/Refine.aspx?Keyword=926-LM3940IS-33" constant="no"/>
-<attribute name="RS_PART_NUMBER" value="3461773" constant="no"/>
-<attribute name="RS_PRICE-STOCK" value="http://uk.rs-online.com/web/p/products/3461773" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 </libraries>
 <attributes>
 </attributes>
@@ -20024,9 +19941,6 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <part name="P+6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="SUPPLY10" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="+5V/1" device=""/>
 <part name="GND12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="IC3" library="LM3940IS-3.3" deviceset="LM3940IS-3.3" device=""/>
-<part name="P+7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
-<part name="GND13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -20044,10 +19958,10 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <wire x1="139.7" y1="116.84" x2="170.18" y2="116.84" width="0.1524" layer="95"/>
 <wire x1="170.18" y1="88.9" x2="139.7" y2="88.9" width="0.1524" layer="95"/>
 <wire x1="139.7" y1="88.9" x2="139.7" y2="116.84" width="0.1524" layer="95"/>
-<wire x1="185.42" y1="170.18" x2="231.14" y2="170.18" width="0.1524" layer="95"/>
-<wire x1="231.14" y1="170.18" x2="231.14" y2="137.16" width="0.1524" layer="95"/>
-<wire x1="231.14" y1="137.16" x2="185.42" y2="137.16" width="0.1524" layer="95"/>
-<wire x1="185.42" y1="137.16" x2="185.42" y2="170.18" width="0.1524" layer="95"/>
+<wire x1="185.42" y1="137.16" x2="231.14" y2="137.16" width="0.1524" layer="95"/>
+<wire x1="231.14" y1="137.16" x2="231.14" y2="104.14" width="0.1524" layer="95"/>
+<wire x1="231.14" y1="104.14" x2="185.42" y2="104.14" width="0.1524" layer="95"/>
+<wire x1="185.42" y1="104.14" x2="185.42" y2="137.16" width="0.1524" layer="95"/>
 <wire x1="81.28" y1="142.24" x2="134.62" y2="142.24" width="0.1524" layer="95"/>
 <wire x1="134.62" y1="142.24" x2="134.62" y2="88.9" width="0.1524" layer="95"/>
 <wire x1="134.62" y1="88.9" x2="81.28" y2="88.9" width="0.1524" layer="95"/>
@@ -20068,11 +19982,6 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <wire x1="162.56" y1="147.32" x2="162.56" y2="121.92" width="0.1524" layer="95"/>
 <wire x1="162.56" y1="121.92" x2="139.7" y2="121.92" width="0.1524" layer="95"/>
 <wire x1="139.7" y1="121.92" x2="139.7" y2="147.32" width="0.1524" layer="95"/>
-<wire x1="185.42" y1="132.08" x2="236.22" y2="132.08" width="0.1524" layer="95"/>
-<wire x1="236.22" y1="132.08" x2="236.22" y2="104.14" width="0.1524" layer="95"/>
-<wire x1="236.22" y1="104.14" x2="185.42" y2="104.14" width="0.1524" layer="95"/>
-<wire x1="185.42" y1="104.14" x2="185.42" y2="132.08" width="0.1524" layer="95"/>
-<text x="208.28" y="101.6" size="1.778" layer="95">LINE_SENSORS_SUPPLY</text>
 </plain>
 <instances>
 <instance part="MOTOR_DRIVER_1" gate="G$1" x="205.74" y="40.64" smashed="yes">
@@ -20139,9 +20048,9 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <attribute name="VALUE" x="142.24" y="106.68" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="SUPPLY1" gate="G$1" x="167.64" y="111.76" smashed="yes"/>
-<instance part="SIGN_CON" gate="G$1" x="208.28" y="154.94" smashed="yes" rot="R180">
-<attribute name="VALUE" x="212.09" y="170.18" size="1.778" layer="96" rot="R180"/>
-<attribute name="NAME" x="220.98" y="134.62" size="1.778" layer="95"/>
+<instance part="SIGN_CON" gate="G$1" x="208.28" y="121.92" smashed="yes" rot="R180">
+<attribute name="VALUE" x="212.09" y="137.16" size="1.778" layer="96" rot="R180"/>
+<attribute name="NAME" x="220.98" y="101.6" size="1.778" layer="95"/>
 </instance>
 <instance part="SUPPLY2" gate="G$1" x="93.98" y="137.16" smashed="yes"/>
 <instance part="GND4" gate="1" x="93.98" y="119.38" smashed="yes">
@@ -20294,15 +20203,6 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <instance part="SUPPLY10" gate="G$1" x="158.75" y="142.24" smashed="yes"/>
 <instance part="GND12" gate="1" x="153.67" y="127" smashed="yes">
 <attribute name="VALUE" x="151.13" y="124.46" size="1.778" layer="96"/>
-</instance>
-<instance part="IC3" gate="G$1" x="193.04" y="121.92" smashed="yes">
-<attribute name="NAME" x="212.344" y="125.73" size="1.778" layer="95" align="center-left"/>
-</instance>
-<instance part="P+7" gate="1" x="190.5" y="127" smashed="yes">
-<attribute name="VALUE" x="191.77" y="129.54" size="1.778" layer="96" rot="R180"/>
-</instance>
-<instance part="GND13" gate="1" x="207.01" y="108.966" smashed="yes">
-<attribute name="VALUE" x="204.47" y="106.426" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -20479,19 +20379,6 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <wire x1="151.13" y1="130.81" x2="153.67" y2="130.81" width="0.1524" layer="91"/>
 <junction x="153.67" y="130.81"/>
 </segment>
-<segment>
-<pinref part="IC3" gate="G$1" pin="GND_2"/>
-<wire x1="193.04" y1="119.38" x2="190.5" y2="119.38" width="0.1524" layer="91"/>
-<wire x1="190.5" y1="119.38" x2="190.5" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="190.5" y1="114.3" x2="207.01" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="207.01" y1="114.3" x2="223.52" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="223.52" y1="114.3" x2="223.52" y2="119.38" width="0.1524" layer="91"/>
-<pinref part="IC3" gate="G$1" pin="GND"/>
-<wire x1="223.52" y1="119.38" x2="220.98" y2="119.38" width="0.1524" layer="91"/>
-<pinref part="GND13" gate="1" pin="GND"/>
-<wire x1="207.01" y1="111.506" x2="207.01" y2="114.3" width="0.1524" layer="91"/>
-<junction x="207.01" y="114.3"/>
-</segment>
 </net>
 <net name="+5V" class="0">
 <segment>
@@ -20522,12 +20409,6 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <wire x1="154.94" y1="142.24" x2="154.94" y2="138.43" width="0.1524" layer="91"/>
 <pinref part="SUPPLY2_CON" gate="G$1" pin="1"/>
 <wire x1="154.94" y1="138.43" x2="151.13" y2="138.43" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="IC3" gate="G$1" pin="IN"/>
-<pinref part="P+7" gate="1" pin="+5V"/>
-<wire x1="193.04" y1="121.92" x2="190.5" y2="121.92" width="0.1524" layer="91"/>
-<wire x1="190.5" y1="121.92" x2="190.5" y2="124.46" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$6" class="0">
@@ -20676,6 +20557,34 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <label x="170.18" y="106.68" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
+<pinref part="SUPPLY2" gate="G$1" pin="+5V/1"/>
+<label x="93.98" y="132.08" size="1.778" layer="95" rot="R90"/>
+<pinref part="S1" gate="G$1" pin="1"/>
+<wire x1="93.98" y1="130.81" x2="93.98" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="92.71" y1="130.81" x2="93.98" y2="130.81" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="SUPPLY3" gate="G$1" pin="+5V/1"/>
+<label x="119.38" y="132.08" size="1.778" layer="95" rot="R90"/>
+<pinref part="S2" gate="G$1" pin="1"/>
+<wire x1="119.38" y1="130.81" x2="119.38" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="118.11" y1="130.81" x2="119.38" y2="130.81" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="SUPPLY4" gate="G$1" pin="+5V/1"/>
+<label x="93.98" y="106.68" size="1.778" layer="95" rot="R90"/>
+<pinref part="S3" gate="G$1" pin="1"/>
+<wire x1="93.98" y1="105.41" x2="93.98" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="92.71" y1="105.41" x2="93.98" y2="105.41" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="SUPPLY5" gate="G$1" pin="+5V/1"/>
+<label x="119.38" y="106.68" size="1.778" layer="95" rot="R90"/>
+<pinref part="S4" gate="G$1" pin="1"/>
+<wire x1="119.38" y1="105.41" x2="119.38" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="118.11" y1="105.41" x2="119.38" y2="105.41" width="0.1524" layer="91"/>
+</segment>
+<segment>
 <pinref part="SUPPLY6" gate="G$1" pin="+5V/1"/>
 <wire x1="198.12" y1="55.88" x2="198.12" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="MOTOR_DRIVER_1" gate="G$1" pin="+5V"/>
@@ -20721,8 +20630,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <net name="M1_PWM" class="0">
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="2"/>
-<wire x1="215.9" y1="165.1" x2="228.6" y2="165.1" width="0.1524" layer="91"/>
-<label x="228.6" y="165.1" size="1.778" layer="95" align="bottom-right"/>
+<wire x1="215.9" y1="132.08" x2="228.6" y2="132.08" width="0.1524" layer="91"/>
+<label x="228.6" y="132.08" size="1.778" layer="95" align="bottom-right"/>
 </segment>
 <segment>
 <pinref part="MOTOR_DRIVER_1" gate="G$1" pin="PWM"/>
@@ -20733,8 +20642,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <net name="M1_INA" class="0">
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="8"/>
-<wire x1="215.9" y1="157.48" x2="228.6" y2="157.48" width="0.1524" layer="91"/>
-<label x="228.6" y="157.48" size="1.778" layer="95" align="bottom-right"/>
+<wire x1="215.9" y1="124.46" x2="228.6" y2="124.46" width="0.1524" layer="91"/>
+<label x="228.6" y="124.46" size="1.778" layer="95" align="bottom-right"/>
 </segment>
 <segment>
 <pinref part="MOTOR_DRIVER_1" gate="G$1" pin="IN_A"/>
@@ -20745,8 +20654,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <net name="M1_INB" class="0">
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="10"/>
-<wire x1="215.9" y1="154.94" x2="228.6" y2="154.94" width="0.1524" layer="91"/>
-<label x="228.6" y="154.94" size="1.778" layer="95" align="bottom-right"/>
+<wire x1="215.9" y1="121.92" x2="228.6" y2="121.92" width="0.1524" layer="91"/>
+<label x="228.6" y="121.92" size="1.778" layer="95" align="bottom-right"/>
 </segment>
 <segment>
 <pinref part="MOTOR_DRIVER_1" gate="G$1" pin="IN_B"/>
@@ -20757,8 +20666,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <net name="M2_PWM" class="0">
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="4"/>
-<wire x1="215.9" y1="162.56" x2="228.6" y2="162.56" width="0.1524" layer="91"/>
-<label x="228.6" y="162.56" size="1.778" layer="95" align="bottom-right"/>
+<wire x1="215.9" y1="129.54" x2="228.6" y2="129.54" width="0.1524" layer="91"/>
+<label x="228.6" y="129.54" size="1.778" layer="95" align="bottom-right"/>
 </segment>
 <segment>
 <pinref part="MOTOR_DRIVER_2" gate="G$1" pin="PWM"/>
@@ -20769,8 +20678,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <net name="M2_INA" class="0">
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="12"/>
-<wire x1="215.9" y1="152.4" x2="228.6" y2="152.4" width="0.1524" layer="91"/>
-<label x="228.6" y="152.4" size="1.778" layer="95" align="bottom-right"/>
+<wire x1="215.9" y1="119.38" x2="228.6" y2="119.38" width="0.1524" layer="91"/>
+<label x="228.6" y="119.38" size="1.778" layer="95" align="bottom-right"/>
 </segment>
 <segment>
 <pinref part="MOTOR_DRIVER_2" gate="G$1" pin="IN_A"/>
@@ -20781,8 +20690,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <net name="M2_INB" class="0">
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="14"/>
-<wire x1="215.9" y1="149.86" x2="228.6" y2="149.86" width="0.1524" layer="91"/>
-<label x="228.6" y="149.86" size="1.778" layer="95" align="bottom-right"/>
+<wire x1="215.9" y1="116.84" x2="228.6" y2="116.84" width="0.1524" layer="91"/>
+<label x="228.6" y="116.84" size="1.778" layer="95" align="bottom-right"/>
 </segment>
 <segment>
 <pinref part="MOTOR_DRIVER_2" gate="G$1" pin="IN_B"/>
@@ -20793,8 +20702,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <net name="M3_PWM" class="0">
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="6"/>
-<wire x1="215.9" y1="160.02" x2="228.6" y2="160.02" width="0.1524" layer="91"/>
-<label x="228.6" y="160.02" size="1.778" layer="95" align="bottom-right"/>
+<wire x1="215.9" y1="127" x2="228.6" y2="127" width="0.1524" layer="91"/>
+<label x="228.6" y="127" size="1.778" layer="95" align="bottom-right"/>
 </segment>
 <segment>
 <pinref part="MOTOR_DRIVER_3" gate="G$1" pin="PWM"/>
@@ -20805,8 +20714,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <net name="M3_INA" class="0">
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="16"/>
-<wire x1="215.9" y1="147.32" x2="228.6" y2="147.32" width="0.1524" layer="91"/>
-<label x="228.6" y="147.32" size="1.778" layer="95" align="bottom-right"/>
+<wire x1="215.9" y1="114.3" x2="228.6" y2="114.3" width="0.1524" layer="91"/>
+<label x="228.6" y="114.3" size="1.778" layer="95" align="bottom-right"/>
 </segment>
 <segment>
 <pinref part="MOTOR_DRIVER_3" gate="G$1" pin="IN_A"/>
@@ -20817,8 +20726,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <net name="M3_INB" class="0">
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="18"/>
-<wire x1="215.9" y1="144.78" x2="228.6" y2="144.78" width="0.1524" layer="91"/>
-<label x="228.6" y="144.78" size="1.778" layer="95" align="bottom-right"/>
+<wire x1="215.9" y1="111.76" x2="228.6" y2="111.76" width="0.1524" layer="91"/>
+<label x="228.6" y="111.76" size="1.778" layer="95" align="bottom-right"/>
 </segment>
 <segment>
 <pinref part="MOTOR_DRIVER_3" gate="G$1" pin="IN_B"/>
@@ -20829,8 +20738,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <net name="M4_PWM" class="0">
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="1"/>
-<wire x1="200.66" y1="165.1" x2="187.96" y2="165.1" width="0.1524" layer="91"/>
-<label x="187.96" y="165.1" size="1.778" layer="95"/>
+<wire x1="200.66" y1="132.08" x2="187.96" y2="132.08" width="0.1524" layer="91"/>
+<label x="187.96" y="132.08" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="MOTOR_DRIVER_4" gate="G$1" pin="PWM"/>
@@ -20841,8 +20750,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <net name="M4_INA" class="0">
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="3"/>
-<wire x1="200.66" y1="162.56" x2="187.96" y2="162.56" width="0.1524" layer="91"/>
-<label x="187.96" y="162.56" size="1.778" layer="95"/>
+<wire x1="200.66" y1="129.54" x2="187.96" y2="129.54" width="0.1524" layer="91"/>
+<label x="187.96" y="129.54" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="MOTOR_DRIVER_4" gate="G$1" pin="IN_A"/>
@@ -20853,8 +20762,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <net name="M4_INB" class="0">
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="5"/>
-<wire x1="200.66" y1="160.02" x2="187.96" y2="160.02" width="0.1524" layer="91"/>
-<label x="187.96" y="160.02" size="1.778" layer="95"/>
+<wire x1="200.66" y1="127" x2="187.96" y2="127" width="0.1524" layer="91"/>
+<label x="187.96" y="127" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="MOTOR_DRIVER_4" gate="G$1" pin="IN_B"/>
@@ -20973,8 +20882,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 </segment>
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="20"/>
-<wire x1="215.9" y1="142.24" x2="228.6" y2="142.24" width="0.1524" layer="91"/>
-<label x="228.6" y="142.24" size="1.778" layer="95" align="bottom-right"/>
+<wire x1="215.9" y1="109.22" x2="228.6" y2="109.22" width="0.1524" layer="91"/>
+<label x="228.6" y="109.22" size="1.778" layer="95" align="bottom-right"/>
 </segment>
 </net>
 <net name="S1_OUT" class="0">
@@ -20985,8 +20894,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 </segment>
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="19"/>
-<wire x1="200.66" y1="142.24" x2="187.96" y2="142.24" width="0.1524" layer="91"/>
-<label x="187.96" y="142.24" size="1.778" layer="95"/>
+<wire x1="200.66" y1="109.22" x2="187.96" y2="109.22" width="0.1524" layer="91"/>
+<label x="187.96" y="109.22" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="S2_IN" class="0">
@@ -20997,8 +20906,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 </segment>
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="17"/>
-<wire x1="200.66" y1="144.78" x2="187.96" y2="144.78" width="0.1524" layer="91"/>
-<label x="187.96" y="144.78" size="1.778" layer="95"/>
+<wire x1="200.66" y1="111.76" x2="187.96" y2="111.76" width="0.1524" layer="91"/>
+<label x="187.96" y="111.76" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="S2_OUT" class="0">
@@ -21009,8 +20918,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 </segment>
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="15"/>
-<wire x1="200.66" y1="147.32" x2="187.96" y2="147.32" width="0.1524" layer="91"/>
-<label x="187.96" y="147.32" size="1.778" layer="95"/>
+<wire x1="200.66" y1="114.3" x2="187.96" y2="114.3" width="0.1524" layer="91"/>
+<label x="187.96" y="114.3" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="S3_IN" class="0">
@@ -21021,8 +20930,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 </segment>
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="13"/>
-<wire x1="200.66" y1="149.86" x2="187.96" y2="149.86" width="0.1524" layer="91"/>
-<label x="187.96" y="149.86" size="1.778" layer="95"/>
+<wire x1="200.66" y1="116.84" x2="187.96" y2="116.84" width="0.1524" layer="91"/>
+<label x="187.96" y="116.84" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="S3_OUT" class="0">
@@ -21033,8 +20942,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 </segment>
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="11"/>
-<wire x1="200.66" y1="152.4" x2="187.96" y2="152.4" width="0.1524" layer="91"/>
-<label x="187.96" y="152.4" size="1.778" layer="95"/>
+<wire x1="200.66" y1="119.38" x2="187.96" y2="119.38" width="0.1524" layer="91"/>
+<label x="187.96" y="119.38" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="S4_IN" class="0">
@@ -21045,8 +20954,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 </segment>
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="9"/>
-<wire x1="200.66" y1="154.94" x2="187.96" y2="154.94" width="0.1524" layer="91"/>
-<label x="187.96" y="154.94" size="1.778" layer="95"/>
+<wire x1="200.66" y1="121.92" x2="187.96" y2="121.92" width="0.1524" layer="91"/>
+<label x="187.96" y="121.92" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="S4_OUT" class="0">
@@ -21057,43 +20966,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 </segment>
 <segment>
 <pinref part="SIGN_CON" gate="G$1" pin="7"/>
-<wire x1="200.66" y1="157.48" x2="187.96" y2="157.48" width="0.1524" layer="91"/>
-<label x="187.96" y="157.48" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="3,3V/LS" class="0">
-<segment>
-<pinref part="IC3" gate="G$1" pin="OUT"/>
-<wire x1="220.98" y1="121.92" x2="223.52" y2="121.92" width="0.1524" layer="91"/>
-<label x="223.52" y="121.92" size="1.778" layer="95" xref="yes"/>
-</segment>
-<segment>
-<pinref part="SUPPLY2" gate="G$1" pin="+5V/1"/>
-<label x="96.012" y="130.81" size="1.778" layer="95" rot="R90"/>
-<pinref part="S1" gate="G$1" pin="1"/>
-<wire x1="93.98" y1="130.81" x2="93.98" y2="134.62" width="0.1524" layer="91"/>
-<wire x1="92.71" y1="130.81" x2="93.98" y2="130.81" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="SUPPLY3" gate="G$1" pin="+5V/1"/>
-<label x="121.412" y="130.81" size="1.778" layer="95" rot="R90"/>
-<pinref part="S2" gate="G$1" pin="1"/>
-<wire x1="119.38" y1="130.81" x2="119.38" y2="134.62" width="0.1524" layer="91"/>
-<wire x1="118.11" y1="130.81" x2="119.38" y2="130.81" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="SUPPLY4" gate="G$1" pin="+5V/1"/>
-<label x="96.012" y="105.41" size="1.778" layer="95" rot="R90"/>
-<pinref part="S3" gate="G$1" pin="1"/>
-<wire x1="93.98" y1="105.41" x2="93.98" y2="109.22" width="0.1524" layer="91"/>
-<wire x1="92.71" y1="105.41" x2="93.98" y2="105.41" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="SUPPLY5" gate="G$1" pin="+5V/1"/>
-<label x="121.412" y="105.41" size="1.778" layer="95" rot="R90"/>
-<pinref part="S4" gate="G$1" pin="1"/>
-<wire x1="119.38" y1="105.41" x2="119.38" y2="109.22" width="0.1524" layer="91"/>
-<wire x1="118.11" y1="105.41" x2="119.38" y2="105.41" width="0.1524" layer="91"/>
+<wire x1="200.66" y1="124.46" x2="187.96" y2="124.46" width="0.1524" layer="91"/>
+<label x="187.96" y="124.46" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
