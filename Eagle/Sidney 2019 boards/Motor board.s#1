@@ -20025,8 +20025,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <part name="SUPPLY10" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="+5V/1" device=""/>
 <part name="GND12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="IC3" library="LM3940IS-3.3" deviceset="LM3940IS-3.3" device=""/>
+<part name="P+7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="GND13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="SUPPLY11" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="+5V/1" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -20298,10 +20298,12 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <instance part="IC3" gate="G$1" x="193.04" y="121.92" smashed="yes">
 <attribute name="NAME" x="212.344" y="125.73" size="1.778" layer="95" align="center-left"/>
 </instance>
+<instance part="P+7" gate="1" x="190.5" y="127" smashed="yes">
+<attribute name="VALUE" x="191.77" y="129.54" size="1.778" layer="96" rot="R180"/>
+</instance>
 <instance part="GND13" gate="1" x="207.01" y="108.966" smashed="yes">
 <attribute name="VALUE" x="204.47" y="106.426" size="1.778" layer="96"/>
 </instance>
-<instance part="SUPPLY11" gate="G$1" x="190.5" y="127" smashed="yes"/>
 </instances>
 <busses>
 </busses>
@@ -20521,6 +20523,12 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <pinref part="SUPPLY2_CON" gate="G$1" pin="1"/>
 <wire x1="154.94" y1="138.43" x2="151.13" y2="138.43" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="IN"/>
+<pinref part="P+7" gate="1" pin="+5V"/>
+<wire x1="193.04" y1="121.92" x2="190.5" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="190.5" y1="121.92" x2="190.5" y2="124.46" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="N$6" class="0">
 <segment>
@@ -20701,12 +20709,6 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <wire x1="158.75" y1="139.7" x2="158.75" y2="133.35" width="0.1524" layer="91"/>
 <wire x1="158.75" y1="133.35" x2="151.13" y2="133.35" width="0.1524" layer="91"/>
 <label x="158.75" y="134.874" size="1.778" layer="95" rot="R90"/>
-</segment>
-<segment>
-<pinref part="IC3" gate="G$1" pin="IN"/>
-<wire x1="193.04" y1="121.92" x2="190.5" y2="121.92" width="0.1524" layer="91"/>
-<wire x1="190.5" y1="121.92" x2="190.5" y2="124.46" width="0.1524" layer="91"/>
-<pinref part="SUPPLY11" gate="G$1" pin="+5V/1"/>
 </segment>
 </net>
 <net name="N$3" class="0">
