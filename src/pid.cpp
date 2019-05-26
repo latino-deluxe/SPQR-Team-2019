@@ -48,14 +48,6 @@ void drivePID(signed int direzione, float vMot) {
   mot(4, int(speed4));
 
   old_Dir = direzione;
-
-  Serial.print(speed1);
-  Serial.print("|");
-  Serial.print(speed2);
-  Serial.print("|");
-  Serial.print(speed3);
-  Serial.print("|");
-  Serial.println(speed4);
 }
 
 void preparePID(int direction, int speed) { preparePID(direction, speed, 0); }
