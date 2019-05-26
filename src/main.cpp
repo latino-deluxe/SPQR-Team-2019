@@ -100,6 +100,10 @@ void setup() {
   // stincr
   stincr = 0;
 
+  //axis
+  y = 0;
+  x = 0;
+
   // ;)
   // analogWriteFrequency(4 , 15000);
   // analogWriteFrequency(7 , 15000);

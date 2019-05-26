@@ -259,3 +259,8 @@ extr int fpos;
 // test vars
 extr char test; // test select
 extr bool flagtest;
+
+
+//turns to 0 the movement
+extr int y;
+extr int x;

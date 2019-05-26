@@ -1,6 +1,7 @@
 #include "linesensor.h"
 #include "pid.h"
 #include "motors.h"
+#include "myspi_old.h"
 #include "vars.h"
 #include <Arduino.h>
 
@@ -26,8 +27,15 @@ void checkLineSensors() {
   if(LN3 > 500) U3 = true;
   else U3 = false;
 
-  if((U0 + U1 + U2 + U3) > 0) outOfBounds();
+  // if((U0 + U1 + U2 + U3) > 0) outOfBounds();           //movimento di rientro con atan2
+  if((U0 + U1 + U2 + U3) > 0) playSafe();                 //annulla movimento asse dove sta uscendo
+  if((U0 == false) && (U1 == false) && (U2 == false) && (U3 == false)) {
+    x=1;
+    y=1;
+  }
+
 }
+
 
 void outOfBounds() {
   //  S0        180
@@ -58,4 +66,49 @@ void outOfBounds() {
   U = (-(atan2(Uy, Ux) * 180 / 3.14) + 90) - imu_current_euler;
 
   preparePID(U, 250);
+}
+
+
+
+void playSafe() {
+  if(U1) {
+    if(inSensorRange(5, 5)) {
+      x=0;
+      y=1;
+    }
+    else {
+      x=1;
+      y=1;
+    }
+  }
+  if(U3) {
+    if(inSensorRange(14, 5)) {
+      x=0;
+      y=1;
+    }
+    else {
+      x=1;
+      y=1;
+    }
+  }
+  if(U0) {
+    if(inSensorRange(0, 5)) {
+      x=1;
+      y=0;
+    }
+    else {
+      x=1;
+      y=1;
+    }
+  }
+  if(U2) {
+    if(inSensorRange(10, 5)) {
+      x=1;
+      y=0;
+    }
+    else {
+      x=1;
+      y=1;
+    }
+  }
 }
