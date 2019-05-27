@@ -111,13 +111,13 @@ void mot(byte mot, int vel) {
 
 void testMotors() {
   for (int i = 1; i < 5; i++) {
-    turnMotor(i, 0, 1, 100);
+    turnMotor(i, 0, 1, 200);
     delay(1000);
-    turnMotor(i, 0, 0, 100);
+    turnMotor(i, 0, 0, 200);
     delay(300);
-    turnMotor(i, 1, 0, 100);
+    turnMotor(i, 1, 0, 200);
     delay(1000);
-    turnMotor(i, 0, 0, 100);
+    turnMotor(i, 0, 0, 200);
     delay(300);
   }
 }

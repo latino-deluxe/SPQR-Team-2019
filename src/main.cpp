@@ -24,6 +24,7 @@
 // Switch management vars
 int SWS = 0;
 int SWD = 0;
+elapsedMillis timertest;
 
 void setup() {
   // startSetup();
@@ -139,16 +140,15 @@ void setup() {
   // digitalWrite(29, HIGH);
   // digitalWrite(LED_BUILTIN, LOW);
   // stopSetup();
+  timertest = 0;
 }
 
 void loop() {
   readIMU();
-  checkLineSensors();
-  // drivePID(0, 100);
-  // delay(250);
-  drivePID(90, 100);
-  delay(1000);
-  drivePID(270, 100);
-  delay(1000);
-  // testMotors();
+  // checkLineSensors();
+  if(timertest < 500) drivePID(45, 80);
+  else if (timertest < 1000) drivePID(135, 80);
+  else if(timertest < 1500) drivePID(225, 80);
+  else if (timertest < 2000) drivePID(315, 80);
+  else if(timertest < 2500) timertest=0;
 }
