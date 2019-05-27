@@ -17,10 +17,10 @@
 
 // Note
 #define LA3 220.00
-#define C4 261.63
-#define F3 174.61
-#define E6 1318.51
-#define F6 1396.91
+#define C4  261.63
+#define F3  174.61
+#define E6  1318.51
+#define F6  1396.91
 #define GB6 1479.98
 
 // ZONE DEL CAMPO // codici utilizzabili per una matice 3x3
@@ -67,6 +67,10 @@ extr bool U2;       // ;)
 extr bool U3;
 
 extr int Ux0, Uy0, Ux1, Uy1, Ux2, Uy2, Ux3, Uy3, Ux, Uy, U;
+
+//turns to 0 the movement
+extr int y;
+extr int x;
 
 #define BNO055_SAMPLERATE_DELAY_MS (60)
 
@@ -261,6 +265,3 @@ extr char test; // test select
 extr bool flagtest;
 
 
-//turns to 0 the movement
-extr int y;
-extr int x;
