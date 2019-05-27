@@ -50,10 +50,10 @@
 // SPI
 #define SS_PIN 2
 // Linesensors e interrupt
-#define S0 A14
-#define S1 A15
-#define S2 A7
-#define S3 A6
+#define S0 A17
+#define S1 A16
+#define S2 A14
+#define S3 A15
 #define INT_LUNG 6
 
 extr int LN0;

@@ -145,10 +145,18 @@ void setup() {
 
 void loop() {
   readIMU();
-  // checkLineSensors();
-  if(timertest < 500) drivePID(45, 80);
-  else if (timertest < 1000) drivePID(135, 80);
-  else if(timertest < 1500) drivePID(225, 80);
-  else if (timertest < 2000) drivePID(315, 80);
-  else if(timertest < 2500) timertest=0;
+  checkLineSensors();
+  Serial.print(LN0);
+  Serial.print("  ");
+  Serial.print(LN1);
+  Serial.print("  ");
+  Serial.print(LN2);
+  Serial.print("  ");
+  Serial.println(LN3);
+  delay(250);
+  // if(timertest < 500) drivePID(45, 80);
+  // else if (timertest < 1000) drivePID(135, 80);
+  // else if(timertest < 1500) drivePID(225, 80);
+  // else if (timertest < 2000) drivePID(315, 80);
+  // else if(timertest < 2500) timertest=0;
 }

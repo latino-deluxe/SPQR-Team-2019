@@ -6,12 +6,12 @@
 #include <Arduino.h>
 
 // init line sensors and attaches interrput
-void initLineSensors() {
-  pinMode(S0, INPUT);
-  pinMode(S1, INPUT);
-  pinMode(S2, INPUT);
-  pinMode(S3, INPUT);
-}
+// void initLineSensors() {
+//   pinMode(S0, INPUT);
+//   pinMode(S1, INPUT);
+//   pinMode(S2, INPUT);
+//   pinMode(S3, INPUT);
+// }
 
 void checkLineSensors() {
   LN0 = analogRead(S0);
@@ -28,11 +28,11 @@ void checkLineSensors() {
   else U3 = false;
 
   // if((U0 + U1 + U2 + U3) > 0) outOfBounds();           //movimento di rientro con atan2
-  if((U0 + U1 + U2 + U3) > 0) playSafe();                 //annulla movimento asse dove sta uscendo
-  if((U0 == false) && (U1 == false) && (U2 == false) && (U3 == false)) {
-    x=1;
-    y=1;
-  }
+  // if((U0 + U1 + U2 + U3) > 0) playSafe();                 //annulla movimento asse dove sta uscendo
+  // if((U0 == false) && (U1 == false) && (U2 == false) && (U3 == false)) {
+  //   x=1;
+  //   y=1;
+  // }
 
 }
 
