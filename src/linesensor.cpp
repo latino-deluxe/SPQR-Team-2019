@@ -18,14 +18,15 @@ void checkLineSensors() {
   LN1 = analogRead(S1);
   LN2 = analogRead(S2);
   LN3 = analogRead(S3);
-  if(LN0 > 500) U0 = true;
-  else U0 = false;
-  if(LN1 > 500) U1 = true;
-  else U1 = false;
-  if(LN2 > 500) U2 = true;
-  else U2 = false;
-  if(LN3 > 500) U3 = true;
-  else U3 = false;
+  Serial.println(analogRead(A15));
+  // if(LN0 > 500) U0 = true;
+  // else U0 = false;
+  // if(LN1 > 500) U1 = true;
+  // else U1 = false;
+  // if(LN2 > 500) U2 = true;
+  // else U2 = false;
+  // if(LN3 > 500) U3 = true;
+  // else U3 = false;
 
   // if((U0 + U1 + U2 + U3) > 0) outOfBounds();           //movimento di rientro con atan2
   // if((U0 + U1 + U2 + U3) > 0) playSafe();                 //annulla movimento asse dove sta uscendo

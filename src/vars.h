@@ -6,14 +6,14 @@
 #define extr
 #endif
 
-#define R 29
-#define G 31
-#define Y 30
+#define LED1 13
+#define LED2 17
+#define LED3 20
 
 // IR shield pin
-#define BUZZER 27
-//#define SWITCH_SX 28
-#define SWITCH_DX 26
+#define BUZZER 30
+#define SWITCH_SX 28
+#define SWITCH_DX 29
 
 // Note
 #define LA3 220.00
@@ -50,10 +50,14 @@
 // SPI
 #define SS_PIN 2
 // Linesensors e interrupt
-#define S0 A17
-#define S1 A16
-#define S2 A14
-#define S3 A15
+#define S1I A14
+#define S1O A15
+#define S2I A16
+#define S2O A17
+#define S3I A20
+#define S3O A0
+#define S4I A1
+#define S4O A2
 #define INT_LUNG 6
 
 extr int LN0;
@@ -104,11 +108,13 @@ extr int x;
 #define AA18 310
 #define AA19 340
 
-#define BT Serial1
+#define BT Serial3
 
 #define DEBUG_PRINT Serial
 
-#define CAMERA Serial4
+#define CAMERA Serial2
+
+#define NANO_BALL Serial4
 
 // You can modify this if you need
 // LIMITI DEL CAMPO
