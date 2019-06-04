@@ -20,8 +20,12 @@ int linetriggerO[4];
 int lineCnt;
 byte linesensbyteI;
 byte linesensbyteO;
+byte linesensbyte;
 
 void checkLineSensors() {
+  linesensbyteI = 0;
+  linesensbyteO = 0;
+  linesensbyte  = 0;
   for(int i = 0; i<4; i++) {
     linetriggerI[i] = analogRead(linepinsI[i]) > LINE_THRESH;
     linetriggerO[i] = analogRead(linepinsO[i]) > LINE_THRESH;
@@ -29,9 +33,10 @@ void checkLineSensors() {
     linesensbyteI = linesensbyteI + (linetriggerI[i]<<i);
     linesensbyteO = linesensbyteO + (linetriggerO[i]<<i);
   }
+  linesensbyte = linesensbyteI | linesensbyteO;
 
   if(lineCnt == 100) {
-    switch(linesensbyteO) {
+    switch(linesensbyte) {
       case 1:
         outDir = 180;
       break;
@@ -77,7 +82,10 @@ void checkLineSensors() {
   if(lineCnt > 0) preparePID(outDir, 100);
 
   lineCnt--;
-  if(lineCnt < 0) lineCnt = 0;
+  if(lineCnt < 0) {
+    lineCnt = 0;
+    outDir = 0;
+  }
 
   Serial.print("Byte:   ");
   Serial.print(linesensbyteO);
