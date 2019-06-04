@@ -13,103 +13,87 @@
 //   pinMode(S3, INPUT);
 // }
 
+int linepinsI[4] = {S1I, S2I, S3I, S4I};
+int linepinsO[4] = {S1O, S2O, S3O, S4O};
+int linetriggerI[4];
+int linetriggerO[4];
+int lineCnt;
+byte linesensbyteI;
+byte linesensbyteO;
+
 void checkLineSensors() {
-  LN0 = analogRead(S0);
-  LN1 = analogRead(S1);
-  LN2 = analogRead(S2);
-  LN3 = analogRead(S3);
+  for(int i = 0; i<4; i++) {
+    linetriggerI[i] = analogRead(linepinsI[i]) > LINE_THRESH;
+    linetriggerO[i] = analogRead(linepinsO[i]) > LINE_THRESH;
+    if(linetriggerI[i] || linetriggerO[i]) lineCnt = 100;
+    linesensbyteI = linesensbyteI + (linetriggerI[i]<<i);
+    linesensbyteO = linesensbyteO + (linetriggerO[i]<<i);
+  }
+
+  if(lineCnt == 100) {
+    switch(linesensbyteO) {
+      case 1:
+        outDir = 180;
+      break;
+
+      case 2:
+        outDir = 270;
+      break;
+
+      case 4:
+        outDir = 0;
+      break;
+
+      case 8:
+        outDir = 90;
+      break;
+
+
+
+      case 3:
+        outDir = 225;
+      break;
+
+      case 6:
+        outDir = 315;
+      break;
+
+      case 12:
+        outDir = 45;
+      break;
+
+      case 9:
+        outDir = 135;
+      break;
+
+
+
+      default:
+
+      break;
+    }
+  }
+
+  if(lineCnt > 0) preparePID(outDir, 100);
+
+  lineCnt--;
+  if(lineCnt < 0) lineCnt = 0;
+
+  Serial.print("Byte:   ");
+  Serial.print(linesensbyteO);
+  Serial.print("    Direzione:    ");
+  Serial.println(outDir);
   Serial.println(analogRead(A15));
-  // if(LN0 > 500) U0 = true;
-  // else U0 = false;
-  // if(LN1 > 500) U1 = true;
-  // else U1 = false;
-  // if(LN2 > 500) U2 = true;
-  // else U2 = false;
-  // if(LN3 > 500) U3 = true;
-  // else U3 = false;
-
-  // if((U0 + U1 + U2 + U3) > 0) outOfBounds();           //movimento di rientro con atan2
-  // if((U0 + U1 + U2 + U3) > 0) playSafe();                 //annulla movimento asse dove sta uscendo
-  // if((U0 == false) && (U1 == false) && (U2 == false) && (U3 == false)) {
-  //   x=1;
-  //   y=1;
-  // }
-
+  delay(150);
 }
 
 
 void outOfBounds() {
-  //  S0        180
-  //  S1        270
-  //  S2        0
-  //  S3        90
-
-  if(U0) {
-    Ux0 = 0;
-    Uy0 = -1;
-  }
-  if(U1) {
-    Ux1 = -1;
-    Uy1 = 0;
-  }
-  if(U2) {
-    Ux2 = 0;
-    Uy2 = 1;
-  }
-  if(U3) {
-    Ux3 = 1;
-    Uy3 = 0;
-  }
-
-  Ux = ((U0 * Ux0) + (U1 * Ux1) + (U2 * Ux2) + (U3 * Ux3));
-  Uy = ((U0 * Uy0) + (U1 * Uy1) + (U2 * Uy2) + (U3 * Uy3));
-
-  U = (-(atan2(Uy, Ux) * 180 / 3.14) + 90) - imu_current_euler;
-
-  preparePID(U, 250);
+  
 }
 
 
 
 void playSafe() {
-  if(U1) {
-    if(inSensorRange(5, 5)) {
-      x=0;
-      y=1;
-    }
-    else {
-      x=1;
-      y=1;
-    }
-  }
-  if(U3) {
-    if(inSensorRange(14, 5)) {
-      x=0;
-      y=1;
-    }
-    else {
-      x=1;
-      y=1;
-    }
-  }
-  if(U0) {
-    if(inSensorRange(0, 5)) {
-      x=1;
-      y=0;
-    }
-    else {
-      x=1;
-      y=1;
-    }
-  }
-  if(U2) {
-    if(inSensorRange(10, 5)) {
-      x=1;
-      y=0;
-    }
-    else {
-      x=1;
-      y=1;
-    }
-  }
+  
 }

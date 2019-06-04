@@ -105,6 +105,10 @@ void setup() {
   y = 0;
   x = 0;
 
+  //linesensor
+  LINE_THRESH = 500;
+  outDir = 0;
+
   // ;)
   // analogWriteFrequency(4 , 15000);
   // analogWriteFrequency(7 , 15000);
@@ -146,14 +150,6 @@ void setup() {
 void loop() {
   readIMU();
   checkLineSensors();
-  // Serial.print(LN0);
-  // Serial.print("  ");
-  // Serial.print(LN1);
-  // Serial.print("  ");
-  // Serial.print(LN2);
-  // Serial.print("  ");
-  // Serial.println(LN3);
-  // delay(250);
   // if(timertest < 500) drivePID(45, 80);
   // else if (timertest < 1000) drivePID(135, 80);
   // else if(timertest < 1500) drivePID(225, 80);

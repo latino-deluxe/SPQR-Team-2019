@@ -6,9 +6,9 @@
 #define extr
 #endif
 
-#define LED1 13
-#define LED2 17
-#define LED3 20
+#define R 13
+#define Y 17
+#define B 20
 
 // IR shield pin
 #define BUZZER 30
@@ -60,10 +60,17 @@
 #define S4O A2
 #define INT_LUNG 6
 
-extr int LN0;
-extr int LN1;
-extr int LN2;
-extr int LN3;
+extr int LINE_THRESH;
+extr int outDir;
+
+extr int LN1I;
+extr int LN2I;
+extr int LN3I;
+extr int LN4I;
+extr int LN1O;
+extr int LN2O;
+extr int LN3O;
+extr int LN4O;
 
 extr bool U0;
 extr bool U1;
