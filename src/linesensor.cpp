@@ -87,12 +87,11 @@ void checkLineSensors() {
     outDir = 0;
   }
 
-  Serial.print("Byte:   ");
+  /*9Serial.print("Byte:   ");
   Serial.print(linesensbyteO);
   Serial.print("    Direzione:    ");
   Serial.println(outDir);
-  Serial.println(analogRead(A15));
-  delay(150);
+  delay(150);*/
 }
 
 
@@ -104,4 +103,28 @@ void outOfBounds() {
 
 void playSafe() {
   
+}
+
+void testLineSensors(){
+
+  checkLineSensors();
+
+  Serial.println("----------");  
+  for(int i = 0; i<4; i++) {
+    Serial.print(linetriggerI[i]);
+    Serial.print("-");
+    Serial.print(linetriggerO[i]);
+    Serial.print(" | ");
+  }
+  Serial.println();
+  Serial.println("----------"); 
+  
+  Serial.print("Byte:   ");
+  Serial.print(linesensbyteO);
+  Serial.print("    Direzione:    ");
+  Serial.println(outDir);
+  delay(150);
+
+  Serial.println("----------"); 
+
 }

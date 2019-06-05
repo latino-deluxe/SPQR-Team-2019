@@ -6,9 +6,9 @@
 #define extr
 #endif
 
-#define R 13
+#define R 20
 #define Y 17
-#define B 20
+#define G 13
 
 // IR shield pin
 #define BUZZER 30
@@ -17,10 +17,10 @@
 
 // Note
 #define LA3 220.00
-#define C4  261.63
-#define F3  174.61
-#define E6  1318.51
-#define F6  1396.91
+#define C4 261.63
+#define F3 174.61
+#define E6 1318.51
+#define F6 1396.91
 #define GB6 1479.98
 
 // ZONE DEL CAMPO // codici utilizzabili per una matice 3x3
@@ -41,7 +41,7 @@
 #define SUD_EST 9
 
 // VARIABILI E COSTANTI DEL PID
-#define KP 2 // K proporzionale
+#define KP 2   // K proporzionale
 #define KI 0.1 // K integrativo
 #define KD 0   // K derivativo
 // #define KP 1.4
@@ -60,7 +60,8 @@
 #define S4O A2
 #define INT_LUNG 6
 
-extr int LINE_THRESH;
+//extr int LINE_THRESH;
+#define LINE_THRESH 150
 extr int outDir;
 
 extr int LN1I;
@@ -74,7 +75,7 @@ extr int LN4O;
 
 extr bool U0;
 extr bool U1;
-extr bool U2;       // ;)
+extr bool U2; // ;)
 extr bool U3;
 
 extr int Ux0, Uy0, Ux1, Uy1, Ux2, Uy2, Ux3, Uy3, Ux, Uy, U;
@@ -193,12 +194,12 @@ extr bool us_flag;                   // is it measuring or not?
 extr int us_values[4];               // US values array
 extr int us_sx, us_dx, us_px, us_fr; // copies with other names in the array
 // POSITION
-extr int old_status_x; // posizione precedente nel campo vale EST, OVEST o
-                       // CENTRO o 255 >USI FUTURI<
-extr int old_status_y; // posizione precedente nel campo vale SUD, NORD o
-                       // CENTRO o 255 >USI FUTURI<
-extr bool goal_zone; // sto al centro rispetto alle porte         assegnata// da
-                     // WhereAmI ma non usata
+extr int old_status_x;  // posizione precedente nel campo vale EST, OVEST o
+                        // CENTRO o 255 >USI FUTURI<
+extr int old_status_y;  // posizione precedente nel campo vale SUD, NORD o
+                        // CENTRO o 255 >USI FUTURI<
+extr bool goal_zone;    // sto al centro rispetto alle porte         assegnata// da
+                        // WhereAmI ma non usata
 extr bool good_field_x; // vedo tutta la larghezza del campo si/no
 extr bool good_field_y; // vedo tutta la lunghezza del campo si/no
 extr int status_x;      // posizione nel campo vale EST, OVEST o CENTRO o 255
@@ -276,5 +277,3 @@ extr int fpos;
 // test vars
 extr char test; // test select
 extr bool flagtest;
-
-

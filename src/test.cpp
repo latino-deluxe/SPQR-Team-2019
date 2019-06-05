@@ -7,6 +7,7 @@
 #include "imu.h"
 #include "motors.h"
 #include "pid.h"
+#include "linesensor.h"
 
 int testDelay = 10;
 
@@ -29,6 +30,7 @@ void testMenu(){
   Serial.println("6)Test BT");
   Serial.println("7)GigaTestZone");
   Serial.println("8)Test Camera");
+  Serial.println("9)Test Sensori Linea");
 
   do{
     test = Serial.read();
@@ -44,6 +46,8 @@ void testMenu(){
     else if (test == '6') Serial.println("Test BT, connettersi al BT");
     else if (test == '7') Serial.println("GigaTestZone, test grafico matrice zone (1-->9), US, IMU e zona compagno (se presente)");
     else if (test == '8') Serial.println("CAMERA");
+    else if (test == '9') Serial.println("Linee");
+
     else {
       Serial.println(" Comando sconosciuto");
       flagtest = false;
@@ -91,6 +95,8 @@ void testMenu(){
         Serial.println(portx);
         delay(100);
       break;
+      case '9':
+        testLineSensors();
       default://default, todo, maybe
       break;
     }

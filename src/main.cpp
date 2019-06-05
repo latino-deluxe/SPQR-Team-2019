@@ -26,7 +26,8 @@ int SWS = 0;
 int SWD = 0;
 elapsedMillis timertest;
 
-void setup() {
+void setup()
+{
   // startSetup();
   // Now assign value to variables, first thing to do
   // IMU
@@ -105,10 +106,6 @@ void setup() {
   y = 0;
   x = 0;
 
-  //linesensor
-  LINE_THRESH = 500;
-  outDir = 0;
-
   // ;)
   // analogWriteFrequency(4 , 15000);
   // analogWriteFrequency(7 , 15000);
@@ -117,6 +114,13 @@ void setup() {
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
   pinMode(16, INPUT_DISABLE); // pin 16 in corto tra 3.3V e massa
+
+  pinMode(R, OUTPUT);
+  pinMode(G, OUTPUT);
+  pinMode(Y, OUTPUT);
+
+  pinMode(SWITCH_DX, INPUT);
+  pinMode(SWITCH_SX, INPUT);
 
   // pinMode(SWITCH_DX, INPUT);
 
@@ -148,9 +152,17 @@ void setup() {
 }
 
 void loop() {
+
+  if(Serial.available() > 0) testMenu();
+
   readIMU();
-  //checkLineSensors();
-  // testMotors();
+  checkLineSensors();
+
+  
+
+  digitalWrite(G, digitalRead(SWITCH_DX));
+  digitalWrite(R, digitalRead(SWITCH_SX));
+
   // if(timertest < 500) drivePID(45, 80);
   // else if (timertest < 1000) drivePID(135, 80);
   // else if(timertest < 1500) drivePID(225, 80);
