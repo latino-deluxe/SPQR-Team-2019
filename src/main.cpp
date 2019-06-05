@@ -149,7 +149,8 @@ void setup() {
 
 void loop() {
   readIMU();
-  checkLineSensors();
+  //checkLineSensors();
+  // testMotors();
   // if(timertest < 500) drivePID(45, 80);
   // else if (timertest < 1000) drivePID(135, 80);
   // else if(timertest < 1500) drivePID(225, 80);
