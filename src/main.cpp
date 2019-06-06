@@ -28,7 +28,7 @@ elapsedMillis timertest;
 
 void setup()
 {
-  // startSetup();
+  startSetup();
   // Now assign value to variables, first thing to do
   // IMU
   imu_current_euler = 0;

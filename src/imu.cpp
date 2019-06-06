@@ -6,7 +6,7 @@
 Adafruit_BNO055 bno = Adafruit_BNO055();
 
 void initIMU() {
-  bno.begin(bno.OPERATION_MODE_IMUPLUS);
+  bno.begin(bno.OPERATION_MODE_IMUPLUS);  //Posizione impostata a P7 alle righe 105,107 di Adafruit_BNO55.cpp
   bno.setExtCrystalUse(true);
 }
 

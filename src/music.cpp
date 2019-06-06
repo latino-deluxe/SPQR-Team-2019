@@ -60,15 +60,15 @@ void super_mario() {
 }
 
 void startSetup(){
-  tone(buzzer, LA3, 100);
+  tone(30, LA3, 100);
   delay (100);
-  noTone(buzzer);
-  tone(buzzer, LA3, 100);
+  noTone(30);
+  tone(30, LA3, 100);
   delay (100);
-  noTone(buzzer);
-  tone(buzzer, LA5, 100);
+  noTone(30);
+  tone(30, LA5, 100);
   delay (100);
-  noTone(buzzer);
+  noTone(303);
 }
 
 void stopSetup() {
