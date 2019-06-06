@@ -8,6 +8,9 @@ Adafruit_BNO055 bno = Adafruit_BNO055();
 void initIMU() {
   bno.begin(bno.OPERATION_MODE_IMUPLUS);
   bno.setExtCrystalUse(true);
+  bno.setAxisSign(bno.REMAP_SIGN_P6);
+  bno.setAxisRemap(bno.REMAP_CONFIG_P6);
+
 }
 
 void readIMU() {
