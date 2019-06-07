@@ -97,27 +97,22 @@ extr int x;
 #define GOALIE_DANGER 100
 #define VEL_RET 180
 #define GOALIE_P 255 // velocità portiere
-#define AA0 0        // angoli di attacco in funzione del sensore palla
-#define AA1 20
-#define AA2 50
-#define AA3 70
-#define AA4 80
-#define AA5 140
-#define AA6 150
-#define AA7 160
-#define AA8 180
-#define AA9 180  // 135
-#define AA10 180 // 135
-#define AA11 180 // 135
-// il code non worka
-#define AA12 180 // 190
-#define AA13 200 // 210
-#define AA14 230 // 240
-#define AA15 220 // 240
-#define AA16 280 // 280
-#define AA17 290
-#define AA18 310
-#define AA19 340
+#define AA0  0        // angoli di attacco in funzione del sensore palla
+#define AA1  30
+#define AA2  50
+#define AA3  90
+#define AA4  115
+#define AA5  135
+#define AA6  155
+#define AA7  210            //DIETRO
+#define AA8  210            //DIETRO
+#define AA9  150            //DIETRO
+#define AA10 205
+#define AA11 225
+#define AA12 245
+#define AA13 270
+#define AA14 310
+#define AA15 330
 
 #define BT Serial3
 

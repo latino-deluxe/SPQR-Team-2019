@@ -160,13 +160,14 @@ void loop() {
   if(Serial.available() > 0) testMenu();
 
   readIMU();
+  readBallNano();
+  goalie();
   checkLineSensors();
-  // readBallNano();
 
   
 
-  digitalWrite(G, digitalRead(SWITCH_DX));
-  digitalWrite(R, digitalRead(SWITCH_SX));
+  // digitalWrite(G, digitalRead(SWITCH_DX));
+  // digitalWrite(R, digitalRead(SWITCH_SX));
 
   // if(timertest < 500) drivePID(0, 150);
   // else if (timertest < 1000) drivePID(90, 150);

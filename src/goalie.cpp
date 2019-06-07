@@ -10,46 +10,12 @@ void goalie() {
   // directions going around the ball
   int goaliedirection[20] = {AA0,  AA1,  AA2,  AA3,  AA4,  AA5,  AA6,
                              AA7,  AA8,  AA9,  AA10, AA11, AA12, AA13,
-                             AA14, AA15, AA16, AA17, AA18, AA19};
+                             AA14, AA15};
 
-  atk_speed = 180; // forse inutile, lo imposto per livellare
 
-  // PALLA DIETRO
-  palla_dietro();
-
-  atk_direction =
-      goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
-
-  if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 ||
-       ball_sensor == 1 || ball_sensor == 2) &&
-      (ball_distance <= 2) && zoneIndex <= 2)
-    storcimentoPortaIncr();
-  // atk_direction = atk_direction + atk_offset;
-  // atk_direction = (atk_direction + 360) % 360;
-  // stincr = 0;
-  // storcimentoPortaIncr();
-  else
-    stincr = 0;
-  // if (role) {
-  //   if ((ball_sensor == 18 || ball_sensor == 19 || ball_sensor == 0 ||
-  //        ball_sensor == 1 || ball_sensor == 2) &&
-  //       (ball_distance <= 2) && zoneIndex <= 2)   storcimentoPortaIncr();
-  //       // atk_direction = atk_direction + atk_offset;
-  //       // atk_direction = (atk_direction + 360) % 360;
-  //       // stincr = 0;
-  //       // storcimentoPortaIncr();
-  //       else
-  //         stincr = 0;
-  // } else {
-  //   storcimentoZone();
-  //   atk_direction = atk_direction + atk_offset;
-  //   atk_direction = (atk_direction + 360) % 360;
-  //   stincr = 0;
-  // }
-
-  stincr = (((int)stincr) + 360) % 360;
+  atk_direction = goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
   atk_speed = 200;
-  preparePID(atk_direction, atk_speed, stincr);
+  preparePID(atk_direction, atk_speed);
 }
 
 void palla_dietro() {
