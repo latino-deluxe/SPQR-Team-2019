@@ -17,12 +17,8 @@
     S13           4   D4
     S14           3   D3
     S15           2   D2
-
-    portd starts from 2nd byte and needs previous shifting
-
     loop cycle duration: 3.2 millis
 **/
-
 
 #define S9 (PINB & 1) >> 0
 #define S8 (PINB & 2) >> 1
@@ -43,18 +39,27 @@
 #define S11 (PIND & 64) >> 6
 #define S10 (PIND & 128) >> 7
 
-#define NCYCLES 150
-#define BROKEN 10000
+#define NCYCLES 255
+#define BROKEN  900 //just a test
 
-#define THRESHOLD0 200 // attaccato ma non sempre funziona   
-#define THRESHOLD1 170 // circa 5-15cm
-#define THRESHOLD2 150 // circa 15-80cm
-#define THRESHOLD3 125 //  circa 80-140cm
-#define THRESHOLD4 100  // circa oltre 140cm
-#define THRESHOLD5 75   // lontanissima   
-#define THRESHOLD6 7     //palla non vista
+#define THRESHOLD0 200 
+#define THRESHOLD1 170
+#define THRESHOLD2 150 
+#define THRESHOLD3 125
+#define THRESHOLD4 100
+#define THRESHOLD5 75
+#define THRESHOLD6 7
+
+#define DIST_THRESHOLD 90
+
+/*
+ * 200-150: distance 0
+ * 
+*/
 
 int counter[16];
+int pins[] = {A3, A2, A1, A0, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
+
 int distance;
 
 byte ballInfo = 0;
@@ -88,18 +93,21 @@ void setup() {
 }
 
 void loop() {
-  test();
+  readBall();
 }
 
 void readBall() {
-
-
   for (int i = 0; i < 16; i++) {
     counter[i] = 0;
   }
 
   //reads from the register
   for (int i = 0; i < NCYCLES; i++) {
+    for(int j = 0; j < 16; j++){
+      counter[j] += !digitalRead(pins[j]);
+    }
+    /*
+     * Non worka
     counter[0] += !S0;
     counter[1] += !S1;
     counter[2] += !S2;
@@ -115,12 +123,12 @@ void readBall() {
     counter[12] += !S12;
     counter[13] += !S13;
     counter[14] += !S14;
-    counter[15] += !S15;
+    counter[15] += !S15;*/
   }
-
-  /*for (int i = 0; i < 16; i++) {
+  
+  for (int i = 0; i < 16; i++) {
     if (counter[i] > BROKEN) counter[i] = 0;
-    }*/
+  }
 
   nmax = 0;
   //saves max value and index
@@ -132,24 +140,21 @@ void readBall() {
   }
 
   //gets the distance based on thresholds
-  /*if (counter[nmax] < THRESHOLD6) {
+  if (nmax < THRESHOLD6) {
     nmax = 0;
-    distance = 6;
+    distance = 1;
     digitalWrite(A4, LOW);
   } else {
-    if (nmax < THRESHOLD0) distance = 0;
-    if (nmax < THRESHOLD1) distance = 1;
-    if (nmax < THRESHOLD2) distance = 2;
-    if (nmax < THRESHOLD3) distance = 3;
-    if (nmax < THRESHOLD4) distance = 4;
-    if (nmax < THRESHOLD5) distance = 5;
+    if (nmax < DIST_THRESHOLD) distance = 1;
+    else distance = 0;   
 
     digitalWrite(A4, HIGH);
-  }*/
+  }
 
   //sends by serial
-  distance = distance << 5;
-  ballInfo = distance | nmax;
+  ballInfo = (distance << 5) | index;
+
+  Serial.write(ballInfo);
 }
 
 void test() {
@@ -187,7 +192,15 @@ void test() {
   Serial.print(" | ");
   Serial.print(S15);
   Serial.print(" ()  ");
-    Serial.println(index);
+  Serial.println(index);
+}
+
+void printCounter(){
+  for(int i = 0; i < 16; i++){
+    Serial.print(counter[i]);
+    Serial.print(" | ");
+  }
+  Serial.println();
 }
 
 
