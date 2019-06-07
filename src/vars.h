@@ -224,8 +224,8 @@ extr int a;
 // puzzi tanto
 extr unsigned long old_timer;
 // Interrupt
-extr byte lineBallSensor;
-extr byte lineBallDistance;
+extr byte lineball_sensor;
+extr byte lineball_distance;
 extr int lineBallDir;
 // extr float angle;
 // extr int ldir, lspeed;
