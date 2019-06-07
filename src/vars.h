@@ -63,6 +63,9 @@
 //extr int LINE_THRESH;
 #define LINE_THRESH 150
 extr int outDir;
+extr int outVel;
+extr bool bounds;
+extr int EXTIME;
 
 extr int LN1I;
 extr int LN2I;

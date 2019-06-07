@@ -105,6 +105,9 @@ void setup() {
   y = 0;
   x = 0;
 
+  //bounds
+  EXTIME = 75;
+
   // ;)
   analogWriteFrequency(2 , 15000);
   analogWriteFrequency(5 , 15000);
@@ -148,7 +151,7 @@ void setup() {
   // digitalWrite(30, HIGH);
   // digitalWrite(29, HIGH);
   // digitalWrite(LED_BUILTIN, LOW);
-  // stopSetup();
+  stopSetup();
   timertest = 0;
 }
 

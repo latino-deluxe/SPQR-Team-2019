@@ -72,15 +72,15 @@ void startSetup(){
 }
 
 void stopSetup() {
-  tone(buzzer, LA5, 100);
+  tone(30, LA5, 100);
   delay (100);
-  noTone(buzzer);
-  tone(buzzer, LA5, 100);
+  noTone(30);
+  tone(30, LA5, 100);
   delay (100);
-  noTone(buzzer);
-  tone(buzzer, LA2, 100);
+  noTone(30);
+  tone(30, LA2, 100);
   delay (100);
-  noTone(buzzer);
+  noTone(30);
 }
 
 void miiChannel() {
