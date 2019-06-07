@@ -1,0 +1,5 @@
+Issues found on the boards:
+
+- IMU strips distance shorter than expected
+- Bluetooth rotated 180°
+- Ground trace going through IR Sensor 16 signal pad		*Fixed in Eagle
