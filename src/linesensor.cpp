@@ -31,59 +31,78 @@ void checkLineSensors() {
   for(int i = 0; i<4; i++) {
     linetriggerI[i] = analogRead(linepinsI[i]) > LINE_THRESH;
     linetriggerO[i] = analogRead(linepinsO[i]) > LINE_THRESH;
-    if(linetriggerI[i] || linetriggerO[i]) lineCnt = 100;
+    if(linetriggerI[i] || linetriggerO[i]) lineCnt = EXTIME;
     linesensbyteI = linesensbyteI + (linetriggerI[i]<<i);
     linesensbyteO = linesensbyteO + (linetriggerO[i]<<i);
   }
   linesensbyte = linesensbyteI | linesensbyteO;
+  if(linesensbyte > 0) bounds = true;
+  else bounds = false;
+  outOfBounds();
+}
 
-  if(lineCnt == 100) {
+void outOfBounds() {
+  if(lineCnt == EXTIME) {
     switch(linesensbyte) {
+      case 0:
+        outDir = 0;
+        outVel = 0;
+      break;
+
       case 1:
         outDir = 180;
+        outVel = 200;
       break;
 
       case 2:
         outDir = 270;
+        outVel = 200;
       break;
 
       case 4:
         outDir = 0;
+        outVel = 200;
       break;
 
       case 8:
         outDir = 90;
+        outVel = 200;
       break;
 
 
 
       case 3:
         outDir = 225;
+        outVel = 200;
       break;
 
       case 6:
         outDir = 315;
+        outVel = 200;
       break;
 
       case 12:
         outDir = 45;
+        outVel = 200;
       break;
 
       case 9:
         outDir = 135;
+        outVel = 200;
       break;
 
 
 
       default:
-
+        outDir = new_Dir + 180;
+        if(outDir > 360) outDir = outDir - 360;
+        outVel = 200;
       break;
     }
   }
 
-  if(lineCnt > 0) {
-    if(exitTimer < 250) preparePID(outDir, 200);
-  }
+  if(lineCnt > 0) preparePID(outDir, outVel);
+  else preparePID(0, 0);
 
   lineCnt--;
   if(lineCnt < 0) {
@@ -91,18 +110,12 @@ void checkLineSensors() {
     outDir = 0;
   }
 
-  /*9Serial.print("Byte:   ");
+  /*Serial.print("Byte:   ");
   Serial.print(linesensbyteO);
   Serial.print("    Direzione:    ");
   Serial.println(outDir);
   delay(150);*/
 }
-
-
-void outOfBounds() {
-  
-}
-
 
 
 void playSafe() {
