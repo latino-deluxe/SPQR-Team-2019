@@ -13,7 +13,7 @@
 #include "motors.h"
 #include "music.h"
 #include "mysoftware_serial.h"
-#include "myspi_old.h"
+#include "nano_ball.h"
 #include "pid.h"
 #include "position.h"
 #include "space_invaders.h"
@@ -157,15 +157,16 @@ void loop() {
 
   readIMU();
   checkLineSensors();
+  readBall();
 
   
 
-  digitalWrite(G, digitalRead(SWITCH_DX));
-  digitalWrite(R, digitalRead(SWITCH_SX));
+  // digitalWrite(G, digitalRead(SWITCH_DX));
+  // digitalWrite(R, digitalRead(SWITCH_SX));
 
-  // if(timertest < 500) drivePID(45, 80);
-  // else if (timertest < 1000) drivePID(135, 80);
-  // else if(timertest < 1500) drivePID(225, 80);
-  // else if (timertest < 2000) drivePID(315, 80);
+  // if(timertest < 500) drivePID(0, 150);
+  // else if (timertest < 1000) drivePID(90, 150);
+  // else if(timertest < 1500) drivePID(180, 150);
+  // else if (timertest < 2000) drivePID(270, 150);
   // else if(timertest < 2500) timertest=0;
 }

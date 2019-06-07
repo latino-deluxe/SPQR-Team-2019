@@ -3,6 +3,7 @@
 #include "us.h"
 #include "bluetooth.h"
 #include "myspi_old.h"
+#include "nano_ball.h"
 #include "position.h"
 #include "imu.h"
 #include "motors.h"
@@ -62,7 +63,7 @@ void testMenu(){
         return;
       break;
       case '1'://test palla
-        testBall();
+        testBallNano();
         delay(testDelay);
       break;
       case '2'://test us

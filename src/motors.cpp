@@ -3,8 +3,8 @@
 #include "pid.h"
 #include <Arduino.h>
 
-byte INA_MOT[5] = {0, 11, 24, 26, 22}; //{0,  16,  5,  8};           // INA pin
-byte INB_MOT[5] = {0, 12, 25, 27, 21}; //{0,  15,  6,  9};           // INB pin
+byte INA_MOT[5] = {0, 12, 25, 27, 21}; //{0,  16,  5,  8};           // INA pin
+byte INB_MOT[5] = {0, 11, 24, 26, 22}; //{0,  15,  6,  9};           // INB pin
 byte PWM_MOT[5] = {0, 2,   5,  6, 23}; //{0,  4,   7,   10};         // PWM pin
 
 void initMotorsGPIO() {
