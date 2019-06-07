@@ -130,7 +130,6 @@ void setup() {
   // Enable Serial for test
   Serial.begin(9600);
   NANO_BALL.begin(57600);
-  delay(1000);
 
   // Setups a bunch of pins
   // pinMode(27, OUTPUT);
@@ -161,19 +160,11 @@ void loop() {
 
   readIMU();
   readBallNano();
-  goalie();
-  checkLineSensors();
 
+  if(ball_seen) goalie();
+  else preparePID(0, 0);
   
-
-  // digitalWrite(G, digitalRead(SWITCH_DX));
-  // digitalWrite(R, digitalRead(SWITCH_SX));
-
-  // if(timertest < 500) drivePID(0, 150);
-  // else if (timertest < 1000) drivePID(90, 150);
-  // else if(timertest < 1500) drivePID(180, 150);
-  // else if (timertest < 2000) drivePID(270, 150);
-  // else if(timertest < 2500) timertest=0;
+  checkLineSensors();
 
   drivePID(globalDir, globalSpeed);
 }

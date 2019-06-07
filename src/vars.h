@@ -98,21 +98,21 @@ extr int x;
 #define VEL_RET 180
 #define GOALIE_P 255 // velocità portiere
 #define AA0  0        // angoli di attacco in funzione del sensore palla
-#define AA1  30
-#define AA2  50
-#define AA3  90
-#define AA4  115
-#define AA5  135
-#define AA6  155
+#define AA1  45
+#define AA2  75
+#define AA3  100 
+#define AA4  135
+#define AA5  165
+#define AA6  175
 #define AA7  210            //DIETRO
 #define AA8  210            //DIETRO
 #define AA9  150            //DIETRO
-#define AA10 205
-#define AA11 225
-#define AA12 245
-#define AA13 270
-#define AA14 310
-#define AA15 330
+#define AA10 180
+#define AA11 200
+#define AA12 225
+#define AA13 260
+#define AA14 285
+#define AA15 315
 
 #define BT Serial3
 

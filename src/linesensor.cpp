@@ -94,15 +94,14 @@ void outOfBounds() {
 
 
       default:
-        outDir = new_Dir + 180;
-        if(outDir > 360) outDir = outDir - 360;
-        outVel = 200;
+        outDir = 0;
+        outVel = 0;
       break;
     }
   }
 
   if(lineCnt > 0) preparePID(outDir, outVel);
-  else preparePID(0, 0);
+  // else preparePID(0, 0);
 
   lineCnt--;
   if(lineCnt < 0) {
