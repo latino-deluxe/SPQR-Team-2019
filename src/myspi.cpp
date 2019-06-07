@@ -97,7 +97,7 @@
 // }
 //
 // bool inSensorRange(byte sensor, byte range) {
-//   // BT.println(lineBallSensor);
+//   // BT.println(lineball_sensor);
 //   for (int i = 0; i <= range; i++) {
 //     // BT.print(getSensorIndex(sensor - i));
 //     // BT.print(" | ");

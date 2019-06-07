@@ -158,12 +158,8 @@ void loop() {
 
   readIMU();
   checkLineSensors();
-  // readBallNano();
+  readBallNano();
 
-  
-
-  digitalWrite(G, digitalRead(SWITCH_DX));
-  digitalWrite(R, digitalRead(SWITCH_SX));
 
   // if(timertest < 500) drivePID(0, 150);
   // else if (timertest < 1000) drivePID(90, 150);

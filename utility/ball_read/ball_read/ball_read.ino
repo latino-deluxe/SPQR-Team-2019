@@ -59,13 +59,14 @@
 
 int counter[16];
 int pins[] = {A3, A2, A1, A0, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
-
 int distance;
-
-byte ballInfo = 0;
-
 int nmax = 0;
 int index = 0;
+
+int oldIndex = 0;
+int oldDistance = 0;
+
+byte ballInfo = 0;
 
 void setup() {
   delay(1000);
@@ -94,6 +95,7 @@ void setup() {
 
 void loop() {
   readBall();
+  sendData();
 }
 
 void readBall() {
@@ -142,7 +144,7 @@ void readBall() {
   //gets the distance based on thresholds
   if (nmax < THRESHOLD6) {
     nmax = 0;
-    distance = 1;
+    distance = 5;
     digitalWrite(A4, LOW);
   } else {
     if (nmax < DIST_THRESHOLD) distance = 1;
@@ -150,12 +152,18 @@ void readBall() {
 
     digitalWrite(A4, HIGH);
   }
+}
 
+void sendData(){
   //sends by serial
-  ballInfo = (distance << 5) | index;
+  distance = distance << 5;
+  ballInfo = distance | index;
 
-  Serial.write(ballInfo);
-  //Serial.write(42);
+  if(oldDistance != distance || oldIndex != index){
+    Serial.write(ballInfo);
+    oldDistance = distance;
+    oldIndex = index;   
+  }
 }
 
 void test() {
@@ -203,48 +211,3 @@ void printCounter(){
   }
   Serial.println();
 }
-
-
-/*//copies of the register ports
-  byte portb, portc, portd;
-  portb = PINB;
-  portc = PINC;
-  portd = PIND;
-
-  counter[3] += !(portc & 0x01);
-  portc >> 1;
-  counter[2] += !(portc & 0x01);
-  portc >> 1;
-  counter[1] += !(portc & 0x01);
-  portc >> 1;
-  counter[0] += !(portc & 0x01);
-  portc >> 1;
-
-  counter[9] += !(portb & 0x01);
-  portb >> 1;
-  counter[8] += !(portb & 0x01);
-  portb >> 1;
-  counter[7] += !(portb & 0x01);
-  portb >> 1;
-  counter[6] += !(portb & 0x01);
-  portb >> 1;
-  counter[5] += !(portb & 0x01);
-  portb >> 1;
-  counter[4] += !(portb & 0x01);
-  portb >> 1;
-
-  //portd starts from 2nd byte and needs previous shifting
-  portd >> 2;
-  counter[15] += !(portd & 0x01);
-  portd >> 1;
-  counter[14] += !(portd & 0x01);
-  portd >> 1;
-  counter[13] += !(portd & 0x01);
-  portd >> 1;
-  counter[12] += !(portd & 0x01);
-  portd >> 1;
-  counter[11] += !(portd & 0x01);
-  portd >> 1;
-  counter[10] += !(portd & 0x01);
-  portd >> 1;
-  }*/
