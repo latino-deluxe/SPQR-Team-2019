@@ -3,8 +3,8 @@
 
 byte ballReadNano;
 
-void readBall() {
-    if(NANO_BALL.available() > 0) ballReadNano = NANO_BALL.read();
+void readBallNano() {
+    if(Serial4.available() > 0) ballReadNano = Serial4.read();
     if(ballReadNano == 255) return;
 
     ball_sensor = (ballReadNano & 00011111);
@@ -13,11 +13,11 @@ void readBall() {
 }
 
 void testBallNano() {
-  readBall();
-  DEBUG_PRINT.print(ball_sensor);
-  DEBUG_PRINT.print(" | ");
-  DEBUG_PRINT.println(ball_distance);
-
+  readBallNano();
+  // DEBUG_PRINT.print(ball_sensor);
+  // DEBUG_PRINT.print(" | ");
+  // DEBUG_PRINT.println(ball_distance);
+  DEBUG_PRINT.println(ballReadNano);
   delay(500);
 }
 

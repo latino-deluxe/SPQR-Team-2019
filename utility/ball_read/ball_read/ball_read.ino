@@ -155,6 +155,7 @@ void readBall() {
   ballInfo = (distance << 5) | index;
 
   Serial.write(ballInfo);
+  //Serial.write(42);
 }
 
 void test() {

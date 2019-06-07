@@ -1,3 +1,3 @@
-void readBall();
+void readBallNano();
 void testBallNano();
 // bool inSensorRange(byte, byte);

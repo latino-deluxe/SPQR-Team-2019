@@ -21,11 +21,13 @@ int lineCnt;
 byte linesensbyteI;
 byte linesensbyteO;
 byte linesensbyte;
+elapsedMillis exitTimer;
 
 void checkLineSensors() {
   linesensbyteI = 0;
   linesensbyteO = 0;
   linesensbyte  = 0;
+  exitTimer = 0;
   for(int i = 0; i<4; i++) {
     linetriggerI[i] = analogRead(linepinsI[i]) > LINE_THRESH;
     linetriggerO[i] = analogRead(linepinsO[i]) > LINE_THRESH;
@@ -79,7 +81,9 @@ void checkLineSensors() {
     }
   }
 
-  if(lineCnt > 0) preparePID(outDir, 100);
+  if(lineCnt > 0) {
+    if(exitTimer < 250) preparePID(outDir, 200);
+  }
 
   lineCnt--;
   if(lineCnt < 0) {

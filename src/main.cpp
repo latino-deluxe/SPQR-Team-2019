@@ -26,8 +26,7 @@ int SWS = 0;
 int SWD = 0;
 elapsedMillis timertest;
 
-void setup()
-{
+void setup() {
   startSetup();
   // Now assign value to variables, first thing to do
   // IMU
@@ -107,9 +106,10 @@ void setup()
   x = 0;
 
   // ;)
-  // analogWriteFrequency(4 , 15000);
-  // analogWriteFrequency(7 , 15000);
-  // analogWriteFrequency(10, 15000);
+  analogWriteFrequency(2 , 15000);
+  analogWriteFrequency(5 , 15000);
+  analogWriteFrequency(6, 15000);
+  analogWriteFrequency(23, 15000);
 
   // disable those pins, damaged teensy
   pinMode(A8, INPUT_DISABLE); // pin A8 in corto tra 3.3V e massa
@@ -126,6 +126,7 @@ void setup()
 
   // Enable Serial for test
   Serial.begin(9600);
+  NANO_BALL.begin(57600);
   delay(1000);
 
   // Setups a bunch of pins
@@ -157,16 +158,18 @@ void loop() {
 
   readIMU();
   checkLineSensors();
-  readBall();
+  // readBallNano();
 
   
 
-  // digitalWrite(G, digitalRead(SWITCH_DX));
-  // digitalWrite(R, digitalRead(SWITCH_SX));
+  digitalWrite(G, digitalRead(SWITCH_DX));
+  digitalWrite(R, digitalRead(SWITCH_SX));
 
   // if(timertest < 500) drivePID(0, 150);
   // else if (timertest < 1000) drivePID(90, 150);
   // else if(timertest < 1500) drivePID(180, 150);
   // else if (timertest < 2000) drivePID(270, 150);
   // else if(timertest < 2500) timertest=0;
+
+  drivePID(globalDir, globalSpeed);
 }
