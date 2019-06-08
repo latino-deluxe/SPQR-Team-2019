@@ -27,7 +27,9 @@ int SWD = 0;
 elapsedMillis timertest;
 
 void setup() {
-  startSetup();
+  // startSetup();
+  imperial_march();
+  
   // Now assign value to variables, first thing to do
   // IMU
   imu_current_euler = 0;

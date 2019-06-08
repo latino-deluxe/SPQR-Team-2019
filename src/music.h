@@ -107,7 +107,7 @@
 #define S Q/4                               //sixteenth 1/16
 #define W 4*Q                               //whole 4/4
 
-#define buzzer 27
+#define buzzer 30
 
 void imperial_march();
 void super_mario();
