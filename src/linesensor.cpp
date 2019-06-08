@@ -121,6 +121,7 @@ void outOfBounds() {
 
 void playSafe() {
   if(lineCnt == EXTIME) {
+    tone(BUZZER, LA3);
     switch (linesensbyteO){
       case 1:
         outDir = 180;
@@ -238,6 +239,7 @@ void playSafe() {
 
   lineCnt--;
   if(lineCnt < 0) {
+    noTone(BUZZER);
     lineCnt = 0;
     outDir = 0;
   }
