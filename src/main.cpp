@@ -106,7 +106,7 @@ void setup() {
   x = 0;
 
   //bounds
-  EXTIME = 75;
+  EXTIME = 50;      //prima era 75
 
   // ;)
   analogWriteFrequency(2 , 15000);
@@ -129,6 +129,7 @@ void setup() {
 
   // Enable Serial for test
   Serial.begin(9600);
+  // Enable Serial4 for the slave
   NANO_BALL.begin(57600);
 
   // Setups a bunch of pins
@@ -140,16 +141,12 @@ void setup() {
   initIMU();
   initMotorsGPIO();
   // initLineSensors();
-  // initSPI();
   // initUS();
   initSinCos();
   // initBluetooth();
   // initSoftwareSerial();
   // CAMERA.begin(19200);
 
-  // digitalWrite(30, HIGH);
-  // digitalWrite(29, HIGH);
-  // digitalWrite(LED_BUILTIN, LOW);
   stopSetup();
   timertest = 0;
 }
@@ -164,7 +161,7 @@ void loop() {
   if(ball_seen) goalie();
   else preparePID(0, 0);
   
-  checkLineSensors();
+  checkLineSensors();                           //Last thing in loop, for priority
 
   drivePID(globalDir, globalSpeed);
 }

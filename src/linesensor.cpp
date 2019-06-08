@@ -38,7 +38,8 @@ void checkLineSensors() {
   linesensbyte = linesensbyteI | linesensbyteO;
   if(linesensbyte > 0) bounds = true;
   else bounds = false;
-  outOfBounds();
+  // outOfBounds();
+  playSafe();                                                 //utilizzo dei sensori palla
 }
 
 void outOfBounds() {
@@ -96,6 +97,7 @@ void outOfBounds() {
       default:
         outDir = 0;
         outVel = 0;
+        // goCenter();         //UNA VOLTA ABILITATI GLI US
       break;
     }
   }
@@ -118,7 +120,127 @@ void outOfBounds() {
 
 
 void playSafe() {
-  
+  if(lineCnt == EXTIME) {
+    switch (linesensbyteO){
+      case 1:
+        outDir = 180;
+        outVel = 200;
+      break;
+
+      case 2:
+        outDir = 270;
+        outVel = 200;
+      break;
+
+      case 4:
+        outDir = 0;
+        outVel = 200;
+      break;
+
+      case 8:
+        outDir = 90;
+        outVel = 200;
+      break;    
+
+      case 3:
+        outDir = 225;
+        outVel = 200;
+      break;
+
+      case 6:
+        outDir = 315;
+        outVel = 200;
+      break;
+
+      case 12:
+        outDir = 45;
+        outVel = 200;
+      break;
+
+      case 9:
+        outDir = 135;
+        outVel = 200;
+      break;
+
+      default:
+        // goCenter();         //come si introducono gli US
+        outDir = 0;
+        outVel = 0;
+      break;
+    }
+
+    switch(linesensbyteI){
+      case 1:
+        if((ball_sensor > 12 && ball_sensor <= 15) || (ball_sensor >= 0 && ball_sensor < 4)) {
+          outDir = 0;
+          outVel = 0;
+        }
+      break;
+
+      case 2:
+        if(ball_sensor > 0 && ball_sensor < 9) {
+          outDir = 0;
+          outVel = 0;
+        }
+      break;
+
+      case 4:
+        if(ball_sensor > 4 && ball_sensor < 12) {
+          outDir = 0;
+          outVel = 0;
+        }
+      break;
+
+      case 8:
+        if(ball_sensor > 9 && ball_sensor < 15) {
+          outDir = 0;
+          outVel = 0;
+        }
+      break;
+
+      case 3:
+        if((ball_sensor > 12 && ball_sensor <= 15) || (ball_sensor >= 0 && ball_sensor < 4)) {
+          outDir = 0;
+          outVel = 0;
+        }
+      break;
+
+      case 6:
+        if(ball_sensor > 0 && ball_sensor < 9) {
+          outDir = 0;
+          outVel = 0;
+        }
+      break;
+
+      case 12:
+        if(ball_sensor > 4 && ball_sensor < 12) {
+          outDir = 0;
+          outVel = 0;
+        }
+      break;
+
+      case 9:
+        if(ball_sensor > 9 && ball_sensor < 15) {
+          outDir = 0;
+          outVel = 0;
+        }
+      break;
+
+      default:
+        // goCenter();         //come si introducono gli US
+        outDir = 0;
+        outVel = 0;
+      break;
+    }
+  }
+
+  if(lineCnt > 0) preparePID(outDir, outVel);
+
+  lineCnt--;
+  if(lineCnt < 0) {
+    lineCnt = 0;
+    outDir = 0;
+  }
 }
 
 void testLineSensors(){
