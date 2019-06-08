@@ -79,23 +79,13 @@ void goalPosition() {
     valB = oldGoal;
 
   if (datavalid == 1) {
-    if (role == HIGH) {
-      if (pAtk == 1) { // leggi porta blu
-        portx = valB;
-      } else { // leggi porta gialla
-        portx = valY;
-      }
-    } else {
-      if (pDef == 1) { // leggi porta blu
-        portx = valB;
-      } else { // leggi porta gialla
-        portx = valY;
-      }
+    if(goal_orentation) {      //attacco gialla, difendo blu
+      pAtk = valY;
+      pDef = valB;
     }
     datavalid = 0;
   }
-  // update_location_complete();
+
   if (portx == 0)
     portx = 999;
 }
-// un numero grande equivale a stare a destra, piccolo a sinistra

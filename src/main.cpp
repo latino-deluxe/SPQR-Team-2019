@@ -93,6 +93,7 @@ void setup() {
   pAtk = 0;
   pDef = 0;
   portx = 0;
+  goal_orentation = 0;
 
   // BT
   topolino = 0;
@@ -152,13 +153,19 @@ void setup() {
 }
 
 void loop() {
+  role = digitalRead(SWITCH_DX);                //se HIGH sono attaccante
+  goal_orentation = digitalRead(SWITCH_SX);     //se HIGH attacco gialla, difendo blu
 
   if(Serial.available() > 0) testMenu();
 
   readIMU();
   readBallNano();
+  goalPosition();
 
-  if(ball_seen) goalie();
+  if(ball_seen) {
+    if(role) goalie();
+    else space_invaders();
+  }
   else preparePID(0, 0);
   
   checkLineSensors();                           //Last thing in loop, for priority

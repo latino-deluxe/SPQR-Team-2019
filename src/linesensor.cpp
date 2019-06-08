@@ -169,7 +169,7 @@ void playSafe() {
       break;
     }
 
-    switch(linesensbyteI){
+    switch(linesensbyteI) {
       case 1:
         if((ball_sensor > 12 && ball_sensor <= 15) || (ball_sensor >= 0 && ball_sensor < 4)) {
           outDir = 0;

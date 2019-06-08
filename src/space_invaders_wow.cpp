@@ -19,6 +19,14 @@ int defDir = 0;
 int defSpeed = 0;
 int defDistance = 2;
 
+void space_invaders() {
+  if(ball_sensor < 15 && ball_sensor > 12)  preparePID(270, 170);
+  if(ball_sensor > 1  && ball_sensor < 4)   preparePID(90, 170);
+  if(ball_sensor >= 4 && ball_sensor <= 12) goalie();
+  if(ball_sensor == 15 || ball_sensor == 0 || ball_sensor == 1) preparePID(0, 0);
+}
+
+
 void keeper() {
   if (us_px >= 30 && comrade) {
     centerGoalPost();
