@@ -83,9 +83,15 @@ void goalPosition() {
       pAtk = valY;
       pDef = valB;
     }
+    else {
+      pAtk = valB;
+      pDef = valY;
+    }
     datavalid = 0;
   }
 
-  if (portx == 0)
-    portx = 999;
+  if (pAtk == 0) pAtk = 999;
+  if (pDef == 0) pDef = 999;
+
 }
+
