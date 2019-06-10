@@ -4,19 +4,27 @@
 byte ballReadNano;
 
 void readBallNano() {
-    if(NANO_BALL.available() > 0) ballReadNano = NANO_BALL.read();
-    else return;
-    if(ballReadNano == 255) return;
-    
+    if(!NANO_BALL.available()) return;
+    while(NANO_BALL.available() > 0) ballReadNano = NANO_BALL.read();
+
+    if((ballReadNano & 0b00000001) == 0){
+      ball_degrees = ballReadNano;
+    }else{
+      ball_distance = ballReadNano;
+      ball_seen = ball_distance != 1;
+    }
+
+    /*
     ball_sensor = (ballReadNano & 0b00011111);
     ball_distance = ballReadNano >> 5;
-    ball_seen  = ball_distance != 5;
+    ball_seen  = ball_distance != 5;*/
 }
 
 void testBallNano() {
   readBallNano();
   if(ball_seen){
-    DEBUG_PRINT.print(ball_sensor);
+    //DEBUG_PRINT.print(ball_sensor);
+    DEBUG_PRINT.print(ball_degrees); 
     DEBUG_PRINT.print(" | ");
     DEBUG_PRINT.println(ball_distance);
   }else{

@@ -8,7 +8,28 @@
 #include "camera.h" 
 #include <Arduino.h>
 
+#define OFFDEG1 25
+#define OFFDEG2 35
+
 void goalie() {
+  if((ball_degrees >= 345 && ball_degrees <= 359) || (ball_degrees >= 0 && ball_degrees <= 15)) atk_direction = 0;
+  if(ball_degrees > 15 && ball_degrees <= 180) {
+    if(ball_degrees >= 0 && ball_degrees <= 90) atk_direction = ball_degrees + OFFDEG1;
+    if(ball_degrees > 90 && ball_degrees <= 180) atk_direction = ball_degrees + OFFDEG2;
+  }
+  else {
+    if(ball_degrees > 180 && ball_degrees <= 270) atk_direction = ball_degrees - OFFDEG1;
+    if(ball_degrees > 270 && ball_degrees < 345)    atk_direction = ball_degrees - OFFDEG2;
+  }
+  atk_speed = 250;
+
+  preparePID(atk_direction, atk_speed);
+}
+
+
+
+
+void goalieOLD() {
   // directions going around the ball
   int goaliedirection[16] = {AA0,  AA1,  AA2,  AA3,  AA4,  AA5,  AA6,
                              AA7,  AA8,  AA9,  AA10, AA11, AA12, AA13,
