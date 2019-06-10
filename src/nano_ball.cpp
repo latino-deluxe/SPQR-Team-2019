@@ -1,18 +1,14 @@
 #include "Arduino.h"
 #include "vars.h"
 
-byte ballReadNano;
+byte ballReadNano, ballReadNanoCopy;
 
 void readBallNano() {
-    if(!NANO_BALL.available()) return;
     while(NANO_BALL.available() > 0) ballReadNano = NANO_BALL.read();
+    ballReadNanoCopy = ballReadNano;
 
-    if((ballReadNano & 0b00000001) == 0){
-      ball_degrees = ballReadNano;
-    }else{
-      ball_distance = ballReadNano;
-      ball_seen = ball_distance != 1;
-    }
+    ball_seen = true;
+    ball_degrees = ballReadNano * 2;
 
     /*
     ball_sensor = (ballReadNano & 0b00011111);
