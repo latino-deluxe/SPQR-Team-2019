@@ -152,6 +152,10 @@ void setup() {
 
   stopSetup();
   timertest = 0;
+
+  if(SWITCH_DX == HIGH && SWITCH_SX == HIGH){
+    NANO_BALL.end();
+  }
 }
 
 void loop() {
