@@ -112,7 +112,7 @@ void loop() {
   //sendData();
 
   readBallInterpolation();
-  //sendDataInterpolation();  
+  sendDataInterpolation();  
 }
 
 void readBallInterpolation(){
