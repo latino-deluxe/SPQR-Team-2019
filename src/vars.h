@@ -169,7 +169,8 @@ extr unsigned long
 // Motors
 extr float vx, vy, speed1, speed2, speed3, speed4, pidfactor, sins[360], cosin[360];
 // MySPI
-extr byte mess, ball_sensor, ball_distance, old_s_ball, ball_degrees;
+extr byte mess, ball_sensor, old_s_ball;
+extr int ball_degrees, ball_distance;
 extr long time_s_ball, tspi;
 extr bool ball_seen;
 // PID

@@ -8,8 +8,8 @@
 #include "camera.h" 
 #include <Arduino.h>
 
-#define OFFDEG1 25
-#define OFFDEG2 35
+#define OFFDEG1 35
+#define OFFDEG2 50
 
 void goalie() {
   if((ball_degrees >= 345 && ball_degrees <= 359) || (ball_degrees >= 0 && ball_degrees <= 15)) atk_direction = 0;

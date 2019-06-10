@@ -163,7 +163,7 @@ void setup() {
   }
 }
 
-void loop() {
+void loop() {   
   role = digitalRead(SWITCH_DX);                //se HIGH sono attaccante
   goal_orentation = digitalRead(SWITCH_SX);     //se HIGH attacco gialla, difendo blu
 
