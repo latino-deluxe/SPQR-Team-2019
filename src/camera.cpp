@@ -18,7 +18,6 @@ void goalPosition() {
 
   portx = 999;
   while (CAMERA.available()) {
-    Serial.print("sbeble");
     // get the new byte:
     char inChar = (char)CAMERA.read();
     // DEBUG_PRINT.write(inChar);
