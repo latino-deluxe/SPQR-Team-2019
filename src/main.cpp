@@ -179,8 +179,9 @@ void loop() {
   //   cameraReady = 0;
   // }
   
-  if(ball_seen) goalie();
-  else preparePID(0, 0);
+  // if(ball_seen) 
+  goalie();
+  // else preparePID(0, 0);
   
   checkLineSensors();                           //Last thing in loop, for priority
 
