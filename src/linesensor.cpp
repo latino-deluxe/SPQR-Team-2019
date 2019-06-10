@@ -1,4 +1,5 @@
 #include "linesensor.h"
+#include "goalie.h"
 #include "pid.h"
 #include "motors.h"
 #include "myspi_old.h"
@@ -26,7 +27,7 @@ elapsedMillis exitTimer;
 void checkLineSensors() {
   linesensbyteI = 0;
   linesensbyteO = 0;
-  linesensbyte  = 0;
+  // linesensbyte  = 0;
   exitTimer = 0;
   for(int i = 0; i<4; i++) {
     linetriggerI[i] = analogRead(linepinsI[i]) > LINE_THRESH;
@@ -35,61 +36,69 @@ void checkLineSensors() {
     linesensbyteI = linesensbyteI + (linetriggerI[i]<<i);
     linesensbyteO = linesensbyteO + (linetriggerO[i]<<i);
   }
-  linesensbyte = linesensbyteI | linesensbyteO;
+  linesensbyte |= (linesensbyteI | linesensbyteO);
   if(linesensbyte > 0) bounds = true;
   else bounds = false;
-  // outOfBounds();
-  playSafe();                                                 //utilizzo dei sensori palla
+  if(bounds) outOfBounds();
+  // playSafe();                                                 //utilizzo dei sensori palla
 }
 
 void outOfBounds() {
-  if(lineCnt == EXTIME) {
+  // if(lineCnt == EXTIME) {
     switch(linesensbyte) {
       case 0:
+      case 15:
+      case 5:
+      case 10:
         outDir = 0;
         outVel = 0;
+        tone(30, LA3);
       break;
 
       case 1:
+      case 11:
         outDir = 180;
-        outVel = 200;
+        outVel = 255;
       break;
 
       case 2:
+      case 7:
         outDir = 270;
-        outVel = 200;
+        outVel = 255;
       break;
 
       case 4:
+      case 14:
         outDir = 0;
-        outVel = 200;
+        outVel = 255;
       break;
 
       case 8:
+      case 13:
         outDir = 90;
-        outVel = 200;
+        outVel = 255;
       break;
 
 
 
       case 3:
         outDir = 225;
-        outVel = 200;
+        outVel = 255;
       break;
 
       case 6:
         outDir = 315;
-        outVel = 200;
+        outVel = 255;
       break;
 
       case 12:
         outDir = 45;
-        outVel = 200;
+        outVel = 255;
       break;
 
       case 9:
         outDir = 135;
-        outVel = 200;
+        outVel = 255;
       break;
 
 
@@ -100,10 +109,9 @@ void outOfBounds() {
         // goCenter();         //UNA VOLTA ABILITATI GLI US
       break;
     }
-  }
+  // }
 
   if(lineCnt > 0) preparePID(outDir, outVel);
-  // else preparePID(0, 0);
 
   lineCnt--;
   if(lineCnt < 0) {
@@ -111,11 +119,10 @@ void outOfBounds() {
     outDir = 0;
   }
 
-  /*Serial.print("Byte:   ");
-  Serial.print(linesensbyteO);
-  Serial.print("    Direzione:    ");
-  Serial.println(outDir);
-  delay(150);*/
+  if(lineCnt == 0) {
+    linesensbyte = 0;
+    noTone(30);
+  }
 }
 
 
@@ -176,6 +183,7 @@ void playSafe() {
           outDir = 0;
           outVel = 0;
         }
+        else goalie();
       break;
 
       case 2:
@@ -183,6 +191,7 @@ void playSafe() {
           outDir = 0;
           outVel = 0;
         }
+        else goalie();
       break;
 
       case 4:
@@ -190,6 +199,7 @@ void playSafe() {
           outDir = 0;
           outVel = 0;
         }
+        else goalie();
       break;
 
       case 8:
@@ -197,6 +207,7 @@ void playSafe() {
           outDir = 0;
           outVel = 0;
         }
+        else goalie();
       break;
 
       case 3:
@@ -204,6 +215,7 @@ void playSafe() {
           outDir = 0;
           outVel = 0;
         }
+        else goalie();
       break;
 
       case 6:
@@ -211,6 +223,7 @@ void playSafe() {
           outDir = 0;
           outVel = 0;
         }
+        else goalie();
       break;
 
       case 12:
@@ -218,6 +231,7 @@ void playSafe() {
           outDir = 0;
           outVel = 0;
         }
+        else goalie();
       break;
 
       case 9:
@@ -225,6 +239,7 @@ void playSafe() {
           outDir = 0;
           outVel = 0;
         }
+        else goalie();
       break;
 
       default:

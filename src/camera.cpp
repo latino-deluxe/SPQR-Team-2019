@@ -8,7 +8,7 @@ int endpB = 0;
 String valStringY = ""; // stringa dove si vanno a mettere i pacchetti di dati ricevuti
 String valStringB = "";
 int datavalid = 0; // segnalo se il dato ricevuto è valido
-int oldGoal;
+int oldGoalY,oldGoalB;
 
 void goalPosition() {
   int valY; // variabile a cui attribuisco momentaneamente il valore dell x
@@ -16,8 +16,9 @@ void goalPosition() {
 
   int valB;
 
-  // portx = 999;
+  portx = 999;
   while (CAMERA.available()) {
+    Serial.print("sbeble");
     // get the new byte:
     char inChar = (char)CAMERA.read();
     // DEBUG_PRINT.write(inChar);
@@ -57,41 +58,59 @@ void goalPosition() {
       valStringY = "";
       startpY = 0;
       endpY = 0;
-      datavalid = 1;
+      datavalid ++;
     }
     if ((startpB == 1) && (endpB == 1)) {
       valB = valStringB.toInt(); // valid data
       valStringB = "";
       startpB = 0;
       endpB = 0;
-      datavalid = 1;
+      datavalid ++;
     }
 
   } // end of while
+
   if (valY != 0)
-    oldGoal = valY;
+    oldGoalY = valY;
   if (valB != 0)
-    oldGoal = valB;
+    oldGoalB = valB;
 
   if (valY == 0)
-    valY = oldGoal;
+    valY = oldGoalY;
   if (valB == 0)
-    valB = oldGoal;
+    valB = oldGoalB;
 
-  if (datavalid == 1) {
-    if(goal_orentation) {      //attacco gialla, difendo blu
+  if (datavalid > 1) {  ///entro qui solo se ho ricevuto i pacchetti completi sia del blu che del giallo
+    if(goal_orentation == 1){
+      //yellow goalpost
       pAtk = valY;
       pDef = valB;
-    }
-    else {
+    }else{
+      //blue goalpost
       pAtk = valB;
       pDef = valY;
     }
+
     datavalid = 0;
+    cameraReady = 1;  //attivo flag di ricezione pacchetto
   }
+  // update_location_complete();
+  // if (portx == 0)
+  //   portx = 999;
+}
+// un numero grande equivale a stare a destra, piccolo a sinistra
 
-  if (pAtk == 0) pAtk = 999;
-  if (pDef == 0) pDef = 999;
 
+//fix the camera value change caused by the robot twist
+int imuOff, fst;
+int fixCamIMU(){
+    //fix for camera distortion when the robot twists
+    if(imu_current_euler > 30 && imu_current_euler < 180) imuOff = 30;
+    else if(imu_current_euler < 330 && imu_current_euler >= 180) imuOff = -30;
+    else if (imu_current_euler <= 360 && imu_current_euler >= 330) imuOff = imu_current_euler - 360;
+    else imuOff = imu_current_euler;
+
+    fst = map(imuOff, -30, 30, -90, 90);
+    return pAtk - fst;
 }
 

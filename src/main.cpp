@@ -27,8 +27,8 @@ int SWD = 0;
 elapsedMillis timertest;
 
 void setup() {
-  // startSetup();
-  imperial_march();
+  startSetup();
+  // imperial_march();
   
   // Now assign value to variables, first thing to do
   // IMU
@@ -96,6 +96,7 @@ void setup() {
   pDef = 0;
   portx = 0;
   goal_orentation = 0;
+  cameraReady = 0;
 
   // BT
   topolino = 0;
@@ -109,7 +110,7 @@ void setup() {
   x = 0;
 
   //bounds
-  EXTIME = 50;      //prima era 75
+  EXTIME = 100;      //prima era 75
 
   // ;)
   analogWriteFrequency(2 , 15000);
@@ -144,11 +145,10 @@ void setup() {
   initIMU();
   initMotorsGPIO();
   // initLineSensors();
-  // initUS();
+  initUS();
   initSinCos();
   // initBluetooth();
-  // initSoftwareSerial();
-  // CAMERA.begin(19200);
+  CAMERA.begin(19200);
 
   stopSetup();
   timertest = 0;
@@ -164,10 +164,13 @@ void loop() {
   readBallNano();
   goalPosition();
 
-  if(ball_seen) {
-    if(role) goalie();
-    else space_invaders();
+  if(cameraReady == 1) {
+    storcimentoPortaIncr();
+    // calcPhyZoneCam = true;
+    cameraReady = 0;
   }
+  
+  if(ball_seen) goalie();
   else preparePID(0, 0);
   
   checkLineSensors();                           //Last thing in loop, for priority

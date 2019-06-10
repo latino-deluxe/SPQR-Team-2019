@@ -27,7 +27,7 @@ void drivePID(signed int direzione, float vMot) {
   // speed4 = ((vx * sins[315]) + (vy * cosin[315]));
 
   speed1 = ((-(sins[((direzione - 45) + 360) % 360])) * vMot);          // mot 1
-  speed2 = ((-(sins[((direzione - 135) + 360 )% 360])) * vMot);         // mot 2
+  speed2 = ((-(sins[((direzione - 135) + 360)% 360])) * vMot);          // mot 2
   speed3 = -(speed1);                                                   // mot 3
   speed4 = -(speed2);                                                   // mot 4
  

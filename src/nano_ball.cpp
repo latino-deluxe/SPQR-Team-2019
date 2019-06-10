@@ -5,6 +5,7 @@ byte ballReadNano;
 
 void readBallNano() {
     if(NANO_BALL.available() > 0) ballReadNano = NANO_BALL.read();
+    else return;
     if(ballReadNano == 255) return;
     
     ball_sensor = (ballReadNano & 0b00011111);
