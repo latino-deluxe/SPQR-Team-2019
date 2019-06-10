@@ -2,6 +2,7 @@
 #include "goalie.h"
 #include "pid.h"
 #include "motors.h"
+#include "music.h"
 #include "myspi_old.h"
 #include "vars.h"
 #include <Arduino.h>
@@ -19,9 +20,13 @@ int linepinsO[4] = {S1O, S2O, S3O, S4O};
 int linetriggerI[4];
 int linetriggerO[4];
 int lineCnt;
+int CNTY;
+int CNTX;
 byte linesensbyteI;
 byte linesensbyteO;
 byte linesensbyte;
+byte linesensbyteOLDY;
+byte linesensbyteOLDX;
 elapsedMillis exitTimer;
 
 void checkLineSensors() {
@@ -45,14 +50,65 @@ void checkLineSensors() {
 
 void outOfBounds() {
   // if(lineCnt == EXTIME) {
+  if((linesensbyte == 2 || linesensbyte == 8)) {
+    linesensbyteOLDY = linesensbyte;
+    CNTY = 1000;
+    CNTY--;
+  }
+  if(CNTY <= 0) {
+    CNTY = 0;
+    linesensbyteOLDY = 0;
+  }
+
+  if((linesensbyte == 1 || linesensbyte == 4)) {
+    linesensbyteOLDX = linesensbyte;
+    CNTX = 1000;
+    CNTX--;
+  }
+  if(CNTX <= 0) {
+    CNTX = 0;
+    linesensbyteOLDY = 0;
+  }
+
     switch(linesensbyte) {
       case 0:
       case 15:
-      case 5:
-      case 10:
-        outDir = 0;
-        outVel = 0;
         tone(30, LA3);
+      break;
+
+
+      case 10:
+        if(linesensbyteOLDX == 1) {
+          outDir = 180;
+          outVel = 255;
+          tone(30, F6);
+        } else if(linesensbyteOLDX == 4) {
+          outDir = 0;
+          outVel = 255;
+          tone(30, F4);
+        }
+        else {
+          outDir = 0;
+          outVel = 0;
+          tone(30, LA3);
+        }
+      break;
+
+      case 5:
+        if(linesensbyteOLDY == 2) {
+          outDir = 270;
+          outVel = 255;
+          tone(30, F6);
+        } else if(linesensbyteOLDY == 8) {
+          outDir = 90;
+          outVel = 255;
+          tone(30, F4);
+        }
+        else {
+          outDir = 0;
+          outVel = 0;
+          tone(30, LA3);
+        }
       break;
 
       case 1:
