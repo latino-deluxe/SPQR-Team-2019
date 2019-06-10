@@ -173,11 +173,11 @@ void loop() {
   readBallNano();
   goalPosition();
 
-  if(cameraReady == 1) {
-    storcimentoPortaIncr();
-    // calcPhyZoneCam = true;
-    cameraReady = 0;
-  }
+  // if(cameraReady == 1) {
+  //   storcimentoPortaIncr();
+  //   // calcPhyZoneCam = true;
+  //   cameraReady = 0;
+  // }
   
   if(ball_seen) goalie();
   else preparePID(0, 0);
