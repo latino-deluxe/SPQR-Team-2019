@@ -153,8 +153,13 @@ void setup() {
   stopSetup();
   timertest = 0;
 
-  if(SWITCH_DX == HIGH && SWITCH_SX == HIGH){
+  if(digitalRead(SWITCH_DX) == HIGH && digitalRead(SWITCH_SX) == HIGH){
     NANO_BALL.end();
+    //pinMode(31, INPUT_DISABLE);
+    //pinMode(32, INPUT_DISABLE);
+    tone(BUZZER, C6);
+    delay(500);
+    noTone(BUZZER);
   }
 }
 
