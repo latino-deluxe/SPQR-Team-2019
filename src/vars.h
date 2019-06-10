@@ -260,7 +260,7 @@ extr bool stop_menamoli;
 // ema e' scemo da morire (letta)
 // centro a 150
 #define goalieCamMin 150
-#define goalieCamMax 170
+#define goalieCamMax 180
 
 extr int pAtk; // variabile dello switch che decide dove bisogna attaccare
 extr int pDef; // variabile dello switch che decide dove bisogna difendere
@@ -268,6 +268,7 @@ extr bool XP_SX;
 extr bool XP_DX;
 extr int portx;
 extr int goal_orentation;
+extr int cameraReady;
 
 extr float stincr;
 

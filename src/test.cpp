@@ -4,6 +4,7 @@
 #include "bluetooth.h"
 #include "myspi_old.h"
 #include "nano_ball.h"
+#include "camera.h"
 #include "position.h"
 #include "imu.h"
 #include "motors.h"
@@ -93,7 +94,10 @@ void testMenu(){
         delay(10);
       break;
       case '8':
-        Serial.println(portx);
+        goalPosition();
+        Serial.print(pAtk);
+        Serial.print(" | ");
+        Serial.println(pDef);
         delay(100);
       break;
       case '9':
