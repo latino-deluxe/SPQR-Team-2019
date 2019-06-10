@@ -39,8 +39,9 @@
 #define S11 ((PIND & 64) >> 6)
 #define S10 ((PIND & 128) >> 7)
 
-#define NCYCLES 500
-#define BROKEN  450 //just a test
+#define NCYCLES 250
+#define BROKEN  230
+#define TOO_LOW 60
 
 #define THRESHOLD0 200 
 #define THRESHOLD1 170
@@ -68,6 +69,14 @@ int oldDistance = 0;
 
 byte ballInfo = 0;
 
+float xs[16];
+float ys[16];
+
+float angle = 0, dist = 0;
+boolean sending = false;
+byte sendAngle = 0, sendDistance = 0;
+byte sendByte = 0;
+
 void setup() {
   delay(1000);
 
@@ -91,11 +100,78 @@ void setup() {
   pinMode(A3, INPUT);
 
   pinMode(A4, OUTPUT);
+
+  for(int i = 0; i < 16; i++){
+    xs[i] = cos((22.5 * PI / 180) * i);
+    ys[i] = sin((22.5 * PI / 180) * i);
+  }
 }
 
 void loop() {
-  readBall();
-  sendData();  
+  //readBall();
+  //sendData();
+
+  readBallInterpolation();
+  sendDataInterpolation();  
+}
+
+void readBallInterpolation(){
+  for (int i = 0; i < 16; i++) {
+    counter[i] = 0;
+  }
+
+  //reads from the register
+  for (int i = 0; i < NCYCLES; i++) {
+    counter[0] += !S0;
+    counter[1] += !S1;
+    counter[2] += !S2;
+    counter[3] += !S3;
+    counter[4] += !S4;
+    counter[5] += !S5;
+    counter[6] += !S6;
+    counter[7] += !S7;
+    counter[8] += !S8;
+    counter[9] += !S9;
+    counter[10] += !S10;
+    counter[11] += !S11;
+    counter[12] += !S12;
+    counter[13] += !S13;
+    counter[14] += !S14;
+    counter[15] += !S15;
+  }
+
+  float x = 0, y = 0;
+  for (int i = 0; i < 16; i++) {
+    if (counter[i] > BROKEN || counter[i] < TOO_LOW) counter[i] = 0;
+  
+    x += xs[i] * counter[i];
+    y += ys[i] * counter[i];  
+  }
+
+  angle = atan2(y, x) * 180 / PI;
+  angle = ((int)(angle+360)) % 360;
+
+  //distance is 0 when not seeing ball
+  dist = hypot(x, y);
+  if(dist >= 254) dist = 254;
+  
+  //turn led on
+  digitalWrite(A4, dist != 0);
+}
+
+void sendDataInterpolation(){
+  if(sending){
+    sendAngle = angle / 2;
+    sendAngle = sendAngle & 0b11111110;
+    sendByte = sendAngle;
+  }else{
+    sendDistance = distance | 0b00000001;
+    sendByte = sendDistance;
+  }
+  Serial.write(sendByte);
+  /*Serial.print(angle);
+  Serial.print(" , ");
+  Serial.println(sendAngle*2);*/
 }
 
 void readBall() {
@@ -108,7 +184,6 @@ void readBall() {
     /*for(int j = 0; j < 16; j++){
       counter[j] += !digitalRead(pins[j]);
     }*/
-    // Non worka
     counter[0] += !S0;
     counter[1] += !S1;
     counter[2] += !S2;
