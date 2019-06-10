@@ -20,27 +20,27 @@
     loop cycle duration: 3.2 millis
 **/
 
-#define S9 (PINB & 1) >> 0
-#define S8 (PINB & 2) >> 1
-#define S7 (PINB & 4) >> 2
-#define S6 (PINB & 8) >> 3
-#define S5 (PINB & 16) >> 4
-#define S4 (PINB & 32) >> 5
+#define S9 ((PINB & 1))
+#define S8 ((PINB & 2) >> 1)
+#define S7 ((PINB & 4) >> 2)
+#define S6 ((PINB & 8) >> 3)
+#define S5 ((PINB & 16) >> 4)
+#define S4 ((PINB & 32) >> 5)
 
-#define S3 (PINC & 1) >> 0
-#define S2 (PINC & 2) >> 1
-#define S1 (PINC & 4) >> 2
-#define S0 (PINC & 8) >> 3
+#define S3 ((PINC & 1))
+#define S2 ((PINC & 2) >> 1)
+#define S1 ((PINC & 4) >> 2)
+#define S0 ((PINC & 8) >> 3)
 
-#define S15 (PIND & 4) >> 2
-#define S14 (PIND & 8) >> 3
-#define S13 (PIND & 16) >> 4
-#define S12 (PIND & 32) >> 5
-#define S11 (PIND & 64) >> 6
-#define S10 (PIND & 128) >> 7
+#define S15 ((PIND & 4) >> 2)
+#define S14 ((PIND & 8) >> 3)
+#define S13 ((PIND & 16) >> 4)
+#define S12 ((PIND & 32) >> 5)
+#define S11 ((PIND & 64) >> 6)
+#define S10 ((PIND & 128) >> 7)
 
-#define NCYCLES 255
-#define BROKEN  900 //just a test
+#define NCYCLES 500
+#define BROKEN  450 //just a test
 
 #define THRESHOLD0 200 
 #define THRESHOLD1 170
@@ -50,7 +50,7 @@
 #define THRESHOLD5 75
 #define THRESHOLD6 7
 
-#define DIST_THRESHOLD 90
+#define DIST_THRESHOLD 180  
 
 /*
  * 200-150: distance 0
@@ -61,7 +61,7 @@ int counter[16];
 int pins[] = {A3, A2, A1, A0, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 int distance;
 int nmax = 0;
-int index = 0;
+int sensor = 0;
 
 int oldIndex = 0;
 int oldDistance = 0;
@@ -95,7 +95,7 @@ void setup() {
 
 void loop() {
   readBall();
-  sendData();
+  sendData();  
 }
 
 void readBall() {
@@ -105,11 +105,10 @@ void readBall() {
 
   //reads from the register
   for (int i = 0; i < NCYCLES; i++) {
-    for(int j = 0; j < 16; j++){
+    /*for(int j = 0; j < 16; j++){
       counter[j] += !digitalRead(pins[j]);
-    }
-    /*
-     * Non worka
+    }*/
+    // Non worka
     counter[0] += !S0;
     counter[1] += !S1;
     counter[2] += !S2;
@@ -125,7 +124,7 @@ void readBall() {
     counter[12] += !S12;
     counter[13] += !S13;
     counter[14] += !S14;
-    counter[15] += !S15;*/
+    counter[15] += !S15;
   }
   
   for (int i = 0; i < 16; i++) {
@@ -133,11 +132,11 @@ void readBall() {
   }
 
   nmax = 0;
-  //saves max value and index
+  //saves max value and sensor
   for (int i = 0; i < 16; i++) {
     if (counter[i] > nmax) {
       nmax = counter[i];
-      index = i;
+      sensor = i;
     }
   }
 
@@ -157,12 +156,12 @@ void readBall() {
 void sendData(){
   //sends by serial
   distance = distance << 5;
-  ballInfo = distance | index;
+  ballInfo = distance | sensor;
 
-  if(oldDistance != distance || oldIndex != index){
+  if(oldDistance != distance || oldIndex != sensor){
     Serial.write(ballInfo);
     oldDistance = distance;
-    oldIndex = index;   
+    oldIndex = sensor;   
   }
 }
 
@@ -201,7 +200,7 @@ void test() {
   Serial.print(" | ");
   Serial.print(S15);
   Serial.print(" ()  ");
-  Serial.println(index);
+  Serial.println(sensor);
 }
 
 void printCounter(){
