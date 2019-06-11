@@ -150,7 +150,7 @@ void setup() {
   // initBluetooth();
   CAMERA.begin(19200);
 
-  stopSetup();
+  
   timertest = 0;
 
   if(digitalRead(SWITCH_DX) == HIGH && digitalRead(SWITCH_SX) == HIGH){
@@ -160,7 +160,8 @@ void setup() {
     // tone(BUZZER, C6);
     // delay(500);
     // noTone(BUZZER);
-  }
+    super_mario();
+  } else stopSetup();
 }
 
 void loop() {   
@@ -179,7 +180,10 @@ void loop() {
     cameraReady = 0;
   }
   
-  if(ball_seen) goalie();
+  if(ball_seen){
+    if(role) goalie();
+    else space_invaders();
+  } 
   else preparePID(0, 0);
   
   checkLineSensors();                           //Last thing in loop, for priority

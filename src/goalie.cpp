@@ -16,8 +16,8 @@
 
 void goalie() {
   if(ball_degrees >= 345 || ball_degrees < 15) atk_direction = ball_degrees;
-  if(ball_degrees >= 15 && ball_degrees < 45)  atk_direction = ball_degrees + 30;
-  if(ball_degrees >= 45 && ball_degrees < 90)  atk_direction = ball_degrees + 35;
+  if(ball_degrees >= 15 && ball_degrees < 45)  atk_direction = ball_degrees + 40;
+  if(ball_degrees >= 45 && ball_degrees < 90)  atk_direction = ball_degrees + 50;
   if(ball_degrees >= 90 && ball_degrees < 145) atk_direction = 170;
   if(ball_degrees >= 145 && ball_degrees < 180)atk_direction = 215;
   if(ball_degrees >= 180 && ball_degrees < 215)atk_direction = 145;

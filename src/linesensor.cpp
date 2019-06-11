@@ -41,11 +41,11 @@ void checkLineSensors() {
     linesensbyteI = linesensbyteI + (linetriggerI[i]<<i);
     linesensbyteO = linesensbyteO + (linetriggerO[i]<<i);
   }
+  // playSafe();
   linesensbyte |= (linesensbyteI | linesensbyteO);
   if(linesensbyte > 0) bounds = true;
   else bounds = false;
-  if(bounds) outOfBounds();
-  // playSafe();                                                 //utilizzo dei sensori palla
+  if(bounds) outOfBounds();                                            
 }
 
 void outOfBounds() {
@@ -181,7 +181,25 @@ void outOfBounds() {
   }
 }
 
-void playsafe() {
+void playSafe() {
+  switch(linesensbyte) {
+    case 1:
+    case 4:
+      x = 1;
+      y = 0;
+    break;
+
+    case 2:
+    case 8:
+      x = 0;
+      y = 1;
+    break;
+
+    default:
+      x = 1;
+      y = 1;
+    break;
+  }
 }
 
 void testLineSensors(){
