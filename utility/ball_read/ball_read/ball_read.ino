@@ -115,9 +115,9 @@ void loop() {
 
   readBallInterpolation();
 
-  if (millis() - t >= 150) {
+  //if (millis() - t >= 150) {
     sendDataInterpolation();
-  }
+  //}
 }
 
 void readBallInterpolation() {
@@ -158,8 +158,7 @@ void readBallInterpolation() {
 
   //distance is 0 when not seeing ball
   dist = hypot(x, y);
-  if (dist >= 254) dist = 254;
-
+  
   //turn led on
   if (dist == 0) {
     digitalWrite(A4, LOW);
@@ -173,7 +172,10 @@ void sendDataInterpolation() {
     sendAngle = ((byte) (angle / 2)) & 0b11111110;
     Serial.write(sendAngle);
   }else{
-    if(sendDistance % 2 == 0) sendDistance++;
+    sendDistance = ((byte) (dist / 2.5));
+    if(sendDistance > 254) sendDistance = 254;
+    sendDistance = sendDistance |= 0b00000001;
+    //Serial.println(sendDistance, BIN);
     Serial.write(sendDistance);
   }
   sending = !sending;
