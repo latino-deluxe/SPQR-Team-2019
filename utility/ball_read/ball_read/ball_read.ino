@@ -40,8 +40,8 @@
 #define S10 ((PIND & 128) >> 7)
 
 #define NCYCLES 250
-#define BROKEN  350
-#define TOO_LOW 100
+#define BROKEN  400
+#define TOO_LOW 120
 
 #define THRESHOLD0 200
 #define THRESHOLD1 170
