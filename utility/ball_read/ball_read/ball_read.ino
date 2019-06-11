@@ -39,9 +39,9 @@
 #define S11 ((PIND & 64) >> 6)
 #define S10 ((PIND & 128) >> 7)
 
-#define NCYCLES 250
-#define BROKEN  400
-#define TOO_LOW 120
+#define NCYCLES 350
+#define BROKEN  300
+#define TOO_LOW 60
 
 #define THRESHOLD0 200
 #define THRESHOLD1 170
@@ -112,12 +112,8 @@ void setup() {
 void loop() {
   //readBall();
   //sendData();
-
   readBallInterpolation();
-
-  //if (millis() - t >= 150) {
-    sendDataInterpolation();
-  //}
+  sendDataInterpolation();
 }
 
 void readBallInterpolation() {
@@ -145,6 +141,13 @@ void readBallInterpolation() {
     counter[15] += !S15;
   }
 
+
+
+  //printCounter();
+  //delay(300);
+  //return;
+
+
   float x = 0, y = 0;
   for (int i = 0; i < 16; i++) {
     if (counter[i] > BROKEN || counter[i] < TOO_LOW) counter[i] = 0;
@@ -171,11 +174,14 @@ void sendDataInterpolation() {
   if(sending){
     sendAngle = ((byte) (angle / 2)) & 0b11111110;
     Serial.write(sendAngle);
+    //Serial.print(angle);
+    //Serial.print(" - ");
   }else{
     sendDistance = ((byte) (dist / 2.5));
     if(sendDistance > 254) sendDistance = 254;
     sendDistance = sendDistance |= 0b00000001;
-    //Serial.println(sendDistance, BIN);
+    //Serial.println(dist);
+    //delay(300);
     Serial.write(sendDistance);
   }
   sending = !sending;
