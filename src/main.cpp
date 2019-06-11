@@ -106,8 +106,8 @@ void setup() {
   stincr = 0;
 
   //axis
-  y = 0;
-  x = 0;
+  y = 1;
+  x = 1;
 
   //bounds
   EXTIME = 100;      //prima era 75
@@ -154,12 +154,12 @@ void setup() {
   timertest = 0;
 
   if(digitalRead(SWITCH_DX) == HIGH && digitalRead(SWITCH_SX) == HIGH){
-    NANO_BALL.end();
-    //pinMode(31, INPUT_DISABLE);
-    //pinMode(32, INPUT_DISABLE);
-    tone(BUZZER, C6);
-    delay(500);
-    noTone(BUZZER);
+    // NANO_BALL.end();
+    // //pinMode(31, INPUT_DISABLE);
+    // //pinMode(32, INPUT_DISABLE);
+    // tone(BUZZER, C6);
+    // delay(500);
+    // noTone(BUZZER);
   }
 }
 
@@ -173,15 +173,14 @@ void loop() {
   readBallNano();
   goalPosition();
 
-  // if(cameraReady == 1) {
-  //   storcimentoPortaIncr();
-  //   // calcPhyZoneCam = true;
-  //   cameraReady = 0;
-  // }
+  if(cameraReady == 1) {
+    storcimentoPortaIncr();
+    // calcPhyZoneCam = true;
+    cameraReady = 0;
+  }
   
-  // if(ball_seen) 
-  goalie();
-  // else preparePID(0, 0);
+  if(ball_seen) goalie();
+  else preparePID(0, 0);
   
   checkLineSensors();                           //Last thing in loop, for priority
 

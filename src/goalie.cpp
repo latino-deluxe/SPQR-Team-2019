@@ -9,22 +9,48 @@
 #include <Arduino.h>
 
 #define OFFDEG1 35
-#define OFFDEG2 50
+#define OFFDEG2DX 90
+#define OFFDEG2SX 60
+
+
 
 void goalie() {
-  if((ball_degrees >= 345 && ball_degrees <= 359) || (ball_degrees >= 0 && ball_degrees <= 15)) atk_direction = 0;
-  if(ball_degrees > 15 && ball_degrees <= 180) {
-    if(ball_degrees >= 0 && ball_degrees <= 90) atk_direction = ball_degrees + OFFDEG1;
-    if(ball_degrees > 90 && ball_degrees <= 180) atk_direction = ball_degrees + OFFDEG2;
-  }
-  else {
-    if(ball_degrees > 180 && ball_degrees <= 270) atk_direction = ball_degrees - OFFDEG1;
-    if(ball_degrees > 270 && ball_degrees < 345)    atk_direction = ball_degrees - OFFDEG2;
-  }
-  atk_speed = 250;
+  if(ball_degrees >= 345 || ball_degrees < 15) atk_direction = ball_degrees;
+  if(ball_degrees >= 15 && ball_degrees < 45)  atk_direction = ball_degrees + 30;
+  if(ball_degrees >= 45 && ball_degrees < 90)  atk_direction = ball_degrees + 35;
+  if(ball_degrees >= 90 && ball_degrees < 145) atk_direction = 170;
+  if(ball_degrees >= 145 && ball_degrees < 180)atk_direction = 215;
+  if(ball_degrees >= 180 && ball_degrees < 215)atk_direction = 145;
+  if(ball_degrees >= 215 && ball_degrees < 270)atk_direction = 190;
+  if(ball_degrees >= 270 && ball_degrees < 315)atk_direction = ball_degrees - 30;
+  if(ball_degrees >= 315 && ball_degrees < 345)atk_direction = ball_degrees - 35;
 
+  
+  atk_speed = 255;
+
+  if(ball_degrees >= 330 || ball_degrees <= 30) preparePID(atk_direction, atk_speed, stincr);
+  else preparePID(atk_direction, atk_speed);
+}
+
+
+
+
+void goalieINT() {
+  int bsens;
+  bsens = ((ball_degrees * 2) / 45);
+  int goaliedirection[16] = {AA0,  AA1,  AA2,  AA3,  AA4,  AA5,  AA6,
+                             AA7,  AA8,  AA9,  AA10, AA11, AA12, AA13,
+                             AA14, AA15};
+
+
+  atk_direction = goaliedirection[bsens]; // going around the ball (inseguo la palla)
+
+  atk_speed = 250;
   preparePID(atk_direction, atk_speed);
 }
+
+
+
 
 
 
@@ -42,44 +68,12 @@ void goalieOLD() {
   preparePID(atk_direction, atk_speed, stincr);
 }
 
-void palla_dietro() {
-  if (ball_sensor == 9 || ball_sensor == 10 || ball_sensor == 11) {
-    if (ball_distance < 4) { // se la palla è vicina decido come muovermi in
-                             // base alla zona per non uscire
-      atk_speed = 200;
-      if (zoneIndex == 8 || zoneIndex == 5 || zoneIndex == 2)
-        atk_direction = 225;
-      if (zoneIndex == 0 || zoneIndex == 3 || zoneIndex == 9)
-        atk_direction = 135;
-      if (zoneIndex == 1 || zoneIndex == 4 || zoneIndex == 7)
-        atk_direction = 250;
-    } else if (ball_distance >= 4) { // se la palla è lontana mi avvicino più
-                                     // velocemente con angolo più stretto
-      atk_speed = 230;
-      if (zoneIndex == 8 || zoneIndex == 5 || zoneIndex == 2)
-        atk_direction = 200;
-      if (zoneIndex == 0 || zoneIndex == 3 || zoneIndex == 9)
-        atk_direction = 160;
-      if (zoneIndex == 1 || zoneIndex == 4 || zoneIndex == 7)
-        atk_direction = 135;
-    } else if (ball_distance < 2) {
-      // se la palla è incredibilmente vicina VIRI ESTREMO
-      atk_speed = 255;
-      if (zoneIndex == 8 || zoneIndex == 5 || zoneIndex == 2)
-        atk_direction = 270;
-      if (zoneIndex == 0 || zoneIndex == 3 || zoneIndex == 9)
-        atk_direction = 90;
-      if (zoneIndex == 1 || zoneIndex == 4 || zoneIndex == 7)
-        atk_direction = 100;
-    }
-  }
-}
 
 int stport = 0;
 
 void storcimentoPortaIncr() {
   //if((ball_sensor == 15 || ball_sensor == 0 || ball_sensor == 1)){
-    if(ball_seen){
+    // if(ball_seen){
       if (pAtk == 999) { // non vedo porta
         //digitalWrite(Y, LOW);
         //digitalWrite(R, LOW);
@@ -87,9 +81,9 @@ void storcimentoPortaIncr() {
         return;
       }
 
-      // stport = fixCamIMU();
+      stport = fixCamIMU();
 
-      stport = pAtk;
+      // stport = pAtk;
 
       if (stport == 0) {
         stincr = stincr * 0.8;
@@ -97,15 +91,15 @@ void storcimentoPortaIncr() {
         return;
       }else if (stport >= goalieCamMax) {
         stincr -= 3.5; // la porta sta a destra
-        if (stincr < -35)
-          stincr = -35;
+        if (stincr < -45)
+          stincr = -45;
         digitalWrite(Y, LOW);
         digitalWrite(R, HIGH);
         digitalWrite(BUZZER, 0);
       } else if (stport <= goalieCamMin) {
         stincr += 3.5;
-        if (stincr > 35)
-          stincr = 35; // la porta sta a sinistra
+        if (stincr > 45)
+          stincr = 45; // la porta sta a sinistra
         digitalWrite(Y, HIGH);
         digitalWrite(R, LOW);
         digitalWrite(BUZZER, 0);
@@ -114,8 +108,8 @@ void storcimentoPortaIncr() {
         digitalWrite(R, HIGH);
         digitalWrite(BUZZER, 0);
       }
-    }
-    else stincr = 0;
+    // }
+    // else stincr = 0;
   }
 //}
 
