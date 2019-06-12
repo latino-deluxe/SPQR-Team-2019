@@ -1,5 +1,4 @@
 #include "goalie.h"
-#include "myspi_old.h"
 #include "pid.h"
 #include "position.h"
 #include "us.h"

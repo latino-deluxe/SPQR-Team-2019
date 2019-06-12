@@ -2,7 +2,6 @@
 #include "vars.h"
 #include "us.h"
 #include "bluetooth.h"
-#include "myspi_old.h"
 #include "nano_ball.h"
 #include "camera.h"
 #include "position.h"

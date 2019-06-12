@@ -12,7 +12,6 @@
 #include "linesensor.h"
 #include "motors.h"
 #include "music.h"
-#include "mysoftware_serial.h"
 #include "nano_ball.h"
 #include "pid.h"
 #include "position.h"

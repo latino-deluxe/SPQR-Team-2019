@@ -1,7 +1,7 @@
 #include "goalie.h"
 #include "imu.h"
 #include "motors.h"
-#include "myspi_old.h"
+#include "nano_ball.h"
 #include "pid.h"
 #include "position.h"
 #include "us.h"
@@ -175,7 +175,7 @@ void goGoalPost(int posizione) {
 }
 
 void update_sensors_all() {
-  ball_read_position();
+  readBallNano();
   readIMU();
   readUS();
   return;
@@ -183,7 +183,7 @@ void update_sensors_all() {
 
 void testPosition() {
 
-  ball_read_position();
+  readBallNano();
   readIMU();
   readUS();
 
@@ -256,7 +256,7 @@ void updateGuessZone() {
 unsigned long ao;
 
 void gigaTestZone() {
-  ball_read_position();
+  readBallNano();
   readIMU();
   readUS();
   WhereAmI();

@@ -3,7 +3,6 @@
 #include "goalie.h"
 #include "imu.h"
 #include "motors.h"
-#include "myspi_old.h"
 #include "pid.h"
 #include "position.h"
 #include "space_invaders.h"
