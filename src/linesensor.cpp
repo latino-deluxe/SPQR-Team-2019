@@ -48,6 +48,7 @@ void checkLineSensors() {
 }
 
 void outOfBounds() {
+  st = 0;
   // if(lineCnt == EXTIME) {
   if((linesensbyte == 2 || linesensbyte == 8)) {
     linesensbyteOLDY = linesensbyte;

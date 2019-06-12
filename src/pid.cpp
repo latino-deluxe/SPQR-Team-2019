@@ -56,18 +56,17 @@ void preparePID(int direction, int speed, int offset) {
   if(bounds) st = 0;
 }
 
+
 float updatePid() {
   float errorP, errorD, errorI;
   float delta; // assumiamo che la bussola dia un intero positivo, questo lo
                // rende da -179 a +180
 
   // calcola l'errore di posizione rispetto allo 0
-  if (imu_current_euler < 180)
-    // delta = float(imu_current_euler);
-    delta = float(imu_current_euler + st);
-  else
-    delta = float((imu_current_euler - 360) - st);
-  // delta = (imu_current_euler - 360);
+
+  delta = imu_current_euler;
+  if(delta > 180) delta = delta-360;
+  delta = delta-st;
 
   // calcola correzione proporzionale
   errorP = KP * delta;
@@ -76,11 +75,8 @@ float updatePid() {
   errorD = KD * (delta - errorePre);
   errorePre = delta;
 
-  // DEBUG_PRINT.println(errorD);
-
   // calcola correzione integrativa
-  integral =
-      0.5 * integral + delta; // corretta per non far divergere il contributo
+  integral = 0.5 * integral + delta;
   errorI = KI * integral;
 
   // calcota correzione complessiva

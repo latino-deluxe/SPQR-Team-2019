@@ -109,7 +109,7 @@ int fixCamIMU(){
     else if (imu_current_euler <= 360 && imu_current_euler >= 330) imuOff = imu_current_euler - 360;
     else imuOff = imu_current_euler;
 
-    fst = map(imuOff, -30, 30, -90, 90);
+    fst = map(imuOff, -45, 45, -110, 110);
     return pAtk - fst;
 }
 
