@@ -48,12 +48,6 @@ void goalieINT() {
   preparePID(atk_direction, atk_speed);
 }
 
-
-
-
-
-
-
 void goalieOLD() {
   // directions going around the ball
   int goaliedirection[16] = {AA0,  AA1,  AA2,  AA3,  AA4,  AA5,  AA6,
