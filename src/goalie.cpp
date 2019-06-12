@@ -7,9 +7,6 @@
 #include "camera.h" 
 #include <Arduino.h>
 
-#define OFFDEG1 35
-#define OFFDEG2DX 90
-#define OFFDEG2SX 60
 int SCY1 = 0;
 int SCY2 = 0;
 
@@ -47,36 +44,6 @@ void goalie() {
     }
   }
   else preparePID(atk_direction, atk_speed);
-}
-
-
-
-
-void goalieINT() {
-  int bsens;
-  bsens = ((ball_degrees * 2) / 45);
-  int goaliedirection[16] = {AA0,  AA1,  AA2,  AA3,  AA4,  AA5,  AA6,
-                             AA7,  AA8,  AA9,  AA10, AA11, AA12, AA13,
-                             AA14, AA15};
-
-
-  atk_direction = goaliedirection[bsens]; // going around the ball (inseguo la palla)
-
-  atk_speed = 250;
-  preparePID(atk_direction, atk_speed);
-}
-
-void goalieOLD() {
-  // directions going around the ball
-  int goaliedirection[16] = {AA0,  AA1,  AA2,  AA3,  AA4,  AA5,  AA6,
-                             AA7,  AA8,  AA9,  AA10, AA11, AA12, AA13,
-                             AA14, AA15};
-
-
-  atk_direction = goaliedirection[ball_sensor]; // going around the ball (inseguo la palla)
-
-  atk_speed = 250;
-  preparePID(atk_direction, atk_speed, stincr);
 }
 
 

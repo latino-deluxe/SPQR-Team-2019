@@ -170,17 +170,21 @@ void loop() {
   if(Serial.available() > 0) testMenu();
 
   readIMU();
+  readUS();
   readBallNano();
   goalPosition();
-
   if(cameraReady == 1) {
     storcimentoPortaIncr();
-    // calcPhyZoneCam = true;
+    calcPhyZoneCam = true;
     cameraReady = 0;
   }
+  calculateLogicZone();
   
   if(ball_seen){
-    if(role) goalie();
+    if(role) {
+      goalie();
+      leaveMeAlone();
+    }
     else space_invaders();
   } else {
     if(role) goCenter();

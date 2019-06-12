@@ -22,14 +22,13 @@ void space_invaders() {
   if(ball_degrees >= 270 && ball_degrees < 345)  preparePID(270, 255);
   if(ball_degrees >  15 && ball_degrees <= 90)   preparePID(90, 255);
   if(ball_degrees > 90 && ball_degrees < 270)    goalie();
-  if(ball_degrees >= 345 || ball_degrees <= 15)  preparePID(0, 0);
-  // if(pDef <= 60)  preparePID(90, 250);
-  // if(pDef >= 170) preparePID(270, 255);
+  if(ball_degrees >= 345 || ball_degrees <= 15)  preparePID(0, 0); 
+  if(us_px > 45) centerGoalPost();
 }
 
 
 void centerGoalPost() {
-  int vel = 150;
+  int vel = 255;
   if ((zoneIndex >= 0 && zoneIndex <= 2) || zoneIndex == 4) {
     preparePID(180, vel);
   } else if (zoneIndex == 3 || zoneIndex == 6) {
