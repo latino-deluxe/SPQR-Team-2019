@@ -49,6 +49,7 @@ void testMenu(){
     else if (test == '7') Serial.println("GigaTestZone, test grafico matrice zone (1-->9), US, IMU e zona compagno (se presente)");
     else if (test == '8') Serial.println("CAMERA");
     else if (test == '9') Serial.println("Linee");
+    else if (test == 'l') Serial.println("Taratura Linee");
 
     else {
       Serial.println(" Comando sconosciuto");
@@ -103,6 +104,27 @@ void testMenu(){
       break;
       case '9':
         testLineSensors();
+      break;
+      case 'l':
+        DEBUG_PRINT.print("Sensore 1 In - Out");
+        DEBUG_PRINT.print(analogRead(S1I));
+        DEBUG_PRINT.print(" | ");
+        DEBUG_PRINT.println(analogRead(S1O));
+        DEBUG_PRINT.print("Sensore 2 In - Out");
+        DEBUG_PRINT.print(analogRead(S2I));
+        DEBUG_PRINT.print(" | ");
+        DEBUG_PRINT.println(analogRead(S2O));
+        DEBUG_PRINT.print("Sensore 3 In - Out");
+        DEBUG_PRINT.print(analogRead(S3I));
+        DEBUG_PRINT.print(" | ");
+        DEBUG_PRINT.println(analogRead(S3O));
+        DEBUG_PRINT.print("Sensore 4 In - Out");
+        DEBUG_PRINT.print(analogRead(S4I));
+        DEBUG_PRINT.print(" | ");
+        DEBUG_PRINT.print(analogRead(S4O));
+        DEBUG_PRINT.println("                         ");
+        delay(100);
+      break;
       default://default, todo, maybe
       break;
     }

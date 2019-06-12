@@ -61,7 +61,7 @@
 #define INT_LUNG 6
 
 //extr int LINE_THRESH;
-#define LINE_THRESH 150
+#define LINE_THRESH 115     //150
 extr int outDir;
 extr int outVel;
 extr bool bounds;
