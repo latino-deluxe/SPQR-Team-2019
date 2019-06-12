@@ -182,8 +182,10 @@ void loop() {
   if(ball_seen){
     if(role) goalie();
     else space_invaders();
-  } 
-  else preparePID(0, 0);
+  } else {
+    if(role) goCenter();
+    else centerGoalPost();
+  }
   
   checkLineSensors();                           //Last thing in loop, for priority
 

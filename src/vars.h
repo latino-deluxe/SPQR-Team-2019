@@ -180,11 +180,13 @@ extr float errorePre;
 extr float integral;     // somisa degli angoli di errore
 extr bool reaching_ball; // serve per aumentare il PID del 20% GOALIE
 extr int st;             // storcimento sulle fasce
+
 // da utilizzare per sviluppi futuri
 extr signed int old_Dir; // angolo di direzione precedente a quella attuale
 extr signed int new_Dir; // angolo di direzione corrente del moto
 extr float old_vMot;     // velocitá di moto precedente
 extr float new_vMot;     // velocitá di moto corrente
+
 // US
 extr int reading;
 extr long us_t0;                     // US measure start
@@ -192,33 +194,23 @@ extr long us_t1;                     // time value during measure
 extr bool us_flag;                   // is it measuring or not?
 extr int us_values[4];               // US values array
 extr int us_sx, us_dx, us_px, us_fr; // copies with other names in the array
+
 // POSITION
-extr int old_status_x;  // posizione precedente nel campo vale EST, OVEST o
-                        // CENTRO o 255 >USI FUTURI<
-extr int old_status_y;  // posizione precedente nel campo vale SUD, NORD o
-                        // CENTRO o 255 >USI FUTURI<
-extr bool goal_zone;    // sto al centro rispetto alle porte         assegnata// da
-                        // WhereAmI ma non usata
+extr int old_status_x; // posizione precedente nel campo vale EST, OVEST o
+                       // CENTRO o 255 >USI FUTURI<
+extr int old_status_y; // posizione precedente nel campo vale SUD, NORD o
+                       // CENTRO o 255 >USI FUTURI<
+extr bool goal_zone; // sto al centro rispetto alle porte         assegnata// da
+                     // WhereAmI ma non usata
 extr bool good_field_x; // vedo tutta la larghezza del campo si/no
 extr bool good_field_y; // vedo tutta la lunghezza del campo si/no
 extr int status_x;      // posizione nel campo vale EST, OVEST o CENTRO o 255
 extr int status_y;      // posizione nel campo vale SUD, NORD o CENTRO o 255
 extr int guessed_x, guessed_y;
 extr int zoneIndex;
+extr bool calcPhyZoneCam;
+#define ZONE_MAX_VALUE 150
 
-// extr int currentlocation; // risultato misure zone campo da 1 a 9 o 255 se
-//                           // undefined
-// extr int guessedlocation; // risultato misure zone campo da 1 a 9 (da
-// CENTRO_CENTRO a SUD_OVEST)
-// extr int old_currentlocation; // zona precedente del robot in campo da 1 a 9
-// o
-//                               // 255 se undefined >USI FUTURI<
-// extr int old_guessedlocation; // zona precedente del robot in campo da 1 a 9
-// (da
-//                               // CENTRO_CENTRO a SUD_OVEST) >USI FUTURI<
-// extr byte zone[3][3];     // il primo indice = NORD SUD CENTRO  il secondo
-//                           // indice  EST OVEST CENTRO
-// signed int zone_prob[3][3];
 
 // BLUETOOTH
 extr int a;
