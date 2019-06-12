@@ -277,3 +277,7 @@ extr int fpos;
 // test vars
 extr char test; // test select
 extr bool flagtest;
+
+
+
+#define STRCYCL 500

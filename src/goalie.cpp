@@ -10,6 +10,8 @@
 #define OFFDEG1 35
 #define OFFDEG2DX 90
 #define OFFDEG2SX 60
+int SCY1 = 0;
+int SCY2 = 0;
 
 
 
@@ -27,7 +29,23 @@ void goalie() {
   
   atk_speed = 255;
 
-  if(ball_degrees >= 330 || ball_degrees <= 30) preparePID(atk_direction, atk_speed, stincr);
+
+
+  if(ball_degrees >= 330 || ball_degrees <= 30) {
+    if(SCY1 <= STRCYCL) {
+      preparePID(atk_direction, atk_speed, stincr);
+      SCY1++;
+      SCY2 = 0;
+    }
+    else {
+      if(SCY2 <= 200){
+        preparePID(atk_direction, atk_speed);
+        SCY2++;
+      }else{
+        SCY1 = 0;
+      }
+    }
+  }
   else preparePID(atk_direction, atk_speed);
 }
 
