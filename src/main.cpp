@@ -162,10 +162,7 @@ void loop() {
   calculateLogicZone();
   
   if(ball_seen){
-    if(role) {
-      goalie();
-      leaveMeAlone();
-    }
+    if(role) goalie();
     else space_invaders();
   } else {
     if(role) goCenter();

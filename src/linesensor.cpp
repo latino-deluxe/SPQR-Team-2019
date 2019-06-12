@@ -52,7 +52,7 @@ void outOfBounds() {
   // if(lineCnt == EXTIME) {
   if((linesensbyte == 2 || linesensbyte == 8)) {
     linesensbyteOLDY = linesensbyte;
-    CNTY = 1000;
+    CNTY = 750;
     CNTY--;
   }
   if(CNTY <= 0) {
@@ -62,7 +62,7 @@ void outOfBounds() {
 
   if((linesensbyte == 1 || linesensbyte == 4)) {
     linesensbyteOLDX = linesensbyte;
-    CNTX = 1000;
+    CNTX = 750;  
     CNTX--;
   }
   if(CNTX <= 0) {
