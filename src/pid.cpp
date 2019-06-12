@@ -9,15 +9,6 @@
 void drivePID(signed int direzione, float vMot) {
   // mette in variabili globali direzione e velocitá precedenti e attuali
   new_Dir = direzione;
-  
-  // vx = vMot * sins[direzione];
-  // vy = vMot * cosin[direzione];
-
-  // speed1 = (-vx * cosin[45]) + (vy * cosin[45]);
-  // speed2 = (vx * cosin[45]) + (vy * cosin[45]);
-  // speed3 = (-speed1);
-  // speed4 = (-speed2);
-
 
   vx = ((vMot * cosin[direzione]) * x);
   vy = ((-vMot * sins[direzione]) * y);
