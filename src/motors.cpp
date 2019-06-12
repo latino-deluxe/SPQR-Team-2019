@@ -70,13 +70,12 @@ void brakeI() {
   return;
 }
 
-float torad(float deg) // degrees to radiant converting
-{
+// degrees to radiant converting
+float torad(float deg) {
   return (deg * PI / 180.0);
 }
-
-void initSinCos() { // calculates sins of integer angles from 0 to
-                                 // 359
+// calculates sins of integer angles from 0 to 359
+void initSinCos() { 
   for (int i = 0; i < 360; i++) {
     sins[i] = sin(torad(i));
   }
@@ -120,13 +119,4 @@ void testMotors() {
     turnMotor(i, 0, 0, 200);
     delay(300);
   }
-}
-
-void inchioda() {
-  unsigned long it;
-
-  it = millis();
-  do {
-    drivePID(((180 + globalDir) % 360), 255);
-  }while((millis() - it) < 50);            //prima era 100
 }

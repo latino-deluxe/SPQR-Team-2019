@@ -3,7 +3,6 @@
 #include "pid.h"
 #include "motors.h"
 #include "music.h"
-#include "myspi_old.h"
 #include "vars.h"
 #include <Arduino.h>
 

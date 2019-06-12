@@ -1,5 +1,4 @@
 #include "goalie.h"
-#include "myspi_old.h"
 #include "pid.h"
 #include "position.h"
 #include "us.h"
@@ -48,12 +47,6 @@ void goalieINT() {
   atk_speed = 250;
   preparePID(atk_direction, atk_speed);
 }
-
-
-
-
-
-
 
 void goalieOLD() {
   // directions going around the ball

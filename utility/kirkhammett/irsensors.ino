@@ -1,4 +1,4 @@
-void ball_read_position()
+void readBallNano()
 {
   spi_readfrom644l(); //getting our data from our spi slave
   ball_seen = true; //in any other case the ball is seen by the robot
@@ -22,6 +22,6 @@ void update_sensors_all()
 
   imu_current_euler = read_euler(); //reads the imu euler angle >imu_current_euler<
 
-  ball_read_position(); //reads the ball sensor >ball_sensor, ball_distance, ball_seen<
+  readBallNano(); //reads the ball sensor >ball_sensor, ball_distance, ball_seen<
   return;
 }//--------------------------------------------------------------
