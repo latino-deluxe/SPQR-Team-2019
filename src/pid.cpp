@@ -7,9 +7,6 @@
 
 // TIMED PID CONTROL TESTING
 void drivePID(signed int direzione, float vMot) {
-  // mette in variabili globali direzione e velocitá precedenti e attuali
-  new_Dir = direzione;
-
   vx = ((vMot * cosin[direzione]) * x);
   vy = ((-vMot * sins[direzione]) * y);
 
@@ -43,8 +40,6 @@ void drivePID(signed int direzione, float vMot) {
   mot(2, int(speed2));
   mot(3, int(speed3));
   mot(4, int(speed4));
-
-  old_Dir = direzione;
 }
 
 void preparePID(int direction, int speed) { preparePID(direction, speed, 0); }
@@ -59,11 +54,10 @@ void preparePID(int direction, int speed, int offset) {
 
 float updatePid() {
   float errorP, errorD, errorI;
-  float delta; // assumiamo che la bussola dia un intero positivo, questo lo
-               // rende da -179 a +180
+  // assumiamo che la bussola dia un intero positivo, questo lo rende da -179 a +180
+  float delta; 
 
   // calcola l'errore di posizione rispetto allo 0
-
   delta = imu_current_euler;
   if(delta > 180) delta = delta-360;
   delta = delta-st;

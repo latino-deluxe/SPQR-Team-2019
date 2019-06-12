@@ -278,44 +278,6 @@ void goCenter() {
   return;
 }
 
-// called by keeper
-void goGoalPost(int posizione) {
-  if (posizione == 255) {
-    preparePID(0, 0);
-  } else {
-    switch (posizione) {
-    case NORD_CENTRO:
-      preparePID(180, VEL_RET);
-      break;
-    case NORD_EST:
-      preparePID(210, VEL_RET);
-      break;
-    case NORD_OVEST:
-      preparePID(150, VEL_RET);
-      break;
-    case SUD_CENTRO:
-      preparePID(0, 0);
-      break;
-    case SUD_EST:
-      preparePID(270, VEL_RET);
-      break;
-    case SUD_OVEST:
-      preparePID(90, VEL_RET);
-      break;
-    case CENTRO_CENTRO:
-      preparePID(180, VEL_RET);
-      break;
-    case CENTRO_EST:
-      preparePID(270, VEL_RET);
-      break;
-    case CENTRO_OVEST:
-      preparePID(90, VEL_RET);
-      break;
-    }
-  }
-  return;
-}
-
 void update_sensors_all() {
   readBallNano();
   readIMU();

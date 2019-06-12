@@ -80,7 +80,7 @@ void goalPosition() {
     valB = oldGoalB;
 
   if (datavalid > 1) {  ///entro qui solo se ho ricevuto i pacchetti completi sia del blu che del giallo
-    if(goal_orentation == 1){
+    if(goal_orientation == 1){
       //yellow goalpost
       pAtk = valY;
       pDef = valB;

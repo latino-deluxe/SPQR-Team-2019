@@ -33,13 +33,3 @@ void testBallNano() {
 
   delay(100);
 }
-
-bool inSensorRange(byte sensor, byte range) {
-  for (int i = 0; i <= range; i++) {
-    if (ball_sensor == ((sensor + 16) - i) % 16 ||
-        ball_sensor == ((sensor + 16) + i) % 16 ) {
-      return true;
-    }
-  }
-  return false;
-}
