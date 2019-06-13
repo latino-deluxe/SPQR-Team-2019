@@ -15,10 +15,10 @@ void drivePID(signed int direzione, float vMot) {
   speed3 = -(speed1);
   speed4 = -(speed2);
 
-  // speed1 = ((-(sins[((direzione - 45) + 360) % 360])) * vMot);          // mot 1
-  // speed2 = ((-(sins[((direzione - 135) + 360)% 360])) * vMot);          // mot 2
-  // speed3 = -(speed1);                                                   // mot 3
-  // speed4 = -(speed2);                                                   // mot 4
+  /*speed1 = ((-(sins[((direzione - 45) + 360) % 360])) * vMot);          // mot 1
+   speed2 = ((-(sins[((direzione - 135) + 360)% 360])) * vMot);          // mot 2
+   speed3 = -(speed1);                                                   // mot 3
+   speed4 = -(speed2);*/                                                   // mot 4
  
   pidfactor = updatePid();
 
@@ -27,9 +27,6 @@ void drivePID(signed int direzione, float vMot) {
   speed3 += pidfactor;
   speed4 += pidfactor;
   
-  // CheckSpeed(); // normalizza la velocita' a 255 max al motore piu' veloce e
-  // gli altri in proporzione
-
   speed1 = constrain(speed1, -255, 255);
   speed2 = constrain(speed2, -255, 255);
   speed3 = constrain(speed3, -255, 255);

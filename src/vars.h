@@ -162,8 +162,8 @@ extr bool stop_menamoli;
 
 // CAMERA
 // center a 150
-#define keeperCamMin 60    // dx limit
-#define keeperCamMax 240   // sx limit
+#define keeperCamMin 90    // dx limit
+#define keeperCamMax 190   // sx limit
 #define goalieCamMin 150
 #define goalieCamMax 180
 
