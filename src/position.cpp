@@ -180,7 +180,7 @@ void phyZoneUS(){
 int p = 4;
 void phyZoneCam(){
   if(portx != 0 && portx < 999){
-      int camPort = fixCamIMU();
+      int camPort = fixCamIMU(pAtk);
       if(camPort < 80){
           p = 0;
       }else if(camPort > 220){

@@ -10,6 +10,7 @@
 #include "vars.h"
 #include <Arduino.h>
 #include <math.h>
+#include "camera.h"
 
 int vel = 160;
 int usDist = 70;
@@ -19,15 +20,20 @@ int defSpeed = 0;
 int defDistance = 2;
 
 void space_invaders() {
+  x = 0;
   if(ball_degrees >= 270 && ball_degrees < 345)  preparePID(270, 255);
   if(ball_degrees >  15 && ball_degrees <= 90)   preparePID(90, 255);
   if(ball_degrees > 90 && ball_degrees < 270)    goalie();
   if(ball_degrees >= 345 || ball_degrees <= 15)  preparePID(0, 0); 
-  if(us_px > 45) centerGoalPost();
+  if(us_px > 55) centerGoalPost();
+  if((fixCamIMU(pDef) < keeperCamMin && ball_degrees < 180) || (fixCamIMU(pDef) > keeperCamMax) && ball_degrees > 180) centerGoalPost();
+  // || us_dx < 60 || us_sx < 60) centerGoalPost();
 }
 
 
 void centerGoalPost() {
+  x = 1;
+  y = 1;
   int vel = 255;
   if ((zoneIndex >= 0 && zoneIndex <= 2) || zoneIndex == 4) {
     preparePID(180, vel);
@@ -51,9 +57,9 @@ void centerGoalPostCamera() {
     if (zoneIndex < 6) {
       centerGoalPost();
     } else {
-      if (portx < keeperMin) {
+      if (portx < keeperCamMin) {
         preparePID(270, vel);
-      } else if (portx > keeperMax) {
+      } else if (portx > keeperCamMax) {
         preparePID(90, vel);
       }
     }

@@ -13,6 +13,8 @@ int SCY2 = 0;
 
 
 void goalie() {
+  x = 1;
+  y = 1;
   if(ball_degrees >= 345 || ball_degrees < 15) atk_direction = ball_degrees;
   if(ball_degrees >= 15 && ball_degrees < 45)  atk_direction = ball_degrees + 40;
   if(ball_degrees >= 45 && ball_degrees < 90)  atk_direction = ball_degrees + 50;
@@ -53,7 +55,7 @@ int stport = 0;
 
 void storcimentoPorta() {
   if(pAtk == 999) return;
-  stport = fixCamIMU();
+  stport = fixCamIMU(pAtk);
   if(stport >= goalieCamMax) stincr = -30;
   if(stport <= goalieCamMin) stincr = 30;
   else stincr = 0;
@@ -69,7 +71,7 @@ void storcimentoPortaIncr() {
         return;
       }
 
-      stport = fixCamIMU();
+      stport = fixCamIMU(pAtk);
 
       // stport = pAtk;
 
