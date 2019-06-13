@@ -30,7 +30,7 @@ blue_led.off()
 #
 
 thresholds = [  (71, 100, -20, 14, 20, 67),    # thresholds yellow goal
-                (32, 57, -7, 18, -58, -16)]  # thresholds blue goal (6, 31, -15, 4, -35, 0)
+                (34, 78, -21, 16, -52, -20)]  # thresholds blue goal (6, 31, -15, 4, -35, 0)
 
 
 
@@ -83,8 +83,8 @@ while(True):
 
     uart.write(string_yellow)   # scrivo su seriale
     uart.write(string_blue)     # scrivo su seriale
-    #print (string_yellow)   # test on serial terminal
-    #print (string_blue)     # test on serial terminal
+    print (string_yellow)   # test on serial terminal
+    print (string_blue)     # test on serial terminal
 
     #print ("..................................")
 

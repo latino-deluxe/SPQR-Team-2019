@@ -1,12 +1,20 @@
-void testPosition();
-void WhereAmI();
-void update_location_complete();
-void goCenter();
-void fugacentro();
-void goGoalPost(int);
-void update_sensors_all();
-void guessZone();
-void updateGuessZone();
-void testGuessZone();
+//calculations
+void increaseIndex(int, int, int);
+void increaseCol(int, int);
+void increaseRow(int, int);
+
+void calculateLogicZone();
+void phyZoneCam();
+void phyZoneUS();
+
+//testing
+void testPhyZone();
+void testLogicZone();
 void gigaTestZone();
-void calculateZoneIndex();
+
+//movement
+void goCenter();
+void goGoalPost();
+
+//sensors (still needed?)
+void update_sensors_all();

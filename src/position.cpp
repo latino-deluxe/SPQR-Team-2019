@@ -1,14 +1,70 @@
-#include "goalie.h"
-#include "imu.h"
-#include "motors.h"
-#include "nano_ball.h"
 #include "pid.h"
-#include "position.h"
 #include "us.h"
+#include "camera.h"
+#include "imu.h"
 #include "vars.h"
-#include <Arduino.h>
+#include "nano_ball.h"
+#include "position.h"
 
-void WhereAmI() {
+int zone[3][3];
+
+void increaseIndex(int i, int j, int ammount){
+    if(i < 3 && j < 3){
+        if(zone[i][j] + ammount < ZONE_MAX_VALUE && zone[i][j] + ammount >= 0){
+            zone[i][j] += ammount;
+        }
+    }
+}
+
+void increaseRow(int i, int ammount){
+    if(i < 3){
+        for(int a = 0; a < 3; a++){
+            increaseIndex(a, i, ammount);
+        }
+    }
+}
+
+void increaseCol(int i, int ammount){
+    if(i < 3){
+        for(int a = 0; a < 3; a++){
+            increaseIndex(i, a, ammount);
+        }
+    }
+}
+
+void readPhyZone(){
+  phyZoneUS();
+  // phyZoneCam();
+}
+
+void calculateLogicZone(){
+    //decrease all
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            increaseIndex(i, j, -3);
+        }
+    }
+
+    readPhyZone();
+    //calculates guessed_x and guessed_y and zoneIndex
+    //zoneIndex is just 2D to 1D of the guessed x and y
+    //(y_position * width + x_position)
+
+    int top = 0;
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            if(zone[i][j] > top){
+                guessed_x = i;
+                guessed_y = j;
+                top = zone[i][j];
+            }
+        }
+    }
+    zoneIndex = guessed_y * 3 + guessed_x;
+}
+
+//old WhereAmI. Renamed to be coerent. Now also adds to the logic zone
+void phyZoneUS(){
   // decide la posizione in orizzontale e verticale
   // Aggiorna i flag :  good_field_x  good_field_y      non utilizzata da altre
   // routines
@@ -110,168 +166,84 @@ void WhereAmI() {
     if (us_px >= (Dy + 0))
       status_y = CENTRO; //  e'probabile che stia al centro
   }
-  return;
-}
 
-void goCenter() {
-  if (zoneIndex == 8)
-    preparePID(330, 180);
-  if (zoneIndex == 7)
-    preparePID(0, 180);
-  if (zoneIndex == 6)
-    preparePID(45, 180);
-  if (zoneIndex == 5)
-    preparePID(270, 180);
-  if (zoneIndex == 4)
-    preparePID(0, 0);
-  if (zoneIndex == 3)
-    preparePID(90, 180);
-  if (zoneIndex == 2)
-    preparePID(255, 180);
-  if (zoneIndex == 1)
-    preparePID(180, 180);
-  if (zoneIndex == 0)
-    preparePID(135, 180);
-
-  return;
-}
-
-// called by keeper
-void goGoalPost(int posizione) {
-  if (posizione == 255) {
-    preparePID(0, 0);
-  } else {
-    switch (posizione) {
-    case NORD_CENTRO:
-      preparePID(180, VEL_RET);
-      break;
-    case NORD_EST:
-      preparePID(210, VEL_RET);
-      break;
-    case NORD_OVEST:
-      preparePID(150, VEL_RET);
-      break;
-    case SUD_CENTRO:
-      preparePID(0, 0);
-      break;
-    case SUD_EST:
-      preparePID(270, VEL_RET);
-      break;
-    case SUD_OVEST:
-      preparePID(90, VEL_RET);
-      break;
-    case CENTRO_CENTRO:
-      preparePID(180, VEL_RET);
-      break;
-    case CENTRO_EST:
-      preparePID(270, VEL_RET);
-      break;
-    case CENTRO_OVEST:
-      preparePID(90, VEL_RET);
-      break;
-    }
-  }
-  return;
-}
-
-void update_sensors_all() {
-  readBallNano();
-  readIMU();
-  readUS();
-  return;
-}
-
-void testPosition() {
-
-  readBallNano();
-  readIMU();
-  readUS();
-
-  WhereAmI();
-  DEBUG_PRINT.print("Measured location:\t");
-  DEBUG_PRINT.print(status_x);
-  DEBUG_PRINT.print(" | ");
-  DEBUG_PRINT.println(status_y);
-}
-
-int zone[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-
-void testGuessZone() {
-  guessZone();
-  DEBUG_PRINT.println("-----------------");
-
-  for (int j = 0; j < 3; j++) {
-    for (int i = 0; i < 3; i++) {
-      DEBUG_PRINT.print(zone[i][j]);
-      DEBUG_PRINT.print(" | ");
-    }
-    DEBUG_PRINT.println();
-  }
-  DEBUG_PRINT.println("-----------------");
-  DEBUG_PRINT.print("Guessed location:\t");
-  DEBUG_PRINT.print(guessed_x);
-  DEBUG_PRINT.print(" | ");
-  DEBUG_PRINT.println(guessed_y);
-  DEBUG_PRINT.print("Zone Index: ");
-  DEBUG_PRINT.println(zoneIndex);
-}
-
-void guessZone() {
-  updateGuessZone();
-  int top = 0;
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      if (zone[i][j] > top) {
-        guessed_x = i;
-        guessed_y = j;
-      }
-    }
-  }
-}
-
-void updateGuessZone() {
+  //now operates on the matrix
   if (status_x == 255 && status_y != 255) {
-    for (int i = 0; i < 3; i++) {
-      if (zone[i][status_y] < 150)
-        zone[i][status_y] += 3;
-    }
+      increaseRow(status_y, 3);
   } else if (status_x != 255 && status_y == 255) {
-    for (int i = 0; i < 3; i++) {
-      if (zone[status_x][i] < 150)
-        zone[status_x][i] += 3;
-    }
+      increaseCol(status_x, 3);
   } else {
-    if (zone[status_x][status_y] < 150)
-      zone[status_x][status_y] += 8;
+      increaseIndex(status_x, status_y, 6);
   }
+}
 
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      if (zone[i][j] - 1 >= 0)
-        zone[i][j] -= 2;
-    }
+int p = 4;
+void phyZoneCam(){
+  if(portx != 0 && portx < 999){
+      int camPort = fixCamIMU(pAtk);
+      if(camPort < 80){
+          p = 0;
+      }else if(camPort > 220){
+          p = 2;
+      }else if(camPort >= 80&& camPort <= 220){
+          p = 1;
+      }
+      increaseCol(p, 10);
   }
+  calcPhyZoneCam = false;
+}
+
+
+void testPhyZone(){
+    readBallNano();
+
+    readUS();
+    readIMU();
+    goalPosition();
+
+    readPhyZone();
+    DEBUG_PRINT.print("Measured US location:\t");
+    DEBUG_PRINT.print(status_x);
+    DEBUG_PRINT.print(" | ");
+    DEBUG_PRINT.println(status_y);
+    DEBUG_PRINT.print("Measured Cam Column (4 is error):\t");
+    DEBUG_PRINT.println(p);
+}
+
+void testLogicZone(){
+    calculateLogicZone();
+    DEBUG_PRINT.println("-----------------");
+
+    for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 3; i++) {
+        DEBUG_PRINT.print(zone[i][j]);
+        DEBUG_PRINT.print(" | ");
+        }
+        DEBUG_PRINT.println();
+    }
+    DEBUG_PRINT.println("-----------------");
+    DEBUG_PRINT.print("Guessed location:\t");
+    DEBUG_PRINT.print(guessed_x);
+    DEBUG_PRINT.print(" | ");
+    DEBUG_PRINT.println(guessed_y);
+    DEBUG_PRINT.print("Zone Index: ");
+    DEBUG_PRINT.println(zoneIndex);
 }
 
 unsigned long ao;
+void gigaTestZone(){
 
-void gigaTestZone() {
-  readBallNano();
-  readIMU();
-  readUS();
-  WhereAmI();
-  guessZone();
-
-  if (millis() - ao >= 100) {
-    DEBUG_PRINT.println("------");
-    for (int i = 0; i < 4; i++) {
-      DEBUG_PRINT.print("US: ");
-      DEBUG_PRINT.print(us_values[i]);
-      DEBUG_PRINT.print(" | ");
+    //outpus the matrix
+    if (millis() - ao >= 500) {
+        DEBUG_PRINT.println("------");
+        for (int i = 0; i < 4; i++) {
+        DEBUG_PRINT.print("US: ");
+        DEBUG_PRINT.print(us_values[i]);
+        DEBUG_PRINT.print(" | ");
     }
     DEBUG_PRINT.println();
-    testPosition();
-    testGuessZone();
+    testPhyZone();
+    testLogicZone();
     testIMU();
 
     // if (comrade){
@@ -283,21 +255,32 @@ void gigaTestZone() {
   }
 }
 
-// gives zoneIndex based on guessed and measured zone
-void calculateZoneIndex() {
-  int x, y;
+void goCenter() {
+  if (zoneIndex == 8)
+    preparePID(330, 255);
+  if (zoneIndex == 7)
+    preparePID(0, 255);
+  if (zoneIndex == 6)
+    preparePID(45, 255);
+  if (zoneIndex == 5)
+    preparePID(270, 255);
+  if (zoneIndex == 4)
+    preparePID(0, 0);
+  if (zoneIndex == 3)
+    preparePID(90, 255);
+  if (zoneIndex == 2)
+    preparePID(255, 255);
+  if (zoneIndex == 1)
+    preparePID(180, 255);
+  if (zoneIndex == 0)
+    preparePID(135, 255);
 
-  if (status_x == 255) {
-    x = guessed_x;
-  } else {
-    x = status_x;
-  }
+  return;
+}
 
-  if (status_y == 255) {
-    y = guessed_y;
-  } else {
-    y = status_y;
-  }
-
-  zoneIndex = y * 3 + x;
+void update_sensors_all() {
+  readBallNano();
+  readIMU();
+  readUS();
+  return;
 }

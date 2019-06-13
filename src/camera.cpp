@@ -80,7 +80,7 @@ void goalPosition() {
     valB = oldGoalB;
 
   if (datavalid > 1) {  ///entro qui solo se ho ricevuto i pacchetti completi sia del blu che del giallo
-    if(goal_orentation == 1){
+    if(goal_orientation == 1){
       //yellow goalpost
       pAtk = valY;
       pDef = valB;
@@ -102,7 +102,7 @@ void goalPosition() {
 
 //fix the camera value change caused by the robot twist
 int imuOff, fst;
-int fixCamIMU(){
+int fixCamIMU(int d){
     //fix for camera distortion when the robot twists
     if(imu_current_euler > 30 && imu_current_euler < 180) imuOff = 30;
     else if(imu_current_euler < 330 && imu_current_euler >= 180) imuOff = -30;
@@ -110,6 +110,6 @@ int fixCamIMU(){
     else imuOff = imu_current_euler;
 
     fst = map(imuOff, -45, 45, -110, 110);
-    return pAtk - fst;
+    return d - fst;
 }
 

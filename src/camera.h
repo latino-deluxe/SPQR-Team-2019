@@ -1,2 +1,2 @@
 void goalPosition();
-int fixCamIMU();
+int fixCamIMU(int);

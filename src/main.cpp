@@ -27,25 +27,17 @@ elapsedMillis timertest;
 
 void setup() {
   startSetup();
-  // imperial_march();
   
   // Now assign value to variables, first thing to do
   // IMU
   imu_current_euler = 0;
-  imu_temp_euler = 0;
   // MySPI
-  ball_sensor = 0;
   ball_distance = 0;
   ball_seen = false;
-  tspi = 0;
   // PID
   errorePre = 0.0;
   integral = 0.0;
-  reaching_ball = false;
   st = 0;
-  old_Dir = 0;
-  new_Dir = 0;
-  new_vMot = 0;
   // US
   reading = 0;
   us_t0 = 0;
@@ -63,10 +55,6 @@ void setup() {
   // currentlocation = CENTRO_CENTRO;
   // guessedlocation = CENTRO_CENTRO;
   // Linesensors and interrupt
-  flag_interrupt = false;
-  nint = 0;
-  attesa = 0;
-  zoneIndex = 0;
   lineReading = 0;
 
   // bluetooth misc
@@ -84,17 +72,12 @@ void setup() {
   // attack
   atk_direction = 0;
   atk_speed = 0;
-  atk_offset = 0;
-  // defense
-  flag_interrupt = false;
-  // end of variable set up
-  Nint = 0;
 
   // CAMERA
   pAtk = 0;
   pDef = 0;
   portx = 0;
-  goal_orentation = 0;
+  goal_orientation = 0;
   cameraReady = 0;
 
   // BT
@@ -107,9 +90,6 @@ void setup() {
   //axis
   y = 1;
   x = 1;
-
-  //bounds
-  EXTIME = 100;      //prima era 75
 
   // ;)
   analogWriteFrequency(2 , 15000);
@@ -128,26 +108,20 @@ void setup() {
   pinMode(SWITCH_DX, INPUT);
   pinMode(SWITCH_SX, INPUT);
 
-  // pinMode(SWITCH_DX, INPUT);
-
   // Enable Serial for test
   Serial.begin(9600);
   // Enable Serial4 for the slave
   NANO_BALL.begin(57600);
-
-  // Setups a bunch of pins
-  // pinMode(27, OUTPUT);
-  // for (int i = 29; i <= 31; i++)
-  //   pinMode(i, OUTPUT);
+  // Enable Serial2 for the camera
+  CAMERA.begin(19200);
 
   // Misc inits
   initIMU();
   initMotorsGPIO();
-  // initLineSensors();
   initUS();
   initSinCos();
   // initBluetooth();
-  CAMERA.begin(19200);
+  
 
   
   timertest = 0;
@@ -165,25 +139,28 @@ void setup() {
 
 void loop() {   
   role = digitalRead(SWITCH_DX);                //se HIGH sono attaccante
-  goal_orentation = digitalRead(SWITCH_SX);     //se HIGH attacco gialla, difendo blu
+  goal_orientation = digitalRead(SWITCH_SX);     //se HIGH attacco gialla, difendo blu
 
   if(Serial.available() > 0) testMenu();
 
   readIMU();
+  readUS();
   readBallNano();
   goalPosition();
-
   if(cameraReady == 1) {
     storcimentoPortaIncr();
-    // calcPhyZoneCam = true;
+    calcPhyZoneCam = true;
     cameraReady = 0;
   }
+  calculateLogicZone();
   
   if(ball_seen){
     if(role) goalie();
     else space_invaders();
-  } 
-  else preparePID(0, 0);
+  } else {
+    if(role) goCenter();
+    else centerGoalPost();
+  }
   
   checkLineSensors();                           //Last thing in loop, for priority
 
