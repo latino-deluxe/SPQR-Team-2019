@@ -32,24 +32,22 @@ void goalie() {
 
 
 
-  if((ball_degrees >= 330 || ball_degrees <= 30) && ball_distance > 140) preparePID(atk_direction, atk_speed, stincr);
-    // {
-    // if(SCY1 <= STRCYCL) {
-    //   preparePID(atk_direction, atk_speed, stincr);
-    //   SCY1++;
-    //   SCY2 = 0;
-    // }
-    // else {
-    //   if(SCY2 <= 200){
-    //     preparePID(atk_direction, atk_speed);
-    //     SCY2++;
-    //   }else{
-    //     SCY1 = 0;
-    //   }
-    // }
-    // }
-  else 
-  preparePID(atk_direction, atk_speed);
+  if((ball_degrees >= 330 || ball_degrees <= 30) && ball_distance > 140) {
+    if(SCY1 <= STRCYCL) {
+      preparePID(atk_direction, atk_speed, stincr);
+      SCY1++;
+      SCY2 = 0;
+    }
+    else {
+      if(SCY2 <= 200){
+        preparePID(atk_direction, atk_speed);
+        SCY2++;
+      }else{
+        SCY1 = 0;
+      }
+    }
+  }
+  else preparePID(atk_direction, atk_speed);
 }
 
 
@@ -83,14 +81,14 @@ void storcimentoPortaIncr() {
         // digitalWrite(BUZZER, 1);
         return;
       }else if (stport >= goalieCamMax) {
-        stincr -= 3.5; // la porta sta a destra
+        stincr -= 5; // la porta sta a destra
         if (stincr < -45)
           stincr = -45;
         digitalWrite(Y, LOW);
         digitalWrite(R, HIGH);
         digitalWrite(BUZZER, 0);
       } else if (stport <= goalieCamMin) {
-        stincr += 3.5;
+        stincr += 5;
         if (stincr > 45)
           stincr = 45; // la porta sta a sinistra
         digitalWrite(Y, HIGH);
