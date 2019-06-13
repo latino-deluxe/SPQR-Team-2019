@@ -19,10 +19,8 @@ int defSpeed = 0;
 int defDistance = 2;
 
 void space_invaders() {
-  if(ball_degrees >= 270 && ball_degrees < 345)  preparePID(270, 255);
-  if(ball_degrees >  15 && ball_degrees <= 90)   preparePID(90, 255);
-  if(ball_degrees > 90 && ball_degrees < 270)    goalie();
-  if(ball_degrees >= 345 || ball_degrees <= 15)  preparePID(0, 0);
+  x = 0;
+  goalie();
   // if(pDef <= 60)  preparePID(90, 250);
   // if(pDef >= 170) preparePID(270, 255);
 }
