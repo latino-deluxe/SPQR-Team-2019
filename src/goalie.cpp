@@ -20,34 +20,44 @@ void goalie() {
   if(ball_degrees >= 145 && ball_degrees < 180)atk_direction = 215;
   if(ball_degrees >= 180 && ball_degrees < 215)atk_direction = 145;
   if(ball_degrees >= 215 && ball_degrees < 270)atk_direction = 190;
-  if(ball_degrees >= 270 && ball_degrees < 315)atk_direction = ball_degrees - 30;
-  if(ball_degrees >= 315 && ball_degrees < 345)atk_direction = ball_degrees - 35;
+  if(ball_degrees >= 270 && ball_degrees < 315)atk_direction = ball_degrees - 50;
+  if(ball_degrees >= 315 && ball_degrees < 345)atk_direction = ball_degrees - 40;
 
   
   atk_speed = 255;
 
 
 
-  if(ball_degrees >= 330 || ball_degrees <= 30) {
-    if(SCY1 <= STRCYCL) {
-      preparePID(atk_direction, atk_speed, stincr);
-      SCY1++;
-      SCY2 = 0;
-    }
-    else {
-      if(SCY2 <= 200){
-        preparePID(atk_direction, atk_speed);
-        SCY2++;
-      }else{
-        SCY1 = 0;
-      }
-    }
-  }
+  if((ball_degrees >= 330 || ball_degrees <= 30) && ball_distance > 140) preparePID(atk_direction, atk_speed, stincr);
+    // {
+    // if(SCY1 <= STRCYCL) {
+    //   preparePID(atk_direction, atk_speed, stincr);
+    //   SCY1++;
+    //   SCY2 = 0;
+    // }
+    // else {
+    //   if(SCY2 <= 200){
+    //     preparePID(atk_direction, atk_speed);
+    //     SCY2++;
+    //   }else{
+    //     SCY1 = 0;
+    //   }
+    // }
+    // }
   else preparePID(atk_direction, atk_speed);
 }
 
 
 int stport = 0;
+
+
+void storcimentoPorta() {
+  if(pAtk == 999) return;
+  stport = fixCamIMU();
+  if(stport >= goalieCamMax) stincr = -30;
+  if(stport <= goalieCamMin) stincr = 30;
+  else stincr = 0;
+}
 
 void storcimentoPortaIncr() {
   //if((ball_sensor == 15 || ball_sensor == 0 || ball_sensor == 1)){

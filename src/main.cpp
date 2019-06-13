@@ -27,7 +27,6 @@ elapsedMillis timertest;
 
 void setup() {
   startSetup();
-  // imperial_march();
   
   // Now assign value to variables, first thing to do
   // IMU
@@ -109,26 +108,20 @@ void setup() {
   pinMode(SWITCH_DX, INPUT);
   pinMode(SWITCH_SX, INPUT);
 
-  // pinMode(SWITCH_DX, INPUT);
-
   // Enable Serial for test
   Serial.begin(9600);
   // Enable Serial4 for the slave
   NANO_BALL.begin(57600);
-
-  // Setups a bunch of pins
-  // pinMode(27, OUTPUT);
-  // for (int i = 29; i <= 31; i++)
-  //   pinMode(i, OUTPUT);
+  // Enable Serial2 for the camera
+  CAMERA.begin(19200);
 
   // Misc inits
   initIMU();
   initMotorsGPIO();
-  // initLineSensors();
   initUS();
   initSinCos();
   // initBluetooth();
-  CAMERA.begin(19200);
+  
 
   
   timertest = 0;
