@@ -148,7 +148,7 @@ void loop() {
   readBallNano();
   goalPosition();
   if(cameraReady == 1) {
-    //storcimentoPorta();
+    storcimentoPortaIncr();
     calcPhyZoneCam = true;
     cameraReady = 0;
   }
