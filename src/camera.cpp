@@ -83,10 +83,10 @@ void goalPosition() {
   if (valB != -90)
     oldGoalB = valB;
 
-  if (valY == -90)
-    valY = oldGoalY;
-  if (valB == -90)
-    valB = oldGoalB;
+  // if (valY == -90)
+  //   valY = oldGoalY;
+  // if (valB == -90)
+  //   valB = oldGoalB;
 
   if (datavalid > 1 ) {  ///entro qui solo se ho ricevuto i pacchetti completi sia del blu che del giallo
     if(goal_orientation == 1){

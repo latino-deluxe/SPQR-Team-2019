@@ -16,30 +16,41 @@ int storc = 0;
 void goalie() {
   x = 1;
   y = 1;
-  if(ball_degrees >= 345 || ball_degrees <= 15) atk_direction = ball_degrees;
-  if(ball_degrees > 15 && ball_degrees < 30) atk_direction = ball_degrees + 20;
-  if(ball_degrees >= 30 && ball_degrees < 45)  atk_direction = ball_degrees + 40;
-  if(ball_degrees >= 45 && ball_degrees < 90)  atk_direction = ball_degrees + 50;
-  if(ball_degrees >= 90 && ball_degrees < 145) atk_direction = 170;
-  if(ball_degrees >= 145 && ball_degrees < 180)atk_direction = 215;
-  if(ball_degrees >= 180 && ball_degrees < 215)atk_direction = 145;
-  if(ball_degrees >= 215 && ball_degrees < 270)atk_direction = 190;
-  if(ball_degrees >= 270 && ball_degrees < 315)atk_direction = ball_degrees - 50;
-  if(ball_degrees >= 315 && ball_degrees < 330)atk_direction = ball_degrees - 40;
-  if(ball_degrees >= 330 && ball_degrees < 345)atk_direction = ball_degrees - 20;
+  if(ball_degrees >= 345 || ball_degrees <= 15)  atk_direction = ball_degrees;
+  if(ball_degrees > 15  && ball_degrees < 30)    atk_direction = ball_degrees + 20;
+  if(ball_degrees >= 30 && ball_degrees < 45)    atk_direction = ball_degrees + 40;
+  if(ball_degrees >= 45 && ball_degrees < 90)    atk_direction = ball_degrees + 50;
+  if(ball_degrees >= 90 && ball_degrees < 145)   atk_direction = 170;
+  if(ball_degrees >= 145&& ball_degrees <= 180)  atk_direction = 215;
+  if(ball_degrees > 180 && ball_degrees <= 215)  atk_direction = 145;
+  if(ball_degrees > 215 && ball_degrees <= 270)  atk_direction = 190;
+  if(ball_degrees > 270 && ball_degrees <= 315)  atk_direction = ball_degrees - 50;
+  if(ball_degrees > 315 && ball_degrees <= 330)  atk_direction = ball_degrees - 40;
+  if(ball_degrees > 330 && ball_degrees < 345)   atk_direction = ball_degrees - 20;
 
   
   atk_speed = 255;
 
-
-
+  goalPosition();
   if((ball_degrees >= 330 || ball_degrees <= 30) && ball_distance > 140) {
-    storc = pAtk;
-    if(storc > 45) storc = 45;
-    if(storc < -45) storc = -45;
-    if(storc > 0) tone(BUZZER, C3);
-    if(storc < 0) tone(BUZZER, C6);
-    preparePID(atk_direction, atk_speed, storc);
+    if(pAtk > 30) {
+      storc = 45;
+      digitalWrite(Y, HIGH);
+      digitalWrite(R, LOW);
+    }
+    if(pAtk < -30) {
+      storc = -45;
+      digitalWrite(Y, LOW);
+      digitalWrite(R, HIGH);
+    }
+    if(pAtk > -30 || pAtk < 30) {
+      storc = 0;
+      digitalWrite(Y, HIGH);
+      digitalWrite(R, HIGH);
+    }
+    // if(storc > 45) storc = 45;
+    // if(storc < -45) storc = -45;
+    preparePID(atk_direction, atk_speed, pAtk);
   }
   else preparePID(atk_direction, atk_speed);
 }

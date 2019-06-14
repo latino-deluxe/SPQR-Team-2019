@@ -24,6 +24,7 @@
 int SWS = 0;
 int SWD = 0;
 elapsedMillis timertest;
+int aiut = 0;
 
 void setup() {
   startSetup();
@@ -126,15 +127,17 @@ void setup() {
   
   timertest = 0;
 
-  if(digitalRead(SWITCH_DX) == HIGH && digitalRead(SWITCH_SX) == HIGH){
-    // NANO_BALL.end();
-    // //pinMode(31, INPUT_DISABLE);
-    // //pinMode(32, INPUT_DISABLE);
-    // tone(BUZZER, C6);
-    // delay(500);
-    // noTone(BUZZER);
-    super_mario();
-  } else stopSetup();
+  // if(digitalRead(SWITCH_DX) == HIGH && digitalRead(SWITCH_SX) == HIGH){
+  //   // NANO_BALL.end();
+  //   // //pinMode(31, INPUT_DISABLE);
+  //   // //pinMode(32, INPUT_DISABLE);
+  //   // tone(BUZZER, C6);
+  //   // delay(500);
+  //   // noTone(BUZZER);
+  //   // super_mario();
+  // } else 
+  delay(500);
+  stopSetup();
 }
 
 void loop() {   
@@ -163,6 +166,10 @@ void loop() {
   }
   
   checkLineSensors();                           //Last thing in loop, for priority
-
+  // Serial.print(pAtk);
+  // Serial.print (" ");
+  // Serial.println(imu_current_euler);
+  // delay(100);
+  // preparePID(0, 0, pAtk);
   drivePID(globalDir, globalSpeed);
 }

@@ -45,7 +45,9 @@ void preparePID(int direction, int speed, int offset) {
   globalDir = direction;
   globalSpeed = speed;
   st = offset;
-  if(bounds) st = 0;
+  while(st < -180) st += 360;
+  while(st > 180) st -= 360;
+  // if(bounds) st = 0;
 }
 
 

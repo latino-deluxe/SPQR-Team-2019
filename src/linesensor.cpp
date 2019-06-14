@@ -1,5 +1,6 @@
 #include "linesensor.h"
 #include "goalie.h"
+#include "position.h"
 #include "pid.h"
 #include "motors.h"
 #include "music.h"
@@ -42,6 +43,7 @@ void checkLineSensors() {
   }
   // playSafe();
   linesensbyte |= (linesensbyteI | linesensbyteO);
+  // phyZoneLines(linesensbyte);
   if(linesensbyte > 0) bounds = true;
   else bounds = false;
   if(bounds) outOfBounds();                                            
@@ -88,8 +90,9 @@ void outOfBounds() {
           tone(30, F4);
         }
         else {
-          outDir = 0;
-          outVel = 0;
+          if(zoneIndex >= 0 && zoneIndex <= 2) outDir = 180;
+          if(zoneIndex >= 6 && zoneIndex <= 8) outDir = 0;
+          outVel = 255;
           tone(30, LA3);
         }
       break;

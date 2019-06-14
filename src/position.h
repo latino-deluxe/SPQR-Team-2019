@@ -2,10 +2,10 @@
 void increaseIndex(int, int, int);
 void increaseCol(int, int);
 void increaseRow(int, int);
-
 void calculateLogicZone();
 void phyZoneCam();
 void phyZoneUS();
+// void phyZoneLines(byte);
 
 //testing
 void testPhyZone();
