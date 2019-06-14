@@ -28,7 +28,7 @@ int aiut = 0;
 
 void setup() {
   startSetup();
-  
+
   // Now assign value to variables, first thing to do
   // IMU
   imu_current_euler = 0;
@@ -111,6 +111,8 @@ void setup() {
 
   // Enable Serial for test
   Serial.begin(9600);
+  //Enable Serial3 for debug
+  BT.begin(9600);
   // Enable Serial4 for the slave
   NANO_BALL.begin(57600);
   // Enable Serial2 for the camera
@@ -122,9 +124,9 @@ void setup() {
   initUS();
   initSinCos();
   // initBluetooth();
-  
 
-  
+
+
   timertest = 0;
 
   // if(digitalRead(SWITCH_DX) == HIGH && digitalRead(SWITCH_SX) == HIGH){
@@ -135,12 +137,14 @@ void setup() {
   //   // delay(500);
   //   // noTone(BUZZER);
   //   // super_mario();
-  // } else 
+  // } else
   delay(500);
   stopSetup();
 }
 
-void loop() {   
+float cstorc = 0;
+
+void loop() {
   role = digitalRead(SWITCH_DX);                //se HIGH sono attaccante
   goal_orientation = digitalRead(SWITCH_SX);     //se HIGH attacco gialla, difendo blu
 
@@ -154,9 +158,13 @@ void loop() {
     // storcimentoPortaIncr();
     calcPhyZoneCam = true;
     cameraReady = 0;
-  }
+
+      if (pAtk > 20) cstorc+=0.1;
+      if (pAtk < -20) cstorc-=0.1;
+  //    Serial.println(pAtk);
+      }
   calculateLogicZone();
-  
+
   if(ball_seen){
     if(role) goalie();
     else space_invaders();
@@ -164,12 +172,16 @@ void loop() {
     if(role) goCenter();
     else centerGoalPost();
   }
-  
+
   checkLineSensors();                           //Last thing in loop, for priority
   // Serial.print(pAtk);
   // Serial.print (" ");
   // Serial.println(imu_current_euler);
   // delay(100);
-  // preparePID(0, 0, pAtk);
+  // BT.print(pAtk);
+  // BT.print("      ");
+  // delay(250);
+
+  preparePID(0, 0, cstorc);
   drivePID(globalDir, globalSpeed);
 }

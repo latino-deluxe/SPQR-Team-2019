@@ -83,10 +83,10 @@ void goalPosition() {
   if (valB != -90)
     oldGoalB = valB;
 
-  // if (valY == -90)
-  //   valY = oldGoalY;
-  // if (valB == -90)
-  //   valB = oldGoalB;
+  if (valY == -90)
+    valY = oldGoalY;
+  if (valB == -90)
+    valB = oldGoalB;
 
   if (datavalid > 1 ) {  ///entro qui solo se ho ricevuto i pacchetti completi sia del blu che del giallo
     if(goal_orientation == 1){
@@ -98,6 +98,9 @@ void goalPosition() {
       pAtk = valB;
       pDef = valY;
     }
+    Serial.print(pAtk);
+    Serial.print(" - ");
+    Serial.println(pDef);
 
     datavalid = 0;
     cameraReady = 1;  //attivo flag di ricezione pacchetto
@@ -121,4 +124,3 @@ int fixCamIMU(int d){
     fst = map(imuOff, -30, 30, -30, 30);
     return d - fst;
 }
-
