@@ -174,14 +174,5 @@ void loop() {
   }
 
   checkLineSensors();                           //Last thing in loop, for priority
-  // Serial.print(pAtk);
-  // Serial.print (" ");
-  // Serial.println(imu_current_euler);
-  // delay(100);
-  // BT.print(pAtk);
-  // BT.print("      ");
-  // delay(250);
-
-  preparePID(0, 0, cstorc);
   drivePID(globalDir, globalSpeed);
 }

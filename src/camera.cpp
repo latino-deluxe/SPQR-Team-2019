@@ -98,9 +98,9 @@ void goalPosition() {
       pAtk = valB;
       pDef = valY;
     }
-    Serial.print(pAtk);
-    Serial.print(" - ");
-    Serial.println(pDef);
+    // Serial.print(pAtk);
+    // Serial.print(" - ");
+    // Serial.println(pDef);
 
     datavalid = 0;
     cameraReady = 1;  //attivo flag di ricezione pacchetto

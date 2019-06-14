@@ -73,7 +73,7 @@ while(True):
     yY = 3
 
     area,cx,cy,code = tt_yellow[ny-1]    # coordinata x del piu' grande y se montata al contrario
-    Y = ((90 - (int((math.atan2(((cy - yY) * 1.41), cx - xY))* 180 / math.pi))) * -1)
+    Y = ((90 - (int((math.atan2(((cy - yY) / 1.41), cx - xY))* 180 / math.pi))) * -1)
     string_yellow = "Y"+str(Y)+"y"
     #string_yellow = str(cx) + " - " + str(cy);
 
@@ -82,7 +82,7 @@ while(True):
 
 
     area,cx,cy,code = tt_blue[nb-1]      # coordinata x del piu' grande y se montata al contrario
-    B = ((90 - (int((math.atan2(((cy - yY) * 1.41), cx - xY))* 180 / math.pi))))
+    B = ((90 - (int((math.atan2(((cy - yY) / 1.41), cx - xY))* 180 / math.pi))) * -1)
     string_blue = "B"+str(B)+"b"
 
     uart.write(string_yellow)   # scrivo su seriale
