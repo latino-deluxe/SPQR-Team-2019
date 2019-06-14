@@ -5,11 +5,12 @@
 #include "vars.h"
 #include "imu.h"
 #include "camera.h" 
+#include "music.h"
 #include <Arduino.h>
 
 int SCY1 = 0;
 int SCY2 = 0;
-
+int storc = 0;
 
 
 void goalie() {
@@ -33,76 +34,67 @@ void goalie() {
 
 
   if((ball_degrees >= 330 || ball_degrees <= 30) && ball_distance > 140) {
-    if(SCY1 <= STRCYCL) {
-      preparePID(atk_direction, atk_speed, stincr);
-      SCY1++;
-      SCY2 = 0;
-    }
-    else {
-      if(SCY2 <= 200){
-        preparePID(atk_direction, atk_speed);
-        SCY2++;
-      }else{
-        SCY1 = 0;
-      }
-    }
+    storc = pAtk;
+    if(storc > 45) storc = 45;
+    if(storc < -45) storc = -45;
+    if(storc > 0) tone(BUZZER, C3);
+    if(storc < 0) tone(BUZZER, C6);
+    preparePID(atk_direction, atk_speed, storc);
   }
   else preparePID(atk_direction, atk_speed);
 }
 
 
-int stport = 0;
+// int stport = 0;
+// void storcimentoPorta() {
+//   if(pAtk == 999) return;
+//   stport = fixCamIMU(pAtk);
+//   if(stport >= goalieCamMax) stincr = -30;
+//   if(stport <= goalieCamMin) stincr = 30;
+//   else stincr = 0;
+// }
 
+// void storcimentoPortaIncr() {
+//   //if((ball_sensor == 15 || ball_sensor == 0 || ball_sensor == 1)){
+//     // if(ball_seen){
+//       if (pAtk == 999) { // non vedo porta
+//         //digitalWrite(Y, LOW);
+//         //digitalWrite(R, LOW);
+//         //digitalWrite(BUZZER, 0);
+//         return;
+//       }
 
-void storcimentoPorta() {
-  if(pAtk == 999) return;
-  stport = fixCamIMU(pAtk);
-  if(stport >= goalieCamMax) stincr = -30;
-  if(stport <= goalieCamMin) stincr = 30;
-  else stincr = 0;
-}
+//       stport = fixCamIMU(pAtk);
 
-void storcimentoPortaIncr() {
-  //if((ball_sensor == 15 || ball_sensor == 0 || ball_sensor == 1)){
-    // if(ball_seen){
-      if (pAtk == 999) { // non vedo porta
-        //digitalWrite(Y, LOW);
-        //digitalWrite(R, LOW);
-        //digitalWrite(BUZZER, 0);
-        return;
-      }
+//       // stport = pAtk;
 
-      stport = fixCamIMU(pAtk);
-
-      // stport = pAtk;
-
-      if (stport == 0) {
-        stincr = stincr * 0.8;
-        // digitalWrite(BUZZER, 1);
-        return;
-      }else if (stport >= goalieCamMax) {
-        stincr -= 5; // la porta sta a destra
-        if (stincr < -45)
-          stincr = -45;
-        digitalWrite(Y, LOW);
-        digitalWrite(R, HIGH);
-        digitalWrite(BUZZER, 0);
-      } else if (stport <= goalieCamMin) {
-        stincr += 5;
-        if (stincr > 45)
-          stincr = 45; // la porta sta a sinistra
-        digitalWrite(Y, HIGH);
-        digitalWrite(R, LOW);
-        digitalWrite(BUZZER, 0);
-      } else { // robot centrato con porta
-        digitalWrite(Y, HIGH);
-        digitalWrite(R, HIGH);
-        digitalWrite(BUZZER, 0);
-      }
-    // }
-    // else stincr = 0;
-  }
-//}
+//       if (stport == 0) {
+//         stincr = stincr * 0.8;
+//         // digitalWrite(BUZZER, 1);
+//         return;
+//       }else if (stport >= goalieCamMax) {
+//         stincr -= 5; // la porta sta a destra
+//         if (stincr < -45)
+//           stincr = -45;
+//         digitalWrite(Y, LOW);
+//         digitalWrite(R, HIGH);
+//         digitalWrite(BUZZER, 0);
+//       } else if (stport <= goalieCamMin) {
+//         stincr += 5;
+//         if (stincr > 45)
+//           stincr = 45; // la porta sta a sinistra
+//         digitalWrite(Y, HIGH);
+//         digitalWrite(R, LOW);
+//         digitalWrite(BUZZER, 0);
+//       } else { // robot centrato con porta
+//         digitalWrite(Y, HIGH);
+//         digitalWrite(R, HIGH);
+//         digitalWrite(BUZZER, 0);
+//       }
+//     // }
+//     // else stincr = 0;
+//   }
+// //}
 
 
 void leaveMeAlone() {

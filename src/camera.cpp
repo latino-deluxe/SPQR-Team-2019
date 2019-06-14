@@ -9,6 +9,8 @@ String valStringY = ""; // stringa dove si vanno a mettere i pacchetti di dati r
 String valStringB = "";
 int datavalid = 0; // segnalo se il dato ricevuto è valido
 int oldGoalY,oldGoalB;
+bool negateB = false;
+bool negateY = false;
 
 void goalPosition() {
   int valY; // variabile a cui attribuisco momentaneamente il valore dell x
@@ -20,7 +22,6 @@ void goalPosition() {
   while (CAMERA.available()) {
     // get the new byte:
     char inChar = (char)CAMERA.read();
-    // DEBUG_PRINT.write(inChar);
     // if the incoming character is a 'Y', set the start packet flag
     if (inChar == 'Y') {
       startpY = 1;
@@ -42,6 +43,8 @@ void goalPosition() {
       if (isDigit(inChar)) {
         // convert the incoming byte to a char and add it to the string:
         valStringY += inChar;
+      }else if(inChar == '-'){
+        negateY = true;
       }
     }
 
@@ -49,37 +52,43 @@ void goalPosition() {
       if (isDigit(inChar)) {
         // convert the incoming byte to a char and add it to the string:
         valStringB += inChar;
+      }else if(inChar == '-'){
+        negateB = true;
       }
     }
 
     if ((startpY == 1) && (endpY == 1)) {
       valY = valStringY.toInt(); // valid data
+      if(negateY) valY *= -1;
       valStringY = "";
       startpY = 0;
       endpY = 0;
+      negateY = false;
       datavalid ++;
     }
     if ((startpB == 1) && (endpB == 1)) {
       valB = valStringB.toInt(); // valid data
+      if(negateB) valB *= -1;
       valStringB = "";
       startpB = 0;
       endpB = 0;
+      negateB = false;
       datavalid ++;
     }
 
   } // end of while
 
-  if (valY != 0)
+  if (valY != -90)
     oldGoalY = valY;
-  if (valB != 0)
+  if (valB != -90)
     oldGoalB = valB;
 
-  if (valY == 0)
+  if (valY == -90)
     valY = oldGoalY;
-  if (valB == 0)
+  if (valB == -90)
     valB = oldGoalB;
 
-  if (datavalid > 1) {  ///entro qui solo se ho ricevuto i pacchetti completi sia del blu che del giallo
+  if (datavalid > 1 ) {  ///entro qui solo se ho ricevuto i pacchetti completi sia del blu che del giallo
     if(goal_orientation == 1){
       //yellow goalpost
       pAtk = valY;
@@ -94,7 +103,7 @@ void goalPosition() {
     cameraReady = 1;  //attivo flag di ricezione pacchetto
   }
   // update_location_complete();
-  // if (portx == 0)
+  // if (portx == -90)
   //   portx = 999;
 }
 // un numero grande equivale a stare a destra, piccolo a sinistra
@@ -109,7 +118,7 @@ int fixCamIMU(int d){
     else if (imu_current_euler <= 360 && imu_current_euler >= 330) imuOff = imu_current_euler - 360;
     else imuOff = imu_current_euler;
 
-    fst = map(imuOff, -45, 45, -110, 110);
+    fst = map(imuOff, -30, 30, -30, 30);
     return d - fst;
 }
 

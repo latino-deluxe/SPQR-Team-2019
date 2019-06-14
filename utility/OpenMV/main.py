@@ -3,7 +3,7 @@
 # Automatic RGB565 Color Tracking Example
 #
 
-import sensor, image, time, pyb
+import sensor, image, time, pyb, math
 
 from pyb import UART
 uart = UART(3,19200, timeout_char = 1000)
@@ -30,7 +30,7 @@ blue_led.off()
 #
 
 thresholds = [  (71, 100, -20, 14, 20, 67),    # thresholds yellow goal
-                (34, 78, -21, 16, -52, -20)]  # thresholds blue goal (6, 31, -15, 4, -35, 0)
+                (38, 73, -19, 7, -55, -27)]  # thresholds blue goal (6, 31, -15, 4, -35, 0)
 
 
 
@@ -69,17 +69,21 @@ while(True):
 
     ny = len(tt_yellow)
     nb = len(tt_blue)
-
+    xY = 150
+    yY = 3
 
     area,cx,cy,code = tt_yellow[ny-1]    # coordinata x del piu' grande y se montata al contrario
-    string_yellow = "Y"+str(cx)+"y"
+    Y = ((90 - (int((math.atan2(cy - yY, cx - xY))* 180 / math.pi))) * -1)
+    string_yellow = "Y"+str(Y)+"y"
+    #string_yellow = str(cx) + " - " + str(cy);
 
     #for c in range( 0, ny):
     #    print (tt_yellow[c])
 
 
     area,cx,cy,code = tt_blue[nb-1]      # coordinata x del piu' grande y se montata al contrario
-    string_blue = "B"+str(cx)+"b"
+    B = ((90 - (int((math.atan2(cy - yY, cx - xY))* 180 / math.pi))))
+    string_blue = "B"+str(B)+"b"
 
     uart.write(string_yellow)   # scrivo su seriale
     uart.write(string_blue)     # scrivo su seriale
