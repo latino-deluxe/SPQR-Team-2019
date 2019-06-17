@@ -19,14 +19,14 @@ void drivePID(signed int direzione, float vMot) {
    speed2 = ((-(sins[((direzione - 135) + 360)% 360])) * vMot);          // mot 2
    speed3 = -(speed1);                                                   // mot 3
    speed4 = -(speed2);*/                                                   // mot 4
- 
+
   pidfactor = updatePid();
 
   speed1 += pidfactor;
   speed2 += pidfactor;
   speed3 += pidfactor;
   speed4 += pidfactor;
-  
+
   speed1 = constrain(speed1, -255, 255);
   speed2 = constrain(speed2, -255, 255);
   speed3 = constrain(speed3, -255, 255);
@@ -45,14 +45,16 @@ void preparePID(int direction, int speed, int offset) {
   globalDir = direction;
   globalSpeed = speed;
   st = offset;
-  if(bounds) st = 0;
+   while(st < -180) st += 360;
+   while(st > 180) st -= 360;
+  // if(bounds) st = 0;
 }
 
 
 float updatePid() {
   float errorP, errorD, errorI;
   // assumiamo che la bussola dia un intero positivo, questo lo rende da -179 a +180
-  float delta; 
+  float delta;
 
   // calcola l'errore di posizione rispetto allo 0
   delta = imu_current_euler;

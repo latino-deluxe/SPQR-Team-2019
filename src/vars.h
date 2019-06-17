@@ -15,14 +15,6 @@
 #define SWITCH_SX 28
 #define SWITCH_DX 29
 
-// Note
-#define LA3 220.00
-#define C4 261.63
-#define F3 174.61
-#define E6 1318.51
-#define F6 1396.91
-#define GB6 1479.98
-
 // ZONE DEL CAMPO 
 // codici utilizzabili per una matice 3x3
 #define EST 2
@@ -56,8 +48,8 @@
 #define S4I A1
 #define S4O A2
 
-#define LINE_THRESH 115     //150
-#define EXTIME 100
+#define LINE_THRESH 160     //150
+#define EXTIME 200
 extr int outDir;
 extr int outVel;
 extr bool bounds;
@@ -164,8 +156,13 @@ extr bool stop_menamoli;
 // center a 150
 #define keeperCamMin 90    // dx limit
 #define keeperCamMax 190   // sx limit
+<<<<<<< HEAD
 #define goalieCamMin 100
 #define goalieCamMax 180
+=======
+#define goalieCamMin 140
+#define goalieCamMax 170
+>>>>>>> 25f872cc59146404858a3fa581528c53cb49cc4c
 
 extr int pAtk; // variabile dello switch che decide dove bisogna attaccare
 extr int pDef; // variabile dello switch che decide dove bisogna difendere

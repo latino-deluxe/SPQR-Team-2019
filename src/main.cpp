@@ -24,10 +24,11 @@
 int SWS = 0;
 int SWD = 0;
 elapsedMillis timertest;
+int aiut = 0;
 
 void setup() {
   startSetup();
-  
+
   // Now assign value to variables, first thing to do
   // IMU
   imu_current_euler = 0;
@@ -110,6 +111,8 @@ void setup() {
 
   // Enable Serial for test
   Serial.begin(9600);
+  //Enable Serial3 for debug
+  BT.begin(9600);
   // Enable Serial4 for the slave
   NANO_BALL.begin(57600);
   // Enable Serial2 for the camera
@@ -120,24 +123,26 @@ void setup() {
   initMotorsGPIO();
   initUS();
   initSinCos();
-  // initBluetooth();
-  
 
-  
+
+
   timertest = 0;
 
-  if(digitalRead(SWITCH_DX) == HIGH && digitalRead(SWITCH_SX) == HIGH){
-    // NANO_BALL.end();
-    // //pinMode(31, INPUT_DISABLE);
-    // //pinMode(32, INPUT_DISABLE);
-    // tone(BUZZER, C6);
-    // delay(500);
-    // noTone(BUZZER);
-    super_mario();
-  } else stopSetup();
+  // if(digitalRead(SWITCH_DX) == HIGH && digitalRead(SWITCH_SX) == HIGH){
+  //   // NANO_BALL.end();
+  //   // //pinMode(31, INPUT_DISABLE);
+  //   // //pinMode(32, INPUT_DISABLE);
+  //   // tone(BUZZER, C6);
+  //   // delay(500);
+  //   // noTone(BUZZER);
+  //   // super_mario();
+  // } else
+  delay(500);
+  stopSetup();
 }
 
-void loop() {   
+
+void loop() {
   role = digitalRead(SWITCH_DX);                //se HIGH sono attaccante
   goal_orientation = digitalRead(SWITCH_SX);     //se HIGH attacco gialla, difendo blu
 
@@ -148,21 +153,20 @@ void loop() {
   readBallNano();
   goalPosition();
   if(cameraReady == 1) {
-    storcimentoPortaIncr();
+    storcimentoPorta();
     calcPhyZoneCam = true;
     cameraReady = 0;
   }
   calculateLogicZone();
-  
+
   if(ball_seen){
     if(role) goalie();
     else space_invaders();
   } else {
-    if(role) goCenter();
-    else centerGoalPost();
+    if(role) preparePID(0, 0);
+    else preparePID(0, 0);
   }
-  
-  checkLineSensors();                           //Last thing in loop, for priority
 
+  checkLineSensors();                           //Last thing in loop, for priority
   drivePID(globalDir, globalSpeed);
 }

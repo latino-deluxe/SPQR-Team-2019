@@ -194,6 +194,39 @@ void phyZoneCam(){
 }
 
 
+void phyZoneLines(byte b) {
+  switch(b) {
+    case 1:         //NORD
+      increaseRow(0, 10);
+      increaseRow(1, -10);
+      increaseRow(2, -10);
+    break;
+
+    case 2:         //EST
+      increaseCol(0, -10);
+      increaseCol(1, -10);
+      increaseCol(2, 10);
+    break;
+
+    case 4:         //SUD
+      increaseRow(0, -10);
+      increaseRow(1, -10);
+      increaseRow(2, 10);
+    break;
+
+    case 8:         //OVEST
+      increaseCol(0, 10);
+      increaseCol(1, -10);
+      increaseCol(2, -10);
+    break;
+
+    default:
+
+    break;
+  }
+}
+
+
 void testPhyZone(){
     readBallNano();
 

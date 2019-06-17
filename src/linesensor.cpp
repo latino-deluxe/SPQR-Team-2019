@@ -1,5 +1,6 @@
 #include "linesensor.h"
 #include "goalie.h"
+#include "position.h"
 #include "pid.h"
 #include "motors.h"
 #include "music.h"
@@ -42,6 +43,7 @@ void checkLineSensors() {
   }
   // playSafe();
   linesensbyte |= (linesensbyteI | linesensbyteO);
+  // phyZoneLines(linesensbyte);
   if(linesensbyte > 0) bounds = true;
   else bounds = false;
   if(bounds) outOfBounds();                                            
@@ -52,7 +54,7 @@ void outOfBounds() {
   // if(lineCnt == EXTIME) {
   if((linesensbyte == 2 || linesensbyte == 8)) {
     linesensbyteOLDY = linesensbyte;
-    CNTY = 750;
+    CNTY = 1500;
     CNTY--;
   }
   if(CNTY <= 0) {
@@ -62,7 +64,7 @@ void outOfBounds() {
 
   if((linesensbyte == 1 || linesensbyte == 4)) {
     linesensbyteOLDX = linesensbyte;
-    CNTX = 750;  
+    CNTX = 1500;  
     CNTX--;
   }
   if(CNTX <= 0) {
@@ -78,6 +80,7 @@ void outOfBounds() {
 
 
       case 10:
+      case 11:
         if(linesensbyteOLDX == 1) {
           outDir = 180;
           outVel = 255;
@@ -88,6 +91,9 @@ void outOfBounds() {
           tone(30, F4);
         }
         else {
+          // if(zoneIndex >= 0 && zoneIndex <= 2) outDir = 180;
+          // if(zoneIndex >= 6 && zoneIndex <= 8) outDir = 0;
+          // outVel = 255;
           outDir = 0;
           outVel = 0;
           tone(30, LA3);
@@ -95,6 +101,7 @@ void outOfBounds() {
       break;
 
       case 5:
+      case 14:
         if(linesensbyteOLDY == 2) {
           outDir = 270;
           outVel = 255;
@@ -112,7 +119,6 @@ void outOfBounds() {
       break;
 
       case 1:
-      case 11:
         outDir = 180;
         outVel = 255;
       break;
@@ -124,7 +130,6 @@ void outOfBounds() {
       break;
 
       case 4:
-      case 14:
         outDir = 0;
         outVel = 255;
       break;
@@ -156,6 +161,7 @@ void outOfBounds() {
         outDir = 135;
         outVel = 255;
       break;
+
 
 
 
