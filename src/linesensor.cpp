@@ -22,6 +22,7 @@ int linetriggerO[4];
 int lineCnt;
 int CNTY;
 int CNTX;
+int prevDir;
 byte linesensbyteI;
 byte linesensbyteO;
 byte linesensbyte;
@@ -33,7 +34,6 @@ void checkLineSensors() {
   linesensbyteI = 0;
   linesensbyteO = 0;
   // linesensbyte  = 0;
-  exitTimer = 0;
   for(int i = 0; i < 4; i++) {
     linetriggerI[i] = analogRead(linepinsI[i]) > LINE_THRESH;
     linetriggerO[i] = analogRead(linepinsO[i]) > LINE_THRESH;
@@ -44,15 +44,15 @@ void checkLineSensors() {
   // playSafe();
   linesensbyte |= (linesensbyteI | linesensbyteO);
   // phyZoneLines(linesensbyte);
-  if(linesensbyte > 0) bounds = true;
-  else bounds = false;
-  if(bounds) outOfBounds();                                            
+  // if(linesensbyte > 0) bounds = true;
+  // else bounds = false;
+  // if(bounds) 
+  outOfBounds();                                            
 }
 
 void outOfBounds() {
-  st = 0;
-  cstorc = 0;
   // if(lineCnt == EXTIME) {
+
   if((linesensbyte == 2 || linesensbyte == 8)) {
     linesensbyteOLDY = linesensbyte;
     CNTY = 1500;
@@ -70,25 +70,48 @@ void outOfBounds() {
   }
   if(CNTX <= 0) {
     CNTX = 0;
-    linesensbyteOLDY = 0;
+    linesensbyteOLDX = 0;
   }
 
     switch(linesensbyte) {
       case 0:
-
+        outDir = prevDir;
+        outVel = 255;
+        prevDir = -1;
+        digitalWrite(R, HIGH);
+        digitalWrite(Y, LOW);
       break;
 
-      case 15:
-        tone(30, LA3);
-        tone(30, C6);
+      // case 15:
+      //   tone(30, LA3);
+      //   tone(30, C6);
+      //   digitalWrite(G, HIGH);
+      //   // outDir = 0;
+      //   // outVel = 0;
+      //   outDir = prevDir;
+      //   outVel = 255;
+      // break;
+
+      case 11:
+        outDir = 180;
+        outVel = 255;
+        
+        digitalWrite(R, LOW);
+        digitalWrite(Y, LOW);
         digitalWrite(G, HIGH);
+      break;
+
+      case 14:
         outDir = 0;
-        outVel = 0;
+        outVel = 255;
+        
+        digitalWrite(R, LOW);
+        digitalWrite(G, HIGH);
+        digitalWrite(Y, LOW);
       break;
 
 
       case 10:
-      case 11:
         if(linesensbyteOLDX == 1) {
           outDir = 180;
           outVel = 255;
@@ -102,10 +125,13 @@ void outOfBounds() {
           outVel = 0;
           tone(30, LA3);
         }
+        
+        digitalWrite(R, HIGH);
+        digitalWrite(Y, LOW);
+        digitalWrite(G, HIGH);
       break;
 
       case 5:
-      case 14:
         if(linesensbyteOLDY == 2) {
           outDir = 270;
           outVel = 255;
@@ -120,28 +146,50 @@ void outOfBounds() {
           outVel = 0;
           tone(30, LA3);
         }
+        
+        digitalWrite(R, HIGH);
+        digitalWrite(Y, LOW);
+        digitalWrite(G, HIGH);
       break;
 
       case 1:
         outDir = 180;
         outVel = 255;
+        digitalWrite(R, LOW);
+        digitalWrite(G, LOW);
+        digitalWrite(Y, LOW);
       break;
 
       case 2:
       case 7:
+           if(prevDir == 270)outDir = prevDir;
+           else{
         outDir = 270;
         outVel = 255;
+           }
+        digitalWrite(R, LOW);
+        digitalWrite(G, LOW);
+        digitalWrite(Y, LOW);
       break;
 
       case 4:
         outDir = 0;
         outVel = 255;
+        digitalWrite(R, LOW);
+        digitalWrite(G, LOW);
+        digitalWrite(Y, LOW);
       break;
 
       case 8:
       case 13:
+      if(prevDir == 270)outDir = prevDir;
+      else{
         outDir = 90;
         outVel = 255;
+      }
+        digitalWrite(R, LOW);
+        digitalWrite(G, LOW);
+        digitalWrite(Y, LOW);
       break;
 
 
@@ -149,46 +197,65 @@ void outOfBounds() {
       case 3:
         outDir = 225;
         outVel = 255;
+        digitalWrite(R, LOW);
+        digitalWrite(G, LOW);
+        digitalWrite(Y, LOW);
       break;
 
       case 6:
         outDir = 315;
         outVel = 255;
+        digitalWrite(R, LOW);
+        digitalWrite(G, LOW);
+        digitalWrite(Y, LOW);
       break;
 
       case 12:
         outDir = 45;
         outVel = 255;
+        digitalWrite(R, LOW);
+        digitalWrite(G, LOW);
+        digitalWrite(Y, LOW);
       break;
 
       case 9:
         outDir = 135;
         outVel = 255;
+        digitalWrite(R, LOW);
+        digitalWrite(G, LOW);
+        digitalWrite(Y, LOW);
       break;
 
 
 
 
       default:
-        outDir = 0;
-        outVel = 0;
-        // goCenter();         //UNA VOLTA ABILITATI GLI US
+        outDir = (atk_direction + 180) % 360;
+        outVel = 255;
+        prevDir = -1;
+        digitalWrite(R, LOW);
+        digitalWrite(G, LOW);
+        digitalWrite(Y, HIGH);
       break;
     }
   // }
-
-  if(lineCnt > 0) preparePID(outDir, outVel, 0);
-
   lineCnt--;
-  if(lineCnt < 0) {
+  if(lineCnt > 0 && outDir != -1) {
+    prevDir = outDir;
+    preparePID(outDir, outVel, 0);
+    ballMask(1);
+  }
+  else prevDir = -1;
+
+  if(lineCnt <= 0) {
+    ballMask(0);
     lineCnt = 0;
     outDir = 0;
+    linesensbyte =0;
   }
 
-  if(lineCnt == 0) {
-    linesensbyte = 0;
-    noTone(30);
-  }
+ 
+
 }
 
 void playSafe() {
@@ -233,5 +300,30 @@ void testLineSensors(){
   delay(150);
 
   Serial.println("----------"); 
+
+}
+
+int ball = -1;
+
+void ballMask(int on) {
+  float diffB;
+
+  if(on) ball = ball_degrees;
+  else {
+    if(ball != -1) {
+        Serial.print(diffB);
+  Serial.print(", b:");
+  Serial.println(ball);
+      diffB = min(((2*PI) - abs(ball*PI/180 - ball_degrees*PI/180)), abs(ball*PI/180 - ball_degrees*PI/180));
+      diffB = diffB * 180/PI;
+      if(diffB > 50) {
+        ball = -1;
+        return;
+      }
+      else {
+        preparePID(0, 0, 0);
+      }
+    } else return;
+  }
 
 }

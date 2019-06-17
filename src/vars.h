@@ -49,7 +49,7 @@
 #define S4O A2
 
 #define LINE_THRESH 150
-#define EXTIME 200
+#define EXTIME 100
 extr int outDir;
 extr int outVel;
 extr bool bounds;
@@ -176,6 +176,7 @@ extr float cstorc;
 // test vars
 extr char test; // test select
 extr bool flagtest;
+
 
 
 

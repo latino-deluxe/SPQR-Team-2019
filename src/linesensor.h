@@ -5,3 +5,4 @@ void checkLineSensors();
 void outOfBounds();
 void playSafe();
 void testLineSensors();
+void ballMask(int);
