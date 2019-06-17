@@ -177,6 +177,7 @@ void outOfBounds() {
     }
   // }
 
+  lineSensByteBak = linesensbyte;
   if(lineCnt > 0) preparePID(outDir, outVel, 0);
 
   lineCnt--;
