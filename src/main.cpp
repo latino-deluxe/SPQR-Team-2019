@@ -161,10 +161,10 @@ void loop() {
 
   if(ball_seen){
     if(role) goalie();
-    else space_invaders();
+    else keeper();
   } else {
     if(role) preparePID(0, 0);
-    else preparePID(0, 0);
+    else centerGoalPost();
   }
 
   checkLineSensors();                           //Last thing in loop, for priority

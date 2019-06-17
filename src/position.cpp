@@ -307,8 +307,44 @@ void goCenter() {
     preparePID(180, 255);
   if (zoneIndex == 0)
     preparePID(135, 255);
+}
 
-  return;
+
+int vel = 160;
+int usDist = 70;
+void centerGoalPost() {
+  x = 1;
+  y = 1;
+  int vel = 255;
+  if ((zoneIndex >= 0 && zoneIndex <= 2) || zoneIndex == 4) {
+    preparePID(180, vel);
+  } else if (zoneIndex == 3 || zoneIndex == 6) {
+    preparePID(90, vel);
+  } else if (zoneIndex == 5 || zoneIndex == 8) {
+    preparePID(270, vel);
+  } else {
+    stop_menamoli = false;
+    if (us_px >= 25)
+      preparePID(180, vel);
+    else
+      preparePID(0, 0);
+  }
+}
+
+void centerGoalPostCamera() {
+  if (portx == 0) {
+    centerGoalPost();
+  } else {
+    if (zoneIndex < 6) {
+      centerGoalPost();
+    } else {
+      if (portx < keeperCamMin) {
+        preparePID(270, vel);
+      } else if (portx > keeperCamMax) {
+        preparePID(90, vel);
+      }
+    }
+  }
 }
 
 void update_sensors_all() {
