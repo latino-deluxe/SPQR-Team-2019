@@ -164,7 +164,7 @@ extr bool stop_menamoli;
 // center a 150
 #define keeperCamMin 90    // dx limit
 #define keeperCamMax 190   // sx limit
-#define goalieCamMin 120
+#define goalieCamMin 100
 #define goalieCamMax 180
 
 extr int pAtk; // variabile dello switch che decide dove bisogna attaccare
