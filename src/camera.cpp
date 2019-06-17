@@ -11,12 +11,10 @@ int datavalid = 0; // segnalo se il dato ricevuto è valido
 int oldGoalY,oldGoalB;
 bool negateB = false;
 bool negateY = false;
+int valY; // variabile a cui attribuisco momentaneamente il valore dell x della porta
+int valB;
 
 void goalPosition() {
-  int valY; // variabile a cui attribuisco momentaneamente il valore dell x
-            // della porta
-
-  int valB;
 
   portx = 999;
   while (CAMERA.available()) {

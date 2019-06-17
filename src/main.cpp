@@ -123,7 +123,6 @@ void setup() {
   initMotorsGPIO();
   initUS();
   initSinCos();
-  // initBluetooth();
 
 
 
@@ -142,7 +141,6 @@ void setup() {
   stopSetup();
 }
 
-float cstorc = 0;
 
 void loop() {
   role = digitalRead(SWITCH_DX);                //se HIGH sono attaccante
@@ -155,22 +153,18 @@ void loop() {
   readBallNano();
   goalPosition();
   if(cameraReady == 1) {
-    // storcimentoPortaIncr();
+    storcimentoPorta();
     calcPhyZoneCam = true;
     cameraReady = 0;
-
-      if (pAtk > 20) cstorc+=0.1;
-      if (pAtk < -20) cstorc-=0.1;
-  //    Serial.println(pAtk);
-      }
+  }
   calculateLogicZone();
 
   if(ball_seen){
     if(role) goalie();
     else space_invaders();
   } else {
-    if(role) goCenter();
-    else centerGoalPost();
+    if(role) preparePID(0, 0);
+    else preparePID(0, 0);
   }
 
   checkLineSensors();                           //Last thing in loop, for priority
