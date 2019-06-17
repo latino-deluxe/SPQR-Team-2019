@@ -29,10 +29,10 @@ blue_led.off()
 #                (30, 45, 1, 40, -60, -19)]    # thresholds blue goal
 #
 
-thresholds = [  (53, 100, -15, 7, 5, 51),    # thresholds yellow goal
-                (32, 60, -10, -2, -52, -9)]  # thresholds blue goal (6, 31, -15, 4, -35, 0)
+thresholds = [  (52, 100, -28, -3, 24, 86),    # thresholds yellow goal
+                (47, 68, -40, 12, -47, -19)]  # thresholds blue goal (6, 31, -15, 4, -35, 0)
 
-
+roi = (0, 6, 318, 152)
 
 # Camera Setup ###############################################################
 sensor.reset()
@@ -41,6 +41,7 @@ sensor.set_framesize(sensor.QVGA)
 sensor.skip_frames(time = 2000)
 sensor.set_auto_gain(False)         # must be turned off for color tracking
 sensor.set_auto_whitebal(False)     # must be turned off for color tracking
+#sensor.set_windowing(roi)
 clock = time.clock()
 ##############################################################################
 
@@ -55,7 +56,7 @@ while(True):
     tt_blue = [(0,999,0,2)]       ## creo una lista di tuple per il blue, valore x = 999 : non trovata
 
     img = sensor.snapshot()
-    for blob in img.find_blobs(thresholds, pixels_threshold=300, area_threshold=700):
+    for blob in img.find_blobs(thresholds, pixels_threshold=300, area_threshold=700, merge = True):
         img.draw_rectangle(blob.rect())
         img.draw_cross(blob.cx(), blob.cy())
 
@@ -69,11 +70,14 @@ while(True):
 
     ny = len(tt_yellow)
     nb = len(tt_blue)
-    xY = 150
-    yY = 3
+    xY = 140
+    yY = 240
 
     area,cx,cy,code = tt_yellow[ny-1]    # coordinata x del piu' grande y se montata al contrario
-    Y = ((90 - (int((math.atan2(((cy - yY) / 1.41), cx - xY))* 180 / math.pi))) * -1)
+    #Y = ((90 - (int((math.atan2(cy - yY, cx - xY))* 180 / math.pi))) * -1)
+    print(cy - yY,cx-xY)
+    Y = (-90-(math.atan2(cy-yY, cx-xY) * 180 / math.pi))
+    print(Y)
     string_yellow = "Y"+str(Y)+"y"
     #string_yellow = str(cx) + " - " + str(cy);
 
@@ -87,8 +91,8 @@ while(True):
 
     uart.write(string_yellow)   # scrivo su seriale
     uart.write(string_blue)     # scrivo su seriale
-    print (string_yellow)   # test on serial terminal
-    print (string_blue)     # test on serial terminal
+    #print (string_yellow)   # test on serial terminal
+    #print (string_blue)     # test on serial terminal
 
     #print ("..................................")
 

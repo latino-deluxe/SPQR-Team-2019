@@ -96,7 +96,7 @@ void setup() {
   // ;)
   analogWriteFrequency(2 , 15000);
   analogWriteFrequency(5 , 15000);
-  analogWriteFrequency(6, 15000);
+  analogWriteFrequency(6,  15000);
   analogWriteFrequency(23, 15000);
 
   // disable those pins, damaged teensy

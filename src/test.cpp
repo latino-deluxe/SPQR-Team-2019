@@ -121,7 +121,8 @@ void testMenu(){
         DEBUG_PRINT.print(analogRead(S4I));
         DEBUG_PRINT.print(" | ");
         DEBUG_PRINT.print(analogRead(S4O));
-        DEBUG_PRINT.println("                         ");
+        DEBUG_PRINT.print("\n--------------------------");
+        DEBUG_PRINT.println(" ");
         delay(100);
       break;
       default://default, todo, maybe
