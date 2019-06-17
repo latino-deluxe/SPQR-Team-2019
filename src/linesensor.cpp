@@ -97,11 +97,7 @@ void outOfBounds() {
           outDir = 0;
           outVel = 255;
           tone(30, F4);
-        }
-        else {
-          // if(zoneIndex >= 0 && zoneIndex <= 2) outDir = 180;
-          // if(zoneIndex >= 6 && zoneIndex <= 8) outDir = 0;
-          // outVel = 255;
+        } else {
           outDir = 0;
           outVel = 0;
           tone(30, LA3);
