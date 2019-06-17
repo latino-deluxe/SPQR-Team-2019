@@ -48,7 +48,7 @@
 #define S4I A1
 #define S4O A2
 
-#define LINE_THRESH 160     //150
+#define LINE_THRESH 100     //150
 #define EXTIME 200
 extr int outDir;
 extr int outVel;
@@ -156,15 +156,10 @@ extr bool stop_menamoli;
 // center a 150
 #define keeperCamMin 90    // dx limit
 #define keeperCamMax 190   // sx limit
-<<<<<<< HEAD
 
 #define goalieCamMin 140
 #define goalieCamMax 170
 
-=======
-#define goalieCamMin 100
-#define goalieCamMax 180
->>>>>>> 41b19aab3226948a056c05f813984db212541f38
 
 extr int pAtk; // variabile dello switch che decide dove bisogna attaccare
 extr int pDef; // variabile dello switch che decide dove bisogna difendere
