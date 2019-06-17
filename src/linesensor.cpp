@@ -51,6 +51,7 @@ void checkLineSensors() {
 
 void outOfBounds() {
   st = 0;
+  cstorc = 0;
   // if(lineCnt == EXTIME) {
   if((linesensbyte == 2 || linesensbyte == 8)) {
     linesensbyteOLDY = linesensbyte;
@@ -74,8 +75,15 @@ void outOfBounds() {
 
     switch(linesensbyte) {
       case 0:
+
+      break;
+
       case 15:
         tone(30, LA3);
+        tone(30, C6);
+        digitalWrite(G, HIGH);
+        outDir = 0;
+        outVel = 0;
       break;
 
 
@@ -173,7 +181,7 @@ void outOfBounds() {
     }
   // }
 
-  if(lineCnt > 0) preparePID(outDir, outVel);
+  if(lineCnt > 0) preparePID(outDir, outVel, 0);
 
   lineCnt--;
   if(lineCnt < 0) {

@@ -168,6 +168,7 @@ extr int goal_orientation;
 extr int cameraReady;
 
 extr float stincr;
+extr float cstorc;
 
 
 // test vars

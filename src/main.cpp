@@ -87,6 +87,7 @@ void setup() {
 
   // stincr
   stincr = 0;
+  cstorc = 0;
 
   //axis
   y = 1;
