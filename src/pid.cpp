@@ -46,6 +46,9 @@ void drivePID(signed int direzione, float vMot) {
   mot(2, int(speed2));
   mot(3, int(speed3));
   mot(4, int(speed4));
+
+  prevPidDir = direzione;
+  prevPidSpeed = vMot;
 }
 
 void preparePID(int direction, int speed) { preparePID(direction, speed, 0); }

@@ -7,8 +7,11 @@ void decreaseIndex(int, int, int);
 void decreaseCol(int, int);
 void decreaseRow(int, int);
 void decreaseAll(int);
+
+//reading
 void calculateLogicZone();
 void readPhyZone();
+void phyZoneDirection();
 void phyZoneCam();
 void phyZoneUS();
 void phyZoneLines();

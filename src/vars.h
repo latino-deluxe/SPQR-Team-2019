@@ -84,6 +84,8 @@ extr bool ball_seen;
 extr float errorePre;
 extr float integral;     
 extr int st;             
+extr int prevPidDir;
+extr int prevPidSpeed;
 // test new angle
 extr int globalDir;
 extr int globalSpeed;
