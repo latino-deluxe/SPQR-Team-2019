@@ -16,12 +16,20 @@ void increaseIndex(int i, int j, int ammount){
     }
 }
 
+void decreaseIndex(int i, int j, int ammount){
+  increaseIndex(i, j, -ammount);
+}
+
 void increaseRow(int i, int ammount){
     if(i < 3){
         for(int a = 0; a < 3; a++){
             increaseIndex(a, i, ammount);
         }
     }
+}
+
+void decreaseRow(int i, int ammount){
+  increaseRow(i, -ammount);
 }
 
 void increaseCol(int i, int ammount){
@@ -32,18 +40,25 @@ void increaseCol(int i, int ammount){
     }
 }
 
-void readPhyZone(){
-  phyZoneUS();
-  // phyZoneCam();
+void decreaseCol(int i, int ammount){
+  increaseCol(i, -ammount);
 }
 
-void calculateLogicZone(){
+void increaseAll(int val){
     //decrease all
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
-            increaseIndex(i, j, -3);
+            increaseIndex(i, j, val);
         }
     }
+}
+
+void decreaseAll(int val){
+  increaseAll(-val);
+}
+
+void calculateLogicZone(){
+    decreaseAll(3);
 
     readPhyZone();
     //calculates guessed_x and guessed_y and zoneIndex
@@ -61,6 +76,13 @@ void calculateLogicZone(){
         }
     }
     zoneIndex = guessed_y * 3 + guessed_x;
+}
+
+void readPhyZone(){
+  phyZoneUS();
+  // phyZoneCam();
+  phyZoneLines();
+  phyZoneDirection();
 }
 
 //old WhereAmI. Renamed to be coerent. Now also adds to the logic zone
@@ -194,36 +216,73 @@ void phyZoneCam(){
 }
 
 
-void phyZoneLines(byte b) {
-  switch(b) {
-    case 1:         //NORD
-      increaseRow(0, 10);
-      increaseRow(1, -10);
-      increaseRow(2, -10);
-    break;
 
-    case 2:         //EST
-      increaseCol(0, -10);
-      increaseCol(1, -10);
-      increaseCol(2, 10);
-    break;
+void phyZoneLines(){
+  int val = 30;
 
-    case 4:         //SUD
-      increaseRow(0, -10);
-      increaseRow(1, -10);
-      increaseRow(2, 10);
-    break;
+  //30 is a random error code not used in line exit direction calculations
+  if(lineSensByteBak != 30){
+    switch(lineSensByteBak) {
+      case 1:         //NORD
+        increaseRow(0, val);
+        decreaseRow(1, val);
+        decreaseRow(2, val);
+      break;
 
-    case 8:         //OVEST
-      increaseCol(0, 10);
-      increaseCol(1, -10);
-      increaseCol(2, -10);
-    break;
+      case 2:         //EST
+        decreaseCol(0, val);
+        decreaseCol(1, val);
+        increaseCol(2, val);
+      break;
 
-    default:
+      case 4:         //SUD
+        decreaseRow(0, val);
+        decreaseRow(1, val);
+        decreaseRow(2, 10);
+      break;
 
-    break;
+      case 8:         //OVEST
+        increaseCol(0, val);
+        decreaseCol(1, val);
+        decreaseCol(2, val);
+      break;
+
+      case 3:
+        decreaseAll(val);
+        increaseIndex(0, 2, 2*val);
+      break;
+
+      case 6:
+        decreaseAll(val);
+        increaseIndex(2, 2, 2*val);
+      break;
+
+      case 9:
+        decreaseAll(val);
+        increaseIndex(0, 0, 2*val);
+      break;
+        
+      break;
+
+      default:
+
+      break;
+    }
+    //Last thing to do, sets the var to an error code, so next time it will be called will be because of the outOfBounds function being called
+    lineSensByteBak = 30;
   }
+}
+
+void phyZoneDirection(){
+  int val = 5;
+
+  int x = sin(prevPidDir) * prevPidSpeed;
+  int y = cos(prevPidSpeed) * prevPidSpeed;
+
+  if(y > 0) decreaseRow(2, val);
+  if(y < 0) decreaseRow(0, val);
+  if(x > 0) increaseCol(2, val);
+  if(x < 0) increaseCol(0, val);
 }
 
 

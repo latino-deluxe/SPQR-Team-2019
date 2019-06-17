@@ -84,6 +84,8 @@ extr bool ball_seen;
 extr float errorePre;
 extr float integral;     
 extr int st;             
+extr int prevPidDir;
+extr int prevPidSpeed;
 // test new angle
 extr int globalDir;
 extr int globalSpeed;
@@ -109,6 +111,9 @@ extr int status_y;      // posizione nel campo vale SUD, NORD o CENTRO o 255
 extr int guessed_x, guessed_y;
 extr int zoneIndex;
 extr bool calcPhyZoneCam;
+
+extr byte lineSensByteBak;
+
 #define ZONE_MAX_VALUE 150
 
 // You can modify this if you need

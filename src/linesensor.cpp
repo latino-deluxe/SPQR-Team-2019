@@ -238,12 +238,15 @@ void outOfBounds() {
         digitalWrite(Y, HIGH);
       break;
     }
-  // }
+  // } 
+   lineSensByteBak = linesensbyte;
+
+
   lineCnt--;
   if(lineCnt > 0 && outDir != -1) {
+    ballMask(1);        //da mettere solo prima volta becco linea
     prevDir = outDir;
     preparePID(outDir, outVel, 0);
-    ballMask(1);
   }
   else prevDir = -1;
 
