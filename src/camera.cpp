@@ -76,14 +76,14 @@ void goalPosition() {
 
   } // end of while
 
-  if (valY != -90)
+  if (valY != -74)
     oldGoalY = valY;
-  if (valB != -90)
+  if (valB != -74)
     oldGoalB = valB;
 
-  if (valY == -90)
+  if (valY == -74)
     valY = oldGoalY;
-  if (valB == -90)
+  if (valB == -74)
     valB = oldGoalB;
 
   if (datavalid > 1 ) {  ///entro qui solo se ho ricevuto i pacchetti completi sia del blu che del giallo

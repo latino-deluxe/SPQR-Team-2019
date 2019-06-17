@@ -99,6 +99,8 @@ void testMenu(){
         Serial.print(pAtk);
         Serial.print(" | ");
         Serial.println(pDef);
+        // Serial.print("  | Delta:  ");;
+        // Serial.println(delta);
         delay(100);
       break;
       case '9':
