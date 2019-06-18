@@ -1,17 +1,22 @@
 #include "camera.h"
 #include "vars.h"
 
-int startpY = 0; // inizio del dato
+ // inizio del dato
+int startpY = 0;
 int startpB = 0;
-int endpY = 0; // fine del dato
+// fine del dato
+int endpY = 0; 
 int endpB = 0;
-String valStringY = ""; // stringa dove si vanno a mettere i pacchetti di dati ricevuti
+// stringa dove si vanno a mettere i pacchetti di dati ricevuti
+String valStringY = ""; 
 String valStringB = "";
-int datavalid = 0; // segnalo se il dato ricevuto è valido
+// segnalo se il dato ricevuto è valido
+int datavalid = 0; 
 int oldGoalY,oldGoalB;
 bool negateB = false;
 bool negateY = false;
-int valY; // variabile a cui attribuisco momentaneamente il valore dell x della porta
+// variabile a cui attribuisco momentaneamente il valore dell x della porta
+int valY;
 int valB;
 
 void goalPosition() {
@@ -85,8 +90,9 @@ void goalPosition() {
     valY = oldGoalY;
   if (valB == -74)
     valB = oldGoalB;
-
-  if (datavalid > 1 ) {  ///entro qui solo se ho ricevuto i pacchetti completi sia del blu che del giallo
+  
+  // entro qui solo se ho ricevuto i pacchetti completi sia del blu che del giallo
+  if (datavalid > 1 ) {
     if(goal_orientation == 1){
       //yellow goalpost
       pAtk = valY;
@@ -96,22 +102,16 @@ void goalPosition() {
       pAtk = valB;
       pDef = valY * -1;
     }
-    // Serial.print(pAtk);
-    // Serial.print(" - ");
-    // Serial.println(pDef);
 
     datavalid = 0;
     cameraReady = 1;  //attivo flag di ricezione pacchetto
   }
-  // update_location_complete();
-  // if (portx == -90)
-  //   portx = 999;
 }
 // un numero grande equivale a stare a destra, piccolo a sinistra
 
 
-//fix the camera value change caused by the robot twist
-int imuOff, fst;
+//fix the camera value change caused by the robot twist. Every degree of twist corresponds to a degree of the port change, more or less
+int imuOff;
 int fixCamIMU(int d){
     //fix for camera distortion when the robot twists
     if(imu_current_euler > 30 && imu_current_euler < 180) imuOff = 30;
@@ -119,6 +119,5 @@ int fixCamIMU(int d){
     else if (imu_current_euler <= 360 && imu_current_euler >= 330) imuOff = imu_current_euler - 360;
     else imuOff = imu_current_euler;
 
-    fst = map(imuOff, -30, 30, -30, 30);
-    return d - fst;
+    return d + imuOff;
 }
