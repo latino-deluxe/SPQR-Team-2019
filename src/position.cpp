@@ -79,10 +79,10 @@ void calculateLogicZone(){
 }
 
 void readPhyZone(){
-  // phyZoneUS();
-  phyZoneCam();
-  // phyZoneLines();
-  // phyZoneDirection();
+  phyZoneUS();
+  // phyZoneCam();
+  phyZoneLines();
+  phyZoneDirection();
 }
 
 //old WhereAmI. Renamed to be coerent. Now also adds to the logic zone
