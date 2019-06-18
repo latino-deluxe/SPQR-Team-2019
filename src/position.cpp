@@ -79,10 +79,10 @@ void calculateLogicZone(){
 }
 
 void readPhyZone(){
-  phyZoneUS();
-  // phyZoneCam();
-  phyZoneLines();
-  phyZoneDirection();
+  // phyZoneUS();
+  phyZoneCam();
+  // phyZoneLines();
+  // phyZoneDirection();
 }
 
 //old WhereAmI. Renamed to be coerent. Now also adds to the logic zone
@@ -200,18 +200,56 @@ void phyZoneUS(){
 }
 
 int p = 4;
+int camA;
+int camD;
+
 void phyZoneCam(){
-  if(portx != 0 && portx < 999){
-      int camPort = fixCamIMU(pAtk);
-      if(camPort < 80){
-          p = 0;
-      }else if(camPort > 220){
-          p = 2;
-      }else if(camPort >= 80&& camPort <= 220){
-          p = 1;
-      }
-      increaseCol(p, 10);
+  int val = 30;
+
+  //IMU-fixed attack angle
+  camA = fixCamIMU(pAtk);
+  //IMU-fixed defence angle
+  camD = fixCamIMU(pDef);
+
+  /*  At center row (indeces 3 to 5) camA and camD will be pretty similar
+      At top row (indeces 0 to 2) camA will be much stronger and variable than camD
+      At bottom row (indeces 6 to 8) camB will be much stronger and variable than camA
+  */
+
+  //Negative angle means that the robot is positioned to the right of the goalpost
+  //Positive angle means that the robot is positioned to the left of the goalpost
+
+  if(abs(diff(camA, camD)) <= 10){
+    //at center row, you can consider both camA and camD
+    if(camA < 30 && camA > -30){
+      increaseIndex(1, 1, val);
+    }else if(camA <= -30 || camD < -15){
+      increaseIndex(2, 1, val);
+    }else if(camA >= 30 || camD > 15){
+      increaseIndex(0, 1, val);
+    }
+  }else if(camA > camD){
+    //at top row, only camA can be considered
+    if(camA < 15 && camA > -15){
+      increaseIndex(1, 0, val);
+    }else if(camA <= -15){
+      increaseIndex(2, 0, val);
+    }else if(camA >= 15){
+      increaseIndex(0, 0, val);
+    }
+  
+  /*}else{
+    //at bottom row, only camD can be considered
+    if(camD < 15 && camD > -5){
+      increaseIndex(2, 1, val);
+    }else if(camD <= -15){
+      increaseIndex(2, 2, val);
+    }else if(camD >= 15){
+      increaseIndex(2, 0, val);
+    }*/
   }
+
+
   calcPhyZoneCam = false;
 }
 
@@ -262,10 +300,7 @@ void phyZoneLines(){
         increaseIndex(0, 0, 2*val);
       break;
         
-      break;
-
       default:
-
       break;
     }
     //Last thing to do, sets the var to an error code, so next time it will be called will be because of the outOfBounds function being called

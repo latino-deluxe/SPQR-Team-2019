@@ -97,10 +97,16 @@ void testMenu(){
         goal_orientation = digitalRead(SWITCH_SX);     //se HIGH attacco gialla, difendo blu
         goalPosition();
         readIMU();
-        
+
         Serial.print(pAtk);
         Serial.print(" | ");
-        Serial.println(fixCamIMU(pAtk));
+        Serial.print(fixCamIMU(pAtk));
+
+        Serial.print(" --- ");
+
+        Serial.print(pDef);
+        Serial.print(" | ");
+        Serial.println(fixCamIMU(pDef));
         // Serial.print("  | Delta:  ");;
         // Serial.println(delta);
         delay(100);
