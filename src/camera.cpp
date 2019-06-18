@@ -94,7 +94,7 @@ void goalPosition() {
     }else{
       //blue goalpost
       pAtk = valB;
-      pDef = valY;
+      pDef = valY * -1;
     }
     // Serial.print(pAtk);
     // Serial.print(" - ");

@@ -5,6 +5,7 @@
 #include "motors.h"
 #include "music.h"
 #include "vars.h"
+#include "nano_ball.h"
 #include <Arduino.h>
 
 // init line sensors and attaches interrput
@@ -23,6 +24,7 @@ int lineCnt;
 int CNTY;
 int CNTX;
 int prevDir;
+int ai, ar;
 byte linesensbyteI;
 byte linesensbyteO;
 byte linesensbyte;
@@ -95,6 +97,8 @@ void outOfBounds() {
       case 11:
         outDir = 180;
         outVel = 255;
+        ai = 0;
+        ar = 60;
         
         digitalWrite(R, LOW);
         digitalWrite(Y, LOW);
@@ -104,6 +108,8 @@ void outOfBounds() {
       case 14:
         outDir = 0;
         outVel = 255;
+        ai = 180;
+        ar = 60;
         
         digitalWrite(R, LOW);
         digitalWrite(G, HIGH);
@@ -115,10 +121,14 @@ void outOfBounds() {
         if(linesensbyteOLDX == 1) {
           outDir = 180;
           outVel = 255;
+          ai = 0;
+          ar = 30;
           tone(30, F6);
         } else if(linesensbyteOLDX == 4) {
           outDir = 0;
           outVel = 255;
+          ai = 180;
+          ar = 30;
           tone(30, F4);
         } else {
           outDir = 0;
@@ -135,10 +145,14 @@ void outOfBounds() {
         if(linesensbyteOLDY == 2) {
           outDir = 270;
           outVel = 255;
+          ai = 90;
+          ar = 30;
           tone(30, F6);
         } else if(linesensbyteOLDY == 8) {
           outDir = 90;
           outVel = 255;
+          ai = 270;
+          ar = 30;
           tone(30, F4);
         }
         else {
@@ -155,6 +169,8 @@ void outOfBounds() {
       case 1:
         outDir = 180;
         outVel = 255;
+        ai = 0;
+        ar = 30;
         digitalWrite(R, LOW);
         digitalWrite(G, LOW);
         digitalWrite(Y, LOW);
@@ -162,11 +178,13 @@ void outOfBounds() {
 
       case 2:
       case 7:
-           if(prevDir == 270)outDir = prevDir;
-           else{
-        outDir = 270;
-        outVel = 255;
-           }
+        if(prevDir == 270)outDir = prevDir;
+        else{
+          outDir = 270;
+          outVel = 255;
+        }
+        ai = 90;
+        ar = 60; 
         digitalWrite(R, LOW);
         digitalWrite(G, LOW);
         digitalWrite(Y, LOW);
@@ -175,6 +193,10 @@ void outOfBounds() {
       case 4:
         outDir = 0;
         outVel = 255;
+
+        ai = 180;
+        ar = 30;
+
         digitalWrite(R, LOW);
         digitalWrite(G, LOW);
         digitalWrite(Y, LOW);
@@ -182,11 +204,15 @@ void outOfBounds() {
 
       case 8:
       case 13:
-      if(prevDir == 270)outDir = prevDir;
-      else{
-        outDir = 90;
-        outVel = 255;
-      }
+        if(prevDir == 270)outDir = prevDir;
+        else{
+          outDir = 90;
+          outVel = 255;
+        }
+
+        ai = 270;
+        ar = 60;
+
         digitalWrite(R, LOW);
         digitalWrite(G, LOW);
         digitalWrite(Y, LOW);
@@ -197,6 +223,10 @@ void outOfBounds() {
       case 3:
         outDir = 225;
         outVel = 255;
+
+        ai = 45;
+        ar = 20;
+
         digitalWrite(R, LOW);
         digitalWrite(G, LOW);
         digitalWrite(Y, LOW);
@@ -205,6 +235,10 @@ void outOfBounds() {
       case 6:
         outDir = 315;
         outVel = 255;
+
+        ai = 135;
+        ar = 20;
+
         digitalWrite(R, LOW);
         digitalWrite(G, LOW);
         digitalWrite(Y, LOW);
@@ -213,6 +247,10 @@ void outOfBounds() {
       case 12:
         outDir = 45;
         outVel = 255;
+
+        ai = 225;
+        ar = 20;
+
         digitalWrite(R, LOW);
         digitalWrite(G, LOW);
         digitalWrite(Y, LOW);
@@ -221,6 +259,10 @@ void outOfBounds() {
       case 9:
         outDir = 135;
         outVel = 255;
+
+        ai = 315;
+        ar = 20;
+
         digitalWrite(R, LOW);
         digitalWrite(G, LOW);
         digitalWrite(Y, LOW);
@@ -252,6 +294,7 @@ void outOfBounds() {
 
   if(lineCnt <= 0) {
     ballMask(0);
+    noTone(30);
     lineCnt = 0;
     outDir = 0;
     linesensbyte =0;
@@ -314,12 +357,16 @@ void ballMask(int on) {
   if(on) ball = ball_degrees;
   else {
     if(ball != -1) {
-        Serial.print(diffB);
-  Serial.print(", b:");
-  Serial.println(ball);
-      diffB = min(((2*PI) - abs(ball*PI/180 - ball_degrees*PI/180)), abs(ball*PI/180 - ball_degrees*PI/180));
-      diffB = diffB * 180/PI;
-      if(diffB > 50) {
+      // Serial.print(diffB);
+      // Serial.print(", b:");
+      // Serial.println(ball);
+      // diffB = min(((2*PI) - abs(ball*PI/180 - ball_degrees*PI/180)), abs(ball*PI/180 - ball_degrees*PI/180));
+      // diffB = diffB * 180/PI;
+      // if(diffB > 50) {
+      //   ball = -1;
+      //   return;
+      // }
+      if(inAngle(ball_degrees, ai, ar) == 0 /*&& inAngle(atk_direction, ball, 15) == 0*/) {
         ball = -1;
         return;
       }
