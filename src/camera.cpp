@@ -113,7 +113,6 @@ void goalPosition() {
 //fix the camera value change caused by the robot twist. Every degree of twist corresponds to a degree of the port change, more or less
 int imuOff;
 int fixCamIMU(int d){
-    //fix for camera distortion when the robot twists
     if(imu_current_euler > 30 && imu_current_euler < 180) imuOff = 30;
     else if(imu_current_euler < 330 && imu_current_euler >= 180) imuOff = -30;
     else if (imu_current_euler <= 360 && imu_current_euler >= 330) imuOff = imu_current_euler - 360;
