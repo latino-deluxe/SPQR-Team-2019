@@ -1,3 +1,4 @@
 void readBallNano();
 void testBallNano();
-// bool inSensorRange(byte, byte);
+bool inAngle(int, int, int);
+int diff(int, int);

@@ -1,5 +1,6 @@
-#include "Arduino.h"
+#include <Arduino.h>
 #include "vars.h"
+#include "nano_ball.h"
 
 byte ballReadNano;
 
@@ -32,4 +33,15 @@ void testBallNano() {
   }
 
   delay(100);
+}
+
+bool inAngle(int reachAngle, int startAngle, int range){
+	return diff(reachAngle, startAngle) <= range;
+}
+
+int diff(int a, int b){
+	int diffB = abs(min(a, b) - max(a, b));
+	int diffB1 = 360-diffB;
+	int diff = min(diffB, diffB1);
+  return diff;
 }
