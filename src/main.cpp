@@ -3,6 +3,7 @@
 
 #include "Wire.h"
 #include <Arduino.h>
+#include <TeensyThreads.h>
 
 #include "bluetooth.h"
 #include "camera.h"
@@ -16,6 +17,7 @@
 #include "pid.h"
 #include "position.h"
 #include "space_invaders.h"
+#include "threads.h"
 #include "test.h"
 #include "us.h"
 #include "vars.h"
@@ -93,6 +95,10 @@ void setup() {
   y = 1;
   x = 1;
 
+  //threads id
+  THRD1 = 0;
+  THRD2 = 0;
+
   // ;)
   analogWriteFrequency(2 , 15000);
   analogWriteFrequency(5 , 15000);
@@ -139,6 +145,12 @@ void setup() {
   //   // super_mario();
   // } else
   delay(500);
+
+  //Enable the super position thread
+  THRD1 = threads.addThread(pos);
+  //Enable the BT thread
+  THRD2 = threads.addThread(chat);
+
   stopSetup();
 }
 
@@ -149,8 +161,7 @@ void loop() {
 
   if(Serial.available() > 0) testMenu();
 
-  readIMU();
-  readUS();
+  
   readBallNano();
   goalPosition();
   if(cameraReady == 1) {
@@ -158,7 +169,6 @@ void loop() {
     calcPhyZoneCam = true;
     cameraReady = 0;
   }
-  calculateLogicZone();
 
   if(ball_seen){
     if(role) goalie();

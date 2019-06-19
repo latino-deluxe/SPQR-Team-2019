@@ -1,0 +1,2 @@
+void pos();
+void chat();

@@ -72,6 +72,8 @@ extr int LN4O;
 
 // IMU
 extr int imu_current_euler;
+extr int THRD1;
+extr int THRD2;
 
 // Line Sensors
 extr byte lineReading;
