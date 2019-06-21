@@ -47,8 +47,8 @@ void checkLineSensors() {
   // playSafe();
   linesensbyte |= (linesensbyteI | linesensbyteO);
   // phyZoneLines(linesensbyte);
-  // if(linesensbyte > 0) bounds = true;
-  // else bounds = false;
+  if(linesensbyte > 0) bounds = true;
+  else bounds = false;
   // if(bounds) 
   outOfBounds();                                            
 }
@@ -292,6 +292,13 @@ void outOfBounds() {
 
 
   lineCnt--;
+  
+  if(bounds) if(lineCnt < 300) {
+    outDir = 0;
+    outVel = 0;
+    brake();
+  }
+
   if(lineCnt > 0 && outDir != -1) {
     ballMask(1);        //da mettere solo prima volta becco linea
     prevDir = outDir;
@@ -307,7 +314,6 @@ void outOfBounds() {
     linesensbyte =0;
   }
 
-  if(lineCnt < 51) brake();
 
 }
 
@@ -357,28 +363,27 @@ void testLineSensors(){
 }
 
 int ball = -1;
+elapsedMillis mask;
 
 void ballMask(int on) {
   float diffB;
 
-  if(on) ball = ball_degrees;
+  if(on) {
+    ball = ball_degrees;
+    mask = 0;
+  }
   else {
     if(ball != -1) {
-      // Serial.print(diffB);
-      // Serial.print(", b:");
-      // Serial.println(ball);
-      // diffB = min(((2*PI) - abs(ball*PI/180 - ball_degrees*PI/180)), abs(ball*PI/180 - ball_degrees*PI/180));
-      // diffB = diffB * 180/PI;
-      // if(diffB > 50) {
-      //   ball = -1;
-      //   return;
-      // }
-      if(inAngle(ball_degrees, ai, ar) == 0 /*&& inAngle(atk_direction, ball, 15) == 0*/) {
+      if(inAngle(ball_degrees, ai, ar) == 0) {
         ball = -1;
         return;
       }
       else {
-        preparePID(0, 0, 0);
+        if(mask < 750) preparePID(0, 0, 0);
+        else {
+          ball = -1;
+          return;
+        }
       }
     } else return;
   }
