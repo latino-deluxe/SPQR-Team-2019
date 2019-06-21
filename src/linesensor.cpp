@@ -28,6 +28,7 @@ int ai, ar;
 byte linesensbyteI;
 byte linesensbyteO;
 byte linesensbyte;
+byte linesensbytefst;
 byte linesensbyteOLDY;
 byte linesensbyteOLDX;
 elapsedMillis exitTimer;
@@ -55,6 +56,10 @@ void checkLineSensors() {
 void outOfBounds() {
   // if(lineCnt == EXTIME) {
 
+  if(lineCnt == EXTIME) {
+    if(linesensbytefst == 0) linesensbytefst = linesensbyte;
+  }
+
   if((linesensbyte == 2 || linesensbyte == 8)) {
     linesensbyteOLDY = linesensbyte;
     CNTY = 1500;
@@ -74,6 +79,9 @@ void outOfBounds() {
     CNTX = 0;
     linesensbyteOLDX = 0;
   }
+
+  if(linesensbyte == 15) linesensbyte = linesensbytefst;
+
 
     switch(linesensbyte) {
       case 0:
@@ -147,13 +155,13 @@ void outOfBounds() {
           outVel = 255;
           ai = 90;
           ar = 30;
-          tone(30, F6);
+          tone(30, C6);
         } else if(linesensbyteOLDY == 8) {
           outDir = 90;
           outVel = 255;
           ai = 270;
           ar = 30;
-          tone(30, F4);
+          tone(30, C3);
         }
         else {
           outDir = 0;
