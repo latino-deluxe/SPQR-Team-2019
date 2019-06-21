@@ -48,8 +48,8 @@
 #define S4I A1
 #define S4O A2
 
-#define LINE_THRESH 120
-#define EXTIME 400
+#define LINE_THRESH 250
+// #define EXTIME 100
 extr int outDir;
 extr int outVel;
 extr bool bounds;

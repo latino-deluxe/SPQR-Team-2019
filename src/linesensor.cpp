@@ -25,6 +25,7 @@ int CNTY;
 int CNTX;
 int prevDir;
 int ai, ar;
+int EXTIME = 100;
 byte linesensbyteI;
 byte linesensbyteO;
 byte linesensbyte;
@@ -87,7 +88,7 @@ void outOfBounds() {
         outDir = prevDir;
         outVel = 255;
         prevDir = -1;
-        digitalWrite(R, HIGH);
+        digitalWrite(R, LOW);
         digitalWrite(Y, LOW);
       break;
 
@@ -185,11 +186,8 @@ void outOfBounds() {
 
       case 2:
       case 7:
-        if(prevDir == 270)outDir = prevDir;
-        else{
-          outDir = 270;
-          outVel = 255;
-        }
+        outDir = 270;
+        outVel = 255;
         ai = 90;
         ar = 60; 
         digitalWrite(R, LOW);
@@ -211,11 +209,8 @@ void outOfBounds() {
 
       case 8:
       case 13:
-        if(prevDir == 270)outDir = prevDir;
-        else{
-          outDir = 90;
-          outVel = 255;
-        }
+        outDir = 90;
+        outVel = 255;
 
         ai = 270;
         ar = 60;
@@ -293,11 +288,11 @@ void outOfBounds() {
 
   lineCnt--;
   
-  if(bounds) if(lineCnt < 300) {
-    outDir = 0;
-    outVel = 0;
-    brake();
-  }
+  // if(bounds) if(lineCnt < 300) {
+  //   outDir = 0;
+  //   outVel = 0;
+  //   brake();
+  // }
 
   if(lineCnt > 0 && outDir != -1) {
     ballMask(1);        //da mettere solo prima volta becco linea
@@ -312,6 +307,27 @@ void outOfBounds() {
     lineCnt = 0;
     outDir = 0;
     linesensbyte =0;
+  }
+  
+  if(linesensbyte == 1) {
+    digitalWrite(G, LOW);
+    digitalWrite(Y, LOW);
+    digitalWrite(R, HIGH);
+  }
+  if(linesensbyte == 2) {
+    digitalWrite(G, LOW);
+    digitalWrite(Y, HIGH);
+    digitalWrite(R, LOW);
+  }
+  if(linesensbyte == 4) {
+    digitalWrite(G, HIGH);
+    digitalWrite(Y, LOW);
+    digitalWrite(R, LOW);
+  }
+  if(linesensbyte == 8) {
+    digitalWrite(G, HIGH);
+    digitalWrite(Y, HIGH);
+    digitalWrite(R, LOW);
   }
 
 

@@ -169,6 +169,5 @@ void loop() {
   }
 
   checkLineSensors();                           //Last thing in loop, for priority
-  
   drivePID(globalDir, globalSpeed);
 }

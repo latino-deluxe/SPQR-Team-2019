@@ -38,8 +38,12 @@ void goalie() {
     if(ball_degrees > 330 && ball_degrees < 345)   atk_direction = ball_degrees - 40;
   }
 
+  
   if((ball_degrees > 60 && ball_degrees < 120) || (ball_degrees > 230 && ball_degrees < 290)) atk_speed = 215;
   else atk_speed = 250;
+  
+  //presa più stabile
+  if((ball_degrees >= 90 && ball_degrees <= 270) && ball_distance <= 180) atk_speed = 190;
 
   goalPosition();
   if((ball_degrees >= 330 || ball_degrees <= 30) && ball_distance > 140) preparePID(atk_direction, atk_speed, cstorc);
