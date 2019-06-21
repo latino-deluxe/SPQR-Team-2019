@@ -309,26 +309,26 @@ void outOfBounds() {
     linesensbyte =0;
   }
   
-  if(linesensbyte == 1) {
-    digitalWrite(G, LOW);
-    digitalWrite(Y, LOW);
-    digitalWrite(R, HIGH);
-  }
-  if(linesensbyte == 2) {
-    digitalWrite(G, LOW);
-    digitalWrite(Y, HIGH);
-    digitalWrite(R, LOW);
-  }
-  if(linesensbyte == 4) {
-    digitalWrite(G, HIGH);
-    digitalWrite(Y, LOW);
-    digitalWrite(R, LOW);
-  }
-  if(linesensbyte == 8) {
-    digitalWrite(G, HIGH);
-    digitalWrite(Y, HIGH);
-    digitalWrite(R, LOW);
-  }
+  // if(linesensbyte == 1) {
+  //   digitalWrite(G, LOW);
+  //   digitalWrite(Y, LOW);
+  //   digitalWrite(R, HIGH);
+  // }
+  // if(linesensbyte == 2) {
+  //   digitalWrite(G, LOW);
+  //   digitalWrite(Y, HIGH);
+  //   digitalWrite(R, LOW);
+  // }
+  // if(linesensbyte == 4) {
+  //   digitalWrite(G, HIGH);
+  //   digitalWrite(Y, LOW);
+  //   digitalWrite(R, LOW);
+  // }
+  // if(linesensbyte == 8) {
+  //   digitalWrite(G, HIGH);
+  //   digitalWrite(Y, HIGH);
+  //   digitalWrite(R, LOW);
+  // }
 
 
 }
