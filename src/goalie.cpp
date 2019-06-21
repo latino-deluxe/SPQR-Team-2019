@@ -21,15 +21,15 @@ void goalie() {
   if(ball_degrees > 180 && ball_degrees <= 215)  atk_direction = 145;
   if(ball_degrees > 215 && ball_degrees <= 270)  atk_direction = 190;
 
-  if(ball_distance > 180) {
+  if(ball_distance > 300) atk_direction = ball_degrees;
+  else if(ball_distance > 180) {
     if(ball_degrees > 15  && ball_degrees < 30)    atk_direction = ball_degrees + 30;
     if(ball_degrees >= 30 && ball_degrees < 45)    atk_direction = ball_degrees + 35;
     if(ball_degrees >= 45 && ball_degrees < 90)    atk_direction = ball_degrees + 45;
     if(ball_degrees > 270 && ball_degrees <= 315)  atk_direction = ball_degrees - 45;
     if(ball_degrees > 315 && ball_degrees <= 330)  atk_direction = ball_degrees - 35;
     if(ball_degrees > 330 && ball_degrees < 345)   atk_direction = ball_degrees - 30;
-  }
-  else {
+  } else {
     if(ball_degrees > 15  && ball_degrees < 30)    atk_direction = ball_degrees + 40;
     if(ball_degrees >= 30 && ball_degrees < 45)    atk_direction = ball_degrees + 45;
     if(ball_degrees >= 45 && ball_degrees < 90)    atk_direction = ball_degrees + 55;
@@ -41,7 +41,7 @@ void goalie() {
   
   if((ball_degrees > 60 && ball_degrees < 120) || (ball_degrees > 230 && ball_degrees < 290)) atk_speed = 215;
   else atk_speed = 250;
-  
+
   //presa più stabile
   if((ball_degrees >= 90 && ball_degrees <= 270) && ball_distance <= 180) atk_speed = 190;
 

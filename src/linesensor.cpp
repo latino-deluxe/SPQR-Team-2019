@@ -25,7 +25,7 @@ int CNTY;
 int CNTX;
 int prevDir;
 int ai, ar;
-int EXTIME = 100;
+int EXTIME = 200;
 byte linesensbyteI;
 byte linesensbyteO;
 byte linesensbyte;
@@ -81,7 +81,10 @@ void outOfBounds() {
     linesensbyteOLDX = 0;
   }
 
-  if(linesensbyte == 15) linesensbyte = linesensbytefst;
+  if(linesensbyte == 15) {
+    linesensbyte = linesensbytefst;
+    digitalWrite(Y, HIGH);
+  }
 
     switch(linesensbyte) {
       case 0:
@@ -288,11 +291,10 @@ void outOfBounds() {
 
   lineCnt--;
   
-  // if(bounds) if(lineCnt < 300) {
-  //   outDir = 0;
-  //   outVel = 0;
-  //   brake();
-  // }
+  
+  if(lineCnt == 1) slow = true;
+  else slow = false;
+
 
   if(lineCnt > 0 && outDir != -1) {
     ballMask(1);        //da mettere solo prima volta becco linea
@@ -380,6 +382,7 @@ void testLineSensors(){
 
 int ball = -1;
 elapsedMillis mask;
+elapsedMillis slowly;
 
 void ballMask(int on) {
   float diffB;
@@ -404,4 +407,9 @@ void ballMask(int on) {
     } else return;
   }
 
+}
+
+void safetysafe() {
+  if(slow)  slowly = 0;
+  if(!slow) if(slowly < 1000 && inAngle(ball_degrees, ai, ar)) globalSpeed = globalSpeed / 2;
 }
