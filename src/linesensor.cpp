@@ -82,7 +82,6 @@ void outOfBounds() {
 
   if(linesensbyte == 15) linesensbyte = linesensbytefst;
 
-
     switch(linesensbyte) {
       case 0:
         outDir = prevDir;
@@ -308,7 +307,7 @@ void outOfBounds() {
     linesensbyte =0;
   }
 
- 
+  if(lineCnt < 51) brake();
 
 }
 
