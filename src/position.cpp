@@ -79,10 +79,10 @@ void calculateLogicZone(){
 }
 
 void readPhyZone(){
-  phyZoneUS();
-  // phyZoneCam();
-  phyZoneLines();
-  phyZoneDirection();
+  // phyZoneUS();
+  phyZoneCam();
+  // phyZoneLines();
+  // phyZoneDirection();
 }
 
 //old WhereAmI. Renamed to be coerent. Now also adds to the logic zone
@@ -211,44 +211,17 @@ void phyZoneCam(){
   //IMU-fixed defence angle
   camD = fixCamIMU(pDef);
 
-  /*  At center row (indeces 3 to 5) camA and camD will be pretty similar
-      At top row (indeces 0 to 2) camA will be much stronger and variable than camD
-      At bottom row (indeces 6 to 8) camB will be much stronger and variable than camA
-  */
-
   //Negative angle means that the robot is positioned to the right of the goalpost
   //Positive angle means that the robot is positioned to the left of the goalpost
 
-  if(abs(diff(camA, camD)) <= 10){
+  if(abs(diff(camA, camD)) <= 20){
     //at center row, you can consider both camA and camD
-    if(camA < 30 && camA > -30){
-      increaseIndex(1, 1, val);
-    }else if(camA <= -30 || camD < -15){
-      increaseIndex(2, 1, val);
-    }else if(camA >= 30 || camD > 15){
-      increaseIndex(0, 1, val);
-    }
+      increaseCol(1, val);
   }else if(camA > camD){
-    //at top row, only camA can be considered
-    if(camA < 15 && camA > -15){
-      increaseIndex(1, 0, val);
-    }else if(camA <= -15){
-      increaseIndex(2, 0, val);
-    }else if(camA >= 15){
-      increaseIndex(0, 0, val);
-    }
-  
-  /*}else{
-    //at bottom row, only camD can be considered
-    if(camD < 15 && camD > -5){
-      increaseIndex(2, 1, val);
-    }else if(camD <= -15){
-      increaseIndex(2, 2, val);
-    }else if(camD >= 15){
-      increaseIndex(2, 0, val);
-    }*/
+    increaseCol(0, val);
+  }else if(camD > camA){
+    increaseCol(2, val);
   }
-
 
   calcPhyZoneCam = false;
 }
@@ -259,7 +232,7 @@ void phyZoneLines(){
   int val = 30;
 
   //30 is a random error code not used in line exit direction calculations
-  if(lineSensByteBak != 30){
+  if(lineSensByteBak != 30){ 
     switch(lineSensByteBak) {
       case 1:         //NORD
         increaseRow(0, val);
