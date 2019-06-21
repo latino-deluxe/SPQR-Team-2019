@@ -9,7 +9,6 @@
 int defSpeed = 0;
 int defDir = 0;
 byte defDistance = 180;
-/* Less than defDistance is far away, more than defDistance in near*/
 
 void keeper(){
   x = 1;
