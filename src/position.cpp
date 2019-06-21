@@ -79,8 +79,8 @@ void calculateLogicZone(){
 }
 
 void readPhyZone(){
-  // phyZoneUS();
-  phyZoneCam();
+  phyZoneUS();
+  // phyZoneCam();
   // phyZoneLines();
   // phyZoneDirection();
 }
