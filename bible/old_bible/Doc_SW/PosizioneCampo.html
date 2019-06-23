@@ -1,0 +1,351 @@
+﻿<html>
+	
+<head>
+	<title>Posizione Campo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "Kirk Reference.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("PosizioneCampo");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Posizione Campo</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Reference.html">Reference</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Reference.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="SerialTest.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="MatriceBussola.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps3"><span class="rvts14">Nota: " * " significa tutto ciò che ha nel suo nome tutto ciò che la precede o segue.</span></p>
+<p class="rvps3"><span class="rvts14"><br/></span></p>
+<div class="rvps3"><table width="100%" border="1" cellpadding="1" cellspacing="2" style="border-color: #000000; border-style: solid; border-spacing: 2px;">
+<tr valign="top">
+<td colspan="5" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts20">Funzioni</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Nome</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Parametri</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Sottofunzioni</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Descrizione</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Uscita</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">byte posizione_campo</span><span class="rvts8"> ( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Funzione che capisce dai ultrasuoni le coordinate del robot sul campo, ritornando uno delle 20 posizioni del campo ritrovabili nel tab KIRK (Pre-Definite).</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">ZONA_*</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">byte PCS</span><span class="rvts8"> ( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Ritorna la posizione statistica del robot sul campo.</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">pos</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void Add_PCS</span><span class="rvts8"> ( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">byte settore</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Aggiungere valori alla tabella statistica per la posizione statistica.</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void sott_PCS</span><span class="rvts8"> ( )</span></p>
+</td>
+<td height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">byte v</span></p>
+</td>
+<td height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Sottrae un valore costante ogni N Loop.</span></p>
+<p class="rvps4"><span class="rvts14">NON USATA PERCHè INEFFICENTE AL SUO POSTO norm_PCS ( )</span></p>
+</td>
+<td height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void norm_PCS</span><span class="rvts8"> ( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">int Val_tot</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Riproporziona la tabella statistica per evitare che i numeri diventino troppo grandi e non abbia più effetto e al sommare la posizione del robot.</span></p>
+<p class="rvps4"><span class="rvts14">Ogni 0.5 Secondo lo proporziona con 500 valori totali nella tabella.</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">signed int calcola_storcimento</span><span class="rvts8"> ( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">byte zona</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">FUNZIONE NON USATA</span></p>
+<p class="rvps4"><span class="rvts14">Da rimouvere successivamente</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">ret_code</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">byte interpola_pos</span><span class="rvts8"> ( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Ritorna in ordine di priorità:</span></p>
+<p class="rvps4"><span class="rvts14">1-La posizione istantanea del robot (Ultrasuoni).</span></p>
+<p class="rvps4"><span class="rvts14">2-Se la posizione istantanea ritorna solo la fascia (Una delle quattro prova a vedere se la posizione statistica può risteringere il campo).</span></p>
+<p class="rvps4"><span class="rvts14">3-Se non riesce proprio a capire istantaneamente dove si trova ritorna solo la posizione statistica.</span></p>
+<p class="rvps4"><span class="rvts14">4-ZONA NONE.</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">pos_pcs/pos_ist</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<div class="rvps3"><table width="100%" border="1" cellpadding="1" cellspacing="2" style="border-color: #000000; border-style: solid; border-spacing: 2px;">
+<tr valign="top">
+<td colspan="3" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts20">Variabili/Costanti</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Nome</span></p>
+</td>
+<td width="424" height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Descrizione</span></p>
+</td>
+<td width="374" height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Funzioni</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14"> int l_x</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Somma dei ultrasuoni EST e OVEST (Che stanno sulla asse X).</span><br/><span class="rvts14">Indichiranno la larghezza letta del campo, se è più grande del limite L_X_MAX la misura viene considerata errata e messo ZONA NONE a x_status (Variabile).</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="12" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">int l_y</span></p>
+</td>
+<td width="424" height="12" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Somma dei ultrasuoni NORD e SUD (Che stanno sulla asse Y).</span><br/><span class="rvts14">Indichiranno la larghezza letta del campo, se è più grande del limite L_Y_MAX la misura viene considerata errata e messo ZONA NONE a y_status (Variabile).</span></p>
+</td>
+<td width="374" height="12" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">int x_status</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Variabile che contiene la asse della X (EST,MIDDLE,OVEST).</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">int y_status</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Variabile che contiene la asse della Y (NORD,MIDDLE,SUD).</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">int x</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Variabile che contiene la distanza in centimetri rispetto al centro del campo (che capisce il robot).</span></p>
+<p class="rvps4"><span class="rvts14">Si ottiene faccendo distanza da sinistra sottratta da quella distanza da destra e il risultato ottenuto sarà la distanza dal centro del campo.</span></p>
+<p class="rvps4"><span class="rvts14">Se il robot si trova al destra del centro il numero sarà positivo, se si trova a sinistra del campo il numero sarà negativo.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">int y</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Variabile che contiene la distanza in centimetri rispetto al centro del campo (che capisce il robot).</span></p>
+<p class="rvps4"><span class="rvts14">Si ottiene faccendo distanza da frontale sottratta da quella distanza posteriore e il risultato ottenuto sarà la distanza dal centro del campo.</span></p>
+<p class="rvps4"><span class="rvts14">Se il robot si trova al frontale del centro il numero sarà positivo, se si trova a posteriore del campo il numero sarà negativo.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="17" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">define L_X_MAX</span></p>
+</td>
+<td width="424" height="17" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">La larghezza massima accettabile dai sensori della X del campo.</span></p>
+</td>
+<td width="374" height="17" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="19" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14"> define L_Y_MAX</span></p>
+</td>
+<td width="424" height="19" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">La larghezza massima accettabile dai sensori della Y del campo.</span></p>
+</td>
+<td width="374" height="19" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">define NONE</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Codice zona NULLA.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">define NORD</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Codice zona NORD.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( ), interpola_pos ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">define SUD</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Codice zona SUD.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( ), interpola_pos ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">define EST</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Codice zona EST.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( ), interpola_pos ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">define OVEST</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Codice zona OVEST.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( ), interpola_pos ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">define MIDDLE</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Codice zona MIDDLE.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">posizione_campo ( ), interpola_pos ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">define Fascia_val</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Valore da aggiungere alla tabella statistica quando si sa la fascia in cui il robot si trova (Ultrasuoni non certi dalla posizione).</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">add_pcs ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">define Psicura_val</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Valore da aggiungere alla tabella statistica quando si sa la posizione precisa in cui il robot si trova (Ultrasuoni).</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">add_pcs ( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">define linea_val</span></p>
+</td>
+<td width="424" height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Valore da aggiungere alla tabella statistica quando si sa la fascia in cui il robot si trova (Si tocca la linea).</span></p>
+</td>
+<td width="374" height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">add_pcs ( )</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p></p>
+<p class="rvps2"><span class="rvts6">Created with the Personal Edition of HelpNDoc: </span><a class="rvts7" href="http://www.helpndoc.com/feature-tour/create-ebooks-for-amazon-kindle">Write eBooks for the Kindle</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; 2016  by CptPackage, Flavio, Speranza. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

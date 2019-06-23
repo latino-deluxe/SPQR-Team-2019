@@ -1,0 +1,186 @@
+﻿<html>
+	
+<head>
+	<title>Sensore Linea</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "Kirk Reference.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("SensoreLinea");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Sensore Linea</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Reference.html">Reference</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Reference.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="LED.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="BussolaRed.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps3"><span class="rvts14">Nota: " * " significa tutto ciò che ha nel suo nome tutto ciò che la precede o segue.</span></p>
+<p class="rvps3"><span class="rvts14"><br/></span></p>
+<div class="rvps3"><table width="100%" border="1" cellpadding="1" cellspacing="2" style="border-color: #000000; border-style: solid; border-spacing: 2px;">
+<tr valign="top">
+<td colspan="5" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts20">Funzioni</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Nome</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Parametri</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Sottofunzioni</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Descrizione</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Uscita</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void init_sensore_linea( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">pinMode( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14"><br/></span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">USCITA INUTILIZZATA</span></p>
+<p class="rvps4"><span class="rvts14">Da rimouvere successivamente</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void linea( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">flag_interrupt,LINEA_EST,</span></p>
+<p class="rvps4"><span class="rvts14">LINEA_NORD, LINEA_SUD, LINEA_OVEST, sensore_fondo, PINL, S1,S2,S3,S4,S5,S6.</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Add_PCS( ), posizione_campo( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14"><br/></span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<div class="rvps3"><table width="100%" border="1" cellpadding="1" cellspacing="2" style="border-color: #000000; border-style: solid; border-spacing: 2px;">
+<tr valign="top">
+<td colspan="3" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts20">Variabili</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Nome</span></p>
+</td>
+<td width="424" height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Descrizione</span></p>
+</td>
+<td width="374" height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Funzioni</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">S1-&gt;S6</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Maschere da applicare a PINL per ottenere i numeri dei pin dei sensori di linea che vanno da 44 a 49.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void linea( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">flag_interrupt</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Indica se ce sta un interrupt o no.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void linea( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">LINEA_*</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Indica il numero della casistica, che vengono usati per il calcolo della posizione casistica del robot.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void linea( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">sensore_fondo</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Indica quale sensore di linea è attivo.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void linea( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">PINL</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Nome del registro AVR.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void linea( )</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p></p>
+<p class="rvps2"><span class="rvts6">Created with the Personal Edition of HelpNDoc: </span><a class="rvts7" href="http://www.helpndoc.com/feature-tour">Easily create EPub books</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; 2016  by CptPackage, Flavio, Speranza. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

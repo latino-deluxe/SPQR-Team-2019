@@ -1,0 +1,324 @@
+﻿<html>
+	
+<head>
+	<title>Bussola Red</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "Kirk Reference.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("BussolaRed");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Bussola Red</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Reference.html">Reference</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Reference.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="SensoreLinea.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="LeggiPalla.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps3"><span class="rvts14">Nota: " * " significa tutto ciò che ha nel suo nome tutto ciò che la precede o segue.</span></p>
+<p class="rvps3"><span class="rvts14"><br/></span></p>
+<div class="rvps3"><table width="100%" border="1" cellpadding="1" cellspacing="2" style="border-color: #000000; border-style: solid; border-spacing: 2px;">
+<tr valign="top">
+<td colspan="5" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts20">Funzioni</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Nome</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Parametri</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Sottofunzioni</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Descrizione</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Uscita</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void init_bussola_red (void)</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">I2C()</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Imposta il modo operativo della bussola in continuous.</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="31" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">int read_bussola_red (void)</span></p>
+</td>
+<td height="31" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td height="31" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">I2C()</span></p>
+</td>
+<td height="31" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Legge la bussola che fornisce la sua ultima lettura da 0 a 359</span></p>
+</td>
+<td height="31" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">int lettura</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">float read_bussola_red_puro (void)</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">I2C()</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Ritorna angolo con 0.1° di precisione da intero(3600°)</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">float lettura</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">signed int read_compass_norm (int gradi, int delta)</span></p>
+</td>
+<td height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">(int gradi, int delta)</span></p>
+</td>
+<td height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">La funzione ritorna i gradi di differenza rispetto alla porta(Nord Virtuale). Richiede l'angolo REALE attuale e l'angolo a cui si trova la porta</span></p>
+</td>
+<td height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">signed int direzione</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void Auto_Calibrazione(void)</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">I2C()</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Invia il codice di autocalibrazione alla bussola e gira da solo per 15 secondi.</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void salva_bussola (int val, int Loc_low, int Loc_high)</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">(int val, int Loc_low, int Loc_high)</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Salva nella eeprom i dati della bussola che cambiano a seconda del verso in cui il robot gioca (blue o yellow)</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">int carica_bussola (int Loc_low, int Loc_high)</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14"> (int Loc_low, int Loc_high)</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Legge nella eeprom i dati della bussola</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">int val</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void save_compass (void)</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Auto_Calibrazione(), Blink(), carica_VetMagn();</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">ESEGUE UN AUTO_CALIBRAZIONE E CARICA IN "delta_magn" L'ULTIMO ANGOLO SALVATO</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void Test_Bussola()</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">read_bussola_red();</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Permette di testare le funzioni che gestiscono la bussola e printa i risultati sul seriale.</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<div class="rvps3"><table width="100%" border="1" cellpadding="1" cellspacing="2" style="border-color: #000000; border-style: solid; border-spacing: 2px;">
+<tr valign="top">
+<td colspan="3" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts20">Variabili</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Nome</span></p>
+</td>
+<td width="424" height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Descrizione</span></p>
+</td>
+<td width="374" height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Funzioni</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">byte init_data_send_bussola[2]</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">//indirizzo Ram del modo operativo della bussola e codice per impostare il modo operativo della bussola, che è continuous.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">void init_bussola_red (void)</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="17" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14"> velocita_calibrazione</span></p>
+</td>
+<td width="424" height="17" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Velocità usata per l'autocalibrazione della bussola</span></p>
+</td>
+<td width="374" height="17" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8"> Auto_Calibrazione</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">led_green</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Pin del led verde</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">save_compass</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">PIN_SET_COMPASS</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">pin del bottone che salva i dati sulla eeprom</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">Test_Bussola(), save_compass</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">button</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">pin del bottone che attiva l'autocalibrazione</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">save_compass</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">switch_campo</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">pin dello switch che cambia il campo su cui gioca il robot</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">save_compass</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="17" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">BLUE_GOAL</span></p>
+</td>
+<td width="424" height="17" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">se lo switch è impostato sul campo blu</span></p>
+</td>
+<td width="374" height="17" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps3"><span class="rvts8">save_compass</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="19" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">angolo_medio</span></p>
+</td>
+<td width="424" height="19" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">variabile usata per fare la media di 100 misurazioni dell'angolo</span></p>
+</td>
+<td width="374" height="19" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">save_compass</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">delta_magn_blue</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">variabile salvata nella eeprom contente i dati della bussola per il campo blu</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">save_compass</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">delta_magn_yellow</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">variabile salvata nella eeprom contente i dati della bussola per il campo giallo</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">save_compass</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">led_red</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">pin del led rosso</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">save_compass</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Magn_vet_set</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">variabile che indica se ci sono dati salvati nella eeprom</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts8">save_compass</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p></p>
+<p class="rvps2"><span class="rvts6">Created with the Personal Edition of HelpNDoc: </span><a class="rvts7" href="http://www.helpndoc.com/help-authoring-tool">Full-featured multi-format Help generator</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; 2016  by CptPackage, Flavio, Speranza. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

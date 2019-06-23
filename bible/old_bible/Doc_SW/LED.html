@@ -1,0 +1,184 @@
+﻿<html>
+	
+<head>
+	<title>LED</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "Kirk Reference.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("LED");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">LED</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Reference.html">Reference</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Reference.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="Portiere.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="SensoreLinea.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps3"><span class="rvts14">Nota: " * " significa tutto ciò che ha nel suo nome tutto ciò che la precede o segue.</span></p>
+<p class="rvps3"><span class="rvts14"><br/></span></p>
+<div class="rvps3"><table width="100%" border="1" cellpadding="1" cellspacing="2" style="border-color: #000000; border-style: solid; border-spacing: 2px;">
+<tr valign="top">
+<td colspan="5" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts20">Funzioni</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Nome</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Parametri</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Sottofunzioni</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Descrizione</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Uscita</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="54" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void init_led( )</span></p>
+</td>
+<td height="54" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">led_red,led_yellow,led_green,button</span></p>
+</td>
+<td height="54" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">pinMode( )</span></p>
+</td>
+<td height="54" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Inizalizza le porte dei LED mettendole in uscita (modalità OUTPUT).</span></p>
+</td>
+<td height="54" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void blink(byte led)</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">led,timeblink</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">digitalWrite( ),delay( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Fa lampeggiare i LED in un intervello di tempo uguale a timeblink.</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<div class="rvps3"><table width="100%" border="1" cellpadding="1" cellspacing="2" style="border-color: #000000; border-style: solid; border-spacing: 2px;">
+<tr valign="top">
+<td colspan="3" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts20">Variabili</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Nome</span></p>
+</td>
+<td width="424" height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Descrizione</span></p>
+</td>
+<td width="374" height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Funzioni</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">timeblink</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Intervallo di tempo usato per fare lampeggiare i LED.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void blink(byte led)</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">led_red</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Pin del LED rosso.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void init_led( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">led_green</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Pin del LED verde.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void init_led( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">led_yellow</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Pin del LED giallo.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void init_led( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">button</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Pin del pulsante di auto taratura.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void init_led( )</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p></p>
+<p class="rvps2"><span class="rvts6">Created with the Personal Edition of HelpNDoc: </span><a class="rvts7" href="http://www.helpndoc.com/feature-tour/iphone-website-generation">Free iPhone documentation generator</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; 2016  by CptPackage, Flavio, Speranza. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

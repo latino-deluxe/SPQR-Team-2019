@@ -1,0 +1,300 @@
+﻿<html>
+	
+<head>
+	<title>Attaccante</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+	<meta name="keywords" content="">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "Kirk Reference.html?" + sTopicUrl;
+			}
+			else
+			{
+				var bTocSelected = false;
+				(function waitForTOC()
+				{
+					if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+					{
+						top.FrameTOC.SelectTocItem("Attaccante");
+						bTocSelected = true;
+					}
+					if (!bTocSelected) setTimeout(function() { waitForTOC(); }, 300);
+				})();
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Attaccante</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Reference.html">Reference</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Reference.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="HolonMotori.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="Portiere.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps3"><span class="rvts14">Nota: " * " significa tutto ciò che ha nel suo nome tutto ciò che la precede o segue.</span></p>
+<p class="rvps3"><span class="rvts14"><br/></span></p>
+<div class="rvps3"><table width="100%" border="1" cellpadding="1" cellspacing="2" style="border-color: #000000; border-style: solid; border-spacing: 2px;">
+<tr valign="top">
+<td colspan="5" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts20">Funzioni</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Nome</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Parametri</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Sottofunzioni</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Descrizione</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Uscita</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">sensore,palla_sensore,direzione,</span></p>
+<p class="rvps4"><span class="rvts14">sonar_dx,sonar_sx,</span></p>
+<p class="rvps4"><span class="rvts14">G_direzione[sensore],</span></p>
+<p class="rvps4"><span class="rvts14">VEL_ATT[VELxZONE( )],</span></p>
+<p class="rvps4"><span class="rvts14">gradi_norm,letto,time_testugine,</span></p>
+<p class="rvps4"><span class="rvts14">piezo,bip,velocita.</span></p>
+<p class="rvps4"><span class="rvts14"><br/></span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">VELxZONE( ),leggi_ultrasuoni( ),</span></p>
+<p class="rvps4"><span class="rvts14">go( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Muove il robot in base alla sua posizione sul campo, e alla posizione della palla. Accelera se la palla é davanti al sensore frontale, cerca di portarsi la palla davanti.</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">-</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">byte VELxZONE( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">ZONE_*,FASCIA_*,v,MED,MAX</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">interpola_pos( )</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Restituisce la velocità migliore in base alla posizione del robot nel campo usando le variabili ZONE_* e FASCIA_*.</span></p>
+</td>
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">v</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<div class="rvps3"><table width="100%" border="1" cellpadding="1" cellspacing="2" style="border-color: #000000; border-style: solid; border-spacing: 2px;">
+<tr valign="top">
+<td colspan="3" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts20">Variabili</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Nome</span></p>
+</td>
+<td width="424" height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Descrizione</span></p>
+</td>
+<td width="374" height="20" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts19">Funzioni</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">bip </span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Tempo in cui il buzzer deve stare acceso.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="12" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">sensore</span></p>
+</td>
+<td width="424" height="12" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Il sensore tra i 16 che vede più la palla.</span></p>
+</td>
+<td width="374" height="12" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">velocita</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Velocita in cui si muove il robot attualmente.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">G_direzione[16]</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Array che indica la direzione del robot in base al sensore che vede la palla.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">direzione</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">La direzione in cui si sta muovendo il robot.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">letto</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Una variabile che viene usata come se fosse booleana se sta a 0, viene effettuata una misurazione del tempo.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="17" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">time_tesugine</span></p>
+</td>
+<td width="424" height="17" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Misurazione del tempo.</span></p>
+</td>
+<td width="374" height="17" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="19" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">gradi_norm</span></p>
+</td>
+<td width="424" height="19" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Indica i gradi della bussola normalizzati (calcolati),alias l'angolo rispetto alla porta.</span></p>
+</td>
+<td width="374" height="19" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">VEL_ATT</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Velocita d'attacco.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">sonar_dx</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">La distanza impostata dal sensore ultra-suoni da destra.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">sonar_sx</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">La distanza impostata dal sensore ultra-suoni da sinistra.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">MED</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Velocità media.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">byte VELxZONE( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">MAX</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Velocità massima e viene usata quando il robot sta attaccando.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">byte VELxZONE( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">ZONE_*</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Contiene la posizione calcolata del robot nel campo tra le 9 zone.</span></p>
+<p class="rvps4"><span class="rvts14">NORD,NORD_EST,NORD_OVEST,CENTRO,EST,OVEST,SUD,</span></p>
+<p class="rvps4"><span class="rvts14">SUD_OVEST,SUD_EST.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">byte VELxZONE( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">FASIA_*</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Una define che codifica la posizione del robot nel campo, le fasice vengono usati per indicare la posizione in generale (Meno Precisione).</span></p>
+<p class="rvps4"><span class="rvts14">FASCIA_ NORD,SUD,EST,OVEST,MIDDLE_X,MIDDLE_Y</span></p>
+<p class="rvps4"><span class="rvts14">MIDDLE_X: Il centro dal punto di vista destra o sinistra del campo</span></p>
+<p class="rvps4"><span class="rvts14">MIDDLE_Y:Il centro dal punto di vista posteriore o inferiore del campo.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">byte VELxZONE( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">v</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Velocità in base alla posizione in campo.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">byte VELxZONE( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">piezo</span></p>
+</td>
+<td width="424" height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Pin corrisponde al buzzer.</span></p>
+</td>
+<td width="374" height="15" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">palla_sensore</span></p>
+</td>
+<td width="424" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">Indica quale sensore che vede bene la palla ed il suo valore viene copiato nel variabile sensore.</span></p>
+</td>
+<td width="374" style="border-color: #000000; border-style: solid; padding: 1px;"><p class="rvps4"><span class="rvts14">void attaccante( )</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p></p>
+<p class="rvps2"><span class="rvts6">Created with the Personal Edition of HelpNDoc: </span><a class="rvts7" href="http://www.helpndoc.com/help-authoring-tool">Easy to use tool to create HTML Help files and Help web sites</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; 2016  by CptPackage, Flavio, Speranza. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+
