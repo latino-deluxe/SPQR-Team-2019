@@ -1,0 +1,2 @@
+void initBluetooth();
+void testBluetooth();
