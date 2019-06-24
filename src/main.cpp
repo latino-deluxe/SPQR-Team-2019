@@ -147,7 +147,7 @@ void loop() {
   role = digitalRead(SWITCH_DX);                //se HIGH sono attaccante
   goal_orientation = digitalRead(SWITCH_SX);     //se HIGH attacco gialla, difendo blu
 
-  if(Serial.available() > 0) testMenu();
+  if(DEBUG_PRINT.available() > 0) testMenu();
 
   readIMU();
   readUS();
