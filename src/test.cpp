@@ -140,3 +140,63 @@ void testMenu(){
     }
   } while (Serial.available() == 0);
 }
+
+
+
+/* 
+  elapsedMicros t1,t2,t3,t4,t5,t6,t7,t8,t9;
+
+  role = digitalRead(SWITCH_DX);                //se HIGH sono attaccante
+  goal_orientation = digitalRead(SWITCH_SX);     //se HIGH attacco gialla, difendo blu
+
+  if(Serial.available() > 0) testMenu();
+
+  Serial.print("IMU");
+  t1 = 0;
+  readIMU();
+  Serial.print(t1);
+  Serial.print("| US  |");
+  t2 = 0;
+  readUS();
+  Serial.print(t2);
+  Serial.print("| NANO  |");
+  t3 = 0;
+  readBallNano();
+  Serial.print(t3);
+  Serial.print("| CAMERA  |");
+  t4 = 0;
+  goalPosition();
+  Serial.print(t4);
+  Serial.print("| STORCIMENTO |");
+  t5 = 0;
+  if(cameraReady == 1) {
+    storcimentoPorta();
+    calcPhyZoneCam = true;
+    cameraReady = 0;
+  }
+  Serial.print(t5);
+  Serial.print("| ZONA LOGICA |");
+  t6 = 0;
+  calculateLogicZone();
+  Serial.print(t6);
+  Serial.print("| GIOCO |");
+  t7 = 0;
+  if(ball_seen){
+    if(role) goalie();
+    else keeper();
+  } else {
+    if(role) preparePID(0, 0, 0);
+    else centerGoalPost();
+  }
+  Serial.print(t7);
+  Serial.print("| LINESENSOR  |");
+  t8 = 0;
+  checkLineSensors();                           //Last thing in loop, for priority
+  Serial.print(t8);
+  Serial.print("| SAFETYSAFE  |");
+  t9 = 0;
+  safetysafe();
+  Serial.println(t9);
+
+
+*/

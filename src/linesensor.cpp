@@ -61,25 +61,30 @@ void outOfBounds() {
     if(linesensbytefst == 0) linesensbytefst = linesensbyte;
   }
 
-  if((linesensbyte == 2 || linesensbyte == 8)) {
-    linesensbyteOLDY = linesensbyte;
-    CNTY = 1500;
-    CNTY--;
-  }
-  if(CNTY <= 0) {
-    CNTY = 0;
-    linesensbyteOLDY = 0;
-  }
+  if(linesensbyte & 0x02) linesensbyteOLDY =  2;
+  if(linesensbyte & 0x08) linesensbyteOLDY =  8;
+  if(linesensbyte & 0x01) linesensbyteOLDX =  1;
+  if(linesensbyte & 0x04) linesensbyteOLDX =  4;
 
-  if((linesensbyte == 1 || linesensbyte == 4)) {
-    linesensbyteOLDX = linesensbyte;
-    CNTX = 1500;  
-    CNTX--;
-  }
-  if(CNTX <= 0) {
-    CNTX = 0;
-    linesensbyteOLDX = 0;
-  }
+  // if((linesensbyte == 2 || linesensbyte == 8)) {
+  //   linesensbyteOLDY = linesensbyte;
+  //   CNTY = 1500;
+  //   CNTY--;
+  // }
+  // if(CNTY <= 0) {
+  //   CNTY = 0;
+  //   linesensbyteOLDY = 0;
+  // }
+
+  // if((linesensbyte == 1 || linesensbyte == 4)) {
+  //   linesensbyteOLDX = linesensbyte;
+  //   CNTX = 1500;  
+  //   CNTX--;
+  // }
+  // if(CNTX <= 0) {
+  //   CNTX = 0;
+  //   linesensbyteOLDX = 0;
+  // }
 
   if(linesensbyte == 15) {
     linesensbyte = linesensbytefst;
@@ -106,7 +111,8 @@ void outOfBounds() {
       // break;
 
       case 11:
-        outDir = 180;
+        if(linesensbyteOLDX = 1) outDir = 180;
+        else outDir = 0;
         outVel = 255;
         ai = 0;
         ar = 60;
@@ -117,7 +123,8 @@ void outOfBounds() {
       break;
 
       case 14:
-        outDir = 0;
+        if(linesensbyteOLDX = 1) outDir = 180;
+        else outDir = 0;
         outVel = 255;
         ai = 180;
         ar = 60;
@@ -311,26 +318,7 @@ void outOfBounds() {
     linesensbyte =0;
   }
   
-  // if(linesensbyte == 1) {
-  //   digitalWrite(G, LOW);
-  //   digitalWrite(Y, LOW);
-  //   digitalWrite(R, HIGH);
-  // }
-  // if(linesensbyte == 2) {
-  //   digitalWrite(G, LOW);
-  //   digitalWrite(Y, HIGH);
-  //   digitalWrite(R, LOW);
-  // }
-  // if(linesensbyte == 4) {
-  //   digitalWrite(G, HIGH);
-  //   digitalWrite(Y, LOW);
-  //   digitalWrite(R, LOW);
-  // }
-  // if(linesensbyte == 8) {
-  //   digitalWrite(G, HIGH);
-  //   digitalWrite(Y, HIGH);
-  //   digitalWrite(R, LOW);
-  // }
+  
 
 
 }
@@ -378,6 +366,27 @@ void testLineSensors(){
 
   Serial.println("----------"); 
 
+    if(linesensbyte == 1) {
+      digitalWrite(G, LOW);
+        digitalWrite(Y, LOW);
+        digitalWrite(R, HIGH);
+      }
+      if(linesensbyte == 2) {
+        digitalWrite(G, LOW);
+        digitalWrite(Y, HIGH);
+        digitalWrite(R, LOW);
+      }
+      if(linesensbyte == 4) {
+        digitalWrite(G, HIGH);
+        digitalWrite(Y, LOW);
+        digitalWrite(R, LOW);
+      }
+      if(linesensbyte == 8) {
+        digitalWrite(G, HIGH);
+        digitalWrite(Y, HIGH);
+        digitalWrite(R, LOW);
+      }
+
 }
 
 int ball = -1;
@@ -411,5 +420,5 @@ void ballMask(int on) {
 
 void safetysafe() {
   if(slow)  slowly = 0;
-  if(!slow) if(slowly < 1000 && inAngle(ball_degrees, ai, ar)) globalSpeed = globalSpeed / 2;
+  if(!slow) if(slowly < 1000 && inAngle(ball_degrees, ai, 20)) globalSpeed = globalSpeed / 2;
 }
