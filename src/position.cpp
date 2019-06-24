@@ -10,9 +10,8 @@ int zone[3][3];
 
 void increaseIndex(int i, int j, int ammount){
     if(i < 3 && j < 3){
-        if(zone[i][j] + ammount < ZONE_MAX_VALUE && zone[i][j] + ammount >= 0){
-            zone[i][j] += ammount;
-        }
+      zone[i][j] += ammount;
+      zone[i][j] = constrain(zone[i][j], 0, ZONE_MAX_VALUE);
     }
 }
 
@@ -58,7 +57,7 @@ void decreaseAll(int val){
 }
 
 void calculateLogicZone(){
-    decreaseAll(3);
+    decreaseAll(ZONE_LOOP_DECREASE_VALUE);
 
     readPhyZone();
     //calculates guessed_x and guessed_y and zoneIndex
@@ -80,7 +79,7 @@ void calculateLogicZone(){
 
 void readPhyZone(){
   phyZoneUS();
-  // phyZoneCam();
+  phyZoneCam();
   // phyZoneLines();
   // phyZoneDirection();
 }
@@ -191,11 +190,11 @@ void phyZoneUS(){
 
   //now operates on the matrix
   if (status_x == 255 && status_y != 255) {
-      increaseRow(status_y, 3);
+      increaseRow(status_y, ZONE_US_UNKNOWN_INCREASE_VALUE);
   } else if (status_x != 255 && status_y == 255) {
-      increaseCol(status_x, 3);
+      increaseCol(status_x, ZONE_US_UNKNOWN_INCREASE_VALUE);
   } else {
-      increaseIndex(status_x, status_y, 6);
+      increaseIndex(status_x, status_y, ZONE_US_INDEX_INCREASE_VALUE);
   }
 }
 
@@ -204,7 +203,6 @@ int camA;
 int camD;
 
 void phyZoneCam(){
-  int val = 30;
 
   //IMU-fixed attack angle
   camA = fixCamIMU(pAtk);
@@ -214,14 +212,18 @@ void phyZoneCam(){
   //Negative angle means that the robot is positioned to the right of the goalpost
   //Positive angle means that the robot is positioned to the left of the goalpost
 
-  if(abs(diff(camA, camD)) <= 20){
+  p = 4;
+
+  if(abs(diff(camA, camD)) <= ZONE_CAM_CENTER_RANGE){
     //at center row, you can consider both camA and camD
-      increaseCol(1, val);
+      p = 1;
   }else if(camA > camD){
-    increaseCol(0, val);
+      p = 0;
   }else if(camD > camA){
-    increaseCol(2, val);
+      p = 2;
   }
+
+  increaseCol(p, ZONE_CAM_INCREASE_VALUE);
 
   calcPhyZoneCam = false;
 }
@@ -229,55 +231,53 @@ void phyZoneCam(){
 
 
 void phyZoneLines(){
-  int val = 30;
-
-  //30 is a random error code not used in line exit direction calculations
-  if(lineSensByteBak != 30){ 
+  //ZONE_LINES_ERROR_VALUE is a random error code not used in line exit direction calculations
+  if(lineSensByteBak != ZONE_LINES_ERROR_VALUE){ 
     switch(lineSensByteBak) {
       case 1:         //NORD
-        increaseRow(0, val);
-        decreaseRow(1, val);
-        decreaseRow(2, val);
+        increaseRow(0, ZONE_LINES_INCREASE_VALUE);
+        decreaseRow(1, ZONE_LINES_INCREASE_VALUE);
+        decreaseRow(2, ZONE_LINES_INCREASE_VALUE);
       break;
 
       case 2:         //EST
-        decreaseCol(0, val);
-        decreaseCol(1, val);
-        increaseCol(2, val);
+        decreaseCol(0, ZONE_LINES_INCREASE_VALUE);
+        decreaseCol(1, ZONE_LINES_INCREASE_VALUE);
+        increaseCol(2, ZONE_LINES_INCREASE_VALUE);
       break;
 
       case 4:         //SUD
-        decreaseRow(0, val);
-        decreaseRow(1, val);
-        decreaseRow(2, 10);
+        decreaseRow(0, ZONE_LINES_INCREASE_VALUE);
+        decreaseRow(1, ZONE_LINES_INCREASE_VALUE);
+        decreaseRow(2, ZONE_LINES_INCREASE_VALUE);
       break;
 
       case 8:         //OVEST
-        increaseCol(0, val);
-        decreaseCol(1, val);
-        decreaseCol(2, val);
+        increaseCol(0, ZONE_LINES_INCREASE_VALUE);
+        decreaseCol(1, ZONE_LINES_INCREASE_VALUE);
+        decreaseCol(2, ZONE_LINES_INCREASE_VALUE);
       break;
 
       case 3:
-        decreaseAll(val);
-        increaseIndex(0, 2, 2*val);
+        decreaseAll(ZONE_LINES_INCREASE_VALUE);
+        increaseIndex(0, 2, 2*ZONE_LINES_INCREASE_VALUE);
       break;
 
       case 6:
-        decreaseAll(val);
-        increaseIndex(2, 2, 2*val);
+        decreaseAll(ZONE_LINES_INCREASE_VALUE);
+        increaseIndex(2, 2, 2*ZONE_LINES_INCREASE_VALUE);
       break;
 
       case 9:
-        decreaseAll(val);
-        increaseIndex(0, 0, 2*val);
+        decreaseAll(ZONE_LINES_INCREASE_VALUE);
+        increaseIndex(0, 0, 2*ZONE_LINES_INCREASE_VALUE);
       break;
         
       default:
       break;
     }
     //Last thing to do, sets the var to an error code, so next time it will be called will be because of the outOfBounds function being called
-    lineSensByteBak = 30;
+    lineSensByteBak = ZONE_LINES_ERROR_VALUE;
   }
 }
 
@@ -399,19 +399,16 @@ void centerGoalPost() {
 }
 
 void centerGoalPostCamera() {
-  if (portx == 0) {
-    centerGoalPost();
-  } else {
-    if (zoneIndex < 6) {
-      centerGoalPost();
-    } else {
-      if (portx < keeperCamMin) {
-        preparePID(270, vel);
-      } else if (portx > keeperCamMax) {
-        preparePID(90, vel);
-      }
-    }
+  int vel = 255;
+  if(us_px > 45) preparePID(180, 200);
+  if (fixCamIMU(pDef) > 20) {
+    preparePID(270, vel);
+  } else if (fixCamIMU(pDef) < -20) {
+    preparePID(90, vel);
+  }else{
+    if(!ball_seen) preparePID(0, 0);
   }
+
 }
 
 void update_sensors_all() {

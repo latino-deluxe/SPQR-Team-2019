@@ -15,51 +15,51 @@ int testDelay = 10;
 void testMenu(){
   brake();
 
-  Serial.println();
-  Serial.println("Velocitá 9600 e NESSUN FINE RIGA >no LF<");
-  Serial.println("Digitare il test (1-->7) da eseguire e premere ENTER >no LF<");
-  Serial.println("Digitare 0 per uscire dai test >no LF<");
-  Serial.println();
+  DEBUG_PRINT.println();
+  DEBUG_PRINT.println("Velocitá 9600 e NESSUN FINE RIGA >no LF<");
+  DEBUG_PRINT.println("Digitare il test (1-->7) da eseguire e premere ENTER >no LF<");
+  DEBUG_PRINT.println("Digitare 0 per uscire dai test >no LF<");
+  DEBUG_PRINT.println();
 
-  Serial.println("Test Menu: ");
-  Serial.println("0)Esci dai test e gioca");
-  Serial.println("1)Test Palla");
-  Serial.println("2)Test US");
-  Serial.println("3)Test IMU");
-  Serial.println("4)Test Motori");
-  Serial.println("5)Recenter");
-  Serial.println("6)Test BT");
-  Serial.println("7)GigaTestZone");
-  Serial.println("8)Test Camera");
-  Serial.println("9)Test Sensori Linea");
+  DEBUG_PRINT.println("Test Menu: ");
+  DEBUG_PRINT.println("0)Esci dai test e gioca");
+  DEBUG_PRINT.println("1)Test Palla");
+  DEBUG_PRINT.println("2)Test US");
+  DEBUG_PRINT.println("3)Test IMU");
+  DEBUG_PRINT.println("4)Test Motori");
+  DEBUG_PRINT.println("5)Recenter");
+  DEBUG_PRINT.println("6)Test BT");
+  DEBUG_PRINT.println("7)GigaTestZone");
+  DEBUG_PRINT.println("8)Test Camera");
+  DEBUG_PRINT.println("9)Test Sensori Linea");
 
   do{
-    test = Serial.read();
-    Serial.println();
-    Serial.print("Test "); Serial.print(test); Serial.println(" ");
+    test = DEBUG_PRINT.read();
+    DEBUG_PRINT.println();
+    DEBUG_PRINT.print("Test "); DEBUG_PRINT.print(test); DEBUG_PRINT.println(" ");
 
-    if (test == '0') Serial.println("Esce dal test e torna a giocare");
-    else if (test == '1') Serial.println("Test Palla, accendere la palla e girarla tra i sensori");
-    else if (test == '2') Serial.println("Test US, tenere il robot fermo ed in piano");
-    else if (test == '3') Serial.println("Test IMU, tenere il robot in piano");
-    else if (test == '4') Serial.println("Test Motori, accendere I MOTORI e tenerlo sospeso");
-    else if (test == '5') Serial.println("Recenter, accendere il robot e storcerlo");
-    else if (test == '6') Serial.println("Test BT, connettersi al BT");
-    else if (test == '7') Serial.println("GigaTestZone, test grafico matrice zone (1-->9), US, IMU e zona compagno (se presente)");
-    else if (test == '8') Serial.println("CAMERA");
-    else if (test == '9') Serial.println("Linee");
-    else if (test == 'l') Serial.println("Taratura Linee");
+    if (test == '0') DEBUG_PRINT.println("Esce dal test e torna a giocare");
+    else if (test == '1') DEBUG_PRINT.println("Test Palla, accendere la palla e girarla tra i sensori");
+    else if (test == '2') DEBUG_PRINT.println("Test US, tenere il robot fermo ed in piano");
+    else if (test == '3') DEBUG_PRINT.println("Test IMU, tenere il robot in piano");
+    else if (test == '4') DEBUG_PRINT.println("Test Motori, accendere I MOTORI e tenerlo sospeso");
+    else if (test == '5') DEBUG_PRINT.println("Recenter, accendere il robot e storcerlo");
+    else if (test == '6') DEBUG_PRINT.println("Test BT, connettersi al BT");
+    else if (test == '7') DEBUG_PRINT.println("GigaTestZone, test grafico matrice zone (1-->9), US, IMU e zona compagno (se presente)");
+    else if (test == '8') DEBUG_PRINT.println("CAMERA");
+    else if (test == '9') DEBUG_PRINT.println("Linee");
+    else if (test == 'l') DEBUG_PRINT.println("Taratura Linee");
 
     else {
-      Serial.println(" Comando sconosciuto");
+      DEBUG_PRINT.println(" Comando sconosciuto");
       flagtest = false;
     }
-  }  while (Serial.available() > 0);
+  }  while (DEBUG_PRINT.available() > 0);
 
   do{
     switch(test){
       case '0':
-        Serial.println("Fine test");
+        DEBUG_PRINT.println("Fine test");
         flagtest = false;
         return;
       break;
@@ -98,17 +98,17 @@ void testMenu(){
         goalPosition();
         readIMU();
 
-        Serial.print(pAtk);
-        Serial.print(" | ");
-        Serial.print(fixCamIMU(pAtk));
+        DEBUG_PRINT.print(pAtk);
+        DEBUG_PRINT.print(" | ");
+        DEBUG_PRINT.print(fixCamIMU(pAtk));
 
-        Serial.print(" --- ");
+        DEBUG_PRINT.print(" --- ");
 
-        Serial.print(pDef);
-        Serial.print(" | ");
-        Serial.println(fixCamIMU(pDef));
-        // Serial.print("  | Delta:  ");;
-        // Serial.println(delta);
+        DEBUG_PRINT.print(pDef);
+        DEBUG_PRINT.print(" | ");
+        DEBUG_PRINT.println(fixCamIMU(pDef));
+        // DEBUG_PRINT.print("  | Delta:  ");;
+        // DEBUG_PRINT.println(delta);
         delay(100);
       break;
       case '9':
@@ -138,7 +138,7 @@ void testMenu(){
       default://default, todo, maybe
       break;
     }
-  } while (Serial.available() == 0);
+  } while (DEBUG_PRINT.available() == 0);
 }
 
 

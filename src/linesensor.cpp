@@ -92,7 +92,7 @@ void outOfBounds() {
 
   if(linesensbyte == 15) {
     linesensbyte = linesensbytefst;
-    digitalWrite(Y, HIGH);
+    // digitalWrite(Y, HIGH);
   }
 
     switch(linesensbyte) {
@@ -100,11 +100,29 @@ void outOfBounds() {
         // outDir = prevDir;
         outDir = linesensbytefst;
         outVel = 255;
+<<<<<<< HEAD
         // prevDir = -1;
         digitalWrite(R, LOW);
         digitalWrite(Y, LOW);
       break;
 
+=======
+        prevDir = -1;
+        // digitalWrite(R, LOW);
+        // digitalWrite(Y, LOW);
+      break;
+
+      // case 15:
+      //   tone(30, LA3);
+      //   tone(30, C6);
+      //   // digitalWrite(G, HIGH);
+      //   // outDir = 0;
+      //   // outVel = 0;
+      //   outDir = prevDir;
+      //   outVel = 255;
+      // break;
+
+>>>>>>> ebfffbc8627f2669f98970074af14a93ab0dcba7
       case 11:
         if(linesensbyteOLDX == 1) outDir = 180;
         else outDir = 0;
@@ -112,9 +130,9 @@ void outOfBounds() {
         ai = 0;
         ar = 60;
         
-        digitalWrite(R, LOW);
-        digitalWrite(Y, LOW);
-        digitalWrite(G, HIGH);
+        // digitalWrite(R, LOW);
+        // digitalWrite(Y, LOW);
+        // digitalWrite(G, HIGH);
       break;
 
       case 14:
@@ -124,9 +142,9 @@ void outOfBounds() {
         ai = 180;
         ar = 60;
         
-        digitalWrite(R, LOW);
-        digitalWrite(G, HIGH);
-        digitalWrite(Y, LOW);
+        // digitalWrite(R, LOW);
+        // digitalWrite(G, HIGH);
+        // digitalWrite(Y, LOW);
       break;
 
 
@@ -149,9 +167,9 @@ void outOfBounds() {
           tone(30, LA3);
         }
         
-        digitalWrite(R, HIGH);
-        digitalWrite(Y, LOW);
-        digitalWrite(G, HIGH);
+        // digitalWrite(R, HIGH);
+        // digitalWrite(Y, LOW);
+        // digitalWrite(G, HIGH);
       break;
 
       case 5:
@@ -174,9 +192,9 @@ void outOfBounds() {
           tone(30, LA3);
         }
         
-        digitalWrite(R, HIGH);
-        digitalWrite(Y, LOW);
-        digitalWrite(G, HIGH);
+        // digitalWrite(R, HIGH);
+        // digitalWrite(Y, LOW);
+        // digitalWrite(G, HIGH);
       break;
 
       case 1:
@@ -184,9 +202,9 @@ void outOfBounds() {
         outVel = 255;
         ai = 0;
         ar = 30;
-        digitalWrite(R, LOW);
-        digitalWrite(G, LOW);
-        digitalWrite(Y, LOW);
+        // digitalWrite(R, LOW);
+        // digitalWrite(G, LOW);
+        // digitalWrite(Y, LOW);
       break;
 
       case 2:
@@ -195,9 +213,9 @@ void outOfBounds() {
         outVel = 255;
         ai = 90;
         ar = 60; 
-        digitalWrite(R, LOW);
-        digitalWrite(G, LOW);
-        digitalWrite(Y, LOW);
+        // digitalWrite(R, LOW);
+        // digitalWrite(G, LOW);
+        // digitalWrite(Y, LOW);
       break;
 
       case 4:
@@ -207,9 +225,9 @@ void outOfBounds() {
         ai = 180;
         ar = 30;
 
-        digitalWrite(R, LOW);
-        digitalWrite(G, LOW);
-        digitalWrite(Y, LOW);
+        // digitalWrite(R, LOW);
+        // digitalWrite(G, LOW);
+        // digitalWrite(Y, LOW);
       break;
 
       case 8:
@@ -220,9 +238,9 @@ void outOfBounds() {
         ai = 270;
         ar = 60;
 
-        digitalWrite(R, LOW);
-        digitalWrite(G, LOW);
-        digitalWrite(Y, LOW);
+        // digitalWrite(R, LOW);
+        // digitalWrite(G, LOW);
+        // digitalWrite(Y, LOW);
       break;
 
 
@@ -234,9 +252,9 @@ void outOfBounds() {
         ai = 45;
         ar = 20;
 
-        digitalWrite(R, LOW);
-        digitalWrite(G, LOW);
-        digitalWrite(Y, LOW);
+        // digitalWrite(R, LOW);
+        // digitalWrite(G, LOW);
+        // digitalWrite(Y, LOW);
       break;
 
       case 6:
@@ -246,9 +264,9 @@ void outOfBounds() {
         ai = 135;
         ar = 20;
 
-        digitalWrite(R, LOW);
-        digitalWrite(G, LOW);
-        digitalWrite(Y, LOW);
+        // digitalWrite(R, LOW);
+        // digitalWrite(G, LOW);
+        // digitalWrite(Y, LOW);
       break;
 
       case 12:
@@ -258,9 +276,9 @@ void outOfBounds() {
         ai = 225;
         ar = 20;
 
-        digitalWrite(R, LOW);
-        digitalWrite(G, LOW);
-        digitalWrite(Y, LOW);
+        // digitalWrite(R, LOW);
+        // digitalWrite(G, LOW);
+        // digitalWrite(Y, LOW);
       break;
 
       case 9:
@@ -270,9 +288,9 @@ void outOfBounds() {
         ai = 315;
         ar = 20;
 
-        digitalWrite(R, LOW);
-        digitalWrite(G, LOW);
-        digitalWrite(Y, LOW);
+        // digitalWrite(R, LOW);
+        // digitalWrite(G, LOW);
+        // digitalWrite(Y, LOW);
       break;
 
 
@@ -282,9 +300,9 @@ void outOfBounds() {
         outDir = (atk_direction + 180) % 360;
         outVel = 255;
         prevDir = -1;
-        digitalWrite(R, LOW);
-        digitalWrite(G, LOW);
-        digitalWrite(Y, HIGH);
+        // digitalWrite(R, LOW);
+        // digitalWrite(G, LOW);
+        // digitalWrite(Y, HIGH);
       break;
     }
   // } 
@@ -365,24 +383,24 @@ void testLineSensors(){
   Serial.println("----------"); 
 
     if(linesensbyte == 1) {
-      digitalWrite(G, LOW);
-        digitalWrite(Y, LOW);
-        digitalWrite(R, HIGH);
+      // digitalWrite(G, LOW);
+        // digitalWrite(Y, LOW);
+        // digitalWrite(R, HIGH);
       }
       if(linesensbyte == 2) {
-        digitalWrite(G, LOW);
-        digitalWrite(Y, HIGH);
-        digitalWrite(R, LOW);
+        // digitalWrite(G, LOW);
+        // digitalWrite(Y, HIGH);
+        // digitalWrite(R, LOW);
       }
       if(linesensbyte == 4) {
-        digitalWrite(G, HIGH);
-        digitalWrite(Y, LOW);
-        digitalWrite(R, LOW);
+        // digitalWrite(G, HIGH);
+        // digitalWrite(Y, LOW);
+        // digitalWrite(R, LOW);
       }
       if(linesensbyte == 8) {
-        digitalWrite(G, HIGH);
-        digitalWrite(Y, HIGH);
-        digitalWrite(R, LOW);
+        // digitalWrite(G, HIGH);
+        // digitalWrite(Y, HIGH);
+        // digitalWrite(R, LOW);
       }
 
 }

@@ -96,7 +96,7 @@ void goalPosition() {
     if(goal_orientation == 1){
       //yellow goalpost
       pAtk = valY;
-      pDef = valB;
+      pDef = valB * -1;
     }else{
       //blue goalpost
       pAtk = valB;
@@ -117,5 +117,5 @@ int fixCamIMU(int d){
     else if (imu_current_euler <= 360 && imu_current_euler >= 180) imuOff = imu_current_euler - 360;
     imuOff = constrain(imuOff, -45, 45);
 
-    return d - imuOff  - 0.1*imuOff;
+    return d - imuOff;
 }

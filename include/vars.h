@@ -117,6 +117,13 @@ extr bool calcPhyZoneCam;
 extr byte lineSensByteBak;
 
 #define ZONE_MAX_VALUE 150
+#define ZONE_LOOP_DECREASE_VALUE 4
+#define ZONE_US_UNKNOWN_INCREASE_VALUE 4
+#define ZONE_US_INDEX_INCREASE_VALUE 9
+#define ZONE_CAM_INCREASE_VALUE 3
+#define ZONE_CAM_CENTER_RANGE 25
+#define ZONE_LINES_INCREASE_VALUE 100
+#define ZONE_LINES_ERROR_VALUE 30
 
 // You can modify this if you need
 // LIMITI DEL CAMPO
