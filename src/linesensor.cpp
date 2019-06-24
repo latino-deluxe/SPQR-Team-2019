@@ -25,7 +25,7 @@ int CNTY;
 int CNTX;
 int prevDir;
 int ai, ar;
-int EXTIME = 200;
+int EXTIME = 300;
 byte linesensbyteI;
 byte linesensbyteO;
 byte linesensbyte;
