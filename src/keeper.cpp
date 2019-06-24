@@ -6,6 +6,7 @@
 #include "us.h"
 #include "camera.h"
 #include "nano_ball.h"
+#include "goalie.h"
 #include "math.h"
 #include <Arduino.h>
 
@@ -31,5 +32,5 @@ void keeper() {
 
     }
 
-    // centerGoalPostCamera();
+    if(zoneIndex < 6) centerGoalPostCamera();
 }
