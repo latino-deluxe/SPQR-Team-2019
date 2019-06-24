@@ -31,49 +31,33 @@ bool com(int delay) {
   return comrade;
 }
 
-bool commy(int delay) {
-  if (millis() - count > 250) {
-    int d; // funzione di comunicazione
-    if (BT.available() > 0) {
-      d = BT.read();
-      if (d != 0)
-        fpos = d;
-    }
-    if ((fpos >= 1) && (fpos <= 9)) {
-      comrade = true;
-      fpos = fpos - 1;
-      old_timer = millis();
-    }
-    if ((millis() - old_timer) > delay) {
-      old_timer = millis();
-      comrade = false;
-    }
-    if (comrade) {
-      digitalWrite(Y, HIGH);
-      digitalWrite(R, LOW);
-    } else {
-      digitalWrite(R, HIGH);
-      digitalWrite(Y, LOW);
-    }
-    count = millis();
-    return comrade;
-  }
-}
-
 void Ao() {
   if (topolino < 100) {
     topolino++;
   } else {
     topolino = 0;
-    BT.write(42);
+    BT.write(zoneIndex);
   }
 }
 
-void WOW() {
-  if (topolino < 100) {
-    topolino++;
-  } else {
-    topolino = 0;
-    BT.write(zoneIndex + 1);
+void friendo(int delay) {
+  int z;
+  if(Serial3.available()){   
+    z = (BT.read());
+    old_timer = millis();
+    if(z >= 0 && z <= 8) comrade = true;
   }
+  if ((millis() - old_timer) > delay) {
+    old_timer = millis();
+    comrade = false;
+  }
+  if (comrade) {
+    digitalWrite(Y, HIGH);
+    digitalWrite(R, LOW);
+  } else {
+    digitalWrite(R, HIGH);
+    digitalWrite(Y, LOW);
+  }
+  if(comrade) friendZone = z;
 }
+

@@ -25,7 +25,7 @@ int CNTY;
 int CNTX;
 int prevDir;
 int ai, ar;
-int EXTIME = 300;
+int EXTIME = 700;
 byte linesensbyteI;
 byte linesensbyteO;
 byte linesensbyte;
@@ -33,6 +33,7 @@ byte linesensbytefst;
 byte linesensbyteOLDY;
 byte linesensbyteOLDX;
 elapsedMillis exitTimer;
+elapsedMillis ltimer;
 
 void checkLineSensors() {
   linesensbyteI = 0;
@@ -41,7 +42,10 @@ void checkLineSensors() {
   for(int i = 0; i < 4; i++) {
     linetriggerI[i] = analogRead(linepinsI[i]) > LINE_THRESH;
     linetriggerO[i] = analogRead(linepinsO[i]) > LINE_THRESH;
-    if(linetriggerI[i] || linetriggerO[i]) lineCnt = EXTIME;
+    if(linetriggerI[i] || linetriggerO[i]) {
+      if(ltimer > 1700) lineCnt = 1200;
+      else lineCnt = EXTIME;
+    }
     linesensbyteI = linesensbyteI + (linetriggerI[i]<<i);
     linesensbyteO = linesensbyteO + (linetriggerO[i]<<i);
   }
@@ -93,25 +97,16 @@ void outOfBounds() {
 
     switch(linesensbyte) {
       case 0:
-        outDir = prevDir;
+        // outDir = prevDir;
+        outDir = linesensbytefst;
         outVel = 255;
-        prevDir = -1;
+        // prevDir = -1;
         digitalWrite(R, LOW);
         digitalWrite(Y, LOW);
       break;
 
-      // case 15:
-      //   tone(30, LA3);
-      //   tone(30, C6);
-      //   digitalWrite(G, HIGH);
-      //   // outDir = 0;
-      //   // outVel = 0;
-      //   outDir = prevDir;
-      //   outVel = 255;
-      // break;
-
       case 11:
-        if(linesensbyteOLDX = 1) outDir = 180;
+        if(linesensbyteOLDX == 1) outDir = 180;
         else outDir = 0;
         outVel = 255;
         ai = 0;
@@ -123,7 +118,7 @@ void outOfBounds() {
       break;
 
       case 14:
-        if(linesensbyteOLDX = 1) outDir = 180;
+        if(linesensbyteOLDX == 1) outDir = 180;
         else outDir = 0;
         outVel = 255;
         ai = 180;
@@ -299,7 +294,10 @@ void outOfBounds() {
   lineCnt--;
   
   
-  if(lineCnt == 1) slow = true;
+  if(lineCnt == 1) {
+    slow = true;
+    ltimer = 0;
+  }
   else slow = false;
 
 
@@ -420,5 +418,9 @@ void ballMask(int on) {
 
 void safetysafe() {
   if(slow)  slowly = 0;
-  if(!slow) if(slowly < 1000 && inAngle(ball_degrees, ai, 20)) globalSpeed = globalSpeed / 2;
+  if(!slow) if(slowly < 600){
+    if(ball_degrees > 45 && ball_degrees < 315) globalSpeed = globalSpeed / 2;
+  } 
 }
+
+// (inAngle(ball_degrees, ai, 20)

@@ -48,7 +48,7 @@
 #define S4I A1
 #define S4O A2
 
-#define LINE_THRESH 120 //250
+#define LINE_THRESH 130
 // #define EXTIME 100
 extr int outDir;
 extr int outVel;
@@ -70,6 +70,7 @@ extr int LN4O;
 #define DEBUG_PRINT Serial
 #define CAMERA Serial2
 #define NANO_BALL Serial4
+
 
 // IMU
 extr int imu_current_euler;
@@ -142,7 +143,7 @@ extr unsigned long old_timer;
 
 // Comunicazione compagno
 extr int iAmHere;
-extr int friendZone; // :(
+extr int friendZone;            //    ;(
 extr int fpos;
 extr int role;
 extr bool comrade;
