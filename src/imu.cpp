@@ -3,6 +3,8 @@
 #include <Adafruit_BNO055.h>
 #include <Arduino.h>
 
+elapsedMillis readingIMU;
+
 Adafruit_BNO055 bno = Adafruit_BNO055();
 
 void initIMU() {
@@ -11,10 +13,13 @@ void initIMU() {
 }
 
 void readIMU() {
-  imu::Vector<3> euler = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
+  if(readingIMU > 5) {
+    imu::Vector<3> euler = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
 
-  if (euler.x() != imu_current_euler) {
-    imu_current_euler = euler.x();
+    if (euler.x() != imu_current_euler) {
+      imu_current_euler = euler.x();
+    }
+    readingIMU = 0;
   }
   return;
 }

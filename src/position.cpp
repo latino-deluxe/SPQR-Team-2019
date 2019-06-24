@@ -400,19 +400,15 @@ void centerGoalPost() {
 
 void centerGoalPostCamera() {
   int vel = 255;
-  if ((zoneIndex >= 0 && zoneIndex <= 2) || zoneIndex == 4) {
-    preparePID(180, vel);
-  } else if (zoneIndex == 3 || zoneIndex == 6) {
-    preparePID(90, vel);
-  } else if (zoneIndex == 5 || zoneIndex == 8) {
+  if(us_px > 45) preparePID(180, 200);
+  if (fixCamIMU(pDef) > 20) {
     preparePID(270, vel);
-  } else {
-    if (fixCamIMU(pDef) < keeperCamMin) {
-      preparePID(270, vel);
-    } else if (fixCamIMU(pDef) > keeperCamMax) {
-      preparePID(90, vel);
-    }
+  } else if (fixCamIMU(pDef) < -20) {
+    preparePID(90, vel);
+  }else{
+    if(!ball_seen) preparePID(0, 0);
   }
+
 }
 
 void update_sensors_all() {

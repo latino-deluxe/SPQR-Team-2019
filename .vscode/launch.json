@@ -12,9 +12,15 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",
+<<<<<<< HEAD
             "executable": "/home/emamaker/vs_code/SPQR-Team-2019/.pioenvs/teensy35/firmware.elf",
             "toolchainBinDir": "/home/emamaker/.platformio/packages/toolchain-gccarmnoneeabi/bin",
             "svdPath": "/home/emamaker/.platformio/platforms/teensy/misc/svd/MK64F12.svd",
+=======
+            "executable": "/home/ema/Documents/Robotica/SPQR-Team-2019/.pioenvs/teensy35/firmware.elf",
+            "toolchainBinDir": "/home/ema/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+            "svdPath": "/home/ema/.platformio/platforms/teensy/misc/svd/MK64F12.svd",
+>>>>>>> 834f6f14e260e69d123c6d98d177db0fd7d86daa
             "preLaunchTask": {
                 "type": "PlatformIO",
                 "task": "Pre-Debug"
@@ -25,9 +31,15 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (skip Pre-Debug)",
+<<<<<<< HEAD
             "executable": "/home/emamaker/vs_code/SPQR-Team-2019/.pioenvs/teensy35/firmware.elf",
             "toolchainBinDir": "/home/emamaker/.platformio/packages/toolchain-gccarmnoneeabi/bin",
             "svdPath": "/home/emamaker/.platformio/platforms/teensy/misc/svd/MK64F12.svd",
+=======
+            "executable": "/home/ema/Documents/Robotica/SPQR-Team-2019/.pioenvs/teensy35/firmware.elf",
+            "toolchainBinDir": "/home/ema/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+            "svdPath": "/home/ema/.platformio/platforms/teensy/misc/svd/MK64F12.svd",
+>>>>>>> 834f6f14e260e69d123c6d98d177db0fd7d86daa
             "internalConsoleOptions": "openOnSessionStart"
         }
     ]

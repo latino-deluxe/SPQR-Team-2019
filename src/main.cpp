@@ -164,11 +164,12 @@ void loop() {
     if(role) goalie();
     else keeper();
   } else {
-    if(role) goCenter();
+    if(role) preparePID(0, 0, 0);
     else centerGoalPost();
   }
 
   checkLineSensors();                           //Last thing in loop, for priority
   safetysafe();
   drivePID(globalDir, globalSpeed);
+  
 }
