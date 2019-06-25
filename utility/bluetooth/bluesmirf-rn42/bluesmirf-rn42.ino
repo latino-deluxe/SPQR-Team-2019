@@ -15,13 +15,22 @@ int bluetoothTx = 2;  // TX-O pin of bluetooth mate, Arduino D2
 int bluetoothRx = 3;  // RX-I pin of bluetooth mate, Arduino D3
 
 //SoftwareSerial bluetooth(bluetoothTx, bluetoothRx);
+<<<<<<< HEAD
+=======
+
+#define bluetooth Serial3
+>>>>>>> 5c0171dd181357ae6f20ec98cb5c060f067c30fc
 
 #define bluetooth Serial3
 
 void setup() {
   Serial.begin(9600);  // Begin the serial monitor at 9600bps
+<<<<<<< HEAD
   
   bluetooth.begin(9600);  // Start bluetooth serial at 9600
+=======
+  bluetooth.begin(9600);
+>>>>>>> 5c0171dd181357ae6f20ec98cb5c060f067c30fc
 }
 
 void read() {
