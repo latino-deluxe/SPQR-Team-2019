@@ -92,7 +92,9 @@ void outOfBounds() {
 
   if(linesensbyte == 15) {
     linesensbyte = linesensbytefst;
-    // digitalWrite(Y, HIGH);
+    digitalWrite(Y, HIGH);
+    preparePID(0, 0, 0);
+    return;
   }
 
     switch(linesensbyte) {
@@ -100,29 +102,11 @@ void outOfBounds() {
         // outDir = prevDir;
         outDir = linesensbytefst;
         outVel = 255;
-<<<<<<< HEAD
         // prevDir = -1;
         digitalWrite(R, LOW);
         digitalWrite(Y, LOW);
       break;
 
-=======
-        prevDir = -1;
-        // digitalWrite(R, LOW);
-        // digitalWrite(Y, LOW);
-      break;
-
-      // case 15:
-      //   tone(30, LA3);
-      //   tone(30, C6);
-      //   // digitalWrite(G, HIGH);
-      //   // outDir = 0;
-      //   // outVel = 0;
-      //   outDir = prevDir;
-      //   outVel = 255;
-      // break;
-
->>>>>>> ebfffbc8627f2669f98970074af14a93ab0dcba7
       case 11:
         if(linesensbyteOLDX == 1) outDir = 180;
         else outDir = 0;
@@ -332,6 +316,7 @@ void outOfBounds() {
     lineCnt = 0;
     outDir = 0;
     linesensbyte =0;
+    linesensbytefst = 0;
   }
   
   
