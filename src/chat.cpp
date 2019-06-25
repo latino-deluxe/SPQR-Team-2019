@@ -36,7 +36,7 @@ void Ao() {
     topolino++;
   } else {
     topolino = 0;
-    BT.write(zoneIndex);
+    BT.write(char(zoneIndex));
   }
 }
 

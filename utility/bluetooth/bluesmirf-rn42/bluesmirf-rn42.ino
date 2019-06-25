@@ -14,37 +14,14 @@
 int bluetoothTx = 2;  // TX-O pin of bluetooth mate, Arduino D2
 int bluetoothRx = 3;  // RX-I pin of bluetooth mate, Arduino D3
 
-SoftwareSerial bluetooth(bluetoothTx, bluetoothRx);
+//SoftwareSerial bluetooth(bluetoothTx, bluetoothRx);
+
+#define bluetooth Serial3
 
 void setup()
 {
   Serial.begin(9600);  // Begin the serial monitor at 9600bps
-  
-  /*bluetooth.begin(115200);  // The Bluetooth Mate defaults to 115200bps
-    bluetooth.print("$");  // Print three times individually
-    bluetooth.print("$");
-    bluetooth.print("$");  // Enter command mode
-    delay(100);  // Short delay, wait for the Mate to send back CMD
-    bluetooth.println("U,9600,N");  // Temporarily Change the baudrate to 9600, no parity
-    //115200 can be too fast at times for NewSoftSerial to relay the data reliably*/
-
-  delay(1000);
-
-  bluetooth.begin(9600);  // Start bluetooth serial at 9600
-  bluetooth.print("$");  // Print three times individually
-  bluetooth.print("$");
-  bluetooth.print("$");
-  read();
-  delay(1000);
-  bluetooth.println("SA,0");
-  read();
-  bluetooth.println("SM,6");
-  read();
-  bluetooth.println("C");
-  read();
-  //bluetooth.println("---");
-  //delay(10000);
-  //bluetooth.println("---");
+  bluetooth.begin(9600);
 }
 
 void read() {
@@ -66,5 +43,5 @@ void write() {
 
 void loop() {
   read();
-  //write();
+  write();
 }

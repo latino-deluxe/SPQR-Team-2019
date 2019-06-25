@@ -16,10 +16,11 @@ void goalie() {
   y = 1;
   if(ball_degrees >= 355 || ball_degrees <= 5)  atk_direction = ball_degrees;
 
-  if(ball_degrees >= 90 && ball_degrees < 145)   atk_direction = ball_degrees + 35; //atk_direction = 170;
-  if(ball_degrees >= 145&& ball_degrees <= 180)  atk_direction = ball_degrees + 45; //atk_direction = 215;
-  if(ball_degrees > 180 && ball_degrees <= 215)  atk_direction = ball_degrees - 45; //atk_direction = 145;
-  if(ball_degrees > 215 && ball_degrees <= 270)  atk_direction = ball_degrees - 35; //atk_direction = 190;
+  if(ball_degrees >= 90 && ball_degrees <= 270) ballBack();
+  // if(ball_degrees >= 90 && ball_degrees < 145)   atk_direction = ball_degrees + 35; //atk_direction = 170;
+  // if(ball_degrees >= 145&& ball_degrees <= 180)  atk_direction = ball_degrees + 45; //atk_direction = 215;
+  // if(ball_degrees > 180 && ball_degrees <= 215)  atk_direction = ball_degrees - 45; //atk_direction = 145;
+  // if(ball_degrees > 215 && ball_degrees <= 270)  atk_direction = ball_degrees - 35; //atk_direction = 190;
 
   if(ball_degrees > 5  && ball_degrees < 30)    atk_direction = ball_degrees + 30;
   if(ball_degrees >= 30 && ball_degrees < 45)    atk_direction = ball_degrees + 35;
@@ -49,4 +50,17 @@ void storcimentoPorta() {
   
   if (cstorc > 30) cstorc = 30;
   if (cstorc < -30) cstorc = -30;
+}
+
+void ballBack() {
+  int ball_degrees2;
+  int dir;
+  
+  if(ball_degrees > 180) ball_degrees2 = ball_degrees - 360;
+  else ball_degrees2 = ball_degrees;
+  if(ball_degrees2 > 0) dir = ball_degrees + 30;
+  else dir = ball_degrees - 30;
+  if(dir < 0) dir = dir + 360;
+  else dir = dir;
+  atk_direction = dir;
 }
