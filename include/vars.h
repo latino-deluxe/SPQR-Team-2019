@@ -50,8 +50,6 @@
 
 #define LINE_THRESH 130
 // #define EXTIME 100
-extr int outDir;
-extr int outVel;
 extr bool bounds;
 extr bool slow;
 
