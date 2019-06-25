@@ -164,8 +164,9 @@ void loop() {
     cameraReady = 0;
   }
   calculateLogicZone();
-  // Ao();
-  // friendo(500);
+  
+  Ao();
+  friendo(500);
 
   if(ball_seen){
     if(role) goalie();

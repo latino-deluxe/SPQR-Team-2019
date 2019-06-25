@@ -36,16 +36,18 @@ void Ao() {
     topolino++;
   } else {
     topolino = 0;
-    BT.write(char(zoneIndex));
+    BT.write(char((43 + ((byte)zoneIndex))));
   }
 }
 
 void friendo(int delay) {
   int z;
   if(Serial3.available()){   
-    z = (BT.read());
+    z = (int) (BT.read());
     old_timer = millis();
+  
     if(z >= 0 && z <= 8) comrade = true;
+    friendZone = z - 43;
   }
   if ((millis() - old_timer) > delay) {
     old_timer = millis();

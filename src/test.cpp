@@ -1,13 +1,16 @@
 #include <Arduino.h>
 #include "vars.h"
+#include "chat.h"
 #include "us.h"
 #include "bluetooth.h"
 #include "nano_ball.h"
+#include "goalie.h"
 #include "camera.h"
 #include "position.h"
 #include "imu.h"
 #include "motors.h"
 #include "pid.h"
+#include "position.h"
 #include "linesensor.h"
 
 int testDelay = 10;
@@ -136,6 +139,23 @@ void testMenu(){
         delay(100);
       break;
       default://default, todo, maybe
+      break;
+      case 'b':
+        goalPosition();
+        if(cameraReady == 1) {
+          storcimentoPorta();
+          calcPhyZoneCam = true;
+          cameraReady = 0;
+        }
+        calculateLogicZone();
+        
+        Ao();
+        friendo(500);
+
+        Serial.print(comrade);
+        Serial.print(" | ");
+        Serial.println(friendZone);
+        
       break;
     }
   } while (DEBUG_PRINT.available() == 0);
