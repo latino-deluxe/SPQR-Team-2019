@@ -1,0 +1,5 @@
+todo:
+	fix ic2 description (found in hardware-->motorboard-->ic2.odg)
+	add diode power supply (found in hardware-->motorboard-->draft.odg)
+	add line handling flowchart
+	add ball handling flowchart
