@@ -116,6 +116,8 @@ void loop() {
   sendDataInterpolation();
 }
 
+/**--- READ BALL USING SENSORS ANGLE INTERPOLATION ---**/
+
 void readBallInterpolation() {
   for (int i = 0; i < 16; i++) {
     counter[i] = 0;
@@ -141,12 +143,9 @@ void readBallInterpolation() {
     counter[15] += !S15;
   }
 
-
-
-  //printCounter();
-  //delay(300);
-  //return;
-
+  /*printCounter();
+  delay(300);
+  return;*/
 
   float x = 0, y = 0;
   for (int i = 0; i < 16; i++) {
@@ -160,7 +159,26 @@ void readBallInterpolation() {
   angle = ((int)(angle + 360)) % 360;
 
   //distance is 0 when not seeing ball
-  dist = hypot(x, y);
+  //dist = hypot(x, y);
+  
+  nmax = 0;
+  //saves max value and sensor
+  for (int i = 0; i < 16; i++) {
+    if (counter[i] > nmax) {
+      nmax = counter[i];
+    }
+  }
+  
+  nmax = 0;
+  //saves max value and sensor
+  for (int i = 0; i < 16; i++) {
+    if (counter[i] > nmax) {
+      nmax = counter[i];
+      sensor = i;
+    }
+  }
+
+  dist = nmax;
   
   //turn led on
   if (dist == 0) {
@@ -177,7 +195,7 @@ void sendDataInterpolation() {
     //Serial.print(angle);
     //Serial.print(" - ");
   }else{
-    sendDistance = ((byte) (dist / 2.5));
+    sendDistance = dist;
     if(sendDistance > 254) sendDistance = 254;
     sendDistance = sendDistance |= 0b00000001;
     //Serial.println(dist);
@@ -185,10 +203,10 @@ void sendDataInterpolation() {
     Serial.write(sendDistance);
   }
   sending = !sending;
-  /*Serial.print(angle);
-    Serial.print(" , ");
-    Serial.println(sendAngle*2);*/
 }
+
+
+/**--- READ BALL CHECKING WHICH SENSORS SEES THE BALL THE MOST ---**/
 
 void readBall() {
   for (int i = 0; i < 16; i++) {
@@ -198,8 +216,8 @@ void readBall() {
   //reads from the register
   for (int i = 0; i < NCYCLES; i++) {
     /*for(int j = 0; j < 16; j++){
-      counter[j] += !digitalRead(pins[j]);
-      }*/
+    counter[j] += !digitalRead(pins[j]);
+    }*/
     counter[0] += !S0;
     counter[1] += !S1;
     counter[2] += !S2;
