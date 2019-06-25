@@ -8,8 +8,6 @@
 #include "nano_ball.h"
 #include <Arduino.h>
 
-unsigned long EXTIME = 500;
-
 int linepinsI[4] = {S1I, S2I, S3I, S4I};
 int linepinsO[4] = {S1O, S2O, S3O, S4O};
 int linetriggerI[4];
@@ -33,7 +31,6 @@ bool fboundsY;
 int outDir;
 int outVel;
 
-elapsedMillis exitTimer;
 elapsedMillis ltimer;
 
 void checkLineSensors() {
@@ -52,6 +49,7 @@ void checkLineSensors() {
       fboundsX = true;
       fboundsY = true;
       exitTimer = 0;
+    }
   }
 
   linesensbyte |= (linesensbyteI | linesensbyteO);
@@ -75,7 +73,10 @@ void outOfBounds(){
   if (exitTimer <= EXTIME){
     //fase di rientro
 
-    if(linesensbyte == 15) linesensbyte = linesensbyteOLDY | linesensbyteOLDX;        //ZOZZATA MAXIMA
+    if(linesensbyte == 15) {
+      linesensbyte = linesensbyteOLDY | linesensbyteOLDX;        //ZOZZATA MAXIMA
+      digitalWrite(Y, HIGH);
+    }
 
     switch(linesensbyte){
       case 1:
@@ -129,11 +130,13 @@ void outOfBounds(){
 
 
       case 5:
+        digitalWrite(R, HIGH);
         if(linesensbyteOLDX == 2) outDir = 270;
         if(linesensbyteOLDX == 8) outDir = 90;
         outVel = 250;
         break;
       case 10:
+        digitalWrite(G, HIGH);
         if(linesensbyteOLDY == 4) outDir = 0;
         if(linesensbyteOLDY == 1) outDir = 180;
         outVel = 250;
@@ -146,12 +149,17 @@ void outOfBounds(){
         break;
     }
 
+    elapsedMillis h = 0;
+    while (h < 200) brake();
     preparePID(outDir, outVel, 0);
   }else{
     //fine rientro
     linesensbyte = 0;
     linesensbyteOLDY = 0;
     linesensbyteOLDX = 0;
+    digitalWrite(R, LOW);
+    digitalWrite(Y, LOW);
+    digitalWrite(G, LOW);
   }
 }
 

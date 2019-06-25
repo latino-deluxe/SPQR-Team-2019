@@ -32,8 +32,9 @@ void setup() {
   // Now assign value to variables, first thing to do
   // IMU
   imu_current_euler = 0;
-  // MySPI
+  // Ball
   ball_distance = 0;
+  ball_degrees = 0;
   ball_seen = false;
   // PID
   errorePre = 0.0;
@@ -56,7 +57,6 @@ void setup() {
   // currentlocation = CENTRO_CENTRO;
   // guessedlocation = CENTRO_CENTRO;
   // Linesensors and interrupt
-  lineReading = 0;
 
   // bluetooth misc
   a = 0;
@@ -70,6 +70,7 @@ void setup() {
   globalDir = 0;
   globalSpeed = 0;
   st = 0;
+
   // attack
   atk_direction = 0;
   atk_speed = 0;
@@ -88,6 +89,9 @@ void setup() {
   // stincr
   stincr = 0;
   cstorc = 0;
+
+  // lines
+  exitTimer = EXTIME;
 
   //axis
   y = 1;

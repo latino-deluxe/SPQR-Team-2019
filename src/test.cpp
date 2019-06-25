@@ -112,7 +112,7 @@ void testMenu(){
         delay(100);
       break;
       case '9':
-        testLineSensors();
+        // testLineSensors();
       break;
       case 'l':
         DEBUG_PRINT.print("Sensore 1 In - Out");
