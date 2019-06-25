@@ -134,14 +134,15 @@ void setup() {
   timertest = 0;
 
   // if(digitalRead(SWITCH_DX) == HIGH && digitalRead(SWITCH_SX) == HIGH){
-  //   // NANO_BALL.end();
-  //   // //pinMode(31, INPUT_DISABLE);
-  //   // //pinMode(32, INPUT_DISABLE);
-  //   // tone(BUZZER, C6);
-  //   // delay(500);
-  //   // noTone(BUZZER);
-  //   // super_mario();
-  // } else
+  //   NANO_BALL.end();
+    // //pinMode(31, INPUT_DISABLE);
+    // //pinMode(32, INPUT_DISABLE);
+    // tone(BUZZER, C6);
+    // delay(500);
+    // noTone(BUZZER);
+    // super_mario();
+  // }
+  
   delay(500);
   stopSetup();
 }
