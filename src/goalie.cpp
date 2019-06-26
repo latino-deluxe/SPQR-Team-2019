@@ -39,11 +39,11 @@ void leaveMeAlone() {
 }
 
 void storcimentoPorta() {
-  if (pAtk > 20) cstorc+=7.5;
-  else if (pAtk < -20) cstorc-=7.5;
+  if (pAtk > 20) cstorc+=9.5;
+  else if (pAtk < -20) cstorc-=9.5;
   else {
-    if (cstorc > 0) cstorc -= 4;
-    else  cstorc += 4;
+    if (cstorc > 0) cstorc -= 2;
+    else  cstorc += 2;
   }
   
   if (cstorc > 30) cstorc = 30;
