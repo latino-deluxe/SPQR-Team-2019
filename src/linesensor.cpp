@@ -82,63 +82,103 @@ void outOfBounds(){
       case 1:
         outDir = 180;
         outVel = 250;
+        ai = 0;
+        ar = 30;
         break;
       case 2:
         outDir = 270;
         outVel = 250;
+        ai = 90;
+        ar = 60; 
         break;
       case 4:
         outDir = 0;
         outVel = 250;
+        ai = 180;
+        ar = 30;
         break;
       case 8:
         outDir = 90;
         outVel = 250;
+        ai = 270;
+        ar = 60;
         break;
       case 3:
         outDir = 225;
         outVel = 250;
+        ai = 45;
+        ar = 20;
         break;
       case 6:
         outDir = 315;
         outVel = 250;
+        ai = 135;
+        ar = 20;
         break;
       case 12:
         outDir = 45;
         outVel = 250;
+        ai = 225;
+        ar = 20;
         break;
       case 9:
         outDir = 135;
         outVel = 250;
+        ai = 315;
+        ar = 20;
         break;
       case 7:
         outDir = 270;
         outVel = 250;
+        ai = 90;
+        ar = 60; 
         break;
       case 13:
         outDir = 90;
         outVel = 250;
+        ai = 270;
+        ar = 60;
         break;
       case 11:
         outDir = 180;
         outVel = 250;
+        ai = 0;
+        ar = 60;
         break;
       case 14:
         outDir = 0;
         outVel = 250;
+        ai = 180;
+        ar = 60;
         break;
 
 
       case 5:
         digitalWrite(R, HIGH);
-        if(linesensbyteOLDX == 2) outDir = 270;
-        if(linesensbyteOLDX == 8) outDir = 90;
+        if(linesensbyteOLDX == 2) {
+          outDir = 270;
+          ai = 90;
+          ar = 30;
+        }
+        if(linesensbyteOLDX == 8) {
+          outDir = 90;
+          ai = 270;
+          ar = 30;
+        }
         outVel = 250;
         break;
       case 10:
         digitalWrite(G, HIGH);
-        if(linesensbyteOLDY == 4) outDir = 0;
-        if(linesensbyteOLDY == 1) outDir = 180;
+        if(linesensbyteOLDY == 4) {
+          outDir = 0;
+          ai = 180;
+          ar = 30;
+        }
+        if(linesensbyteOLDY == 1) {
+          outDir = 180;
+          ai = 0;
+          ar = 30;
+        }
         outVel = 250;
         break;
 
@@ -148,17 +188,22 @@ void outOfBounds(){
         //;)
         break;
     }
-
+    ballMask(1);
     preparePID(outDir, outVel, 0);
   }else{
     //fine rientro
+    ballMask(0);
     linesensbyte = 0;
     linesensbyteOLDY = 0;
     linesensbyteOLDX = 0;
     digitalWrite(R, LOW);
     digitalWrite(Y, LOW);
     digitalWrite(G, LOW);
+
+    lineSensByteBak = 30;
   }
+
+   lineSensByteBak = linesensbyte;
 }
 
 int ball = -1;

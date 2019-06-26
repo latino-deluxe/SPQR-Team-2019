@@ -18,6 +18,7 @@
 #include "space_invaders.h"
 #include "test.h"
 #include "us.h"
+#include "rambo.h"
 #include "vars.h"
 
 // Switch management vars
@@ -168,11 +169,16 @@ void loop() {
   Ao();
   friendo(500);
 
-  if(ball_seen){
-    if(role) goalie();
-    else keeper();
-  } else {
-    if(role) preparePID(0, 0, 0);
+  if(comrade) {
+    if(ball_seen){
+      if(role) goalie();
+      else keeper();
+    } else {
+      if(role) preparePID(0, 0, 0);
+      else centerGoalPost();
+    }
+  }else{
+    if(ball_seen) rambo();
     else centerGoalPost();
   }
 
