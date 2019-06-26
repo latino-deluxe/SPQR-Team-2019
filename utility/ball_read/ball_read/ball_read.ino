@@ -43,20 +43,6 @@
 #define BROKEN  300
 #define TOO_LOW 60
 
-#define THRESHOLD0 200
-#define THRESHOLD1 170
-#define THRESHOLD2 150
-#define THRESHOLD3 125
-#define THRESHOLD4 100
-#define THRESHOLD5 75
-#define THRESHOLD6 7
-
-#define DIST_THRESHOLD 180
-
-/*
-   200-150: distance 0
-
-*/
 
 int counter[16];
 int pins[] = {A3, A2, A1, A0, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
@@ -143,10 +129,6 @@ void readBallInterpolation() {
     counter[15] += !S15;
   }
 
-  /*printCounter();
-  delay(300);
-  return;*/
-
   float x = 0, y = 0;
   for (int i = 0; i < 16; i++) {
     if (counter[i] > BROKEN || counter[i] < TOO_LOW) counter[i] = 0;
@@ -168,15 +150,6 @@ void readBallInterpolation() {
       nmax = counter[i];
     }
   }
-  
-  nmax = 0;
-  //saves max value and sensor
-  for (int i = 0; i < 16; i++) {
-    if (counter[i] > nmax) {
-      nmax = counter[i];
-      sensor = i;
-    }
-  }
 
   dist = nmax;
   
@@ -192,14 +165,10 @@ void sendDataInterpolation() {
   if(sending){
     sendAngle = ((byte) (angle / 2)) & 0b11111110;
     Serial.write(sendAngle);
-    //Serial.print(angle);
-    //Serial.print(" - ");
   }else{
     sendDistance = dist;
     if(sendDistance > 254) sendDistance = 254;
     sendDistance = sendDistance |= 0b00000001;
-    //Serial.println(dist);
-    //delay(300);
     Serial.write(sendDistance);
   }
   sending = !sending;
