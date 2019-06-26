@@ -204,6 +204,8 @@ void outOfBounds(){
   }
 
    lineSensByteBak = linesensbyte;
+   if(exitTimer == 149) slow = true;
+   else slow = false;
 }
 
 int ball = -1;

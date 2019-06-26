@@ -168,7 +168,7 @@ void loop() {
   
   Ao();
   friendo(500);
-
+  comrade = true;
   if(comrade) {
     if(ball_seen){
       if(role) goalie();
@@ -184,6 +184,6 @@ void loop() {
 
   checkLineSensors();                           //Last thing in loop, for priority
   safetysafe();
-  drivePID(globalDir, globalSpeed);
-  
+  // drivePID(globalDir, globalSpeed);
+  testMotors();
 }
