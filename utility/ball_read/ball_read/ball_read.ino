@@ -43,7 +43,6 @@
 #define BROKEN  300
 #define TOO_LOW 60
 
-
 int counter[16];
 int pins[] = {A3, A2, A1, A0, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 int distance;
@@ -96,8 +95,6 @@ void setup() {
 }
 
 void loop() {
-  //readBall();
-  //sendData();
   readBallInterpolation();
   sendDataInterpolation();
 }
@@ -174,77 +171,8 @@ void sendDataInterpolation() {
   sending = !sending;
 }
 
-
-/**--- READ BALL CHECKING WHICH SENSORS SEES THE BALL THE MOST ---**/
-
-void readBall() {
-  for (int i = 0; i < 16; i++) {
-    counter[i] = 0;
-  }
-
-  //reads from the register
-  for (int i = 0; i < NCYCLES; i++) {
-    /*for(int j = 0; j < 16; j++){
-    counter[j] += !digitalRead(pins[j]);
-    }*/
-    counter[0] += !S0;
-    counter[1] += !S1;
-    counter[2] += !S2;
-    counter[3] += !S3;
-    counter[4] += !S4;
-    counter[5] += !S5;
-    counter[6] += !S6;
-    counter[7] += !S7;
-    counter[8] += !S8;
-    counter[9] += !S9;
-    counter[10] += !S10;
-    counter[11] += !S11;
-    counter[12] += !S12;
-    counter[13] += !S13;
-    counter[14] += !S14;
-    counter[15] += !S15;
-  }
-
-  for (int i = 0; i < 16; i++) {
-    if (counter[i] > BROKEN) counter[i] = 0;
-  }
-
-  nmax = 0;
-  //saves max value and sensor
-  for (int i = 0; i < 16; i++) {
-    if (counter[i] > nmax) {
-      nmax = counter[i];
-      sensor = i;
-    }
-  }
-
-  //gets the distance based on thresholds
-  if (nmax < THRESHOLD6) {
-    nmax = 0;
-    distance = 5;
-    digitalWrite(A4, LOW);
-  } else {
-    if (nmax < DIST_THRESHOLD) distance = 1;
-    else distance = 0;
-
-    digitalWrite(A4, HIGH);
-  }
-}
-
-void sendData() {
-  //sends by serial
-  distance = distance << 5;
-  ballInfo = distance | sensor;
-
-  if (oldDistance != distance || oldIndex != sensor) {
-    Serial.write(ballInfo);
-    oldDistance = distance;
-    oldIndex = sensor;
-  }
-}
-
 void test() {
-  readBall();
+  readBallInterpolation();
 
   Serial.print(S0);
   Serial.print(" | ");
