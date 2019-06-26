@@ -17,22 +17,17 @@ void goalie() {
   if(ball_degrees >= 355 || ball_degrees <= 5)  atk_direction = ball_degrees;
 
   if(ball_degrees >= 90 && ball_degrees <= 270) ballBack();
-  // if(ball_degrees >= 90 && ball_degrees < 145)   atk_direction = ball_degrees + 35; //atk_direction = 170;
-  // if(ball_degrees >= 145&& ball_degrees <= 180)  atk_direction = ball_degrees + 45; //atk_direction = 215;
-  // if(ball_degrees > 180 && ball_degrees <= 215)  atk_direction = ball_degrees - 45; //atk_direction = 145;
-  // if(ball_degrees > 215 && ball_degrees <= 270)  atk_direction = ball_degrees - 35; //atk_direction = 190;
 
-  if(ball_degrees > 5  && ball_degrees < 30)    atk_direction = ball_degrees + 30;
-  if(ball_degrees >= 30 && ball_degrees < 45)    atk_direction = ball_degrees + 35;
-  if(ball_degrees >= 45 && ball_degrees < 90)    atk_direction = ball_degrees + 45;
-  if(ball_degrees > 270 && ball_degrees <= 315)  atk_direction = ball_degrees - 45;
-  if(ball_degrees > 315 && ball_degrees <= 330)  atk_direction = ball_degrees - 35;
-  if(ball_degrees > 330 && ball_degrees < 355)   atk_direction = ball_degrees - 30;
+  if(ball_degrees > 5   && ball_degrees <  30)    atk_direction = ball_degrees + 30;
+  if(ball_degrees >= 30 && ball_degrees <  45)    atk_direction = ball_degrees + 35;
+  if(ball_degrees >= 45 && ball_degrees <  90)    atk_direction = ball_degrees + 45;
+  if(ball_degrees > 270 && ball_degrees <= 315)   atk_direction = ball_degrees - 45;
+  if(ball_degrees > 315 && ball_degrees <= 330)   atk_direction = ball_degrees - 35;
+  if(ball_degrees > 330 && ball_degrees <  355)   atk_direction = ball_degrees - 30;
 
-  atk_speed = 250;
+  atk_speed = 220;
 
-  goalPosition();
-  if((ball_degrees >= 330 || ball_degrees <= 30) && ball_distance > 140) preparePID(atk_direction, atk_speed, cstorc);
+  if((ball_degrees >= 330 || ball_degrees <= 30) && ball_distance > 200) preparePID(atk_direction, atk_speed, cstorc);
   else preparePID(atk_direction, atk_speed);
 }
 
@@ -58,8 +53,8 @@ void ballBack() {
   
   if(ball_degrees > 180) ball_degrees2 = ball_degrees - 360;
   else ball_degrees2 = ball_degrees;
-  if(ball_degrees2 > 0) dir = ball_degrees + 30;
-  else dir = ball_degrees - 30;
+  if(ball_degrees2 > 0) dir = ball_degrees + 35;
+  else dir = ball_degrees - 35;
   if(dir < 0) dir = dir + 360;
   else dir = dir;
   atk_direction = dir;

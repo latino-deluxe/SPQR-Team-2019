@@ -48,8 +48,8 @@ void checkLineSensors() {
     if(exitTimer > EXTIME) {
       fboundsX = true;
       fboundsY = true;
-      exitTimer = 0;
     }
+    exitTimer = 0;
   }
 
   linesensbyte |= (linesensbyteI | linesensbyteO);
@@ -149,8 +149,6 @@ void outOfBounds(){
         break;
     }
 
-    elapsedMillis h = 0;
-    while (h < 200) brake();
     preparePID(outDir, outVel, 0);
   }else{
     //fine rientro
