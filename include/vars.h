@@ -15,7 +15,7 @@
 #define SWITCH_SX 28
 #define SWITCH_DX 29
 
-// ZONE DEL CAMPO 
+// ZONE DEL CAMPO
 // codici utilizzabili per una matice 3x3
 #define EST 2
 #define OVEST 0
@@ -48,11 +48,11 @@
 #define S4I A1
 #define S4O A2
 
-#define LINE_THRESH 160
+#define LINE_THRESH 100
 #define EXTIME 170
 extr bool bounds;
 extr bool slow;
-extr elapsedMillis exitTimer; 
+extr elapsedMillis exitTimer;
 
 extr int LN1I;
 extr int LN2I;
@@ -83,8 +83,8 @@ extr bool ball_seen;
 
 // PID
 extr float errorePre;
-extr float integral;     
-extr int st;             
+extr float integral;
+extr int st;
 extr int prevPidDir;
 extr int prevPidSpeed;
 // test new angle

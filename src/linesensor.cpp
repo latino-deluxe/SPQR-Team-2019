@@ -36,15 +36,15 @@ elapsedMillis ltimer;
 void checkLineSensors() {
   linesensbyteI = 0;
   linesensbyteO = 0;
-  
+
   for(int i = 0; i < 4; i++) {
     linetriggerI[i] = analogRead(linepinsI[i]) > LINE_THRESH;
     linetriggerO[i] = analogRead(linepinsO[i]) > LINE_THRESH;
-    linesensbyteI = linesensbyteI + (linetriggerI[i]<<i);
-    linesensbyteO = linesensbyteO + (linetriggerO[i]<<i);
+    linesensbyteI = linesensbyteI | (linetriggerI[i]<<i);
+    linesensbyteO = linesensbyteO | (linetriggerO[i]<<i);
   }
 
-  if (linesensbyteI > 0 || linesensbyteO > 0) {
+  if ((linesensbyteI > 0) || (linesensbyteO > 0)) {
     if(exitTimer > EXTIME) {
       fboundsX = true;
       fboundsY = true;
@@ -61,18 +61,35 @@ void outOfBounds(){
 
   if(fboundsX == true) {
     if(linesensbyte & 0x02) linesensbyteOLDX = 2;
-    if(linesensbyte & 0x08) linesensbyteOLDX = 8;
-    if(linesensbyteOLDX != 0) fboundsX == false;
+    else if(linesensbyte & 0x08) linesensbyteOLDX = 8;
+    //BIBOP ERROROZZO
+    //if(linesensbyteOLDX != 0) fboundsX == false;
+    if(linesensbyteOLDX != 0) fboundsX = false;
   }
   if(fboundsY == true) {
     if(linesensbyte & 0x01) linesensbyteOLDY = 1;
-    if(linesensbyte & 0x04) linesensbyteOLDY = 4;
-    if(linesensbyteOLDY != 0) fboundsY == false;
+    else if(linesensbyte & 0x04) linesensbyteOLDY = 4;
+    //BIBOP ERROROZZO
+    //if(linesensbyteOLDY != 0) fboundsY == false;
+    if(linesensbyteOLDY != 0) fboundsY = false;
   }
+
+    //
+    // Serial.print(linesensbyte);
+    // Serial.print(" ");
+    // Serial.print(linesensbyteOLDX);
+    // Serial.print(" ");
+    // Serial.print(linesensbyteOLDY);
+    // Serial.print(" ");
+    // Serial.print(exitTimer);
+    // Serial.println(" ");
+
+
+
 
   if (exitTimer <= EXTIME){
     //fase di rientro
-
+    //
     if(linesensbyte == 15) {
       linesensbyte = linesensbyteOLDY | linesensbyteOLDX;        //ZOZZATA MAXIMA
       digitalWrite(Y, HIGH);
@@ -89,7 +106,7 @@ void outOfBounds(){
         outDir = 270;
         outVel = 250;
         ai = 90;
-        ar = 60; 
+        ar = 60;
         break;
       case 4:
         outDir = 0;
@@ -131,7 +148,7 @@ void outOfBounds(){
         outDir = 270;
         outVel = 250;
         ai = 90;
-        ar = 60; 
+        ar = 60;
         break;
       case 13:
         outDir = 90;
@@ -181,9 +198,16 @@ void outOfBounds(){
         }
         outVel = 250;
         break;
-
-      case 0:
       case 15:
+      Serial.print(linesensbyteOLDX);
+      Serial.print(" ");
+      Serial.print(linesensbyteOLDY);
+      Serial.println(" ");
+
+
+
+        break;
+      case 0:
       default:
         //;)
         break;
