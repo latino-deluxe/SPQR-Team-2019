@@ -43,6 +43,30 @@ void decreaseCol(int i, int ammount){
   increaseCol(i, -ammount);
 }
 
+void increaseColWithLimit(int i, int ammount){
+  if(zone[i][0] + ammount < ZONE_MAX_VALUE && zone[i][1] + ammount < ZONE_MAX_VALUE && zone[i][2] + ammount < ZONE_MAX_VALUE){
+    increaseCol(i, ammount);
+  }
+}
+
+void increaseRowWithLimit(int i, int ammount){
+  if(zone[0][1] + ammount < ZONE_MAX_VALUE && zone[1][i] + ammount < ZONE_MAX_VALUE && zone[2][i] + ammount < ZONE_MAX_VALUE){
+    increaseRow(i, ammount);
+  }
+}
+
+void decreaseColWithLimit(int i, int ammount){
+  if(zone[i][0] - ammount >= 0 - ammount >= 0 && zone[i][1] - ammount >= 0 && zone[i][2] - ammount >= 0){
+    decreaseCol(i, ammount);
+  }
+}
+
+void decreaseRowWithLimit(int i, int ammount){
+  if(zone[0][i] - ammount >= 0 - ammount >= 0 && zone[1][i] - ammount >= 0 && zone[2][i] - ammount >= 0){
+    decreaseRow(i, ammount);
+  }
+}
+
 void increaseAll(int val){
     //decrease all
     for(int i = 0; i < 3; i++){
@@ -79,8 +103,8 @@ void calculateLogicZone(){
 
 void readPhyZone(){
   phyZoneUS();
-  //phyZoneCam();
-  // phyZoneLines();
+  phyZoneCam();
+  phyZoneLines();
   // phyZoneDirection();
 }
 
@@ -223,7 +247,7 @@ void phyZoneCam(){
       p = 2;
   }
 
-  increaseCol(p, ZONE_CAM_INCREASE_VALUE);
+  increaseColWithLimit(p, ZONE_CAM_INCREASE_VALUE);
 
   calcPhyZoneCam = false;
 }
@@ -401,9 +425,9 @@ void centerGoalPost() {
 void centerGoalPostCamera() {
   int vel = 255;
   if(us_px > 45) preparePID(180, 200);
-  if (fixCamIMU(pDef) > 20) {
+  if (fixCamIMU(pDef) > 30) {
     preparePID(270, vel);
-  } else if (fixCamIMU(pDef) < -20) {
+  } else if (fixCamIMU(pDef) < -30) {
     preparePID(90, vel);
   }else{
     if(!ball_seen) preparePID(0, 0);

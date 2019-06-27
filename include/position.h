@@ -7,6 +7,10 @@ void decreaseIndex(int, int, int);
 void decreaseCol(int, int);
 void decreaseRow(int, int);
 void decreaseAll(int);
+void increaseRowWithLimit(int, int);
+void increaseColWithLimit(int, int);
+void decreaseRowWithLimit(int, int);
+void decreaseColWithLimit(int, int);
 
 //reading
 void calculateLogicZone();

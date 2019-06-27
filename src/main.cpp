@@ -175,7 +175,7 @@ void loop() {
       if(role) goalie();
       else keeper();
     } else {
-      if(role) preparePID(0, 0, 0);
+      if(role) goCenter();
       else centerGoalPost();
     }
   }else{
