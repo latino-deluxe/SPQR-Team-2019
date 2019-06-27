@@ -110,65 +110,65 @@ void mot(byte mot, int vel) {
 }
 
 void testMotors() {
-  // for (int i = 1; i < 5; i++) {
-  //   turnMotor(i, 0, 1, 100);
-  //   delay(1000);
-  //   turnMotor(i, 0, 0, 100);
-  //   delay(300);
-  //   turnMotor(i, 1, 0, 100);
-  //   delay(1000);
-  //   turnMotor(i, 0, 0, 100);
-  //   delay(300);
-  // }
-    turnMotor(1, 0, 1, 80);
-    turnMotor(3, 0, 1, 200);
+  for (int i = 1; i < 5; i++) {
+    turnMotor(i, 0, 1, 100);
     delay(1000);
-    turnMotor(1, 0, 0, 80);
-    turnMotor(3, 0, 0, 200);
+    turnMotor(i, 0, 0, 100);
     delay(300);
-    turnMotor(1, 1, 0, 80);
-    turnMotor(3, 1, 0, 200);
+    turnMotor(i, 1, 0, 100);
     delay(1000);
-    turnMotor(1, 0, 0, 80);
-    turnMotor(3, 0, 0, 200);
+    turnMotor(i, 0, 0, 100);
     delay(300);
+  }
+    // turnMotor(1, 0, 1, 80);
+    // turnMotor(3, 0, 1, 200);
+    // delay(1000);
+    // turnMotor(1, 0, 0, 80);
+    // turnMotor(3, 0, 0, 200);
+    // delay(300);
+    // turnMotor(1, 1, 0, 80);
+    // turnMotor(3, 1, 0, 200);
+    // delay(1000);
+    // turnMotor(1, 0, 0, 80);
+    // turnMotor(3, 0, 0, 200);
+    // delay(300);
 
-    turnMotor(2, 0, 1, 80);
-    turnMotor(4, 0, 1, 200);
-    delay(1000);
-    turnMotor(2, 0, 0, 80);
-    turnMotor(4, 0, 0, 200);
-    delay(300);
-    turnMotor(2, 1, 0, 80);
-    turnMotor(4, 1, 0, 200);
-    delay(1000);
-    turnMotor(2, 0, 0, 80);
-    turnMotor(4, 0, 0, 200);
-    delay(300);
+    // turnMotor(2, 0, 1, 80);
+    // turnMotor(4, 0, 1, 200);
+    // delay(1000);
+    // turnMotor(2, 0, 0, 80);
+    // turnMotor(4, 0, 0, 200);
+    // delay(300);
+    // turnMotor(2, 1, 0, 80);
+    // turnMotor(4, 1, 0, 200);
+    // delay(1000);
+    // turnMotor(2, 0, 0, 80);
+    // turnMotor(4, 0, 0, 200);
+    // delay(300);
 
-    turnMotor(3, 0, 1, 80);
-    turnMotor(1, 0, 1, 200);
-    delay(1000);
-    turnMotor(3, 0, 0, 80);
-    turnMotor(1, 0, 0, 200);
-    delay(300);
-    turnMotor(3, 1, 0, 80);
-    turnMotor(1, 1, 0, 200);
-    delay(1000);
-    turnMotor(3, 0, 0, 80);
-    turnMotor(1, 0, 0, 200);
-    delay(300);
+    // turnMotor(3, 0, 1, 80);
+    // turnMotor(1, 0, 1, 200);
+    // delay(1000);
+    // turnMotor(3, 0, 0, 80);
+    // turnMotor(1, 0, 0, 200);
+    // delay(300);
+    // turnMotor(3, 1, 0, 80);
+    // turnMotor(1, 1, 0, 200);
+    // delay(1000);
+    // turnMotor(3, 0, 0, 80);
+    // turnMotor(1, 0, 0, 200);
+    // delay(300);
 
-    turnMotor(4, 0, 1, 80);
-    turnMotor(2, 0, 1, 200);
-    delay(1000);
-    turnMotor(4, 0, 0, 80);
-    turnMotor(2, 0, 0, 200);
-    delay(300);
-    turnMotor(4, 1, 0, 80);
-    turnMotor(2, 1, 0, 200);
-    delay(1000);
-    turnMotor(4, 0, 0, 80);
-    turnMotor(2, 0, 0, 200);
-    delay(300);
+    // turnMotor(4, 0, 1, 80);
+    // turnMotor(2, 0, 1, 200);
+    // delay(1000);
+    // turnMotor(4, 0, 0, 80);
+    // turnMotor(2, 0, 0, 200);
+    // delay(300);
+    // turnMotor(4, 1, 0, 80);
+    // turnMotor(2, 1, 0, 200);
+    // delay(1000);
+    // turnMotor(4, 0, 0, 80);
+    // turnMotor(2, 0, 0, 200);
+    // delay(300);
 }

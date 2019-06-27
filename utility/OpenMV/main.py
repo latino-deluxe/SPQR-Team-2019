@@ -29,8 +29,8 @@ blue_led.off()
 #                (30, 45, 1, 40, -60, -19)]    # thresholds blue goal
 #
 
-thresholds = [  (58, 100, -10, 4, 20, 70),    # thresholds yellow goal
-                (18, 53, -28, 11, -58, -26)]  # thresholds blue goal (6, 31, -15, 4, -35, 0)
+thresholds = [  (85, 100, -28, 9, 17, 62),    # thresholds yellow goal
+                (45, 60, -9, 6, -45, -21)]  # thresholds blue goal (6, 31, -15, 4, -35, 0)
 
 roi = (0, 6, 318, 152)
 
@@ -77,7 +77,7 @@ while(True):
 
     area,cx,cy,code = tt_yellow[ny-1]    # coordinata x del piu' grande y se montata al contrario
     #Y = ((90 - (int((math.atan2(cy - yY, cx - xY))* 180 / math.pi))) * -1)
-    print(cy - yY,cx-xY)
+    #print(cy - yY,cx-xY)
     Y = int(-90-(math.atan2(cy-yY, cx-xY) * 180 / math.pi))
     #print(Y)
     string_yellow = "Y"+str(Y)+"y"

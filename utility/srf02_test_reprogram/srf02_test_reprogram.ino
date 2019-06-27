@@ -4,16 +4,16 @@ void setup() {
   Wire.begin();                // join i2c bus (address optional for master)
   Serial.begin(9600);          // start serial communication at 9600bps
 
-  changeAddress(0x70, 0xE2);
+  changeAddress(114, 230);
 }
 
 int reading = 0;
 
 void loop() {
   // step 1: instruct sensor to read echoes
-  Wire.beginTransmission(114); // transmit to device #114 (0x70)
+  Wire.beginTransmission(115); // transmit to device #115 (0x70)
   // the address specified in the datasheet is 224 (0xE0)
-  // but i2c adressing uses the high 7 bits so it's 114
+  // but i2c adressing uses the high 7 bits so it's 115
   Wire.write(byte(0x00));      // sets register pointer to the command register (0x00)
   Wire.write(byte(0x51));      // command sensor to measure in "inches" (0x50)
   // use 0x51 for centimeters
@@ -24,12 +24,12 @@ void loop() {
   delay(70);                   // datasheet suggests at least 65 milliseconds
 
   // step 3: instruct sensor to return a particular echo reading
-  Wire.beginTransmission(114); // transmit to device #114
+  Wire.beginTransmission(115); // transmit to device #115
   Wire.write(byte(0x02));      // sets register pointer to echo #1 register (0x02)
   Wire.endTransmission();      // stop transmitting
 
   // step 4: request reading from sensor
-  Wire.requestFrom(114, 2);    // request 2 bytes from slave device #114
+  Wire.requestFrom(115, 2);    // request 2 bytes from slave device #115
 
   // step 5: receive reading from sensor
   if (2 <= Wire.available()) { // if two bytes were received
