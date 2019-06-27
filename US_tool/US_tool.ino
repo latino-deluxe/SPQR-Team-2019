@@ -141,14 +141,14 @@ void changeAddressCLI() {
   byte add2 = 0;
 
   do {
-    Serial.println("Please input the current US address from the menu below\n\t1) 112\n\t2) 113\n\t3) 114\n\t4) 115");
+    Serial.println("Please input current US address from the menu below\n\t1) 112\n\t2) 113\n\t3) 114\n\t4) 115");
     while (Serial.available() <= 0);
     while (Serial.available() >  0) a = (char) Serial.read();
 
   } while (a != '1' && a != '2' && a != '3' && a != '4');
 
   do {
-    Serial.println("Please input the current US address from the menu below\n\t1) 112\n\t2) 113\n\t3) 114\n\t4) 115");
+    Serial.println("Please input new US address from the menu below\n\t1) 112\n\t2) 113\n\t3) 114\n\t4) 115");
     while (Serial.available() <= 0);
     while (Serial.available() >  0) b = (char) Serial.read();
 
@@ -217,4 +217,6 @@ void changeAddress(byte oldAddress, byte newAddress) {
   Serial.print(oldAddress);
   Serial.print(" to ");
   Serial.println(newAddress / 2);
+  
+  while(Serial.available() > 0) Serial.read();
 }
