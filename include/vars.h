@@ -36,7 +36,7 @@
 // VARIABILI E COSTANTI DEL PID
 #define KP 2   // K proporzionale
 #define KI 0.1 // K integrativo
-#define KD 0   // K derivativo
+#define KD 1.7   // K derivativo
 
 // Linesensors e interrupt
 #define S1I A14

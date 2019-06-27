@@ -189,7 +189,7 @@ void outOfBounds(){
         break;
     }
     ballMask(1);
-    preparePID(outDir, outVel, 0);
+    preparePID(outDir, 350, 0);
   }else{
     //fine rientro
     ballMask(0);
