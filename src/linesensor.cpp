@@ -189,7 +189,7 @@ void outOfBounds(){
         break;
     }
     ballMask(1);
-    preparePID(outDir, outVel, 0);
+    preparePID(outDir, 350, 0);
   }else{
     //fine rientro
     ballMask(0);
@@ -239,7 +239,7 @@ void ballMask(int on) {
 
 void safetysafe() {
   if(slow)  slowly = 0;
-  if(!slow) if(slowly < 600){
-    if(ball_degrees > 45 && ball_degrees < 315) globalSpeed = globalSpeed / 2;
+  if(!slow) if(slowly < 400){
+    if(ball_degrees > 45 && ball_degrees < 315) globalSpeed = globalSpeed / 1.4;
   }
 }

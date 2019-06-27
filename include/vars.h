@@ -36,7 +36,7 @@
 // VARIABILI E COSTANTI DEL PID
 #define KP 2   // K proporzionale
 #define KI 0.1 // K integrativo
-#define KD 0   // K derivativo
+#define KD 1.7   // K derivativo
 
 // Linesensors e interrupt
 #define S1I A14
@@ -48,7 +48,7 @@
 #define S4I A1
 #define S4O A2
 
-#define LINE_THRESH 150
+#define LINE_THRESH 160
 #define EXTIME 170
 extr bool bounds;
 extr bool slow;
