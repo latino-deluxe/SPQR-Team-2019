@@ -14,7 +14,7 @@ int SCY2 = 0;
 void goalie() {
   x = 1;
   y = 1;
-  if(ball_degrees >= 345 || ball_degrees <= 15)  {
+  if(ball_degrees >= 350 || ball_degrees <= 10)  {
     atk_direction = ball_degrees;
     atk_speed = 300;
   }
@@ -24,7 +24,7 @@ void goalie() {
     atk_speed = 200;
   }
 
-  if(ball_degrees > 15   && ball_degrees <  30)   {
+  if(ball_degrees > 10   && ball_degrees <  30)   {
     atk_direction = ball_degrees + 35;
     atk_speed = 220;
   }
@@ -37,19 +37,19 @@ void goalie() {
     atk_speed = 220;
   }
   if(ball_degrees > 270 && ball_degrees <= 315)   {
-    atk_direction = ball_degrees - 45;
+    atk_direction = ball_degrees - 55;
     atk_speed = 220;
   }
   if(ball_degrees > 315 && ball_degrees <= 330)   {
-    atk_direction = ball_degrees - 40;
+    atk_direction = ball_degrees - 50;
     atk_speed = 220;
   }
-  if(ball_degrees > 330 && ball_degrees <  345)   {
-    atk_direction = ball_degrees - 35;
+  if(ball_degrees > 330 && ball_degrees <  350)   {
+    atk_direction = ball_degrees - 45;
     atk_speed = 220;
   }
 
-  if((ball_degrees >= 330 || ball_degrees <= 30) && ball_distance > 140) {
+  if((ball_degrees >= 330 || ball_degrees <= 30) && ball_distance > 190) {
     atk_speed = 330;                                                            //dove i gigahertz hanno fallito
     preparePID(atk_direction, atk_speed, cstorc);
   }
