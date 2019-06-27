@@ -32,22 +32,28 @@ bool com(int delay) {
 }
 
 void Ao() {
-  if (topolino < 100) {
+  if (topolino < 250) {
     topolino++;
   } else {
     topolino = 0;
-    BT.write(char((43 + ((byte)zoneIndex))));
+    BT.write((byte) zoneIndex);
+    //BT.write(42);
   }
 }
 
 void friendo(int delay) {
   int z;
-  if(Serial3.available()){   
+  while(BT.available() > 1) BT.read();
+  while(BT.available() > 0){   
     z = (int) (BT.read());
     old_timer = millis();
-  
-    if(z >= 0 && z <= 8) comrade = true;
-    friendZone = z - 43;
+
+    comrade = false;
+    if(z >= 0 && z <= 8){
+      comrade = true;
+      friendZone = z;
+    } 
+    
   }
   if ((millis() - old_timer) > delay) {
     old_timer = millis();
@@ -60,6 +66,5 @@ void friendo(int delay) {
     digitalWrite(R, HIGH);
     digitalWrite(Y, LOW);
   }
-  if(comrade) friendZone = z;
 }
 
