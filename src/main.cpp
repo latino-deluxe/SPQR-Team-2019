@@ -179,7 +179,7 @@ void loop() {
       else centerGoalPost();
     }
   }else{
-    if(ball_seen) rambo();
+    if(ball_seen) keeper();
     else centerGoalPost();
   }
 

@@ -31,19 +31,25 @@ bool com(int delay) {
   return comrade;
 }
 
+elapsedMillis ao2 = 0;
+
 void Ao() {
-  if (topolino < 250) {
+  if(ao2 >= 200){
+    BT.write((byte) zoneIndex);
+    ao2 = 0;
+  }
+  /*if (topolino < 250) {
     topolino++;
   } else {
     topolino = 0;
     BT.write((byte) zoneIndex);
     //BT.write(42);
-  }
+  }*/
+
 }
 
 void friendo(int delay) {
   int z;
-  while(BT.available() > 1) BT.read();
   while(BT.available() > 0){   
     z = (int) (BT.read());
     old_timer = millis();

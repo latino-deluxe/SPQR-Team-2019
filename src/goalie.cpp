@@ -45,7 +45,7 @@ void goalie() {
     atk_speed = 220;
   }
   if(ball_degrees > 330 && ball_degrees <  350)   {
-    atk_direction = ball_degrees - 45;
+    atk_direction = ball_degrees - 50;
     atk_speed = 220;
   }
 

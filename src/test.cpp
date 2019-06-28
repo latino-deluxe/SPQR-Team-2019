@@ -14,6 +14,7 @@
 #include "linesensor.h"
 
 int testDelay = 10;
+elapsedMillis ao3 = 0;
 
 void testMenu(){
   brake();
@@ -151,10 +152,13 @@ void testMenu(){
         
         Ao();
         friendo(500);
-
-        Serial.print(comrade);
-        Serial.print(" | ");
-        Serial.println(friendZone);
+        
+        if(ao3 >= 200){
+          Serial.print(comrade);
+          Serial.print(" | ");
+          Serial.println(friendZone);
+          ao3 = 0;
+        }
         
       break;
     }
