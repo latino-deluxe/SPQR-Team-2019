@@ -168,7 +168,6 @@ void loop() {
   
   Ao();
   friendo(500);
-  //com(500);
 
   if(comrade) {
     if(ball_seen){

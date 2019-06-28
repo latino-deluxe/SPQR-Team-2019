@@ -199,10 +199,10 @@ void outOfBounds(){
         outVel = 250;
         break;
       case 15:
-      Serial.print(linesensbyteOLDX);
-      Serial.print(" ");
-      Serial.print(linesensbyteOLDY);
-      Serial.println(" ");
+      // Serial.print(linesensbyteOLDX);
+      // Serial.print(" ");
+      // Serial.print(linesensbyteOLDY);
+      // Serial.println(" ");
 
 
 
@@ -213,7 +213,9 @@ void outOfBounds(){
         break;
     }
     ballMask(1);
-    preparePID(outDir, 350, 0);
+    if(exitTimer < 75) outVel = 350;
+    else outVel = 230;
+    preparePID(outDir, outVel, 0);
   }else{
     //fine rientro
     ballMask(0);

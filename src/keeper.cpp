@@ -23,7 +23,7 @@ void keeper() {
     angleX = abs(cos(angle));
     
     if (ball_degrees > 350 || ball_degrees < 10){
-        if(ball_distance > 220) goalie();
+        if(ball_distance > 190) goalie();
         else preparePID(0, 0);
     }
     else if(ball_degrees >= 10 && ball_degrees <= 90) preparePID(90, 220*angleX*1.5);
