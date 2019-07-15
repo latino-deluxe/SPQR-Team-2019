@@ -1,11 +1,12 @@
 #include "chat.h"
+#include "bluetooth.h"
 #include "goalie.h"
 #include "position.h"
-#include "space_invaders.h"
 #include "vars.h"
 #include <Arduino.h>
 
 int count = 0;
+elapsedMillis btd;
 
 bool com(int delay) {
   int d; // funzione di comunicazione
@@ -16,35 +17,48 @@ bool com(int delay) {
     comrade = true;
     d = 0;
     old_timer = millis();
+    btd = 0;
   }
   if ((millis() - old_timer) > delay) {
     old_timer = millis();
     comrade = false;
   }
   if (comrade) {
-    digitalWrite(Y, HIGH);
-    digitalWrite(R, LOW);
-  } else {
     digitalWrite(R, HIGH);
-    digitalWrite(Y, LOW);
+  } else {
+    digitalWrite(R, LOW);
   }
+
+  // if (btd > 5000) {
+  //   digitalWrite(G, HIGH);
+  //   BT.print("$");
+  //   BT.print("$");
+  //   BT.print("$");
+  // } 
+  // if (btd > 5500) BT.println("K, 1");
+  // if(btd > 5610) {
+  //   BT.print("$");
+  //   BT.print("$");
+  //   BT.print("$");
+  //   // btd = 0;
+  // }
+  // if(btd > 5400) BT.print("C");
   return comrade;
 }
 
 elapsedMillis ao2 = 0;
 
 void Ao() {
-  if(ao2 >= 200){
-    BT.write((byte) zoneIndex);
-    ao2 = 0;
-  }
-  /*if (topolino < 250) {
+  // if(ao2 >= 200){
+  //   BT.write((byte) zoneIndex);
+  //   ao2 = 0;
+  // }
+  if (topolino < 250) {
     topolino++;
   } else {
     topolino = 0;
-    BT.write((byte) zoneIndex);
-    //BT.write(42);
-  }*/
+    BT.write(42);
+  }
 
 }
 

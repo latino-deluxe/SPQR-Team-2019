@@ -48,7 +48,7 @@
 #define S4I A1
 #define S4O A2
 
-#define LINE_THRESH 150
+#define LINE_THRESH 90
 #define EXTIME 100
 extr bool bounds;
 extr bool slow;
@@ -115,31 +115,7 @@ extr bool calcPhyZoneCam;
 
 extr byte lineSensByteBak;
 
-#define ZONE_MAX_VALUE 150
-#define ZONE_LOOP_DECREASE_VALUE 4
-#define ZONE_US_UNKNOWN_INCREASE_VALUE 4
-#define ZONE_US_INDEX_INCREASE_VALUE 9
-#define ZONE_CAM_INCREASE_VALUE 3
-#define ZONE_CAM_CENTER_RANGE 25
-#define ZONE_LINES_INCREASE_VALUE 100
-#define ZONE_LINES_ERROR_VALUE 30
-
-// You can modify this if you need
-// LIMITI DEL CAMPO
-#define Lx_min 115  // valore minimo accettabile di larghezza
-#define Lx_max 195  // valore massimo accettabile di larghezza (larghezza campo)
-#define LyF_min 190 // valore minimo accettabile di lunghezza sulle fasce
-#define LyF_max 270 // valore massimo accettabile di lunghezza sulle fasce (lunghezza campo)
-#define LyP_min 139 // valore minimo accettabile di lunghezza tra le porte
-#define LyP_max 250 // valore massimo accettabile di lunghezza tra le porte// con misura x OK con us_dx o us_sx < DxF sto nelle fasce 30 + 30 - 1/2 robot
-
-#define DxF_Atk 48 // per attaccante, fascia centrale allargata
-#define DxF_Def 48 // per portiere, fascia centrale ristretta questa roba viene fatta dentro WhereAmI
 extr int DxF;      // con  misura y OK e robot a EST o A OVEST con us_fx o us_px < DyF sto a NORD o a SUD  era - 10
-#define DyF 91     // con misura y OK e robot al CENTRO (tra le porte) con us_fx o us_px < DyP sto a NORD o a SUD era - 22
-#define DyP 69
-//#define DyP 55
-#define robot 21   // diametro del robot
 extr bool goal_zone;
 
 // BLUETOOTH
@@ -165,14 +141,9 @@ extr bool defGoLeft;
 extr bool defGoBehind;
 extr bool stop_menamoli;
 
-// CAMERA
-// center a 150
-#define keeperCamMin 90    // dx limit
-#define keeperCamMax 190   // sx limit
-
-#define goalieCamMin 140
-#define goalieCamMax 170
-
+extr elapsedMillis keeperAttackTimer;
+extr bool keeper_tookTimer;
+extr bool keeper_backToGoalPost;
 
 extr int pAtk; // variabile dello switch che decide dove bisogna attaccare
 extr int pDef; // variabile dello switch che decide dove bisogna difendere
@@ -189,8 +160,3 @@ extr float cstorc;
 // test vars
 extr char test; // test select
 extr bool flagtest;
-
-
-
-
-#define STRCYCL 500

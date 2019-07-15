@@ -3,7 +3,36 @@
 
 // init bluetooth on Serial1, look in vars.h for define
 void initBluetooth() {
-  BT.begin(9600);
+  BT.begin(115200);
+  connectBT();
+}
+
+void connectBT(){
+  BT.print("$");  // Print three times individually
+  BT.print("$");
+  BT.print("$");
+  delay(100);
+  BT.println("C");
+}
+
+bool b = false;
+
+void reconnectBT(){
+  //tries to reconnect when he detects he has no comrade
+  if(!comrade){
+    if(!b){
+      BT.print("$");  // Print three times individually
+      BT.print("$");
+      BT.print("$");
+    }else{
+      BT.println("C");
+    }
+
+    b = !b;
+  }else{
+    //otherwhise exits command mode
+    BT.println("---");
+  }
 }
 
 // prints the serial read to bluetooth and bluetooth to serial monitor

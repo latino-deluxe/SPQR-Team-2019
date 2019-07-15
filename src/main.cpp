@@ -15,11 +15,12 @@
 #include "nano_ball.h"
 #include "pid.h"
 #include "position.h"
-#include "space_invaders.h"
 #include "test.h"
+#include "keeper.h"
 #include "us.h"
 #include "rambo.h"
 #include "vars.h"
+#include "config.h"
 
 // Switch management vars
 int SWS = 0;
@@ -47,16 +48,16 @@ void setup() {
   us_t1 = 0;
   us_flag = false;
   // Position
-  old_status_x = CENTRO;
-  old_status_y = CENTRO;
-  // old_guessedlocation = CENTRO_CENTRO;
+  old_status_x = CENTER;
+  old_status_y = CENTER;
+  // old_guessedlocation = CENTER_CENTER;
   goal_zone = false;
   good_field_x = true;
   good_field_y = true;
-  status_x = CENTRO;
-  status_y = CENTRO;
-  // currentlocation = CENTRO_CENTRO;
-  // guessedlocation = CENTRO_CENTRO;
+  status_x = CENTER;
+  status_y = CENTER;
+  // currentlocation = CENTER_CENTER;
+  // guessedlocation = CENTER_CENTER;
   // Linesensors and interrupt
 
   // bluetooth misc
@@ -98,6 +99,9 @@ void setup() {
   y = 1;
   x = 1;
 
+  keeper_tookTimer = false;
+  keeper_backToGoalPost = false;
+
   // ;)
   analogWriteFrequency(2 , 15000);
   analogWriteFrequency(5 , 15000);
@@ -118,7 +122,7 @@ void setup() {
   // Enable Serial for test
   Serial.begin(9600);
   //Enable Serial3 for debug
-  BT.begin(9600);
+
   // Enable Serial4 for the slave
   NANO_BALL.begin(57600);
   // Enable Serial2 for the camera
@@ -144,7 +148,10 @@ void setup() {
     // super_mario();
   // }
   
-  delay(500);
+  delay(400);
+
+  initBluetooth();
+
   stopSetup();
 }
 
@@ -159,30 +166,38 @@ void loop() {
   readUS();
   readBallNano();
   goalPosition();
+
   if(cameraReady == 1) {
     storcimentoPorta();
     calcPhyZoneCam = true;
     cameraReady = 0;
   }
+
   calculateLogicZone();
   
   Ao();
-  friendo(500);
+  com(500);
+
+  comrade = true;
 
   if(comrade) {
     if(ball_seen){
       if(role) goalie();
       else keeper();
     } else {
-      if(role) goCenter();
-      else centerGoalPost();
+      if(role){
+        goCenter();
+        digitalWrite(Y, LOW);
+      }
+      else centerGoalPostCamera(true);
     }
   }else{
     if(ball_seen) keeper();
-    else centerGoalPost();
+    else centerGoalPostCamera(true);
   }
 
   checkLineSensors();                           //Last thing in loop, for priority
   safetysafe();
+
   drivePID(globalDir, globalSpeed);
 }

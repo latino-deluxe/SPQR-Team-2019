@@ -89,10 +89,9 @@ void outOfBounds(){
 
   if (exitTimer <= EXTIME){
     //fase di rientro
-    //
     if(linesensbyte == 15) {
       linesensbyte = linesensbyteOLDY | linesensbyteOLDX;        //ZOZZATA MAXIMA
-      digitalWrite(Y, HIGH);
+      //digitalWrite(Y, HIGH);
     }
 
     switch(linesensbyte){
@@ -171,7 +170,7 @@ void outOfBounds(){
 
 
       case 5:
-        digitalWrite(R, HIGH);
+        //digitalWrite(R, HIGH);
         if(linesensbyteOLDX == 2) {
           outDir = 270;
           ai = 90;
@@ -185,7 +184,7 @@ void outOfBounds(){
         outVel = 250;
         break;
       case 10:
-        digitalWrite(G, HIGH);
+        //digitalWrite(G, HIGH);
         if(linesensbyteOLDY == 4) {
           outDir = 0;
           ai = 180;
@@ -213,24 +212,28 @@ void outOfBounds(){
         break;
     }
     ballMask(1);
-    if(exitTimer < 75) outVel = 350;
+    if(exitTimer < 45) outVel = 330;
     else outVel = 230;
     preparePID(outDir, outVel, 0);
+    
+    tone(30, LA3);
+    keeper_backToGoalPost = true;
+    keeper_tookTimer = true;
   }else{
     //fine rientro
     ballMask(0);
     linesensbyte = 0;
     linesensbyteOLDY = 0;
     linesensbyteOLDX = 0;
-    digitalWrite(R, LOW);
-    digitalWrite(Y, LOW);
-    digitalWrite(G, LOW);
+    noTone(30);
+    //digitalWrite(Y, LOW);
+    //digitalWrite(G, LOW);
 
     lineSensByteBak = 30;
   }
 
    lineSensByteBak = linesensbyte;
-   if(exitTimer == 149) slow = true;
+   if(exitTimer == 99) slow = true;
    else slow = false;
 }
 
@@ -252,7 +255,7 @@ void ballMask(int on) {
         return;
       }
       else {
-        if(mask < 750) preparePID(0, 0, 0);
+        if(mask < 500) preparePID(0, 0, 0);         //prima era 150
         else {
           ball = -1;
           return;
@@ -265,7 +268,29 @@ void ballMask(int on) {
 
 void safetysafe() {
   if(slow)  slowly = 0;
-  if(!slow) if(slowly < 400){
+  if(!slow) if(slowly < 600){
     if(ball_degrees > 45 && ball_degrees < 315) globalSpeed = globalSpeed / 1.4;
   }
+}
+
+
+void testLineSensors() {
+  checkLineSensors();
+  DEBUG_PRINT.println("______________");
+  for(int i = 0; i<4; i++) {
+    DEBUG_PRINT.print(linetriggerI[i]);
+    DEBUG_PRINT.print("-");
+    DEBUG_PRINT.print(linetriggerO[i]);
+    DEBUG_PRINT.print(" | ");
+  }
+  DEBUG_PRINT.println();
+  DEBUG_PRINT.print("________________");
+
+  DEBUG_PRINT.println("Byte:    ");
+  DEBUG_PRINT.print(linesensbyteO);
+  DEBUG_PRINT.print("   Direzione:    ");
+  DEBUG_PRINT.println(outDir);
+  delay(150);
+
+  DEBUG_PRINT.println("______________");
 }

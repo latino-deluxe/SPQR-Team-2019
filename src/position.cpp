@@ -3,6 +3,7 @@
 #include "camera.h"
 #include "imu.h"
 #include "vars.h"
+#include "config.h"
 #include "nano_ball.h"
 #include "position.h"
 
@@ -56,13 +57,13 @@ void increaseRowWithLimit(int i, int ammount){
 }
 
 void decreaseColWithLimit(int i, int ammount){
-  if(zone[i][0] - ammount >= 0 - ammount >= 0 && zone[i][1] - ammount >= 0 && zone[i][2] - ammount >= 0){
+  if(zone[i][0] - ammount >= 0 && zone[i][1] - ammount >= 0 && zone[i][2] - ammount >= 0){
     decreaseCol(i, ammount);
   }
 }
 
 void decreaseRowWithLimit(int i, int ammount){
-  if(zone[0][i] - ammount >= 0 - ammount >= 0 && zone[1][i] - ammount >= 0 && zone[2][i] - ammount >= 0){
+  if(zone[0][i] - ammount >= 0 && zone[1][i] - ammount >= 0 && zone[2][i] - ammount >= 0){
     decreaseRow(i, ammount);
   }
 }
@@ -116,14 +117,14 @@ void phyZoneUS(){
   //                    goal_zone                       non utilizzata da altre
   //                    routines
   // Aggiorna le variabili:
-  //                    status_x (con valori CENTRO EST  OVEST 255  = non lo so)
-  //                    status_y (con valori CENTRO NORD SUD   255  = non lo so)
+  //                    status_x (con valori CENTER EAST  WEST 255  = non lo so)
+  //                    status_y (con valori CENTER NORTH SOUTH   255  = non lo so)
 
   int Lx_mis; // larghezza totale stimata dalle misure
   int Ly_mis; // lunghezza totale stimata dalle misure
   int Ly_min; // Limite inferiore con cui confrontare la misura y
   int Ly_max; // Limite inferiore con cui confrontare la misura y
-  int Dy;     // Limite per decidere NORD SUD in funzione della posizione
+  int Dy;     // Limite per decidere NORTH SOUTH in funzione della posizione
               // orizzontale
 
   old_status_x = status_x;
@@ -144,13 +145,13 @@ void phyZoneUS(){
   if ((Lx_mis < Lx_max) && (Lx_mis > Lx_min) && (us_dx > 25) && (us_sx > 25)) {
     // se la misura orizzontale é accettabile
     good_field_x = true;
-    status_x = CENTRO;
-    if (us_dx < DxF) // robot é vicino al bordo destro
-      status_x = EST;
+    status_x = CENTER;
+    if (us_dx < DxF) // robot é vicino al bordo dEASTro
+      status_x = EAST;
     if (us_sx < DxF) // robot é vicino al bordo sinistro
-      status_x = OVEST;
+      status_x = WEST;
 
-    if (status_x == CENTRO) {
+    if (status_x == CENTER) {
       // imposto limiti di controllo lunghezza verticale tra le porte
       Ly_min = LyP_min;
       Ly_max = LyP_max;
@@ -164,9 +165,9 @@ void phyZoneUS(){
   } else {
     // la misura non é pulita per la presenza di un ostacolo
     if ((us_dx >= (DxF + 10)) || (us_sx >= (DxF + 10))) {
-      // se ho abbastanza spazio a destra o a sinistra
+      // se ho abbastanza spazio a dEASTra o a sinistra
       // devo stare per forza al cento
-      status_x = CENTRO;
+      status_x = CENTER;
       // imposto limiti di controllo lunghezza verticale tra le porte
       Ly_min = LyP_min;
       Ly_max = LyP_max;
@@ -176,7 +177,7 @@ void phyZoneUS(){
       // non so la coordinata x
       // imposto i limiti di controllo verticale in base alla posizione
       // orizzontale precedente
-      if (old_status_x == CENTRO) {
+      if (old_status_x == CENTER) {
         // controlla la posizione precedente per decidere limiti di controllo y
         // imposto limiti di controllo lunghezza verticale tra le porte
         Ly_min = LyP_min;
@@ -195,21 +196,21 @@ void phyZoneUS(){
   if ((Ly_mis < Ly_max) && (Ly_mis > Ly_min)) {
     // se la misura verticale é accettabile
     good_field_y = true;
-    status_y = CENTRO;
+    status_y = CENTER;
     if (us_fr < Dy) {
-      status_y = NORD; // robot é vicino alla porta avversaria
+      status_y = NORTH; // robot é vicino alla porta avversaria
       if (Dy == DyP)
         goal_zone = true; //  davanti alla porta in zona goal
     }
     if (us_px < Dy)
-      status_y = SUD; // robot é vicino alla propria porta
+      status_y = SOUTH; // robot é vicino alla propria porta
   } else {
     // la misura non é pulita per la presenza di un ostacolo
     status_y = 255; // non so la coordinata y
     if (us_fr >= (Dy + 0))
-      status_y = CENTRO; // ma se ho abbastanza spazio dietro o avanti
+      status_y = CENTER; // ma se ho abbastanza spazio dietro o avanti
     if (us_px >= (Dy + 0))
-      status_y = CENTRO; //  e'probabile che stia al centro
+      status_y = CENTER; //  e'probabile che stia al CENTER
   }
 
   //now operates on the matrix
@@ -258,25 +259,25 @@ void phyZoneLines(){
   //ZONE_LINES_ERROR_VALUE is a random error code not used in line exit direction calculations
   if(lineSensByteBak != ZONE_LINES_ERROR_VALUE){ 
     switch(lineSensByteBak) {
-      case 1:         //NORD
+      case 1:         //NORTH
         increaseRow(0, ZONE_LINES_INCREASE_VALUE);
         decreaseRow(1, ZONE_LINES_INCREASE_VALUE);
         decreaseRow(2, ZONE_LINES_INCREASE_VALUE);
       break;
 
-      case 2:         //EST
+      case 2:         //EAST
         decreaseCol(0, ZONE_LINES_INCREASE_VALUE);
         decreaseCol(1, ZONE_LINES_INCREASE_VALUE);
         increaseCol(2, ZONE_LINES_INCREASE_VALUE);
       break;
 
-      case 4:         //SUD
+      case 4:         //SOUTH
         decreaseRow(0, ZONE_LINES_INCREASE_VALUE);
         decreaseRow(1, ZONE_LINES_INCREASE_VALUE);
         decreaseRow(2, ZONE_LINES_INCREASE_VALUE);
       break;
 
-      case 8:         //OVEST
+      case 8:         //WEST
         increaseCol(0, ZONE_LINES_INCREASE_VALUE);
         decreaseCol(1, ZONE_LINES_INCREASE_VALUE);
         decreaseCol(2, ZONE_LINES_INCREASE_VALUE);
@@ -381,59 +382,64 @@ void gigaTestZone(){
 
 void goCenter() {
   if (zoneIndex == 8)
-    preparePID(330, 255);
+    preparePID(330, GOCENTER_VEL);
   if (zoneIndex == 7)
-    preparePID(0, 255);
+    preparePID(0, GOCENTER_VEL);
   if (zoneIndex == 6)
-    preparePID(45, 255);
+    preparePID(45, GOCENTER_VEL);
   if (zoneIndex == 5)
-    preparePID(270, 255);
+    preparePID(270, GOCENTER_VEL);
   if (zoneIndex == 4)
     preparePID(0, 0);
   if (zoneIndex == 3)
-    preparePID(90, 255);
+    preparePID(90, GOCENTER_VEL);
   if (zoneIndex == 2)
-    preparePID(255, 255);
+    preparePID(255, GOCENTER_VEL);
   if (zoneIndex == 1)
-    preparePID(180, 255);
+    preparePID(180, GOCENTER_VEL);
   if (zoneIndex == 0)
-    preparePID(135, 255);
+    preparePID(135, GOCENTER_VEL);
 }
 
+void centerGoalPostCamera(bool checkBack) {
+  digitalWrite(Y, HIGH);
+  if (fixCamIMU(pDef) > CENTERGOALPOST_CAM_MAX) {
+    preparePID(270, CENTERGOALPOST_VEL1);
+  } else if (fixCamIMU(pDef) < CENTERGOALPOST_CAM_MIN) {
+    preparePID(90, CENTERGOALPOST_VEL1);
+  }else if(fixCamIMU(pDef) > CENTERGOALPOST_CAM_MIN && fixCamIMU(pDef) < CENTERGOALPOST_CAM_MAX){
+    if(!ball_seen) preparePID(0, 0, 0);
+    if(us_px > CENTERGOALPOST_US_MAX && checkBack){
+      preparePID(180, CENTERGOALPOST_VEL1);
+    } else{
+      if(us_px < CENTERGOALPOST_US_CRITIC) preparePID(0, 150);
 
-int vel = 160;
-int usDist = 70;
-void centerGoalPost() {
-  x = 1;
-  y = 1;
-  int vel = 255;
-  if ((zoneIndex >= 0 && zoneIndex <= 2) || zoneIndex == 4) {
-    preparePID(180, vel);
-  } else if (zoneIndex == 3 || zoneIndex == 6) {
-    preparePID(90, vel);
-  } else if (zoneIndex == 5 || zoneIndex == 8) {
-    preparePID(270, vel);
-  } else {
-    stop_menamoli = false;
-    if (us_px >= 25)
-      preparePID(180, vel);
-    else
-      preparePID(0, 0);
+      keeper_backToGoalPost = false;
+      keeper_tookTimer = false;
+    }
   }
 }
 
-void centerGoalPostCamera() {
-  int vel = 255;
-  if(us_px > 45) preparePID(180, 200);
-  if (fixCamIMU(pDef) > 30) {
-    preparePID(270, vel);
-  } else if (fixCamIMU(pDef) < -30) {
-    preparePID(90, vel);
-  }else{
-    if(!ball_seen) preparePID(0, 0);
-  }
-
-}
+// int vel = 160;
+// int usDist = 70;
+// void centerGoalPost() {
+//   x = 1;
+//   y = 1;
+//   int vel = 255;
+//   if ((zoneIndex >= 0 && zoneIndex <= 2) || zoneIndex == 4) {
+//     preparePID(180, vel);
+//   } else if (zoneIndex == 3 || zoneIndex == 6) {
+//     preparePID(90, vel);
+//   } else if (zoneIndex == 5 || zoneIndex == 8) {
+//     preparePID(270, vel);
+//   } else {
+//     stop_menamoli = false;
+//     if (us_px >= 25)
+//       preparePID(180, vel);
+//     else
+//       preparePID(0, 0);
+//   }
+// }
 
 void update_sensors_all() {
   readBallNano();

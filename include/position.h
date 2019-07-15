@@ -28,6 +28,8 @@ void gigaTestZone();
 //movement
 void goCenter();
 void goGoalPost();
+void centerGoalPost();
+void centerGoalPostCamera(bool);
 
 //sensors (still needed?)
 void update_sensors_all();

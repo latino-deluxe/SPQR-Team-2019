@@ -29,19 +29,35 @@ blue_led.off()
 #                (30, 45, 1, 40, -60, -19)]    # thresholds blue goal
 #
 
-thresholds = [  (59, 90, -22, 15, 31, 87),    # thresholds yellow goal
-                (35, 51, -10, 10, -40, -6)]  # thresholds blue goal (6, 31, -15, 4, -35, 0)
+thresholds = [  (37, 91, -13, 24, 22, 75),    # thresholds yellow goal
+                (23, 53, 2, 48, -89, -35)]  # thresholds blue goal (6, 31, -15, 4, -35, 0)
 
 roi = (0, 6, 318, 152)
 
 # Camera Setup ###############################################################
-sensor.reset()
+'''sensor.reset()
 sensor.set_pixformat(sensor.RGB565)
 sensor.set_framesize(sensor.QVGA)
 sensor.skip_frames(time = 2000)
 sensor.set_auto_gain(False)         # must be turned off for color tracking
 sensor.set_auto_whitebal(False)     # must be turned off for color tracking
+sensor.set_auto_exposure(False, 10000)
+#sensor.set_backlight(1)
+#sensor.set_brightness(+2)
 #sensor.set_windowing(roi)
+clock = time.clock()'''
+
+sensor.reset()
+sensor.set_pixformat(sensor.RGB565)
+sensor.set_framesize(sensor.QVGA)
+sensor.set_contrast(+3)
+sensor.set_saturation(+3)
+sensor.set_brightness(+3)
+sensor.set_quality(0)
+sensor.set_auto_exposure(False, 8000)
+sensor.set_auto_gain(True)
+sensor.skip_frames(time = 300)
+
 clock = time.clock()
 ##############################################################################
 
