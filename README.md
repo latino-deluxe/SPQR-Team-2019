@@ -5,8 +5,14 @@ Best Robot Design at Robocup2019, Sydney
 
 
 #include <E.Latino>
+
 #include <A.Ghezzi>
+
 #include <E.Coletta>
+
 #include <D.Casagrande>
+
 #include <S.Sannino>
+
 #incldue <G.Treccape>
+
