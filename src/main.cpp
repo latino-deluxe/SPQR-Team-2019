@@ -18,7 +18,6 @@
 #include "test.h"
 #include "keeper.h"
 #include "us.h"
-#include "rambo.h"
 #include "vars.h"
 #include "config.h"
 
@@ -175,8 +174,8 @@ void loop() {
 
   calculateLogicZone();
   
-  Ao();
-  com(500);
+  // Ao();
+  // com(500);
 
   comrade = true;
 
