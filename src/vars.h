@@ -41,13 +41,13 @@
 #define SUD_EST 9
 
 // VARIABILI E COSTANTI DEL PID
-#define KP 1.7 // K proporzionale
-#define KI 0.1 // K integrativo
-#define KD 5   // K derivativo
+#define KP 0.9 // K proporzionale
+#define KI 0 // K integrativo
+#define KD 1.1 // K derivativo
 
-// #define KP 1.4
+// #define KP 1.7
 // #define KI 0.1
-// #define KD 0.5
+// #define KD 2
 
 // SPI
 #define SS_PIN 2

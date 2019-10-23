@@ -32,9 +32,9 @@ void setup() {
   // delay(100);
   // super_mario();
 
-  analogWriteFrequency(4,  10000);
-  analogWriteFrequency(7,  10000);
-  analogWriteFrequency(10, 10000);
+  analogWriteFrequency(4,  15000);
+  analogWriteFrequency(7,  15000);
+  analogWriteFrequency(10, 15000);
   // Now assign value to variables, first thing to do
   // IMU
   imu_current_euler = 0;
@@ -142,7 +142,7 @@ void setup() {
 }
 
 void loop() {
-  // for ports: 1=Blue 0=Yellow
+   // for ports: 1=Blue 0=Yellow
   pAtk = 0;
   pDef = 1 - pAtk; // the other port for the keeper
   comrade = true;
@@ -167,6 +167,7 @@ void loop() {
 
   calculateLogicZone();
 
+  
   Ao();
   com(2000);
 
@@ -214,4 +215,6 @@ void loop() {
   }
 
   drivePID(globalDir, globalSpeed);
+/*  update_sensors_all();
+ drivePID(0, 0); */
 }
