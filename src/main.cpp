@@ -18,7 +18,6 @@
 #include "test.h"
 #include "keeper.h"
 #include "us.h"
-#include "rambo.h"
 #include "vars.h"
 #include "config.h"
 
@@ -196,8 +195,8 @@ void loop() {
     else centerGoalPostCamera(true);
   }
 
-  checkLineSensors();                           //Last thing in loop, for priority
-  safetysafe();
+  // checkLineSensors();                           //Last thing in loop, for priority
+  // safetysafe();
 
   drivePID(globalDir, globalSpeed);
 }
