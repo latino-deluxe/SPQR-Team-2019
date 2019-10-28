@@ -40,15 +40,15 @@ void goalie() {
     atk_speed = GOALIE_ATKSPD_LAT;
   }
   if(ball_degrees > 270 && ball_degrees <= 315)   {
-    atk_direction = ball_degrees - GOALIE_ATKDIR_PLUSANG3;
+    atk_direction = ball_degrees - (GOALIE_ATKDIR_PLUSANG3 + 25);
     atk_speed = GOALIE_ATKSPD_LAT;
   }
   if(ball_degrees > 315 && ball_degrees <= 330)   {
-    atk_direction = ball_degrees - GOALIE_ATKDIR_PLUSANG2;
+    atk_direction = ball_degrees - (GOALIE_ATKDIR_PLUSANG2 + 15);
     atk_speed = GOALIE_ATKSPD_LAT;
   }
   if(ball_degrees > 330 && ball_degrees <  350)   {
-    atk_direction = ball_degrees - GOALIE_ATKDIR_PLUSANG1;
+    atk_direction = ball_degrees - (GOALIE_ATKDIR_PLUSANG1 + 10);
     atk_speed = GOALIE_ATKSPD_LAT;
   }
 
@@ -64,8 +64,8 @@ void leaveMeAlone() {
 }
 
 void storcimentoPorta() {
-  if (pAtk > 20) cstorc+=9.5;
-  else if (pAtk < -20) cstorc-=9.5;
+  if (pAtk > 20) cstorc+=10.5;         //9.5
+  else if (pAtk < -20) cstorc-=10.5;   //9.5
   else {
     if (cstorc > 0) cstorc -= 2;
     else  cstorc += 2;
