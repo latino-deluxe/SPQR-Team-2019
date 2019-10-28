@@ -49,7 +49,7 @@
 #define S4O A2
 
 #define LINE_THRESH 90
-#define EXTIME 100
+#define EXTIME 50
 extr bool bounds;
 extr bool slow;
 extr elapsedMillis exitTimer;
