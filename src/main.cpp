@@ -174,8 +174,8 @@ void loop() {
 
   calculateLogicZone();
   
-  Ao();
-  com(500);
+  // Ao();
+  // com(500);
 
   comrade = true;
 
@@ -195,8 +195,9 @@ void loop() {
     else centerGoalPostCamera(true);
   }
 
-  // checkLineSensors();                           //Last thing in loop, for priority
+  checkLineSensors();                           //Last thing in loop, for priority
   // safetysafe();
 
+  // preparePID(0, 0, cstorc);
   drivePID(globalDir, globalSpeed);
 }
