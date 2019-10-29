@@ -233,7 +233,7 @@ void outOfBounds(){
   }
 
    lineSensByteBak = linesensbyte;
-   if(exitTimer == 49) slow = true;   //99
+   if(exitTimer == 99) slow = true;
    else slow = false;
 }
 
@@ -255,7 +255,7 @@ void ballMask(int on) {
         return;
       }
       else {
-        if(mask < 49) preparePID(0, 0, 0);         //prima era 500
+        if(mask < 500) preparePID(0, 0, 0);         //prima era 150
         else {
           ball = -1;
           return;

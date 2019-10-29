@@ -22,7 +22,7 @@
 #define Ab1 51.91
 #define LA1 55.00
 #define Bb1 58.27
-// #define B1  61.74
+#define B1  61.74
 #define C2  65.41
 #define Db2 69.30
 #define D2  73.42

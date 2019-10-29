@@ -34,9 +34,9 @@
 #define SUD_EST 9
 
 // VARIABILI E COSTANTI DEL PID
-#define KP 2   // K proporzionale
-#define KI 0.1 // K integrativo
-#define KD 1.7   // K derivativo
+#define KP 1.5          //2     // K proporzionale
+#define KI 0            //0.1   // K integrativo
+#define KD 0.7          //1.7   // K derivativo
 
 // Linesensors e interrupt
 #define S1I A14
@@ -49,7 +49,7 @@
 #define S4O A2
 
 #define LINE_THRESH 90
-#define EXTIME 50
+#define EXTIME 100
 extr bool bounds;
 extr bool slow;
 extr elapsedMillis exitTimer;

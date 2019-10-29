@@ -117,5 +117,5 @@ int fixCamIMU(int d){
     else if (imu_current_euler <= 360 && imu_current_euler >= 180) imuOff = imu_current_euler - 360;
     imuOff = constrain(imuOff, -45, 45);
 
-    return d - imuOff;
+    return d + imuOff;
 }

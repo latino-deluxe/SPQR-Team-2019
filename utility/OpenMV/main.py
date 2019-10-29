@@ -17,7 +17,7 @@ blue_led = pyb.LED(3)
 
 red_led.off()
 green_led.off()
-blue_led.off()
+blue_led.on()
 ##############################################################################
 
 
@@ -29,8 +29,8 @@ blue_led.off()
 #                (30, 45, 1, 40, -60, -19)]    # thresholds blue goal
 #
 
-thresholds = [  (37, 91, -13, 24, 22, 75),    # thresholds yellow goal
-                (23, 53, 2, 48, -89, -35)]  # thresholds blue goal (6, 31, -15, 4, -35, 0)
+thresholds = [  (78, 100, -8, 23, 25, 80),    # thresholds yellow goal
+                (26, 65, -11, 47, -95, -36)]  # thresholds blue goal (6, 31, -15, 4, -35, 0)
 
 roi = (0, 6, 318, 152)
 
@@ -52,7 +52,7 @@ sensor.set_pixformat(sensor.RGB565)
 sensor.set_framesize(sensor.QVGA)
 sensor.set_contrast(+3)
 sensor.set_saturation(+3)
-sensor.set_brightness(+3)
+sensor.set_brightness(+1)
 sensor.set_quality(0)
 sensor.set_auto_exposure(False, 8000)
 sensor.set_auto_gain(True)
@@ -68,6 +68,9 @@ clock = time.clock()
 
 while(True):
     clock.tick()
+
+    blue_led.off()
+
     tt_yellow = [(0,999,0,1)]     ## creo una lista di tuple per il giallo, valore x = 999 : non trovata
     tt_blue = [(0,999,0,2)]       ## creo una lista di tuple per il blue, valore x = 999 : non trovata
 
@@ -86,9 +89,9 @@ while(True):
 
     ny = len(tt_yellow)
     nb = len(tt_blue)
-    xY = 140
+    xY = 160
     yY = 240
-    xB = 140
+    xB = 160
     yB = 240
 
     area,cx,cy,code = tt_yellow[ny-1]    # coordinata x del piu' grande y se montata al contrario
@@ -105,7 +108,7 @@ while(True):
 
     area,cx,cy,code = tt_blue[nb-1]      # coordinata x del piu' grande y se montata al contrario
     B = int(-90-(math.atan2(cy-yB, cx-xB) * 180 / math.pi))
-    print(B)
+    #print(B)
     string_blue = "B"+str(B)+"b"
 
     uart.write(string_yellow)   # scrivo su seriale
