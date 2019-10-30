@@ -26,30 +26,56 @@ void goalie() {
     ballBack();
     atk_speed = GOALIE_ATKSPD_BAK;                   
   }
-
-  if(ball_degrees > 10   && ball_degrees <  30)   {
-    atk_direction = ball_degrees + GOALIE_ATKDIR_PLUSANG1;
-    atk_speed = GOALIE_ATKSPD_LAT;
-  }
-  if(ball_degrees >= 30 && ball_degrees <  45)    {
-    atk_direction = ball_degrees + GOALIE_ATKDIR_PLUSANG2;
-    atk_speed = GOALIE_ATKSPD_LAT;
-  }
-  if(ball_degrees >= 45 && ball_degrees <  90)    {
-    atk_direction = ball_degrees + GOALIE_ATKDIR_PLUSANG3;
-    atk_speed = GOALIE_ATKSPD_LAT;
-  }
-  if(ball_degrees > 270 && ball_degrees <= 315)   {
-    atk_direction = ball_degrees - GOALIE_ATKDIR_PLUSANG3;
-    atk_speed = GOALIE_ATKSPD_LAT;
-  }
-  if(ball_degrees > 315 && ball_degrees <= 330)   {
-    atk_direction = ball_degrees - GOALIE_ATKDIR_PLUSANG2;
-    atk_speed = GOALIE_ATKSPD_LAT;
-  }
-  if(ball_degrees > 330 && ball_degrees <  350)   {
-    atk_direction = ball_degrees - GOALIE_ATKDIR_PLUSANG1;
-    atk_speed = GOALIE_ATKSPD_LAT;
+  if(digitalRead(SWITCH_DX) == 1) {
+    if(ball_degrees > 10   && ball_degrees <  30)   {
+      atk_direction = ball_degrees + GOALIE_ATKDIR_PLUSANG1;
+      atk_speed = GOALIE_ATKSPD_LAT;
+    }
+    if(ball_degrees >= 30 && ball_degrees <  45)    {
+      atk_direction = ball_degrees + GOALIE_ATKDIR_PLUSANG2;
+      atk_speed = GOALIE_ATKSPD_LAT;
+    }
+    if(ball_degrees >= 45 && ball_degrees <  90)    {
+      atk_direction = ball_degrees + GOALIE_ATKDIR_PLUSANG3;
+      atk_speed = GOALIE_ATKSPD_LAT;
+    }
+    if(ball_degrees > 270 && ball_degrees <= 315)   {
+      atk_direction = ball_degrees - GOALIE_ATKDIR_PLUSANG3_COR;
+      atk_speed = GOALIE_ATKSPD_LAT;
+    }
+    if(ball_degrees > 315 && ball_degrees <= 330)   {
+      atk_direction = ball_degrees - GOALIE_ATKDIR_PLUSANG2_COR;
+      atk_speed = GOALIE_ATKSPD_LAT;
+    }
+    if(ball_degrees > 330 && ball_degrees <  350)   {
+      atk_direction = ball_degrees - GOALIE_ATKDIR_PLUSANG1_COR;
+      atk_speed = GOALIE_ATKSPD_LAT;
+    }
+  } else {
+    if(ball_degrees > 10   && ball_degrees <  30)   {
+      atk_direction = ball_degrees + GOALIE_ATKDIR_PLUSANG1_COR;
+      atk_speed = GOALIE_ATKSPD_LAT;
+    }
+    if(ball_degrees >= 30 && ball_degrees <  45)    {
+      atk_direction = ball_degrees + GOALIE_ATKDIR_PLUSANG2_COR;
+      atk_speed = GOALIE_ATKSPD_LAT;
+    }
+    if(ball_degrees >= 45 && ball_degrees <  90)    {
+      atk_direction = ball_degrees + GOALIE_ATKDIR_PLUSANG3_COR;
+      atk_speed = GOALIE_ATKSPD_LAT;
+    }
+    if(ball_degrees > 270 && ball_degrees <= 315)   {
+      atk_direction = ball_degrees - GOALIE_ATKDIR_PLUSANG3;
+      atk_speed = GOALIE_ATKSPD_LAT;
+    }
+    if(ball_degrees > 315 && ball_degrees <= 330)   {
+      atk_direction = ball_degrees - GOALIE_ATKDIR_PLUSANG2;
+      atk_speed = GOALIE_ATKSPD_LAT;
+    }
+    if(ball_degrees > 330 && ball_degrees <  350)   {
+      atk_direction = ball_degrees - GOALIE_ATKDIR_PLUSANG1;
+      atk_speed = GOALIE_ATKSPD_LAT;
+    }
   }
 
   if((ball_degrees >= 330 || ball_degrees <= 30) && ball_distance > 190) {      //storcimento

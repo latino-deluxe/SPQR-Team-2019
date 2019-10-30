@@ -196,8 +196,7 @@ void loop() {
   }
 
   checkLineSensors();                           //Last thing in loop, for priority
-  // safetysafe();
+  safetysafe();
 
-  // preparePID(0, 0, cstorc);
   drivePID(globalDir, globalSpeed);
 }
