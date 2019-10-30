@@ -195,8 +195,11 @@ void loop() {
     else centerGoalPostCamera(true);
   }
 
+  AAANGOLO(); 
+
   checkLineSensors();                           //Last thing in loop, for priority
   safetysafe();
+
 
   drivePID(globalDir, globalSpeed);
 }

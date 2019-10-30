@@ -90,8 +90,9 @@ void leaveMeAlone() {
 }
 
 void storcimentoPorta() {
-  if (fixCamIMU(pAtk) >= 0) cstorc+=9;
-  else if (fixCamIMU(pAtk)  < -0) cstorc-=9;
+  if (fixCamIMU(pAtk) >= 3) cstorc+=9;
+  else if (fixCamIMU(pAtk)  < -3) cstorc-=9;
+  else cstorc *= 0.7;
   // else {
   //   if (cstorc > 0) cstorc -= 2;
   //   else  cstorc += 2;
