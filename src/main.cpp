@@ -195,10 +195,19 @@ void loop() {
     else centerGoalPostCamera(true);
   }
 
-  checkLineSensors();                           //Last thing in loop, for priority
+  // checkLineSensors();                           //Last thing in loop, for priority
   // safetysafe();
 
 
   // drivePID(globalDir, globalSpeed);
-  drivePID(90, 180);
+  for(int i = 0; i <= 255; i+= 10) {
+    turnMotor(2, 1, 0, 50);
+    if(i >= 255) i = 0;
+    Serial.print(i);
+    Serial.print(", ");
+    while(!Serial.available());
+    Serial.println(Serial.parseFloat(),4);
+    while(Serial.available()) Serial.read();
+  } 
+  
 }
