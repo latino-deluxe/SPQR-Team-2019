@@ -64,15 +64,15 @@ void leaveMeAlone() {
 }
 
 void storcimentoPorta() {
-  if (pAtk > 20) cstorc+=9.5;
-  else if (pAtk < -20) cstorc-=9.5;
-  else {
-    if (cstorc > 0) cstorc -= 2;
-    else  cstorc += 2;
-  }
+  if (fixCamIMU(pAtk) >= 3) cstorc+=9;
+  else if (fixCamIMU(pAtk)  < -3) cstorc-=9;
+  else cstorc *= 0.7;
+  // else {
+  //   if (cstorc > 0) cstorc -= 2;
+  //   else  cstorc += 2;
+  // }
   
-  if (cstorc > 30) cstorc = 30;
-  if (cstorc < -30) cstorc = -30;
+  cstorc = constrain(cstorc, -30, 30);
 
   //SUPERTEAM
   // if (cstorc > 55) cstorc = 55;
