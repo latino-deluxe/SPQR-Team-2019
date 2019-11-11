@@ -33,3 +33,5 @@ void centerGoalPostCamera(bool);
 
 //sensors (still needed?)
 void update_sensors_all();
+
+void AAANGOLO();

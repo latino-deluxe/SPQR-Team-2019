@@ -447,3 +447,7 @@ void update_sensors_all() {
   readUS();
   return;
 }
+
+void AAANGOLO() {
+  if((us_px <= 45) && ((us_dx <= 50) || (us_sx <= 50))) preparePID(0, 350, 0);
+}

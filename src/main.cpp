@@ -177,7 +177,7 @@ void loop() {
   // Ao();
   // com(500);
 
-  comrade = true;
+  // comrade = true;
 
   if(comrade) {
     if(ball_seen){
@@ -196,10 +196,11 @@ void loop() {
     else centerGoalPostCamera(true);
   }
 
+  AAANGOLO(); 
+
   checkLineSensors();                           //Last thing in loop, for priority
   // safetysafe();
 
-  // preparePID(0, 0, 0);
   drivePID(globalDir, globalSpeed);
   // for(int i = 0; i <= 255; i+= 10) {
   //   turnMotor(2, 1, 0, 50);
