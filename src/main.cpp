@@ -174,10 +174,10 @@ void loop() {
 
   calculateLogicZone();
   
-  // Ao();
-  // com(500);
+  Ao();
+  com(500);
 
-  comrade = true;
+  // comrade = true;
 
   if(comrade) {
     if(ball_seen){
